@@ -1,0 +1,138 @@
+<%@ page language="java" import="java.util.*, bean.ArticoloBean" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    
+<%
+    this.getServletContext().setAttribute("page","admin");
+	Collection<?> products = (Collection<?>) request.getAttribute("products");
+	if(products == null) {
+		response.sendRedirect("./product");	
+		return;
+	}
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<center>
+<h2> Che strumento vuoi inserire? </h2>
+
+	<form action="product" method="post">
+		<input type="hidden" name="action" value="choise"> 
+		
+		<label for="select">Scegli che articolo vuoi inserire</label><br>
+		<select name="type" id="type">
+		   <option value="strumento">Strumento</option>
+		   <option value="altro">Altro</option>
+		</select>
+		<input type="submit" value="invia"><input type="reset" value="Reset">
+	</form><br>
+		
+		<%
+		    ServletContext sc = request.getServletContext();
+		    Integer c = (Integer)sc.getAttribute("choise");
+			sc.setAttribute("idArticolo",products.size()+1);
+		    if(c!=null){
+		%>
+
+
+<h2>Elenco Articoli</h2>
+
+<!-- quando inserisco un elemento nel database e aggiorno la pagina me lo inserisce nuovamente. da migliorare -->
+<table border="1">
+		<tr>
+			<th>Code</th>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Marca</th>
+			<th>Quantità</th>
+			<% if(c==0){ %> <th>Corde</th> <%} %>
+			<th>Tipologia</th>
+			<th>Prezzo</th>
+			<th>Image</th>
+			<th>Delete</th>
+		</tr>
+		
+		<%
+		    String encode = null;
+			if (products != null && products.size() != 0) {
+				Iterator<?> it = products.iterator();
+				while (it.hasNext()) {
+					ArticoloBean bean = (ArticoloBean) it.next();
+					
+					if(bean.getTipo()==c){
+		%>
+		<tr>
+			<td><%=bean.getID()%></td>
+			<td><%=bean.getName()%></td>
+			<td><%=bean.getDescrizione()%></td>
+			<td><%=bean.getMarca()%></td>
+			<td><%=bean.getQuantita()%></td>
+			<% if(c==0){ %> <td><%=bean.getCorde()%><br> <%} %>
+			<td><%=bean.getTipologia()%></td>
+			<td><%=bean.getPrezzo()%></td>
+			<td><img src="data:image/*;base64,<%= bean.getImmagine() %>" alt="no available" width="100" height="100"/></td>
+			<!-- aggiungere possibilità di eliminare. da fare in seguito -->
+			<td><a href="product?action=delete&id=<%=bean.getID()%>">Delete</a></td>
+			
+		</tr>
+		<%
+			}}} else {
+		%>
+		<tr>
+			<td colspan="<%=(c==0)?10:9%>">No products available</td>
+		</tr>
+		<%
+			}
+		%>
+		
+</table><br>
+
+		<form action="product" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="action" value="Add"> 
+		   <label for="name">Name:</label><br> 
+		   <input name="name" type="text" maxlength="50" required placeholder="enter name"><br> 
+		   
+		   <!-- non ho messo una selezione in quanto bisogna ancora scegliere che tipologie di accessori/strumenti utilizzare
+		        da non dimenticare che se si aggiunge una select poi bisogna prevedere le tipologie di accessori e di strumenti in modo
+		        separato, quindi gestita in modo diverso da ora  -->
+		        
+		   <label for="tipologia">Tipologia:</label><br> 
+		   <input name="tipologia" type="text" maxlength="50" required placeholder="enter tipologia"><br> 
+		
+		   <label for="description">Description:</label><br>
+		   <textarea name="descrizione" maxlength="1000" rows="5" required placeholder="enter description"></textarea><br>
+		
+		   <!-- prevedere uso del "." e della "," nella scrittura del prezzo. protopido, da migliorare -->
+		   <label for="price">Price:</label><br> 
+		   <input name="price" type="number" step="0.01" value="0.00" min="0.00" required placeholder="enter price"><br>
+
+		   <label for="quantity">Quantity:</label><br> 
+		   <input name="quantity" type="number" min="1" value="1" required placeholder="enter quantity"><br>
+		
+           <label for="marca">Marca:</label><br> 
+		   <input name="marca" type="text" maxlength="50" required placeholder="enter marca"><br> 
+		
+		  <%  if(c==0) { %>
+		    <label for="corde">Corde:</label><br> 
+		    <input name="corde" type="number" min="3" max="6" value="3" required><br>  
+		   <%} %> 
+		   <label for="colore">Colore:</label><br> 
+		   <input name="colore" type="color" value="#ff0000" required><br>
+		   
+		   <!-- si possono inserire più immagini ma bisogna modificare il database --> 
+		   <label for="immagine">Immagine:</label><br> 
+		   <input name="image" type="file" accept="image/*"><br><br>
+		   
+	        
+		<input type="submit" value="Add"><input type="reset" value="Reset">
+	 </form>
+	 <%}else{		 %>
+	 <h3>catalogo + insert form</h3>
+	 <% }%>
+</center>
+</body>
+</html>
