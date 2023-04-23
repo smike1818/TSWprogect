@@ -5,8 +5,7 @@
     ServletContext sc = this.getServletContext();
     String type = (String) sc.getAttribute("tipo");	
     sc.setAttribute("page","catalogo");
-    if(type==null){
-        
+    if(type==null){  
     	response.sendRedirect("./product?action=begin");
     	return;
     }

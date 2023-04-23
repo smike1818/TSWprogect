@@ -76,7 +76,9 @@
                 <div>
                   <div>
                     <div>
-                      <img src="data:image/*;base64,<%= bean.getImmagine() %>" alt="no available" width="200" height="200"/>
+                      <a href="dettaglio.jsp?id=<%=bean.getID()%>">
+                         <img src="data:image/*;base64,<%= bean.getImmagine() %>" alt="no available" width="200" height="200"/>
+                      </a>
                     </div>
                   </div>
                   <div>

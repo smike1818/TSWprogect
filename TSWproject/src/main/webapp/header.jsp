@@ -64,8 +64,19 @@
       <!-- Breadcrumb -->
       <nav>
         <h6>
-          <a href="" class="text-white-50"><%=type%></a>
+          <a href="catalogo.jsp" class="text-white-50"><%=type%></a>
           <span class="text-white-50 mx-2"> > </span>
+        <% 
+           String id = request.getParameter("id"); 
+           if(id!=null){
+        	   ArticoloBean bean = (ArticoloBean) request.getAttribute("bean");
+        	   if(bean!=null){
+        %>
+         <span class="text-white-50 mx-2"> <%=bean.getName()%> </span>
+        <%
+        	   }
+           }
+        %>
         </h6>
       </nav>
       <!-- Breadcrumb -->

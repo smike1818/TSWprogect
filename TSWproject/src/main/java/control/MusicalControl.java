@@ -106,6 +106,10 @@ public class MusicalControl extends HttpServlet{
 				  filters.add(tipologia);
 				  sc.setAttribute("filtersList", filters);
 		      }
+		      if(action.equalsIgnoreCase("Details")) {
+		    	  int id = Integer.parseInt(request.getParameter("id"));
+		    	  request.setAttribute("bean", model.doRetrieveByKey(id));
+		      }
 			 
 		   }	
 		}catch(Exception e) {
@@ -127,8 +131,9 @@ public class MusicalControl extends HttpServlet{
 		     dispatcher = getServletContext().getRequestDispatcher("/AdminControl.jsp");
 		else if(page.equalsIgnoreCase("catalogo")){
 			 dispatcher = getServletContext().getRequestDispatcher("/catalogo.jsp");
-		}
-		dispatcher.forward(request, response);
+		}else if(page.equalsIgnoreCase("details")){
+			 dispatcher = getServletContext().getRequestDispatcher("/dettaglio.jsp");
+		}dispatcher.forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

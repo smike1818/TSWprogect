@@ -148,8 +148,45 @@ public class MusicalModelArticoloBean implements MusicalModelDAO<ArticoloBean>{
 
 	@Override
 	public ArticoloBean doRetrieveByKey(int code) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		String selectSQL = "SELECT * FROM " + MusicalModelArticoloBean.TABLE_NAME + " WHERE codice = ?";
+		ArticoloBean ab = null;
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, code);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				ab = new ArticoloBean();
+				ab.setID(rs.getInt("codice"));
+		    	ab.setColore(rs.getString("colore"));
+		    	ab.setNome(rs.getString("nome"));
+		    	ab.setTipologia(rs.getString("tipologia"));
+		    	ab.setDescrizione(rs.getString("descrizione"));
+		    	ab.setMarca(rs.getString("marca"));
+		    	ab.setQuantita(rs.getInt("quantita"));
+		    	ab.setPrezzo(rs.getDouble("prezzoBase"));
+		    	ab.setTipo(rs.getInt("tipo"));
+		    	ab.setCorde(rs.getInt("corde"));
+		    	Blob blob = rs.getBlob("immagine");
+		        byte[] imageBytes = blob.getBytes(1, (int)blob.length());
+		        ab.setImmagine(imageBytes);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return ab;
 	}
 
 }
