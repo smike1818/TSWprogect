@@ -1,5 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" import="java.util.*, bean.ArticoloBean" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<%
+    ServletContext sc = this.getServletContext();
+    String type = (String) sc.getAttribute("tipo");	
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,57 +17,55 @@
 <!--Main Navigation-->
 <header>
   <!-- Jumbotron -->
-  <div class="p-3 text-center bg-white border-bottom">
-    <div class="container">
-      <div class="row gy-3">
+    <div>
+      <div>
+      
         <!-- Left elements -->
-        <div class="col-lg-2 col-sm-4 col-4">
+        <div>
           <a href="https://mdbootstrap.com/" target="_blank" class="float-start">
+          
+            <!-- QUI SI INSERISCE IL LOGO -->
             <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" height="35" />
+          
           </a>
         </div>
         <!-- Left elements -->
 
-        <!-- Center elements -->
-        <div class="order-lg-last col-lg-5 col-sm-8 col-8">
-          <div class="d-flex float-end">
-            <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank"> <i class="fas fa-user-alt m-1 me-md-2"></i><p class="d-none d-md-block mb-0">Sign in</p> </a>
-            <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank"> <i class="fas fa-heart m-1 me-md-2"></i><p class="d-none d-md-block mb-0">Wishlist</p> </a>
-            <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank"> <i class="fas fa-shopping-cart m-1 me-md-2"></i><p class="d-none d-md-block mb-0">My cart</p> </a>
+        <!-- Right elements -->
+        <div>
+          <div align="right">
+          <nav>
+             <a href="AdminControl.jsp" target="_blank"> Sign in </a>
+             <a href="AdminControl.jsp" target="_blank">  Wishlist  </a>
+             <a href="AdminControl.jsp" target="_blank">  My Cart  </a>
+          </nav>
           </div>
         </div>
-        <!-- Center elements -->
+        <!-- Right elements -->
 
-        <!-- Right elements -->
-        <div class="col-lg-5 col-md-12 col-12">
-          <div class="input-group float-center">
-            <div class="form-outline">
-              <input type="search" id="form1" class="form-control" />
-              <label class="form-label" for="form1">Search</label>
-            </div>
-            <button type="button" class="btn btn-primary shadow-0">
-              <i class="fas fa-search"></i>
-            </button>
+        <!-- Search elements (da attivare) -->
+          <div>
+            <div>
+              <input type="search" id="form1">
+              <input type="submit" value="search">
           </div>
-        </div>
-        <!-- Right elements -->
-      </div>
+         </div>
+         <!-- Search elements -->
     </div>
   </div>
   <!-- Jumbotron -->
 
   <!-- Heading -->
   <div class="bg-primary mb-4">
-    <div class="container py-4">
-      <h3 class="text-white mt-2">Men's wear</h3>
+    <div>
+      <h3> 
+         <%=type%>
+      </h3>
       <!-- Breadcrumb -->
-      <nav class="d-flex mb-2">
-        <h6 class="mb-0">
-          <a href="" class="text-white-50">Home</a>
+      <nav>
+        <h6>
+          <a href="" class="text-white-50"><%=type%></a>
           <span class="text-white-50 mx-2"> > </span>
-          <a href="" class="text-white-50">Library</a>
-          <span class="text-white-50 mx-2"> > </span>
-          <a href="" class="text-white"><u>Data</u></a>
         </h6>
       </nav>
       <!-- Breadcrumb -->

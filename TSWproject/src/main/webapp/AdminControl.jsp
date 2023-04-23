@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     
 <%
+    
     this.getServletContext().setAttribute("page","admin");
 	Collection<?> products = (Collection<?>) request.getAttribute("products");
 	if(products == null) {
@@ -17,7 +18,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<center>
 <h2> Che strumento vuoi inserire? </h2>
 
 	<form action="product" method="post">
@@ -77,7 +77,6 @@
 			<td><img src="data:image/*;base64,<%= bean.getImmagine() %>" alt="no available" width="100" height="100"/></td>
 			<!-- aggiungere possibilità di eliminare. da fare in seguito -->
 			<td><a href="product?action=delete&id=<%=bean.getID()%>">Delete</a></td>
-			
 		</tr>
 		<%
 			}}} else {
@@ -133,6 +132,5 @@
 	 <%}else{		 %>
 	 <h3>catalogo + insert form</h3>
 	 <% }%>
-</center>
 </body>
 </html>

@@ -3,6 +3,8 @@ package control;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -14,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import bean.ArticoloBean;
-import model.MusicalModel;
-import model.MusicalModelIDS;
+import model.MusicalModelDAO;
+import model.MusicalModelArticoloBean;
 
 @MultipartConfig
 public class MusicalControl extends HttpServlet{
@@ -24,7 +26,7 @@ public class MusicalControl extends HttpServlet{
 	 * 
 	 */
 	private static final long serialVersionUID = 102831973239L;
-	MusicalModel model = new MusicalModelIDS();
+	MusicalModelDAO<ArticoloBean> model = new MusicalModelArticoloBean();
 	
 	public MusicalControl(){
 		super();
@@ -33,6 +35,7 @@ public class MusicalControl extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		List<String>filters = new ArrayList<String>();
 		String action = request.getParameter("action");
 		ServletContext sc = request.getServletContext();
 		String tipo = null;
@@ -42,10 +45,10 @@ public class MusicalControl extends HttpServlet{
 		      if(action.equalsIgnoreCase("choise")){
 		    	  tipo = request.getParameter("type");
 				  sc.setAttribute("tipo", tipo);
-		    	  if(tipo.equalsIgnoreCase("strumento"))
-		    		  sc.setAttribute(action,0);
+		    	  if(tipo.equalsIgnoreCase("altro"))
+		    		  sc.setAttribute(action,1);
 		    	  else
-		    	      sc.setAttribute(action,1);
+		    	      sc.setAttribute(action,0);
 		      }
 		      if(action.equalsIgnoreCase("add")) {
 		    	  //da aggiungere immagine
@@ -72,6 +75,37 @@ public class MusicalControl extends HttpServlet{
 		    	  int id = Integer.parseInt(request.getParameter("id"));
 				  model.doDelete(id);
 		      }
+		      if(action.equalsIgnoreCase("begin")){
+				  sc.setAttribute("tipo", "Strumenti");
+				  request.setAttribute("filter","no");
+				  sc.setAttribute("filtersList", filters);
+		      }
+		      if(action.equalsIgnoreCase("ShowFilters")){
+				  request.setAttribute("filter","si");
+		      }
+		      if(action.equalsIgnoreCase("Filters")){
+				  String tip = (String) request.getParameter("Tipo");
+				  if(tip!=null)
+					  sc.setAttribute("tipo", tip);
+				  String min = request.getParameter("min");
+				  String max = request.getParameter("max");
+				  String marca = request.getParameter("marca");
+				  String tipologia = request.getParameter("tipologia");
+				  if(tip==null)
+					  filters.add("0");
+				  else
+				      filters.add((tip.equalsIgnoreCase("Strumenti"))?"0":"1");
+				  if(min.equalsIgnoreCase("0") || max.equalsIgnoreCase("0")) {
+					  filters.add("0");
+					  filters.add("0");
+				  }else{
+				      filters.add(min);
+				      filters.add(max);
+				  }
+				  filters.add(marca);
+				  filters.add(tipologia);
+				  sc.setAttribute("filtersList", filters);
+		      }
 			 
 		   }	
 		}catch(Exception e) {
@@ -91,8 +125,9 @@ public class MusicalControl extends HttpServlet{
 		RequestDispatcher dispatcher = null;
 		if(page.equalsIgnoreCase("admin")) 
 		     dispatcher = getServletContext().getRequestDispatcher("/AdminControl.jsp");
-		else
+		else if(page.equalsIgnoreCase("catalogo")){
 			 dispatcher = getServletContext().getRequestDispatcher("/catalogo.jsp");
+		}
 		dispatcher.forward(request, response);
 	}
 	

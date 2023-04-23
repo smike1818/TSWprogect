@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 
 import bean.ArticoloBean;
 
-public class MusicalModelIDS implements MusicalModel{
+public class MusicalModelArticoloBean implements MusicalModelDAO<ArticoloBean>{
 
 	private static DataSource ds;
 
@@ -38,7 +38,7 @@ public class MusicalModelIDS implements MusicalModel{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
         
-		String insertSQL = "INSERT INTO " + MusicalModelIDS.TABLE_NAME +" VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String insertSQL = "INSERT INTO " + MusicalModelArticoloBean.TABLE_NAME +" VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
@@ -76,7 +76,7 @@ public class MusicalModelIDS implements MusicalModel{
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + MusicalModelIDS.TABLE_NAME + " WHERE codice = ?";
+		String deleteSQL = "DELETE FROM " + MusicalModelArticoloBean.TABLE_NAME + " WHERE codice = ?";
 
 		try {
 			connection = ds.getConnection();
@@ -98,19 +98,13 @@ public class MusicalModelIDS implements MusicalModel{
 	}
 
 	@Override
-	public ArticoloBean doRetrieveByKey(int code) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public synchronized Collection<ArticoloBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		Collection<ArticoloBean> products = new LinkedList<ArticoloBean>();
 		
-		String selectSQL = "SELECT * FROM " + MusicalModelIDS.TABLE_NAME;
+		String selectSQL = "SELECT * FROM " + MusicalModelArticoloBean.TABLE_NAME;
 
 		if (order != null && !order.equals("")) {
 			selectSQL += " ORDER BY " + order;
@@ -150,6 +144,12 @@ public class MusicalModelIDS implements MusicalModel{
 			}
 		}
 		return products;
+	}
+
+	@Override
+	public ArticoloBean doRetrieveByKey(int code) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

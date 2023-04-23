@@ -18,9 +18,9 @@
         <!-- Grid column -->
         <div class="col-12 col-lg-3 col-sm-12 mb-2">
           <!-- Content -->
-          <ahref="https://mdbootstrap.com/" target="_blank" class="text-white h2">
+          <a href="https://mdbootstrap.com/" target="_blank" class="text-white h2">
             MDB
-          </ahref=>
+          </a>
           <p class="mt-1 text-white">
             © 2023 Copyright: MDBootstrap.com
           </p>
