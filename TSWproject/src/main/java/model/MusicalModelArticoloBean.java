@@ -5,8 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -98,11 +98,11 @@ public class MusicalModelArticoloBean implements MusicalModelDAO<ArticoloBean>{
 	}
 
 	@Override
-	public synchronized Collection<ArticoloBean> doRetrieveAll(String order) throws SQLException {
+	public synchronized List<ArticoloBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		Collection<ArticoloBean> products = new LinkedList<ArticoloBean>();
+		List<ArticoloBean> products = new LinkedList<ArticoloBean>();
 		
 		String selectSQL = "SELECT * FROM " + MusicalModelArticoloBean.TABLE_NAME;
 

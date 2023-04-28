@@ -16,9 +16,10 @@ public class ArticoloBean {
     private String tipologia;
     private InputStream image;
     private byte[] immagine;
+   
     
-    public void setID(Object object) {
-   	 id=(int) object;
+    public void setID(int i) {
+    	id=i;
     }
     
     public int getID() {

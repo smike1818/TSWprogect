@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     
 <%
-	Collection<ArticoloBean> products = (Collection<ArticoloBean>) request.getAttribute("products");
+	List<ArticoloBean> products = (List<ArticoloBean>) request.getAttribute("products");
     if(products == null){
     	response.sendRedirect("./product");	
 		return;
@@ -61,8 +61,12 @@
  				Iterator<?> it = products.iterator();
  				while (it.hasNext()) {
  					ArticoloBean bean = (ArticoloBean) it.next();
- 					if(bean.getTipo()==0)
+ 					String type = (String) getServletContext().getAttribute("tipo");
+ 					if(type != null){
+ 				      int t = (type.equalsIgnoreCase("Strumenti"))?0:1; 
+ 					  if(bean.getTipo()==t)
  					    fil.add(bean);
+ 					}
                 }
         	 }
          }
@@ -95,7 +99,13 @@
                     </div>
                     <h6 class="text-success">Free shipping</h6>
                     <div>
-                      <button>Buy this</button>                  
+                       <form action="product" method="post">
+                          <input type="hidden" name="action" value="cart">
+                          <input type="hidden" name="id" value="<%=bean.getID()%>">
+                          <label for="quantity">Quantity:</label><br> 
+		                  <input name="quantity" type="number" min="1" max="<%=bean.getQuantita() %>" value="1">
+		                  <button type="submit">Add to Cart</button>
+                       </form>                 
                     </div>
                   </div>
                 </div>

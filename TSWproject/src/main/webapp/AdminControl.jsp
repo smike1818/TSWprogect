@@ -4,11 +4,12 @@
 <%
     
     this.getServletContext().setAttribute("page","admin");
-	Collection<?> products = (Collection<?>) request.getAttribute("products");
+	List<?> products = (List<?>) request.getAttribute("products");	
 	if(products == null) {
 		response.sendRedirect("./product");	
 		return;
 	}
+	ArticoloBean last = (ArticoloBean) products.get(products.size()-1);
 %>
 
 <!DOCTYPE html>
@@ -25,8 +26,8 @@
 		
 		<label for="select">Scegli che articolo vuoi inserire</label><br>
 		<select name="type" id="type">
-		   <option value="strumento">Strumento</option>
-		   <option value="altro">Altro</option>
+		   <option value="Strumento">Strumento</option>
+		   <option value="Pezzi di Ricambio">Altro</option>
 		</select>
 		<input type="submit" value="invia"><input type="reset" value="Reset">
 	</form><br>
@@ -34,7 +35,6 @@
 		<%
 		    ServletContext sc = request.getServletContext();
 		    Integer c = (Integer)sc.getAttribute("choise");
-			sc.setAttribute("idArticolo",products.size()+1);
 		    if(c!=null){
 		%>
 
@@ -58,10 +58,11 @@
 		
 		<%
 		    String encode = null;
+		    ArticoloBean bean = null;
 			if (products != null && products.size() != 0) {
 				Iterator<?> it = products.iterator();
 				while (it.hasNext()) {
-					ArticoloBean bean = (ArticoloBean) it.next();
+				    bean = (ArticoloBean) it.next();
 					
 					if(bean.getTipo()==c){
 		%>
@@ -91,7 +92,7 @@
 </table><br>
 
 		<form action="product" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="action" value="Add"> 
+		<input type="hidden" name="action" value="Add">
 		   <label for="name">Name:</label><br> 
 		   <input name="name" type="text" maxlength="50" required placeholder="enter name"><br> 
 		   
@@ -99,6 +100,9 @@
 		        da non dimenticare che se si aggiunge una select poi bisogna prevedere le tipologie di accessori e di strumenti in modo
 		        separato, quindi gestita in modo diverso da ora  -->
 		        
+		   <!-- gestione ID -->
+		   <input type="hidden" name="id" value="<%=last.getID()+1 %>">
+		   
 		   <label for="tipologia">Tipologia:</label><br> 
 		   <input name="tipologia" type="text" maxlength="50" required placeholder="enter tipologia"><br> 
 		

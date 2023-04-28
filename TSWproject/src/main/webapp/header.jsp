@@ -64,20 +64,29 @@
       <!-- Breadcrumb -->
       <nav>
         <h6>
-          <a href="catalogo.jsp" class="text-white-50"><%=type%></a>
-          <span class="text-white-50 mx-2"> > </span>
+          <a href="catalogo.jsp?action=redirect" class="text-white-50"><%=type%></a>
+
         <% 
            String id = request.getParameter("id"); 
            if(id!=null){
         	   ArticoloBean bean = (ArticoloBean) request.getAttribute("bean");
         	   if(bean!=null){
         %>
+                  <span class="text-white-50 mx-2"> > </span>
          <span class="text-white-50 mx-2"> <%=bean.getName()%> </span>
         <%
         	   }
            }
         %>
-        </h6>
+
+        <% 
+           if(((String)sc.getAttribute("page")).equalsIgnoreCase("carrello")){        
+        %>
+         <span class="text-white-50 mx-2"> > </span>
+         <span class="text-white-50 mx-2"><a href="carrello.jsp" class="text-white-50">Carrello</a></span>
+         
+         <%} %>
+       </h6>
       </nav>
       <!-- Breadcrumb -->
     </div>
