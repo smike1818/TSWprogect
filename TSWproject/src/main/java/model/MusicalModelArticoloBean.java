@@ -14,8 +14,14 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import bean.ArticoloBean;
+import dao.ArticoloDAO;
 
-public class MusicalModelArticoloBean implements MusicalModelDAO<ArticoloBean>{
+/*
+ * Implementazione di ArticoloDAO
+ * effettua la connessione automatica al database sfruttando i servizi offerti da Tomcat
+ */
+
+public class MusicalModelArticoloBean implements ArticoloDAO{
 
 	private static DataSource ds;
 
@@ -187,6 +193,32 @@ public class MusicalModelArticoloBean implements MusicalModelDAO<ArticoloBean>{
 			}
 		}
 		return ab;
+	}
+	
+	@Override
+	public void doChangeQuantity(int id, float q) throws SQLException{
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		String selectSQL = "UPDATE "+ MusicalModelArticoloBean.TABLE_NAME + " SET quantita = ? WHERE codice = ?";
+		ArticoloBean ab = null;
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setFloat(1, q);
+			preparedStatement.setInt(2, id);
+			
+			preparedStatement.executeUpdate();
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
 	}
 
 }

@@ -9,6 +9,7 @@
           String id = request.getParameter("id");
           response.sendRedirect("./product?action=Details&id="+id);
       }
+      int q;
 %>
 <!DOCTYPE html>
 <html>
@@ -47,7 +48,19 @@
        </div>
        <div>
          <label for="marca">Marca:  </label>
-         <span><%=bean.getPrezzo() %></span><br>
+         <span><%=bean.getMarca() %></span><br>
+       </div>
+       <div>
+         <label for="marca"><span><%=q=bean.getQuantita() %></span> prodott<%if(q==1){%>o<%}else{%>i<%} %> disponibil<%if(q==1){%>e<%}else{%>i<%} %> </label>
+       </div>
+       <div>
+            <form action="product" method="post">
+                     <input type="hidden" name="action" value="cart">
+                     <input type="hidden" name="id" value="<%=bean.getID()%>">
+                     <label for="quantity">Quantity:</label><br> 
+		             <input name="quantity" type="number" min="1" max="<%=bean.getQuantita() %>" value="1">
+		             <button type="submit">Add to Cart</button>
+            </form>  
        </div>
     </div>
     <%} %>

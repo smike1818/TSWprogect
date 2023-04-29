@@ -2,6 +2,9 @@ package bean;
 
 import java.io.InputStream;
 import java.util.Base64;
+/*
+ * crea istanze per ogni articolo  
+ */
 
 public class ArticoloBean {
     private int id;
@@ -14,8 +17,10 @@ public class ArticoloBean {
     private int tipo;
     private int corde = -1;
     private String tipologia;
-    private InputStream image;
-    private byte[] immagine;
+    
+    //gestione immagini
+    private InputStream image;   //usato per caricare immagine al database
+    private byte[] immagine;     //usato per mostrare immagine a video
    
     
     public void setID(int i) {
@@ -118,6 +123,7 @@ public class ArticoloBean {
     	immagine=b;
     }
     
+    //codifico l'array di byte in una stringa base64 e la ritorno
     public String getImmagine() {
 	    return Base64.getEncoder().encodeToString(immagine);
 }

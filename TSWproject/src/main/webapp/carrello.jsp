@@ -1,19 +1,20 @@
-<%@ page language="java" import="java.util.*, bean.ArticoloBean, java.text.DecimalFormat " contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" import="java.util.*, bean.ArticoloBean, java.text.DecimalFormat, bean.ArticoloCart" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" %>
     
 <%
     ServletContext sc = this.getServletContext();
-    Map<?,?>cart = (Map<?,?>)session.getAttribute("cart");
-    Map<?,?>quantity = (Map<?,?>)session.getAttribute("quantity");
+    List<?>cart = (List<?>)session.getAttribute("cart");
     
+    //utilizzato per gestire i prezzi e visualizzarli con massimo 2 cifre dopo la virgola
     DecimalFormat frmt = new DecimalFormat();
 	frmt.setMaximumFractionDigits(2);
 	   
     sc.setAttribute("page","carrello");
-    if(cart==null && quantity==null){  
+    if((cart==null)){  
     	response.sendRedirect("./product?action=cart");
     	return;
     }
+    float tot=0;
 %>
 
 <!DOCTYPE html>
@@ -44,19 +45,23 @@
                     <p class="mb-0">You have <%=cart.size() %> items in your cart</p>
                   </div>
                   <div>
-                    <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!"
+                    <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="product?action=sortCart"
                         class="text-body">price <i class="fas fa-angle-down mt-1"></i></a></p>
                   </div>
                 </div>
      
                 <%
+                //mostro a video gli elementi del carrello
                 ArticoloBean bean = null;
                 if (cart != null && cart.size() != 0) {
-                   Iterator<?> it =  cart.keySet().iterator();
+                Iterator<?> it = cart.iterator();
     			   while (it.hasNext()) {
-    				   int key = (Integer) it.next(); 
-    				   bean = (ArticoloBean) cart.get(key);
-    				   int q = (Integer) quantity.get(key);
+    				   ArticoloCart a = (ArticoloCart) it.next(); 
+    				   
+    				   //mi prelevo il bean e la quantità da ArticoloCart
+    				   bean = a.getBean();
+    				   int q = a.getQCorrente();
+    				   
     				   
                 %>
                 
@@ -81,7 +86,7 @@
                           <h5 class="mb-0"><%=frmt.format(bean.getPrezzo()*q) %></h5>
                         </div>
                         <div style="width: 80px;">
-                          <h6 class="mb-0"><a href="product?action=deleteByCart&id=<%=key%>">Delete By Cart</a></h6>
+                          <h6 class="mb-0"><a href="product?action=deleteByCart&id=<%=bean.getID()%>">Delete By Cart</a></h6>
                         </div>
                         
                         <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
@@ -90,7 +95,9 @@
                   </div>
                 </div>
                 
-                <%}
+                <% 
+                //mi ricavo il prezzo totale che il cliente deve spendere per comprare l'intero carrello
+                tot+=bean.getPrezzo()*q;}
     			}else{
     			%>
     			 <div class="ms-3">
@@ -122,7 +129,8 @@
                         class="fab fa-cc-amex fa-2x me-2"></i></a>
                     <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-paypal fa-2x"></i></a>
 
-                    <form class="mt-4">
+                    <form class="mt-4" action="product" method="post">
+                    <input type="hidden" name="action" value="buy">
                       <div class="form-outline form-white mb-4">
                         <input type="text" id="typeName" class="form-control form-control-lg" siez="17"
                           placeholder="Cardholder's Name" />
@@ -152,13 +160,12 @@
                         </div>
                       </div>
 
-                    </form>
 
                     <hr class="my-4">
 
                     <div class="d-flex justify-content-between">
                       <p class="mb-2">Subtotal</p>
-                      <p class="mb-2">$4798.00</p>
+                      <p class="mb-2"><%=tot %></p>
                     </div>
 
                     <div class="d-flex justify-content-between">
@@ -168,16 +175,16 @@
 
                     <div class="d-flex justify-content-between mb-4">
                       <p class="mb-2">Total(Incl. taxes)</p>
-                      <p class="mb-2">$4818.00</p>
+                      <p class="mb-2"><%=tot+20 %></p>
                     </div>
 
-                    <button type="button" class="btn btn-info btn-block btn-lg">
+                    <button type="submit" class="btn btn-info btn-block btn-lg">
                       <div class="d-flex justify-content-between">
-                        <span>$4818.00</span>
-                        <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                        <span><%=tot+20 %>$ </span>
+                        <span> Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
                       </div>
                     </button>
-
+                   </form>
                   </div>
                 </div>
 

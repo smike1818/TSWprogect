@@ -33,8 +33,8 @@
 		<br><br><h5><label for="Price">Price</label></h5>
 		
 		<!-- impostare che min<max in seguito-->
-		<label for="min">Min <input type="number" min="0" max="4000" name="min" value="0"></label>
-		<label for="max">Max <input type="number" min="0" max="4000" name="max" value="0"></label>
+		<label for="min">Min <input type="number" step="0.01" min="0.00" max="4000.00" name="min"  value="0.00"></label>
+		<label for="max">Max <input type="number" step="0.01" min="0.00" max="4000.00" name="max" value="0.00"></label>
 		
 		<!-- impostare anche le marche tramite tecnologie frontend, per ora si usa un classico input di testo-->
 		<br><br><h5><label for="marca">Marca</label></h5>

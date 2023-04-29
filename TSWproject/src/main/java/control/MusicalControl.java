@@ -4,12 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -19,37 +14,38 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-
 import bean.ArticoloBean;
-import model.MusicalModelDAO;
+import bean.ArticoloCart;
+import dao.ArticoloDAO;
 import model.MusicalModelArticoloBean;
 
-@MultipartConfig
+/*
+ * MusicalControl è una servlet che gestisce ogni richiesta del client 
+ * proveniente da ogni pagina (anche quelle non correlate tra loro)
+ */
+
+@MultipartConfig   //dichiarativa utilizzata per facilitare l'importazione e l'esportazione di immagini
 public class MusicalControl extends HttpServlet{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 102831973239L;
-	MusicalModelDAO<ArticoloBean> model = new MusicalModelArticoloBean();
+	ArticoloDAO model = new MusicalModelArticoloBean();
 	
 	public MusicalControl(){
 		super();
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		List<String>filters = new ArrayList<String>();
-		String action = request.getParameter("action");
+		String action = request.getParameter("action");    //action salva l'azione effettuata dall'utente
 		ServletContext sc = request.getServletContext();
 		HttpSession session = request.getSession();
 		String tipo = null;
 		
 		try {
 		   if(action != null) {
-		      if(action.equalsIgnoreCase("choise")){
+		      if(action.equalsIgnoreCase("choise")){     //[AMMINISTRATORE]: scelta dell'articolo da inserire
 		    	  tipo = request.getParameter("type");
 				  sc.setAttribute("tipo", tipo);
 		    	  if(tipo.equalsIgnoreCase("Pezzi di ricambio"))
@@ -57,7 +53,7 @@ public class MusicalControl extends HttpServlet{
 		    	  else
 		    	      sc.setAttribute(action,0);
 		      }
-		      if(action.equalsIgnoreCase("add")) {
+		      if(action.equalsIgnoreCase("add")) {    //[AMMINISTRATORE] gestione insert nel db
 		    	  //da aggiungere immagine
 		    	  ArticoloBean ab = new ArticoloBean();
 		    	  ab.setID(Integer.parseInt(request.getParameter("id")));
@@ -78,23 +74,27 @@ public class MusicalControl extends HttpServlet{
 		    	  ab.setImage(inputStream);
 		    	  model.doSave(ab);
 		      }
-		      if(action.equalsIgnoreCase("delete")) {
+		      if(action.equalsIgnoreCase("delete")) {   //[AMMINISTRATORE] gestione DELETE nel db
 		    	  int id = Integer.parseInt(request.getParameter("id"));
 				  model.doDelete(id);
 		      }
-		      if(action.equalsIgnoreCase("begin")){
+		      if(action.equalsIgnoreCase("begin")){   //[UTENTE]: una serie di azione effettuate avviata la prima richiesta
 		    	  String type = request.getParameter("tipo");
-		    	  if(type==null)
+		    	  if(type==null)                       //quando si apre per la prima volta la pagina del catalogo, voglio che venga 
+		    		                                   //mostrato un elenco di soli strumenti 
 				      sc.setAttribute("tipo", "Strumenti");
 		    	  else
 		    		  sc.setAttribute("tipo", type);
-				  request.setAttribute("filter","no");
-				  sc.setAttribute("filtersList", filters);
+				  request.setAttribute("filter","no");     //all'inzio i filtri non verranno visualizzati
+				  sc.setAttribute("filtersList", filters);     //istanziazione lista di filtri che vengono salvati nel context
 		      }
-		      if(action.equalsIgnoreCase("ShowFilters")){
+		      if(action.equalsIgnoreCase("ShowFilters")){   //[UTENTE]: GESTIONE della visualizzazione menù 
 				  request.setAttribute("filter","si");
 		      }
-		      if(action.equalsIgnoreCase("Filters")){
+		      if(action.equalsIgnoreCase("Filters")){      //[UTENTE]: GESTIONE del menù. il menù è la serie di filtri usati per 
+		    	                                           //mostrare il catalogo per categorie
+		    	  
+		    	  //prelevo tutti i valori dei filtri dal form in listProducs.jsp
 				  String tip = (String) request.getParameter("Tipo");
 				  if(tip!=null)
 					  sc.setAttribute("tipo", tip);
@@ -102,6 +102,8 @@ public class MusicalControl extends HttpServlet{
 				  String max = request.getParameter("max");
 				  String marca = request.getParameter("marca");
 				  String tipologia = request.getParameter("tipologia");
+				  
+				  //salvo i valori nella lista filters che verrà salvata nel context
 				  if(tip==null)
 					  filters.add("0");
 				  else
@@ -117,60 +119,131 @@ public class MusicalControl extends HttpServlet{
 				  filters.add(tipologia);
 				  sc.setAttribute("filtersList", filters);
 		      }
-		      if(action.equalsIgnoreCase("Details")) {
+		      if(action.equalsIgnoreCase("Details")) {   //[UTENTE] gestione pagina di dettaglio
 		    	  int id = Integer.parseInt(request.getParameter("id"));
 		    	  request.setAttribute("bean", model.doRetrieveByKey(id));
 		      }
-		      if(action.equalsIgnoreCase("cart")) {		    	  
-		    	  sc.setAttribute("page","carrello");		    	
+		      if(action.equalsIgnoreCase("cart")) {      //[UTENTE]: Gestione dell'istanzazione, dell'inizializzazione e inserimento
+		    	                                         // prodotti nel carrello
+		    	  //prelevo il carrello dalla sessione  
+                  @SuppressWarnings("unchecked")
+				List<ArticoloCart> cart =  (List<ArticoloCart>) session.getAttribute("cart");
+		    	  
+		    	  //se la sessione non ha salvato come attributo il carrello, lo istanzio
+		    	  if(cart==null) {
+		    		   cart = new ArrayList<ArticoloCart>();
+		    		   session.setAttribute("cart", cart);
+		    	  }
+		    	  //indico alla servlet che dopo aver effettuato queste operazioni  reindirizza alla pagina carrello.jsp
+		    	  sc.setAttribute("page","catalogo");	
+		    	  request.setAttribute("filter","no");
+		    	  //prendo elemento con codice 'id' e lo aggiungo al carrello
 		    	  Integer id = Integer.parseInt(request.getParameter("id"));
-		    	  if(id!=null) {
-		    		  @SuppressWarnings("unchecked")
-			    	  Map<Integer,ArticoloBean>cart = (Map<Integer,ArticoloBean>) session.getAttribute("cart");
-			    	  @SuppressWarnings("unchecked")
-					  Map<Integer,Integer>quantity = (Map<Integer,Integer>) session.getAttribute("quantity");
-			    	  if(cart==null) {
-			    		  cart = new HashMap<Integer,ArticoloBean>();
-			    		  if(quantity==null)
-			    		      quantity = new HashMap<Integer,Integer>();
-			    	  }
+		    	  
+		    	  //se id non è nullo, vuol dire che sto aggiungendo prodotti al carrello
+		    	  if(id!=null && cart!=null) {	  
+			    	
+		    		//prelevo articolo dal DB
 		    	    ArticoloBean add = model.doRetrieveByKey(id);
-		    	    if(!cart.containsKey(id))
-		    	       cart.put(add.getID(),add);
+		    	    //verifico le quantità inserite dall'utente
 		    	    Integer q = Integer.parseInt(request.getParameter("quantity"));
-		    	    if(q!=null){
-		    	    	if(!quantity.containsKey(id))
-		    	    		 quantity.put(id, q);
-		    	    	else {
-		    	    		 int tot = q+quantity.get(id);
-							 if(tot<=add.getQuantita())		   
-		    	    		     quantity.replace(id, tot);
-		    	    		 else {
+		    	    
+		    	     if(q!=null){
+		    	    	//istanzio un nuovo articoloCart da aggiungere al carrello
+		    	    	ArticoloCart aCart = new ArticoloCart(add);
+		    	    	
+		    	    	//controllo se all'interno del carrello c'è articolo
+		    	    	int i=0;
+		    	    	for(ArticoloCart a : cart) {
+		    	    		if(a.equals(aCart))
+		    	    			break;
+		    	    		i++;	
+		    	    	}
+		    	    	
+		    	    	//se non ci sono duplicati aggiungo al carrello
+		    	    	if(cart.size()==i) {
+		    	    		aCart.setQCorrente(q);
+		    	    		cart.add(aCart);
+		    	    	}else {
+		    	    		ArticoloCart ac = cart.get(i);
+		    	    		if(ac.setQCorrente(q)) {
+		    	    			//rimuovo l'articolo per poi aggiungerlo modificato
+		    	    			cart.remove(i);
+		    	    			cart.add(i, ac);
+		    	    		}else {
 		    	    			 RequestDispatcher error = null;
-		    	    			 error = sc.getRequestDispatcher("/error.jsp");
+		    	    			 String header = "Client Error";
+		    	    			 String details = "Hai inserito piu' elementi di quelli disponibili...";
+		    	    			 response.setStatus(400);
+		    	    			 error = sc.getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
 		    	    			 error.forward(request, response);
 		    	    		 }
-		    	    			  
-		    	    	} 
+		    	    	}
+		    	    	//aggiungo il carrello modificato nella sessione
+		    	    	  session.removeAttribute("cart");
+					      session.setAttribute("cart", cart);				    	 
 		    	  }	
-		    	    session.setAttribute("cart", cart); 
-			    	session.setAttribute("quantity", quantity);
-		       }		    	  
+		    	  
+		      }	    	
+		    	  
+			  //rimuovo l'elemento dal carrello
 		      }if(action.equalsIgnoreCase("deleteByCart")) {
-				  int id = Integer.parseInt(request.getParameter("id"));
+				  Integer id = Integer.parseInt(request.getParameter("id"));
+				  
 				  @SuppressWarnings("unchecked")
-				  Map<ArticoloBean,Integer>cart = (Map<ArticoloBean,Integer>) session.getAttribute("cart");
-				  @SuppressWarnings("unchecked")
-				  Map<Integer,Integer>quantity = (Map<Integer,Integer>) session.getAttribute("quantity");
-				  if(cart!=null) {
-					  cart.remove(id);
+				  List<ArticoloCart>cart = (List<ArticoloCart>) session.getAttribute("cart");
+				  
+				  //ciclo il carrelo per eliminare l'item
+				  if(cart!=null && id!=null) {
+					  int i=0;
+					  for(ArticoloCart c : cart) {
+						  if(c.getBean().getID()==id)
+							  cart.remove(i);
+						  i++;
+					  }
 				  }
-				  if(quantity!=null) {
-					  quantity.remove(id);
-				  }
+				  
+				  
 			  }
-		   }	
-		}catch(Exception e) {
+		      //ordinamento degli elementi nel carrello in base al prezzo
+			  }if(action.equalsIgnoreCase("sortCart")) {
+				  List<ArticoloCart>cart = (List<ArticoloCart>)session.getAttribute("cart");
+				  
+				  //uso gli stream per ordinare. sort(expression of comparator) 
+				  //expression = (a1,a2) -> {tot = prezzo1 - prezzo2 (sottoforma di intero)      return tot }
+				  cart.sort((a1,a2) -> {
+					  Double d = (((ArticoloBean)a1.getBean()).getPrezzo()*100*a1.getQCorrente() - 
+							      ((ArticoloBean)a2.getBean()).getPrezzo()*100*a2.getQCorrente());
+					  return d.intValue(); 
+				  });
+				  session.setAttribute("cart", cart);
+			  } if(action.equalsIgnoreCase("buy")) {      //[UTENTE]: GESTIONE dell'acquisto (parziale) dell'utente
+				  @SuppressWarnings("unchecked")
+				  List<ArticoloCart>cart = (List<ArticoloCart>) session.getAttribute("cart");
+				  if(cart==null) {     //se il carrello è nullo reindirizzo alla pagina di errore
+					 RequestDispatcher error = null;
+ 	    			 String header = "Client Error";
+ 	    			 String details = "Carrello nullo ...";
+ 	    			 response.setStatus(400);
+ 	    			 error = sc.getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
+ 	    			 error.forward(request, response);
+				  }
+				  if(cart.size()>0) {
+				    for(int i=0; i<cart.size(); i++) {        //scorro carrello e verifico gli articoli da eliminare o modificare 
+				    	                                      // nel database
+				    	ArticoloCart ac = cart.get(i);
+				    	ArticoloBean bean = ac.getBean();
+					    bean.setQuantita(ac.getQTotale()-ac.getQCorrente());
+					    if(bean.getQuantita()>0)               //se ci sono ancora articoli, modifico quantità
+					        model.doChangeQuantity(bean.getID(), bean.getQuantita());
+					    else                                   //altrimenti elimino l'articolo
+					    	model.doDelete(bean.getID());
+				    }
+				  }
+				  session.removeAttribute("cart");            //rimuovo il carrello
+				  sc.setAttribute("page","catalogo");         //reindirizzo alla pagina iniziale 
+			  }
+		   }catch(Exception e) {
 			System.out.println("Error:" + e.getMessage());
 		}
 		
@@ -183,6 +256,7 @@ public class MusicalControl extends HttpServlet{
 			e.printStackTrace();
 		}
 		
+		//page prende la stringa relativa al nome della pagina su cui bisogna indirizzarsi
 		String page = (String) sc.getAttribute("page");
 		RequestDispatcher dispatcher = null;
 		if(page!=null) {

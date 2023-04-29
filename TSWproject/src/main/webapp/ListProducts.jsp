@@ -20,11 +20,19 @@
 </head>
 <body>
          <%
+         //gestione della mostra di articoli filtrati 
+         //la gestione avviene in questo modo:
+         // - se non si inseriscono tipologia  marca, il sistema prende in ingresso "Enter" e lo associa a un valore di default
+         // - prezzo min e max di default valogono 0 e min<=max
+         // - tipo di default è Strumenti
+         // - se questa fase produce unncatalogo vuole, vengono annullati gli effetti del filtraggio e si mostra il catalogo di soli Strumenti
+         // - la pagina appena avviata mostra il catalogo di strumenti
+         
          Collection<ArticoloBean>fil = new ArrayList<ArticoloBean>();
          if(filters != null && filters.size() != 0){
              int tip = Integer.parseInt((String) filters.get(0));
-             int min = Integer.parseInt((String) filters.get(1));
-    	     int max = Integer.parseInt((String) filters.get(2));
+             float min = Float.parseFloat((String) filters.get(1));
+    	     float max = Float.parseFloat((String) filters.get(2));
     	     String marca = (String) filters.get(3);
     	     String tipologia = (String) filters.get(4);
          
@@ -33,20 +41,20 @@
         	    boolean flag;
 				Iterator<?> it = products.iterator();
 				while (it.hasNext()) {
-					flag=true;
+					flag=true;                                     //se uno degli elementi non rispetta i filtri, allora flag=false;
 					ArticoloBean bean = (ArticoloBean) it.next();
         	            if(bean.getTipo()!=tip)
         	            	flag=false;
-        	        	if(min != 0 && max !=0){
-        	        		if(!(bean.getPrezzo()>=min && bean.getPrezzo()<=max))
-        	        			flag=false;
-        	        	}
+        	        	if(min >0 && max >0 && min<=max){
+        	        		if((bean.getPrezzo()<min || bean.getPrezzo()>max+0.01))    //ho aggiunto +0,01 perchè ho riscontrato problemi quando mettevo un max di prezzo
+        	        			flag=false;                                            //uguale a quello del bean, differiva sempre di un centesimo
+        	        	}                                                              //col minimo non ci sono stati problemi
         	        	if(!marca.equalsIgnoreCase("enter")){
         	        		if(!bean.getMarca().equalsIgnoreCase(marca))
         	        			flag=false;
         	        	}
         	        	if(!tipologia.equalsIgnoreCase("enter")){
-        	        		if(!bean.getMarca().equalsIgnoreCase(tipologia))
+        	        		if(!bean.getTipologia().equalsIgnoreCase(tipologia))
         	        			flag=false;
         	        	}
         	        	
@@ -86,7 +94,7 @@
                     </div>
                   </div>
                   <div>
-                    <h5><%= bean.getName() %></h5>
+                    <a href="dettaglio.jsp?id=<%=bean.getID()%>"><h5><%= bean.getName() %></h5></a>
 
                     <p class="text mb-4 mb-md-0">
                        <%=bean.getDescrizione() %>

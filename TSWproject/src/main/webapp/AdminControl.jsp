@@ -9,7 +9,12 @@
 		response.sendRedirect("./product");	
 		return;
 	}
-	ArticoloBean last = (ArticoloBean) products.get(products.size()-1);
+	int id;
+	if(products.size()!=0){
+	    ArticoloBean last = (ArticoloBean) products.get(products.size()-1);
+	    id = last.getID()+1;
+	}else
+		id=0;
 %>
 
 <!DOCTYPE html>
@@ -19,7 +24,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2> Che strumento vuoi inserire? </h2>
+<h2> Che strumento vuoi inserire? </h2>               
 
 	<form action="product" method="post">
 		<input type="hidden" name="action" value="choise"> 
@@ -34,7 +39,7 @@
 		
 		<%
 		    ServletContext sc = request.getServletContext();
-		    Integer c = (Integer)sc.getAttribute("choise");
+		    Integer c = (Integer)sc.getAttribute("choise");       //choise sarà 0 se si vuole inserire uno strumento, 1 se altro
 		    if(c!=null){
 		%>
 
@@ -75,15 +80,19 @@
 			<% if(c==0){ %> <td><%=bean.getCorde()%><br> <%} %>
 			<td><%=bean.getTipologia()%></td>
 			<td><%=bean.getPrezzo()%></td>
+			
+			<!-- gestione visualizzazione immagini, utilizzo base64. getImmagine() restituisce una stringa in formato base64 -->
 			<td><img src="data:image/*;base64,<%= bean.getImmagine() %>" alt="no available" width="100" height="100"/></td>
-			<!-- aggiungere possibilità di eliminare. da fare in seguito -->
+			
+			<!-- eliminazione dell'articolo dal database  -->
 			<td><a href="product?action=delete&id=<%=bean.getID()%>">Delete</a></td>
+			
 		</tr>
 		<%
-			}}} else {
+			}}} else {                   //quando non si sono prodotti nel database stampo a video il mess sotto
 		%>
 		<tr>
-			<td colspan="<%=(c==0)?10:9%>">No products available</td>
+			<td colspan="<%=(c==0)?10:9%>">No products available</td>        
 		</tr>
 		<%
 			}
@@ -101,7 +110,7 @@
 		        separato, quindi gestita in modo diverso da ora  -->
 		        
 		   <!-- gestione ID -->
-		   <input type="hidden" name="id" value="<%=last.getID()+1 %>">
+		   <input type="hidden" name="id" value="<%=id%>">
 		   
 		   <label for="tipologia">Tipologia:</label><br> 
 		   <input name="tipologia" type="text" maxlength="50" required placeholder="enter tipologia"><br> 
