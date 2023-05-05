@@ -9,6 +9,7 @@
 		response.sendRedirect("./product");	
 		return;
 	}
+	
 	int id;
 	if(products.size()!=0){
 	    ArticoloBean last = (ArticoloBean) products.get(products.size()-1);
