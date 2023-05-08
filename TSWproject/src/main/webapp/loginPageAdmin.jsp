@@ -4,18 +4,18 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Login page Admin</title>
-</head>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Login page Admin</title>
+	</head>
 
-<body>
-<form action="LoginServlet">
-Please enter your username
-<input type="text" name="un" required/><br>
-Please enter your password
-<input type="password" name="pw" required/><br>
-<input type="submit" value="Accedi">
-</form>
-</body>
+	<body>
+		<form action="LoginServlet">
+			Please enter your username
+			<input type="text" name="un" required/><br>
+			Please enter your password
+			<input type="password" name="pw" required/><br>
+			<input type="submit" value="Accedi">
+		</form>
+	</body>
 </html>

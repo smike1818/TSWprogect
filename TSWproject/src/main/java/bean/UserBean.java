@@ -1,68 +1,67 @@
 package bean;
 
 public class UserBean{
-private int id;	
-private String username;
-private String password;
-private String Nome;
-private String Cognome;
-private String CF;
-private boolean valid;
+	private String username;
+	private String password;
+	private String Nome;
+	private String Cognome;
+	private String CF;
+	private String email;
+	private boolean valid;
+		
+	public String getNome() {
+		return Nome;
+	}
 	
-
-
-public String getNome() {
-	return Nome;
-}
-
-public void setNome(String newName) {
-	Nome=newName;
-}
-
-public String getCognome() {
-	return Cognome;
+	public void setNome(String Nome) {
+		this.Nome=Nome;
+	}
+	
+	public String getCognome() {
+		return Cognome;
+	}
+	
+	public void setCognome(String Cognome) {
+		this.Cognome=Cognome;
+	}
+	
+	public String getCF() {
+		return CF;
+	}
+	
+	public void setCF(String CF){
+		this.CF=CF;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setPassword(String password) {
+		this.password=password;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+	
+	public void setUsername(String username) {
+		this.username=username;
+	}
+	
+	public boolean isValid() {
+		return valid;
+	}
+	
+	public void setValid(boolean valid) {
+		this.valid=valid;
 	}
 
-public void setCognome(String newCognome) {
-	Cognome=newCognome;
-}
+	public String getEmail() {
+		return email;
+	}
 
-public int getId() {
-	return id;
-}
-
-public void setId(int newId) {
-	id=newId;
-}
-
-public String getCF() {
-	return CF;}
-
-public void setCF(String newCf){
-	CF=newCf;
-}
-
-public String getPassword() {
-	return password;
-}
-
-public void setPassword(String newPassword) {
-	password=newPassword;
-}
-
-public String getUsername() {
-	return username;
-}
-
-public void setUsername(String newUsername) {
-	username=newUsername;
-}
-
-public boolean isValid() {
-	return valid;
-}
-
-public void setValid(boolean newValid) {
-	valid=newValid;
-}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }

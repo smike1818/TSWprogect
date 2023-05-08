@@ -1,11 +1,12 @@
 use MusicalStoreDB;
 
 create table utente(
-    id int primary key,
     nome varchar(50) not null,
     cognome varchar(50) not null,
     email varchar(100) not null,
     pw varchar(20) not null,
+    CF varchar(16) primary key not null,
+    username varchar(20) not null,
     tipo int(1) not null,
     privilegi varchar(100)
 );
