@@ -3,6 +3,7 @@ package control;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,28 +22,33 @@ public class LoginServlet extends HttpServlet {
 		// Get the form data from request parameters
 		String userName = request.getParameter("un");
         String password = request.getParameter("pw");
-        
-        HttpSession session = request.getSession(false);
-        if(session != null && session.getAttribute("un") != null) {
-        	response.sendRedirect("error.jsp");
-        }
-        else {
         // If form data is valid, create a new user and redirect to success page
             UserBean user = new UserBean();
             user.setPassword(password);
             user.setUsername(userName);
+            HttpSession session = request.getSession(false);
             
             ModelUserDAO mud = new ModelUserDAO();
 			try {
 				mud.doRetrieveByUsr(user);
-	            response.sendRedirect("carrello.jsp");
+				if(session == null) {
+					session = request.getSession(true);
+					session.setAttribute("un", userName);
+					response.sendRedirect("carrello.jsp");
+				}
+				else {
+					RequestDispatcher error = null;
+					String header = "Client Error";
+					String details = "already logged in ...";
+					response.setStatus(400);
+					error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
+					error.forward(request, response);
+				}
 			} catch (SQLException e) {
 					// TODO Auto-generated catch block
-				response.sendRedirect("invalidLogin.jsp");
-				e.printStackTrace();
+				response.sendRedirect("Registrazione.jsp");
 			}
         }
-	}
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		try {

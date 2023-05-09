@@ -44,21 +44,22 @@ public class ModelUserDAO implements UserDAO{
 			ps = connection.prepareStatement(ifExists);
 			ps.setString(1, user.getUsername());
 			ps.setString(2, user.getEmail());
-			if(ps.executeQuery().next()) {
-				throw new SQLException();
+			if(!ps.executeQuery().next()) {
+				preparedStatement = connection.prepareStatement(insertSQL);
+				preparedStatement.setString(1, user.getNome());
+				preparedStatement.setString(2, user.getCognome());
+				preparedStatement.setString(3, user.getEmail());
+				preparedStatement.setString(4, user.getPassword());
+				preparedStatement.setString(5, user.getCF());
+				preparedStatement.setString(6, user.getUsername());
+				preparedStatement.setInt(7, 1);
+				preparedStatement.setString(8, "none");
+				preparedStatement.executeUpdate();
 			}
-			preparedStatement = connection.prepareStatement(insertSQL);
-			preparedStatement.setString(1, user.getNome());
-			preparedStatement.setString(2, user.getCognome());
-			preparedStatement.setString(3, user.getEmail());
-			preparedStatement.setString(4, user.getPassword());
-			preparedStatement.setString(5, user.getCF());
-			preparedStatement.setString(6, user.getUsername());
-			preparedStatement.setInt(7, 1);
-			preparedStatement.setString(8, "none");
-			preparedStatement.executeUpdate();
-
-		} finally {
+			else
+				throw new SQLException();
+		}finally {
+		}
 			try {
 				if (preparedStatement != null)
 					preparedStatement.close();
@@ -67,7 +68,6 @@ public class ModelUserDAO implements UserDAO{
 					connection.close();
 			}
 		}
-	}
 
 	@Override
 	public boolean doDelete(int code) throws SQLException {

@@ -60,11 +60,11 @@ public class RegisterServlet extends HttpServlet {
             ModelUserDAO mud = new ModelUserDAO();
             try {
 				mud.doSave(user);
+				response.sendRedirect("LoginPageUtente.jsp");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				response.sendRedirect("Registrazione.jsp");
 			}
-            response.sendRedirect("LoginPageUtente.jsp");
         } else { // If form data is invalid, display error message on registration page
             request.setAttribute("errorMsg", errorMsg);
             request.getRequestDispatcher("Registrazione.jsp").forward(request, response);
