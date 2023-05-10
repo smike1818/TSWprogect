@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -7,7 +8,7 @@
 		<title>Login Page</title>
 	</head>
 	<body>
-		<form action="LoginServlet">
+		<form action="login" action="post">
 			Please enter your username
 			<input type="text" name="un" required/><br>
 			Please enter your password

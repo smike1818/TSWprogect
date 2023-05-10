@@ -35,8 +35,12 @@
         <div>
           <div align="right">
           <nav>
-             <a href="LoginPageUtente.jsp" target="_self"> Sign in </a><br>
-             <a href="AdminControl.jsp" target="_self">  Wishlist  </a><br>
+          <% if(session==null || session.getAttribute("un")==null){ %>
+               <a href="LoginPageUtente.jsp" target="_self"> Sign in </a><br>
+          <%}else{ %>
+               <a href="user" target="_self"> <%=(String) session.getAttribute("un") %> </a><br>
+          <%} %>
+             <a href="" target="_self">  Wishlist  </a><br>
              <a href="carrello.jsp">  My Cart  </a><br>
           </nav>
           </div>

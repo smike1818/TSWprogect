@@ -16,6 +16,6 @@ public class LogoutServlet extends HttpServlet {
         if (session != null) {
             session.invalidate(); // Invalidate the session to log the user out
         }
-        response.sendRedirect("LoginPageUtente.jsp"); // Redirect the user to the login page
+        response.sendRedirect("catalogo.jsp"); // Redirect the user to the login page
     }
 }

@@ -217,18 +217,19 @@ public class MusicalControl extends HttpServlet{
 					  return d.intValue(); 
 				  });
 				  session.setAttribute("cart", cart);
-			  } if(action.equalsIgnoreCase("buy")) {      //[UTENTE]: GESTIONE dell'acquisto (parziale) dell'utente
+			  } if(action.equalsIgnoreCase("buy")) {      //[UTENTE]: GESTIONE dell'acquisto dell'utente
 				  @SuppressWarnings("unchecked")
 				  List<ArticoloCart>cart = (List<ArticoloCart>) session.getAttribute("cart");
-				  if(cart==null) {     //se il carrello è nullo reindirizzo alla pagina di errore
+				  if(session.getAttribute("un")!=null) {
+				   if(cart==null) {     //se il carrello è nullo reindirizzo alla pagina di errore
 					 RequestDispatcher error = null;
  	    			 String header = "Client Error";
  	    			 String details = "Carrello nullo ...";
  	    			 response.setStatus(400);
  	    			 error = sc.getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
  	    			 error.forward(request, response);
-				  }
-				  if(cart.size()>0) {
+				   }
+				   if(cart.size()>0) {
 				    for(int i=0; i<cart.size(); i++) {        //scorro carrello e verifico gli articoli da eliminare o modificare 
 				    	                                      // nel database
 				    	ArticoloCart ac = cart.get(i);
@@ -243,6 +244,11 @@ public class MusicalControl extends HttpServlet{
 				  session.removeAttribute("cart");            //rimuovo il carrello
 				  sc.setAttribute("page","catalogo");         //reindirizzo alla pagina iniziale 
 			  }
+				  else {     
+					     sc.setAttribute("page", "login"); 
+					     sc.setAttribute("buyAfterLogin", "buy");
+				  }
+			 }
 		   }catch(Exception e) {
 			System.out.println("Error:" + e.getMessage());
 		}
@@ -267,7 +273,9 @@ public class MusicalControl extends HttpServlet{
 		  }else if(page.equalsIgnoreCase("details")){
 			 dispatcher = getServletContext().getRequestDispatcher("/dettaglio.jsp");
 		  }else if(page.equalsIgnoreCase("carrello")){
-				 dispatcher = getServletContext().getRequestDispatcher("/carrello.jsp");
+			 dispatcher = getServletContext().getRequestDispatcher("/carrello.jsp");
+		  }else if(page.equalsIgnoreCase("login")) {
+			 dispatcher = getServletContext().getRequestDispatcher("/LoginPageUtente.jsp");
 		  }
 		}
 		dispatcher.forward(request, response);

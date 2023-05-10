@@ -14,7 +14,7 @@
 <h1>Area registrazione</h1>
     
 
-    <form action="register" method="POST">
+    <form action="register" method="post">
     
 		<p>Inserisci i dati <br>
           Nome: <input type="text" name="name" required><br>

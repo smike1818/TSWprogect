@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -59,7 +60,6 @@ public class ModelUserDAO implements UserDAO{
 			else
 				throw new SQLException();
 		}finally {
-		}
 			try {
 				if (preparedStatement != null)
 					preparedStatement.close();
@@ -67,6 +67,7 @@ public class ModelUserDAO implements UserDAO{
 				if (connection != null)
 					connection.close();
 			}
+		 }
 		}
 
 	@Override
@@ -87,19 +88,36 @@ public class ModelUserDAO implements UserDAO{
 		return null;
 	}
 	
+	@Override
 	public void doRetrieveByUsr(UserBean user) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
         
+	  try {
 		String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE username = ? AND pw = ?";
 		connection = ds.getConnection();
 		preparedStatement = connection.prepareStatement(insertSQL);
 		preparedStatement.setString(1, user.getUsername());
 		preparedStatement.setString(2, user.getPassword());
-		if (preparedStatement.executeQuery().next()) 
+		
+		ResultSet rs = preparedStatement.executeQuery();
+		if (rs.next()) { 
+			    user.setCF(rs.getString("CF"));
+			    user.setNome(rs.getString("nome"));
+			    user.setCognome(rs.getString("cognome"));
+			    user.setCognome(rs.getString("email"));
 				preparedStatement.close();
-		else throw new SQLException();
-		if(connection != null)
-			connection.close();
+		}else 
+			throw new SQLException();
+	  }finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
 	}
+	
 }

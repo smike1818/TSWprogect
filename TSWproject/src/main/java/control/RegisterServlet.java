@@ -3,16 +3,15 @@ package control;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import bean.UserBean;
 import model.ModelUserDAO;
 
-@WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
@@ -28,7 +27,7 @@ public class RegisterServlet extends HttpServlet {
 
         // Validate the form data
         boolean hasError = false;
-        String errorMsg = "";
+		String errorMsg = "";
         if (firstName == null || firstName.trim().length() == 0) {
             hasError = true;
             errorMsg = "First name is required.";
@@ -62,12 +61,26 @@ public class RegisterServlet extends HttpServlet {
 				mud.doSave(user);
 				response.sendRedirect("LoginPageUtente.jsp");
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				response.sendRedirect("Registrazione.jsp");
+				     RequestDispatcher error = null;
+	    			 String header = "Client Error";
+	    			 String details = "sei gia' registrato ...";
+	    			 response.setStatus(400);
+	    			 error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
+	    			 error.forward(request, response);
 			}
         } else { // If form data is invalid, display error message on registration page
-            request.setAttribute("errorMsg", errorMsg);
-            request.getRequestDispatcher("Registrazione.jsp").forward(request, response);
+        	 RequestDispatcher error = null;
+			 String header = "Client Error";
+			 String details = errorMsg;
+			 response.setStatus(400);
+			 error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
+			 error.forward(request, response);
         }
+                
     }
+    
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
 }
