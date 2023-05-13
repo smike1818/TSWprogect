@@ -14,7 +14,11 @@ import model.ModelUserDAO;
 
 public class LoginAdmin extends HttpServlet {
 
-	private static final long serialVersionUID = 10000L;
+	private static final long serialVersionUID = 1L;
+	
+	public LoginAdmin() {
+		super();
+	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
