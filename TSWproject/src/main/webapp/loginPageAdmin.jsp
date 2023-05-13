@@ -10,7 +10,7 @@
 	</head>
 
 	<body>
-		<form action="LoginServlet">
+		<form action="loginadmin">
 			Please enter your username
 			<input type="text" name="un" required/><br>
 			Please enter your password

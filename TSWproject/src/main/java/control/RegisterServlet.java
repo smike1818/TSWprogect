@@ -13,7 +13,7 @@ import bean.UserBean;
 import model.ModelUserDAO;
 
 public class RegisterServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 14L;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
     		throws ServletException, IOException {
         // Get the form data from request parameters

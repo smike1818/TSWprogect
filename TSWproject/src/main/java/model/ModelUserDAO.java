@@ -38,7 +38,7 @@ public class ModelUserDAO implements UserDAO{
 		PreparedStatement ps = null;
         
 		String ifExists = "SELECT * FROM " + TABLE_NAME +" WHERE username = ? OR email = ?";
-		String insertSQL = "INSERT INTO " + TABLE_NAME +" VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		String insertSQL = "INSERT INTO " + TABLE_NAME +" VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
@@ -54,7 +54,6 @@ public class ModelUserDAO implements UserDAO{
 				preparedStatement.setString(5, user.getCF());
 				preparedStatement.setString(6, user.getUsername());
 				preparedStatement.setInt(7, 1);
-				preparedStatement.setString(8, "none");
 				preparedStatement.executeUpdate();
 			}
 			else
@@ -106,6 +105,36 @@ public class ModelUserDAO implements UserDAO{
 			    user.setNome(rs.getString("nome"));
 			    user.setCognome(rs.getString("cognome"));
 			    user.setCognome(rs.getString("email"));
+		}else 
+			throw new SQLException();
+	  }finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
+	}
+	public void doRetrieveByPermit(UserBean user) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+        
+	  try {
+		String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE username = ? AND pw = ? AND privilegi = _all";
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(insertSQL);
+		preparedStatement.setString(1, user.getUsername());
+		preparedStatement.setString(2, user.getPassword());
+		preparedStatement.setString(3, user.getPriviledges());
+		
+		ResultSet rs = preparedStatement.executeQuery();
+		if (rs.next()) { 
+			    user.setCF(rs.getString("CF"));
+			    user.setNome(rs.getString("nome"));
+			    user.setCognome(rs.getString("cognome"));
+			    user.setCognome(rs.getString("email"));
 				preparedStatement.close();
 		}else 
 			throw new SQLException();
@@ -119,5 +148,4 @@ public class ModelUserDAO implements UserDAO{
 			}
 		 }
 	}
-	
 }

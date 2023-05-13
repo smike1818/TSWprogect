@@ -6,6 +6,6 @@
         driverClassName="com.mysql.cj.jdbc.Driver"
         type="javax.sql.DataSource"
         username="root"
-        password="Satellite18."
+        password="#defineLED1"
         url="jdbc:mysql://localhost:3306/musicalstoredb?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
 </Context>
