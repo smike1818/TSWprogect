@@ -20,15 +20,15 @@
 	<servlet-name>RegisterServlet</servlet-name>
     <servlet-class>control.RegisterServlet</servlet-class>
   </servlet>
-    <servlet>
+  <servlet>
 	<servlet-name>LoginServlet</servlet-name>
     <servlet-class>control.LoginServlet</servlet-class>
   </servlet>
-    <servlet>
+  <servlet>
 	<servlet-name>LogoutServlet</servlet-name>
     <servlet-class>control.LogoutServlet</servlet-class>
   </servlet>
-    <servlet>
+  <servlet>
 	<servlet-name>UserServlet</servlet-name>
     <servlet-class>control.UserServlet</servlet-class>
   </servlet>
