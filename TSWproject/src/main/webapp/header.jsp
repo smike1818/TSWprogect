@@ -40,7 +40,7 @@
           <%}else{ %>
                <a href="user" target="_self"> <%=(String) session.getAttribute("un") %> </a><br>
           <%} %>
-             <a href="loginPageAdmin.jsp" target="_self">  Wishlist  </a><br>
+             <a href="AdminControl.jsp" target="_self">  Wishlist  </a><br>
              <a href="carrello.jsp">  My Cart  </a><br>
           </nav>
           </div>

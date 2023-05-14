@@ -3,6 +3,7 @@ package control;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +27,13 @@ public class LoginAdmin extends HttpServlet {
         String password = request.getParameter("pw");
         
         HttpSession session = request.getSession(false);
-        if(session != null && session.getAttribute("un") != null) {
-        	response.sendRedirect("error.jsp");
+        if(session != null && session.getAttribute("admin") != null) {
+        	 RequestDispatcher error = null;
+			 String header = "Client Error";
+			 String details = "admin already logged...";
+			 response.setStatus(400);
+			 error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
+			 error.forward(request, response);
         }
         else {
         // If form data is valid, create a new user and redirect to success page
@@ -38,6 +44,7 @@ public class LoginAdmin extends HttpServlet {
             ModelUserDAO mud = new ModelUserDAO();
 			try {
 					mud.doRetrieveByPermit(user);
+					session.setAttribute("admin", true);
 					response.sendRedirect("AdminControl.jsp");
 			} catch (SQLException e) {
 					// TODO Auto-generated catch block

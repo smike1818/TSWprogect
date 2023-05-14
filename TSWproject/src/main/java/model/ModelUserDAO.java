@@ -117,17 +117,19 @@ public class ModelUserDAO implements UserDAO{
 			}
 		 }
 	}
+	
+	@Override
 	public void doRetrieveByPermit(UserBean user) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
         
 	  try {
-		String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE username = ? AND pw = ? AND privilegi = ?";
+		String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE username = ? AND pw = ? AND tipo = ?";
 		connection = ds.getConnection();
 		preparedStatement = connection.prepareStatement(insertSQL);
 		preparedStatement.setString(1, user.getUsername());
 		preparedStatement.setString(2, user.getPassword());
-		preparedStatement.setString(3, "_all");
+		preparedStatement.setInt(3,0);
 		
 		ResultSet rs = preparedStatement.executeQuery();
 		if (rs.next()) { 

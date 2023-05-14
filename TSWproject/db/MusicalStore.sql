@@ -35,10 +35,10 @@ create table articolo(
     tipo int(1) not null,
     corde int(1),
     tipologia varchar(50),
-    immagine varchar(10000) not null,
+    /*immagine varchar(10000) not null,*/
 );
 
-create table manipola(
+/*create table manipola(
    adm int references utente(id)
         on update cascade
         on delete set null,
@@ -47,7 +47,7 @@ create table manipola(
         on delete set null,
    dataModifica date,
    primary key(adm,articolo)
-);
+);*/
 
 create table acquisto(
    consumer int references utente(id)

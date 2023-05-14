@@ -2,20 +2,30 @@
     pageEncoding="ISO-8859-1"%>
     
 <%
+    String rend = null;
+    List<?> products = null;
     
-    this.getServletContext().setAttribute("page","admin");
-	List<?> products = (List<?>) request.getAttribute("products");	
-	if(products == null) {
-		response.sendRedirect("./product");	
-		return;
+    if(session.getAttribute("admin")==null){ 
+    	 products = (List<?>) request.getAttribute("products");
+    	 rend = "loginPageAdmin.jsp";
+    }else{
+       this.getServletContext().setAttribute("page","admin");
+       products = (List<?>) request.getAttribute("products");	
+	   if(products == null) 
+		   rend = "./product";
 	}
+    
+     if(rend!=null){
+         response.sendRedirect(rend);
+         return;
+     }
 	
-	int id;
-	if(products.size()!=0){
-	    ArticoloBean last = (ArticoloBean) products.get(products.size()-1);
-	    id = last.getID()+1;
-	}else
-		id=0;
+	  int id;
+	  if(products.size()!=0){
+	      ArticoloBean last = (ArticoloBean) products.get(products.size()-1);
+	      id = last.getID()+1;
+	  }else
+		  id=0;
 %>
 
 <!DOCTYPE html>
