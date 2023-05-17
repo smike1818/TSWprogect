@@ -124,12 +124,12 @@ public class ModelUserDAO implements UserDAO{
 		PreparedStatement preparedStatement = null;
         
 	  try {
-		String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE username = ? AND pw = ? AND tipo = ?";
+		String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE username = ? AND pwd = ? AND ruolo = ?";
 		connection = ds.getConnection();
 		preparedStatement = connection.prepareStatement(insertSQL);
 		preparedStatement.setString(1, user.getUsername());
 		preparedStatement.setString(2, user.getPassword());
-		preparedStatement.setInt(3,0);
+		preparedStatement.setBoolean(3,true);
 		
 		ResultSet rs = preparedStatement.executeQuery();
 		if (rs.next()) { 
