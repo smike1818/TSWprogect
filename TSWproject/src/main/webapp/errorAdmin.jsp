@@ -9,8 +9,8 @@
    if(header == null && details == null){
 	   //se header e details non vengono caricati tramite i parametri della richiesta
 	   //li carico tramite gli attributi
-	   header = (String) request.getAttribute("errorMessageHeader");
-	   details = (String) request.getAttribute("errorMessageDetails");
+	   header = "Client Error";
+	   details = "non puoi accedere a questa pagina";
    }
    if(header != null && details != null){
 
@@ -24,9 +24,9 @@
 <body>
        <h2>Error: <%=status%></h2>
        <h3><%=header %></h3>
-       <h4><code><%=details %></code></h4>
-       <% if(details.equalsIgnoreCase("admin already logged...")){ %>i
-           <h3><a href="AdminControl.jsp">Ritorna alla pagina amministratore</a></h3>
-       <%}} %>
+       <h4><code><%=details %></code></h4><br>
+       <h3><a href="CatalogoAdmin.jsp">Ritorna alla pagina del catalogo</a></h3>
 </body>
 </html>
+
+ <%} %>

@@ -45,9 +45,8 @@ public class LoginAdmin extends HttpServlet {
 			try {
 					mud.doRetrieveByPermit(user);
 					session.setAttribute("admin", true);
-					response.sendRedirect("AdminControl.jsp");
+					response.sendRedirect("CatalogoAdmin.jsp");
 			} catch (SQLException e) {
-					// TODO Auto-generated catch block
 				response.sendRedirect("loginPageAdmin.jsp");
 			}
         }

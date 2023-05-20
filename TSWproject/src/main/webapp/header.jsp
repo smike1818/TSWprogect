@@ -1,10 +1,6 @@
 <%@ page language="java" import="java.util.*, bean.ArticoloBean" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-<%
-    ServletContext sc = this.getServletContext();
-    String type = (String) sc.getAttribute("tipo");	
-%>
 
 <!DOCTYPE html>
 <html>
@@ -15,7 +11,6 @@
 <body>
 <!--Main Navigation-->
 <!--Main Navigation-->
-<header>
   <!-- Jumbotron -->
     <div>
       <div>
@@ -40,7 +35,6 @@
           <%}else{ %>
                <a href="user" target="_self"> <%=(String) session.getAttribute("un") %> </a><br>
           <%} %>
-             <a href="AdminControl.jsp" target="_self">  Wishlist  </a><br>
              <a href="carrello.jsp">  My Cart  </a><br>
           </nav>
           </div>
@@ -63,12 +57,14 @@
   <div class="bg-primary mb-4">
     <div>
       <h3> 
-         <%=type%>
+         Strumenti
       </h3>
       <!-- Breadcrumb -->
       <nav>
         <h6>
-          <a href="catalogo.jsp?action=redirect" class="text-white-50"><%=type%></a>
+        
+          <!-- quando clicco su Strumenti/Pezzi di Ricmbio, mi riporta alla pagina iniziale -->
+          <a href="catalogo.jsp" class="text-white-50">Strumenti</a>
 
         <% 
            String id = request.getParameter("id"); 
@@ -84,18 +80,25 @@
         %>
 
         <% 
-           if(((String)sc.getAttribute("page")).equalsIgnoreCase("carrello")){        
+           if(((String)application.getAttribute("page")).equalsIgnoreCase("carrello.jsp")){        
         %>
          <span class="text-white-50 mx-2"> > </span>
          <span class="text-white-50 mx-2"><a href="carrello.jsp" class="text-white-50">Carrello</a></span>
          
          <%} %>
+         
+        <% if(((String)application.getAttribute("page")).equalsIgnoreCase("cardsPage.jsp")){%>
+         <span class="text-white-50 mx-2"> > </span>
+         <span class="text-white-50 mx-2"><a href="carrello.jsp" class="text-white-50">Carrello</a></span>
+         <span class="text-white-50 mx-2"> > </span>
+         <span class="text-white-50 mx-2"><a href="cardsPage.jsp" class="text-white-50">Conti</a></span>
+        
+        <%} %>
        </h6>
       </nav>
       <!-- Breadcrumb -->
     </div>
   </div>
   <!-- Heading -->
-</header>
 </body>
 </html>

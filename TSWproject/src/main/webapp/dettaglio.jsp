@@ -1,15 +1,19 @@
-<%@ page language="java" import="bean.ArticoloBean" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" import="bean.ArticoloBean, dao.ArticoloDAO, model.MusicalModelArticoloBean" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
 <%
-      ServletContext sc = this.getServletContext();
-      sc.setAttribute("page","details");
+      application.setAttribute("page","dettaglio.jsp");
       ArticoloBean bean = (ArticoloBean) request.getAttribute("bean");
+      String rend = null;
       if(bean==null){
           String id = request.getParameter("id");
-          response.sendRedirect("./product?action=Details&id="+id);
+          rend = "./details?id="+id;
       }
       int q;
+      ArticoloDAO model = new MusicalModelArticoloBean();
+      
+      if(rend!=null)
+    	  response.sendRedirect(rend);
 %>
 <!DOCTYPE html>
 <html>
@@ -24,7 +28,7 @@
     <% if(bean!=null){ %>
     <div align="center">
        <div>
-         <img src="data:image/*;base64,<%= bean.getImmagine() %>" alt="no available" width="500" height="500"/>
+         <img src="img/<%=model.getFirstImage(bean.getID()) %>" alt="no available" width="500" height="500"/>
        </div>
        <div>
          <label for="name">Nome:  </label>
@@ -50,11 +54,15 @@
          <label for="marca">Marca:  </label>
          <span><%=bean.getMarca() %></span><br>
        </div>
-       <div>
-         <label for="marca"><span><%=q=bean.getQuantita() %></span> prodott<%if(q==1){%>o<%}else{%>i<%} %> disponibil<%if(q==1){%>e<%}else{%>i<%} %> </label>
+        <div>
+         <label for="marca">Categoria:  </label>
+         <span><%=bean.getCategoria().getNome() %></span><br>
        </div>
        <div>
-            <form action="product" method="post">
+         <label for="quantita"><span><%=q=bean.getQuantita() %></span> prodott<%if(q==1){%>o<%}else{%>i<%} %> disponibil<%if(q==1){%>e<%}else{%>i<%} %> </label>
+       </div>
+       <div>
+            <form action="cart" method="post">
                      <input type="hidden" name="action" value="cart">
                      <input type="hidden" name="id" value="<%=bean.getID()%>">
                      <label for="quantity">Quantity:</label><br> 

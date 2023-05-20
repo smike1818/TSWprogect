@@ -1,7 +1,4 @@
 package bean;
-
-import java.io.InputStream;
-import java.util.Base64;
 /*
  * crea istanze per ogni articolo  
  */
@@ -17,10 +14,8 @@ public class ArticoloBean {
     private int tipo;
     private int corde = -1;
     private String tipologia;
-    
-    //gestione immagini
-    private InputStream image;   //usato per caricare immagine al database
-    private byte[] immagine;     //usato per mostrare immagine a video
+    private CategoriaBean cat = null;
+ 
    
     
     public void setID(int i) {
@@ -111,22 +106,14 @@ public class ArticoloBean {
       	 return nome;
     }
     
-    public void setImage(InputStream i) {
-      	image=i;
-    } 
-    
-    public InputStream getImage1() {
-    	return image;
+    public void setCategoria(CategoriaBean c) {
+    	this.cat=c;
     }
     
-    public void setImmagine(byte[] b) {
-    	immagine=b;
+    public CategoriaBean getCategoria(){
+   	 return cat;
     }
     
-    //codifico l'array di byte in una stringa base64 e la ritorno
-    public String getImmagine() {
-	    return Base64.getEncoder().encodeToString(immagine);
-}
     
    
 }

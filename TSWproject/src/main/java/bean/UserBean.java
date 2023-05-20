@@ -7,7 +7,6 @@ public class UserBean{
 	private String Cognome;
 	private String CF;
 	private String email;
-	private String priviledges;
 	private boolean valid;
 		
 	public String getNome() {
@@ -64,13 +63,5 @@ public class UserBean{
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPriviledges() {
-		return priviledges;
-	}
-
-	public void setPriviledges(String priviledges) {
-		this.priviledges = priviledges;
 	}
 }

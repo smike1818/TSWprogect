@@ -1,30 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
-<%
-    ServletContext sc = this.getServletContext();
-    String filter = (String) request.getAttribute("filter");
-%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
-<%
-     if(filter!= null && filter.equals("no")){
-%>
-   <form action="product" method="post">
-		<input type="hidden" name="action" value="ShowFilters"> 
-		<input type="submit" value="mostra filtri">
-</form><br>
 
-<%}else{%>
-    <div align="center">
+    <button onclick="showFilters()">clicca per vedere i filtri</button>
+
+    <div id="filters-list">
      <h3> Filters for searching</h3>
-     <form action="product" method="post">
-		<input type="hidden" name="action" value="Filters"> 
+     <form action="" method="post">
 		<label for="Tipo">Tipo</label>
 		<select name="Tipo">
 		  <option value="Strumenti">Strumenti</option>
@@ -40,13 +30,15 @@
 		<br><br><h5><label for="marca">Marca</label></h5>
 		<input type="text" name="marca" placeholder="enter marca" value="enter">
 		
-		<!-- inserire colore prossimamente -->
 		<br><br><h5><label for="tipologia">Tipologia</label></h5>
 		<input type=text name="tipologia" placeholder="enter tipologia" value="enter">		
-		<br><br><input type="submit" value="filtra"><br><br><br><br>
+		<br><br><input type="submit" value="filtra">
+		
+		<!-- farla per categoria, aspettare studio di AJAX -->
+		
      </form>
      </div>
 
-<%} %>
+<script src="js/userFunctions.js" type="text/javascript"></script>
 </body>   
 </html>

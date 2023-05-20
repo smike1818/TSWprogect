@@ -22,7 +22,7 @@ public class ModelUserDAO implements UserDAO{
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
-			ds = (DataSource) envCtx.lookup("jdbc/musicalstoredb");
+			ds = (DataSource) envCtx.lookup("jdbc/musicalstore");
 
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
@@ -37,23 +37,22 @@ public class ModelUserDAO implements UserDAO{
 		PreparedStatement preparedStatement = null;
 		PreparedStatement ps = null;
         
-		String ifExists = "SELECT * FROM " + TABLE_NAME +" WHERE username = ? OR email = ?";
+		String ifExists = "SELECT * FROM " + TABLE_NAME +" WHERE CF = ?";
 		String insertSQL = "INSERT INTO " + TABLE_NAME +" VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
 			ps = connection.prepareStatement(ifExists);
-			ps.setString(1, user.getUsername());
-			ps.setString(2, user.getEmail());
+			ps.setString(1, user.getCF());
 			if(!ps.executeQuery().next()) {
 				preparedStatement = connection.prepareStatement(insertSQL);
-				preparedStatement.setString(1, user.getNome());
-				preparedStatement.setString(2, user.getCognome());
-				preparedStatement.setString(3, user.getEmail());
-				preparedStatement.setString(4, user.getPassword());
-				preparedStatement.setString(5, user.getCF());
+				preparedStatement.setString(1, user.getCF());
+				preparedStatement.setString(2, user.getNome());
+				preparedStatement.setString(3, user.getCognome());
+				preparedStatement.setString(4, user.getEmail());
+				preparedStatement.setString(5, user.getPassword());				
 				preparedStatement.setString(6, user.getUsername());
-				preparedStatement.setInt(7, 1);
+				preparedStatement.setBoolean(7, false);
 				preparedStatement.executeUpdate();
 			}
 			else
@@ -76,9 +75,41 @@ public class ModelUserDAO implements UserDAO{
 	}
 
 	@Override
-	public UserBean doRetrieveByKey(int code) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public UserBean doRetrieveByKey(String code) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		UserBean user = null;
+        
+	  try {
+		String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE CF = ?";
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(insertSQL);
+		preparedStatement.setString(1, code);
+		
+		ResultSet rs = preparedStatement.executeQuery();
+		if (rs.next()) { 
+			    user = new UserBean();
+			    
+			    user.setCF(rs.getString("CF"));
+			    user.setPassword(rs.getString("pwd"));
+			    user.setUsername(rs.getString("username"));
+			    user.setCF(rs.getString("CF"));
+			    user.setNome(rs.getString("nome"));
+			    user.setCognome(rs.getString("cognome"));
+			    user.setEmail(rs.getString("email"));
+		}else 
+			throw new SQLException();
+	  }finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
+	  
+	  return user;
 	}
 
 	@Override
@@ -93,7 +124,7 @@ public class ModelUserDAO implements UserDAO{
 		PreparedStatement preparedStatement = null;
         
 	  try {
-		String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE username = ? AND pw = ?";
+		String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE username = ? AND pwd = ?";
 		connection = ds.getConnection();
 		preparedStatement = connection.prepareStatement(insertSQL);
 		preparedStatement.setString(1, user.getUsername());
@@ -104,7 +135,7 @@ public class ModelUserDAO implements UserDAO{
 			    user.setCF(rs.getString("CF"));
 			    user.setNome(rs.getString("nome"));
 			    user.setCognome(rs.getString("cognome"));
-			    user.setCognome(rs.getString("email"));
+			    user.setEmail(rs.getString("email"));
 		}else 
 			throw new SQLException();
 	  }finally {
@@ -124,12 +155,12 @@ public class ModelUserDAO implements UserDAO{
 		PreparedStatement preparedStatement = null;
         
 	  try {
-		String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE username = ? AND pw = ? AND tipo = ?";
+		String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE username = ? AND pwd = ? AND ruolo = ?";
 		connection = ds.getConnection();
 		preparedStatement = connection.prepareStatement(insertSQL);
 		preparedStatement.setString(1, user.getUsername());
 		preparedStatement.setString(2, user.getPassword());
-		preparedStatement.setInt(3,0);
+		preparedStatement.setInt(3,1);
 		
 		ResultSet rs = preparedStatement.executeQuery();
 		if (rs.next()) { 
@@ -149,5 +180,76 @@ public class ModelUserDAO implements UserDAO{
 					connection.close();
 			}
 		 }
+	}
+
+	@Override
+	public UserBean doRetrieveByKey(int code) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasCard(String username) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		boolean result = false;
+        
+	  try {
+		String insertSQL = "SELECT * FROM " + TABLE_NAME +" NATURAL JOIN conto WHERE username = ?";
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(insertSQL);
+		preparedStatement.setString(1, username);
+		
+		ResultSet rs = preparedStatement.executeQuery();
+		if (rs.next()) { 
+			   result = true;
+		}else 
+			throw new SQLException();
+	  }finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
+	  
+	  return result;
+	}
+	
+	@Override
+	public UserBean doRetrieveByUsr(String code) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		UserBean user = new UserBean();
+        
+	  try {
+		String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE username = ?";
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(insertSQL);
+		preparedStatement.setString(1, code);
+		
+		ResultSet rs = preparedStatement.executeQuery();
+		if (rs.next()) { 
+			    user.setCF(rs.getString("CF"));
+			    user.setNome(rs.getString("nome"));
+			    user.setCognome(rs.getString("cognome"));
+			    user.setEmail(rs.getString("email"));
+			    user.setUsername(code);
+			    user.setPassword(rs.getString("pwd"));
+		}else 
+			throw new SQLException();
+	  }finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
+	  
+	  return user;
 	}
 }

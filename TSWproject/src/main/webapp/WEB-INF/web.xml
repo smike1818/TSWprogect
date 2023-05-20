@@ -6,15 +6,26 @@
   </welcome-file-list>
   <resource-ref>
     <description>JNDI reference to a data source</description>
-    <res-ref-name>jdbc/musicalstoredb</res-ref-name>
+    <res-ref-name>jdbc/musicalstore</res-ref-name>
     <res-type>javax.sql.DataSource</res-type>
     <res-auth>Container</res-auth>
   </resource-ref>
   
-  
+ <servlet>
+	 <servlet-name>CardsServlet</servlet-name>
+	 <servlet-class>control.CardsServlet</servlet-class>
+ </servlet> 
   <servlet>
-    <servlet-name>MusicalControl</servlet-name>
-    <servlet-class>control.MusicalControl</servlet-class>
+    <servlet-name>CatalogoServlet</servlet-name>
+    <servlet-class>control.CatalogoServlet</servlet-class>
+  </servlet>
+ <servlet>
+    <servlet-name>ChoiseAdminServlet</servlet-name>
+    <servlet-class>control.ChoiseAdminServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CartServlet</servlet-name>
+    <servlet-class>control.CartServlet</servlet-class>
   </servlet>
   <servlet>
 	<servlet-name>RegisterServlet</servlet-name>
@@ -36,10 +47,63 @@
   	<servlet-name>LoginAdmin</servlet-name>
   	<servlet-class>control.LoginAdmin</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>InsertAdminServlet</servlet-name>
+  	<servlet-class>control.InsertAdminServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ImageServlet</servlet-name>
+  	<servlet-class>control.ImageServlet</servlet-class>
+  </servlet>
+   <servlet>
+  	<servlet-name>BeginActionsServlet</servlet-name>
+  	<servlet-class>control.BeginActionsServlet</servlet-class>
+  </servlet>
+     <servlet>
+  	<servlet-name>FiltersServlet</servlet-name>
+  	<servlet-class>control.FiltersServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>DetailsServlet</servlet-name>
+  	<servlet-class>control.DetailsServlet</servlet-class>
+  </servlet>
   
+
   <servlet-mapping>
-    <servlet-name>MusicalControl</servlet-name>
-    <url-pattern>/product</url-pattern>
+    <servlet-name>DetailsServlet</servlet-name>
+    <url-pattern>/details</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FiltersServlet</servlet-name>
+    <url-pattern>/filters</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CatalogoServlet</servlet-name>
+    <url-pattern>/catalogo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	  <servlet-name>BeginActionsServlet</servlet-name>
+	  <url-pattern>/begin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+	  <servlet-name>ImageServlet</servlet-name>
+	  <url-pattern>/imagespage</url-pattern>
+  </servlet-mapping>
+ <servlet-mapping>
+    <servlet-name>ChoiseAdminServlet</servlet-name>
+    <url-pattern>/choise</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>InsertAdminServlet</servlet-name>
+    <url-pattern>/insertadmin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CartServlet</servlet-name>
+    <url-pattern>/cart</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>CardsServlet</servlet-name>
+    <url-pattern>/cards</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>

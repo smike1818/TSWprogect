@@ -2,6 +2,7 @@ package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,10 +20,10 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
             HttpSession session = request.getSession();
+            RequestDispatcher dispatcher = null;
             
 			String userName = request.getParameter("un");
 	        String password = request.getParameter("pw");
-	        String action = (String) getServletContext().getAttribute("buyAfterLogin");
 
 	        UserBean user = new UserBean();
 	        user.setPassword(password);
@@ -31,7 +32,8 @@ public class LoginServlet extends HttpServlet {
             ModelUserDAO mud = new ModelUserDAO();
             
 			try {
-				
+				//mi salvo il carrello nel caso l'utente effettui il login con un carrello pieno
+				List<?>cart = (List<?>)session.getAttribute("cart");
 				mud.doRetrieveByUsr(user);
 				String userSession = (String) session.getAttribute("un");
 				
@@ -50,21 +52,17 @@ public class LoginServlet extends HttpServlet {
 	                }
 				}
 	            
+	            session.setAttribute("cart", cart);
 				session.setAttribute("un", userName);
 		        session.setAttribute("pw",password);
 		        
-		        if(action!=null) {
-		         if(action.equalsIgnoreCase("buy")) {
-		        	RequestDispatcher dispatcher = null;
-		        	dispatcher = getServletContext().getRequestDispatcher("/product?action="+action);
-		        	dispatcher.forward(request, response);
-		         }
-		        }
+		        String page = (String)getServletContext().getAttribute("page");
 		        
-				response.sendRedirect("catalogo.jsp");
+	        	dispatcher = getServletContext().getRequestDispatcher("/"+page);
+	        	dispatcher.forward(request, response);
 				
 			} catch (SQLException e) {
-				
+				e.printStackTrace();
 				RequestDispatcher error = null;
 				String header = "Client Error";
 				String details = "client not registered ...";
