@@ -1,14 +1,16 @@
 package bean;
 
 public class IndirizzoBean {
-     private String via;
-     private int civico;
-     private String citta;
+     private String via = null;
+     private int civico ;
+     private String citta = null;
      private int cap;
      private UserBean cliente = null;
+     private boolean empty = true;
      
      public void setVia(String v) {
     	  via=v;
+    	  empty=false;
      }
      
      public String getVia() {
@@ -17,6 +19,7 @@ public class IndirizzoBean {
      
      public void setCitta(String v) {
    	     citta=v;
+   	     empty=false;
      }
     
      public String getCitta() {
@@ -25,6 +28,7 @@ public class IndirizzoBean {
      
      public void setCivico(int v) {
    	    civico=v;
+   	    empty=false;
      }
     
      public int getCivico() {
@@ -33,6 +37,7 @@ public class IndirizzoBean {
      
      public void setCap(int v) {
     	cap=v;
+    	empty=false;
      }
      
      public int getCap() {
@@ -41,9 +46,14 @@ public class IndirizzoBean {
      
      public void setCliente(UserBean c) {
     	    cliente=c;
+    	    empty=false;
       }
      
       public UserBean getCliente() {
     	    return cliente;
+      }
+      
+      public boolean isEmpty() {
+    	  return empty;
       }
 }

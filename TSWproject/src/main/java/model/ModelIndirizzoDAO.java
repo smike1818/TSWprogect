@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import javax.naming.Context;
@@ -9,11 +10,14 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import bean.IndirizzoBean;
+import bean.UserBean;
 import dao.IndirizzoDAO;
+import dao.UserDAO;
 
 public class ModelIndirizzoDAO implements IndirizzoDAO{
 
 	private static DataSource ds;
+	private UserDAO usermodel = new ModelUserDAO();
 
 	static {
 		try {
@@ -84,6 +88,71 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 	public Collection<IndirizzoBean> doRetrieveAll(String order) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean doDelete(String CF) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		int result = 0;
+
+		String deleteSQL = "DELETE FROM " + TABLE_NAME + " WHERE cliente = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(deleteSQL);
+			preparedStatement.setString(1, CF);
+			result = preparedStatement.executeUpdate();
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return (result != 0);
+	}
+
+	@Override
+	public IndirizzoBean doRetrieveByKey(String CF) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		IndirizzoBean ind = new IndirizzoBean();
+		UserBean user = null;
+        
+	  try {
+		String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE cliente = ?";
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(insertSQL);
+		preparedStatement.setString(1, CF);
+		
+		ResultSet rs = preparedStatement.executeQuery();
+		if (rs.next()) { 
+			    ind.setCap(rs.getInt("cap"));
+			    ind.setCitta(rs.getString("citta"));
+			    ind.setCivico(rs.getInt("civico"));
+			    ind.setVia(rs.getString("via"));
+			    
+			    user = usermodel.doRetrieveByKey(CF);
+			    
+			    ind.setCliente(user);
+		}else 
+			throw new SQLException();
+	  }finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
+	  
+	  return ind;
 	}
 	
 	

@@ -63,7 +63,7 @@ public class CardsServlet extends HttpServlet{
 						e.printStackTrace();
 						 RequestDispatcher error = null;
 		    			 String header = "Server Error";
-		    			 String details = "errore nel salvataggio della carta...";
+		    			 String details = "errore nel salvataggio della carta, controlla se gia' hai salvato la carta...";
 		    			 response.setStatus(500);
 		    			 error = sc.getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
 		    			 error.forward(request, response);

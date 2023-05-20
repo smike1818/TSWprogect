@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,20 +43,18 @@ public class ModelAcquistoDAO implements AcquistoDAO {
 				PreparedStatement preparedStatement = null;
 				PreparedStatement ps = null;
 		        
-				String ifExists = "SELECT * FROM " + TABLE_NAME +" WHERE consumer = ? AND conto = ?";
-				String insertSQL = "INSERT INTO " + TABLE_NAME +" VALUES (?, ?, ?, ?)";
+				String ifExists = "SELECT * FROM " + TABLE_NAME +" WHERE idAcquisto = ?";
+				String insertSQL = "INSERT INTO " + TABLE_NAME +" (consumer, conto, importo) VALUES (?, ?, ?)";
 
 				try {
 					connection = ds.getConnection();
 					ps = connection.prepareStatement(ifExists);
-					ps.setString(1, acq.getConsumer().getCF());
-					ps.setString(2, acq.getConto().getIBAN());
+					ps.setInt(1, acq.getID());
 					if(!ps.executeQuery().next()) {
 						preparedStatement = connection.prepareStatement(insertSQL);
 						preparedStatement.setString(1, acq.getConsumer().getCF());
 						preparedStatement.setString(2, acq.getConto().getIBAN());
-						preparedStatement.setDate(3, (Date) acq.getDate());
-						preparedStatement.setDouble(4, acq.getImporto());
+						preparedStatement.setDouble(3, acq.getImporto());
 						preparedStatement.executeUpdate();
 					}
 					else
@@ -80,7 +77,13 @@ public class ModelAcquistoDAO implements AcquistoDAO {
 	}
 
 	@Override
-	public AcquistoBean doRetrieveByKey(String cliente, String conto) throws SQLException {
+	public boolean doDelete(int code) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public AcquistoBean doRetrieveByKey(int code) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -90,13 +93,12 @@ public class ModelAcquistoDAO implements AcquistoDAO {
 		UserDAO model = new ModelUserDAO();
 		ContoDAO modelc = new ModelContoDAO();
 		
-		String selectSQL = "SELECT * FROM " + TABLE_NAME + " where consumer = ? AND conto = ?";
+		String selectSQL = "SELECT * FROM " + TABLE_NAME + " idAcquisto = ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
-			preparedStatement.setString(1, cliente);
-			preparedStatement.setString(2, conto);
+			preparedStatement.setInt(1, code);
 
 			ResultSet rs = preparedStatement.executeQuery();
 
@@ -122,17 +124,47 @@ public class ModelAcquistoDAO implements AcquistoDAO {
 		}
 		return acq;
 	}
-	
-	@Override
-	public boolean doDelete(int code) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
-	public AcquistoBean doRetrieveByKey(int code) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public AcquistoBean doRetrieveBeanDesc() throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		AcquistoBean acq = null;
+		ContoBean cont = null;
+		UserBean in = null;
+		UserDAO model = new ModelUserDAO();
+		ContoDAO modelc = new ModelContoDAO();
+		
+		String selectSQL = "SELECT * FROM " +TABLE_NAME+ " ORDER BY idAcquisto DESC LIMIT 1";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				acq = new AcquistoBean();
+		    	
+				acq.setID(rs.getInt("idAcquisto"));
+		    	acq.setImporto(rs.getDouble("importo"));
+		    	in = model.doRetrieveByKey(rs.getString("consumer"));
+		    	cont = modelc.doRetrieveByKey(rs.getString("conto"));
+		    	
+		    	acq.setConsumer(in);
+		    	acq.setConto(cont);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return acq;
 	}
 
 }

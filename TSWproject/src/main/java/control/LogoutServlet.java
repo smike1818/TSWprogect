@@ -14,6 +14,8 @@ public class LogoutServlet extends HttpServlet {
     		throws ServletException, IOException {
         HttpSession session = request.getSession(false); // Retrieve the current session, if it exists
         if (session != null) {
+        	session.removeAttribute("un");
+        	session.removeAttribute("pw");
             session.invalidate(); // Invalidate the session to log the user out
         }
         response.sendRedirect("catalogo.jsp"); // Redirect the user to the login page

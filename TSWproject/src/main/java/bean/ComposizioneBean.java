@@ -5,7 +5,16 @@ public class ComposizioneBean {
      private AcquistoBean acq = null;
      private int iva = 22;
      private double prezzo;
+     private int qAcquistate;
      
+     public void setqAcquistate(int q) {
+		qAcquistate=q;
+	 }
+	 
+	 public int getqAcquistate() {
+		 return qAcquistate;
+	 }
+       
      public void setAcquisto(AcquistoBean i) {
 		 acq=i;
 	 }
@@ -31,7 +40,9 @@ public class ComposizioneBean {
 	 }
 	 
 	 public void setPrezzo(double p) {
-		 prezzo=p;
+		 double prezzoParziale = p*qAcquistate;
+		 double importoIva = (prezzoParziale)*(iva/100);
+		 prezzo = prezzoParziale + importoIva;
 	 }
     
      public double getPrezzo() {

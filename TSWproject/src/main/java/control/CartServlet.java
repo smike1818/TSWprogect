@@ -57,8 +57,6 @@ public class CartServlet extends HttpServlet{
 		    		   cart = new ArrayList<ArticoloCart>();
 		    		   session.setAttribute("cart", cart);
 		    	  }
-		    	  //indico alla servlet che dopo aver effettuato queste operazioni  reindirizza alla pagina carrello.jsp
-		    	  sc.setAttribute("page","catalogo");	
 		    	  
 		    	  //prendo elemento con codice 'id' e lo aggiungo al carrello
 		    	  Integer id = Integer.parseInt(request.getParameter("id"));
@@ -120,11 +118,15 @@ public class CartServlet extends HttpServlet{
 				  if(cart!=null && id!=null) {
 					  int i=0;
 					  for(ArticoloCart c : cart) {
-						  if(c.getBean().getID()==id)
+						  if(c.getBean().getID()==id) {
 							  cart.remove(i);
+							  break;
+						  }
 						  i++;
 					  }
 				  }
+				  
+				
 				  
 				  
 			  }
@@ -141,49 +143,7 @@ public class CartServlet extends HttpServlet{
 					  return d.intValue(); 
 				  });
 				  session.setAttribute("cart", cart);
-			  } if(action.equalsIgnoreCase("buy")) {      //[UTENTE]: GESTIONE dell'acquisto dell'utente
-				  @SuppressWarnings("unchecked")
-				  List<ArticoloCart>cart = (List<ArticoloCart>) session.getAttribute("cart");
-				  if(session.getAttribute("un")!=null) {
-				   if(cart==null) {     //se il carrello è nullo reindirizzo alla pagina di errore
-					 RequestDispatcher error = null;
- 	    			 String header = "Client Error";
- 	    			 String details = "Carrello nullo ...";
- 	    			 response.setStatus(400);
- 	    			 error = sc.getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
- 	    			 error.forward(request, response);
-				   }
-				   if(cart.size()>0) {
-				    
-					for(int i=0; i<cart.size(); i++) {        //scorro carrello e verifico gli articoli da eliminare o modificare 
-				    	                                      // nel database
-				    	ArticoloCart ac = cart.get(i);
-				    	ArticoloBean bean = ac.getBean();
-				    	
-				    	ComposizioneBean comp = new ComposizioneBean();
-				    	comp.setArticolo(bean);
-				    	comp.setPrezzo(bean.getPrezzo()*ac.getQCorrente());
-				    	
-				    	bean.setQuantita(ac.getQTotale()-ac.getQCorrente());
-					    if(bean.getQuantita()>0)               //se ci sono ancora articoli, modifico quantità
-					        model.doChangeQuantity(bean.getID(), bean.getQuantita());
-					    else                                   //altrimenti elimino l'articolo
-					    	model.doDelete(bean.getID());
-					    
-					    listCart.add(comp);
-					    
-				    }
-				    
-				    
-				  }
-				  session.removeAttribute("cart");            //rimuovo il carrello
-				  sc.setAttribute("page","catalogo");         //reindirizzo alla pagina iniziale 
-			  }
-				  else {     
-					     sc.setAttribute("page", "login"); 
-					     sc.setAttribute("buyAfterLogin", "buy");
-				  }
-			 }
+			  } 
 		   }catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -197,20 +157,8 @@ public class CartServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 		
-		//page prende la stringa relativa al nome della pagina su cui bisogna indirizzarsi
-		String page = (String) sc.getAttribute("page");
 		RequestDispatcher dispatcher = null;
-		if(page!=null) {
-		  if(page.equalsIgnoreCase("catalogo")){
-			 dispatcher = getServletContext().getRequestDispatcher("/catalogo.jsp");
-		  }else if(page.equalsIgnoreCase("details")){
-			 dispatcher = getServletContext().getRequestDispatcher("/dettaglio.jsp");
-		  }else if(page.equalsIgnoreCase("carrello")){
-			 dispatcher = getServletContext().getRequestDispatcher("/carrello.jsp");
-		  }else if(page.equalsIgnoreCase("login")) {
-			 dispatcher = getServletContext().getRequestDispatcher("/LoginPageUtente.jsp");
-		  }
-		}
+	    dispatcher = getServletContext().getRequestDispatcher("/carrello.jsp");
 		dispatcher.forward(request, response);
 	}
 	

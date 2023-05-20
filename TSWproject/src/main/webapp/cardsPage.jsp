@@ -5,8 +5,7 @@
 String rend = null;
 List<?> cards = null;
 String username = (String) session.getAttribute("un");
-application.setAttribute("page","cardsPage.jsp");
-
+application.removeAttribute("page");
 if(username==null){ 
 	 rend = "LoginPageUtente.jsp";
 }else{
@@ -15,6 +14,7 @@ if(username==null){
 	   rend = "./cards";
 }
 
+application.setAttribute("page","cardsPage.jsp");
  if(rend!=null){
 	 RequestDispatcher dispatcher = null;
 	 dispatcher = getServletContext().getRequestDispatcher("/"+rend);
@@ -59,7 +59,7 @@ if(username==null){
 		    <tr>
 		       <td><%=bean.getNumCarta() %></td>
 		       <td><%=bean.getIBAN() %></td>
-		       <td><a href="Acquisto.jsp?IBAN=<%=bean.getIBAN()%>">scegli</a></td>
+		       <td><a href="Indirizzo.jsp?IBAN=<%=bean.getIBAN()%>">scegli</a></td>
 		       <td><a href="cards?action=delete&IBAN=<%=bean.getIBAN()%>">elimina</a></td>
 		    </tr>
 		    

@@ -39,22 +39,21 @@ public class ModelComposizioneDAO implements ComposizioneDAO{
 		PreparedStatement preparedStatement = null;
 		PreparedStatement ps = null;
         
-		String ifExists = "SELECT * FROM " + TABLE_NAME +" WHERE articolo = ? AND consumer = ? AND conto = ?";
-		String insertSQL = "INSERT INTO " + TABLE_NAME +" VALUES (?, ?, ?, ?, ?)";
+		String ifExists = "SELECT * FROM " + TABLE_NAME +" WHERE articolo = ? AND acquisto = ?";
+		String insertSQL = "INSERT INTO " + TABLE_NAME +" VALUES (?, ?, ?, ?,?)";
 
 		try {
 			connection = ds.getConnection();
 			ps = connection.prepareStatement(ifExists);
 			ps.setInt(1, comp.getArticolo().getID());
-			ps.setString(2, comp.getAcquisto().getConsumer().getCF());
-			ps.setString(3, comp.getAcquisto().getConto().getIBAN());
+			ps.setInt(2, comp.getAcquisto().getID());
 			if(!ps.executeQuery().next()) {
 				preparedStatement = connection.prepareStatement(insertSQL);
 				preparedStatement.setDouble(1, comp.getPrezzo());
-				preparedStatement.setInt(2, comp.getIva());
-				preparedStatement.setInt(3, comp.getArticolo().getID());
-				preparedStatement.setString(4, comp.getAcquisto().getConsumer().getCF());
-				preparedStatement.setString(5, comp.getAcquisto().getConto().getIBAN());
+				preparedStatement.setInt(3, comp.getIva());
+				preparedStatement.setInt(4, comp.getArticolo().getID());
+				preparedStatement.setInt(5, comp.getAcquisto().getID());
+				preparedStatement.setInt(2, comp.getqAcquistate());
 				preparedStatement.executeUpdate();
 			}
 			else

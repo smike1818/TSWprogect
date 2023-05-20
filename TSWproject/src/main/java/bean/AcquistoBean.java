@@ -1,13 +1,20 @@
 package bean;
 
-import java.util.Calendar;
-import java.util.Date;
-
 public class AcquistoBean {
+	 private int idAcquisto;
 	 private UserBean consumer = null;
 	 private ContoBean conto = null;
-	 private Calendar date = Calendar.getInstance();
+	 private String date = null;
 	 private double importo;
+	 
+	 
+	 public void setID(int id) {
+		 idAcquisto=id;
+	 }
+	 
+	 public int getID() {
+		 return idAcquisto;
+	 }
 	 
 	 public void setConsumer(UserBean c) {
 		 consumer=c;
@@ -25,8 +32,8 @@ public class AcquistoBean {
 		 return conto;
 	 }
 	 
-	 public Date getDate() {
-		 return date.getTime();
+	 public String getDate() {
+		 return date;
 	 }
 	 
 	 public void setImporto(double i) {
@@ -36,4 +43,5 @@ public class AcquistoBean {
      public double getImporto() {
     	 return importo;
      }
+     
 }

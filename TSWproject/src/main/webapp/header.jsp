@@ -94,6 +94,16 @@
          <span class="text-white-50 mx-2"><a href="cardsPage.jsp" class="text-white-50">Conti</a></span>
         
         <%} %>
+        
+         <% if(((String)application.getAttribute("page")).equalsIgnoreCase("Indirizzo.jsp")){%>
+         <span class="text-white-50 mx-2"> > </span>
+         <span class="text-white-50 mx-2"><a href="carrello.jsp" class="text-white-50">Carrello</a></span>
+         <span class="text-white-50 mx-2"> > </span>
+         <span class="text-white-50 mx-2"><a href="cardsPage.jsp" class="text-white-50">Conti</a></span>
+         <span class="text-white-50 mx-2"> > </span>
+         <span class="text-white-50 mx-2"><a href="Indirizzo.jsp" class="text-white-50">Indirizzo</a></span>
+        
+        <%} %>
        </h6>
       </nav>
       <!-- Breadcrumb -->

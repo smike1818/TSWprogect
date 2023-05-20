@@ -215,13 +215,11 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		String selectSQL = "UPDATE "+ MusicalModelArticoloBean.TABLE_NAME + " SET quantita = ? WHERE codice = ?";
 
 		try {
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(selectSQL);
-			preparedStatement.setFloat(1, q);
-			preparedStatement.setInt(2, id);
-			
-			preparedStatement.executeUpdate();
-
+		        connection = ds.getConnection();
+			    preparedStatement = connection.prepareStatement(selectSQL);
+		     	preparedStatement.setFloat(1, q);
+			    preparedStatement.setInt(2, id);
+			    preparedStatement.executeUpdate();
 		} finally {
 			try {
 				if (preparedStatement != null)

@@ -26,6 +26,7 @@
 				Iterator<?> it = products.iterator();
 				while (it.hasNext()) {
 				    bean = (ArticoloBean) it.next();
+				    if(bean.getQuantita()!=0){
 		%>
       
         <div align="center">
@@ -68,7 +69,7 @@
           </div>
         </div>
 
-        <%}} %>
+        <%}}} %>
     
 </body>
 </html>

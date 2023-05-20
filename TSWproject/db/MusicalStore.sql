@@ -49,32 +49,29 @@ create table categoria(
     descrizione varchar(200)
 );
 
-create table composizione(
-    prezzo double not null,  
-    qAcquistate int not null,      //quantità acquistate
-    iva varchar(20) not null,
-    articolo int references articolo(codice)
-         on update cascade
-         on delete set null,
-	consumer varchar(16) references acquisto(consumer)
-         on update cascade
-         on delete set null,
-    conto varchar(27) references acquisto(conto)
-         on update cascade
-         on delete set null
-    primary key(articolo, consumer, conto)
-);
-
 create table acquisto(
-   consumer int references utente(id)
+   idAcquisto int primary key  auto_increment,
+   consumer varchar(16) references utente(id)
         on update cascade
         on delete set null,
    conto varchar(27) references conto(IBAN)
 		on update cascade 
         on delete set null,
-   dataAcquisto date not null,
-   importo double not null,
-   primary key(consumer,conto)
+   data_acquisto DATETIME DEFAULT CURRENT_TIMESTAMP,
+   importo double not null
+);
+
+create table composizione(
+    prezzo double not null,  
+    qAcquistate int not null,      
+    iva int not null,
+    articolo int references articolo(codice)
+         on update cascade
+         on delete set null,
+	acquisto int references acquisto(idAcquisto)
+         on update cascade
+         on delete set null,
+    primary key(articolo, acquisto)
 );
 
 create table indirizzo(

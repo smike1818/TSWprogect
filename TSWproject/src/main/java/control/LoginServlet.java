@@ -58,6 +58,8 @@ public class LoginServlet extends HttpServlet {
 		        
 		        String page = (String)getServletContext().getAttribute("page");
 		        
+		        if(page==null)    page = "catalogo.jsp";
+		        
 	        	dispatcher = getServletContext().getRequestDispatcher("/"+page);
 	        	dispatcher.forward(request, response);
 				

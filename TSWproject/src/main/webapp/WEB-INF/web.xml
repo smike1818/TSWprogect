@@ -16,6 +16,10 @@
 	 <servlet-class>control.CardsServlet</servlet-class>
  </servlet> 
   <servlet>
+	 <servlet-name>IndirizzoServlet</servlet-name>
+	 <servlet-class>control.IndirizzoServlet</servlet-class>
+ </servlet> 
+  <servlet>
     <servlet-name>CatalogoServlet</servlet-name>
     <servlet-class>control.CatalogoServlet</servlet-class>
   </servlet>
@@ -67,11 +71,23 @@
   	<servlet-name>DetailsServlet</servlet-name>
   	<servlet-class>control.DetailsServlet</servlet-class>
   </servlet>
+   <servlet>
+  	<servlet-name>AcquistoServlet</servlet-name>
+  	<servlet-class>control.AcquistoServlet</servlet-class>
+  </servlet>
   
 
+ <servlet-mapping>
+    <servlet-name>AcquistoServlet</servlet-name>
+    <url-pattern>/purchase</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>DetailsServlet</servlet-name>
     <url-pattern>/details</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>IndirizzoServlet</servlet-name>
+    <url-pattern>/address</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>FiltersServlet</servlet-name>
