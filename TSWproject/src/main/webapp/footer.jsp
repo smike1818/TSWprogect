@@ -6,6 +6,14 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style type="text/css">
+footer{
+	position: fixed;
+	left: 0;
+  	bottom: 0;
+  	width: 100%;
+}
+</style>
 </head>
 <body>
  <!-- Footer -->

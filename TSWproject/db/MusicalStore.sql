@@ -44,7 +44,7 @@ create table image(
 );
 
 create table categoria(
-	IDcat int primary key auto increment,
+	IDcat int primary key auto_increment,
     nome_cat varchar(20) not null,
     descrizione varchar(200)
 );
@@ -67,10 +67,10 @@ create table composizione(
     iva int not null,
     articolo int references articolo(codice)
          on update cascade
-         on delete set null,
+         on delete no action,
 	acquisto int references acquisto(idAcquisto)
          on update cascade
-         on delete set null,
+         on delete no action,
     primary key(articolo, acquisto)
 );
 
@@ -83,8 +83,5 @@ create table indirizzo(
     cliente varchar(16) references utente(CF)
         on delete cascade
         on update cascade
-    foreign key(cliente)
 );
-
-
 
