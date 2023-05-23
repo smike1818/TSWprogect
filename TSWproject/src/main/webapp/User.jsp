@@ -4,7 +4,9 @@
 <%
     UserBean bean = (UserBean) session.getAttribute("user-details");
     if(bean==null)    response.sendRedirect("catalogo.jsp");
+    
 %>
+
 
 <!DOCTYPE html>
 <html>
