@@ -15,6 +15,12 @@
 <title>User Page</title>
 </head>
 <body>
+<header>
+	<jsp:include page="header.jsp"></jsp:include>
+</header>
        <a href="logout" target="_self">Esci</a>
+<footer>
+	<jsp:include page="footer.jsp"></jsp:include>
+</footer>
 </body>
 </html>
