@@ -12,8 +12,17 @@ public class ArticoloCart {
     
     public ArticoloCart(ArticoloBean b) {
     	bean=b;
-    	qCorrente=0;
+    	qCorrente=1;
     	qTotale = b.getQuantita();	
+    }
+    
+    public void decrementa() {
+    	if(qCorrente>1)
+    		qCorrente--;
+    }
+    public void incrementa() {
+     if(qCorrente<qTotale)
+        qCorrente++;	
     }
     
     public void setBean(ArticoloBean ab) {

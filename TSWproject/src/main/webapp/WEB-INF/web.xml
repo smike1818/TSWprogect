@@ -10,7 +10,15 @@
     <res-type>javax.sql.DataSource</res-type>
     <res-auth>Container</res-auth>
   </resource-ref>
-  
+   
+<servlet>
+	<servlet-name>StoricoUserServlet</servlet-name>
+	<servlet-class>control.StoricoUserServlet</servlet-class>
+ </servlet> 
+  <servlet>
+	 <servlet-name>ChangeIvaServlet</servlet-name>
+	 <servlet-class>control.ChangeIvaServlet</servlet-class>
+ </servlet> 
  <servlet>
 	 <servlet-name>CardsServlet</servlet-name>
 	 <servlet-class>control.CardsServlet</servlet-class>
@@ -75,8 +83,39 @@
   	<servlet-name>AcquistoServlet</servlet-name>
   	<servlet-class>control.AcquistoServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>UserListServlet</servlet-name>
+    <servlet-class>control.UserListServlet</servlet-class>
+  </servlet>
+    <servlet>
+    <servlet-name>UserDetailsServlet</servlet-name>
+    <servlet-class>control.UserDetailsServlet</servlet-class>
+  </servlet>
+ <servlet>
+    <servlet-name>AcquistoListServlet</servlet-name>
+    <servlet-class>control.AcquistoListServlet</servlet-class>
+  </servlet>
   
-
+  <servlet-mapping>
+    <servlet-name>StoricoUserServlet</servlet-name>
+    <url-pattern>/storico</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ChangeIvaServlet</servlet-name>
+    <url-pattern>/changeiva</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AcquistoListServlet</servlet-name>
+    <url-pattern>/acquistilist</url-pattern>
+  </servlet-mapping>
+ <servlet-mapping>
+    <servlet-name>UserDetailsServlet</servlet-name>
+    <url-pattern>/userdetails</url-pattern>
+  </servlet-mapping>
+ <servlet-mapping>
+    <servlet-name>UserListServlet</servlet-name>
+    <url-pattern>/users</url-pattern>
+  </servlet-mapping>
  <servlet-mapping>
     <servlet-name>AcquistoServlet</servlet-name>
     <url-pattern>/purchase</url-pattern>
@@ -141,4 +180,20 @@
   	<servlet-name>LoginAdmin</servlet-name>
   	<url-pattern>/loginadmin</url-pattern>
   </servlet-mapping>
+  
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/404.jsp</location>
+  </error-page>
+
+  <error-page>
+	<error-code>500</error-code>
+	<location>/500.jsp</location>	
+  </error-page>
+  
+  <error-page>
+  	<error-code>403</error-code>
+  	<location>/403.jsp</location>
+  </error-page>
+  
 </web-app>

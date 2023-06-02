@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,25 +32,25 @@ public class CartServlet extends HttpServlet{
 	ArticoloDAO model = new MusicalModelArticoloBean();
 	List<ComposizioneBean>listCart = new ArrayList<ComposizioneBean>();
 	UserDAO user = new ModelUserDAO();
+	List<ArticoloCart> cart = null;
 	
 	public CartServlet(){
 		super();
 	}
 	
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		String action = request.getParameter("action");    //action salva l'azione effettuata dall'utente
-		ServletContext sc = request.getServletContext();
 		HttpSession session = request.getSession();
+		cart =  (List<ArticoloCart>) session.getAttribute("cart");
 		
 		try {
 		   if(action != null) {
 		      if(action.equalsIgnoreCase("cart")) {      //[UTENTE]: Gestione dell'istanzazione, dell'inizializzazione e inserimento
 		    	                                         // prodotti nel carrello
-		    	  //prelevo il carrello dalla sessione  
-                  @SuppressWarnings("unchecked")
-				List<ArticoloCart> cart =  (List<ArticoloCart>) session.getAttribute("cart");
+
 		    	  
 		    	  //se la sessione non ha salvato come attributo il carrello, lo istanzio
 		    	  if(cart==null) {
@@ -62,57 +62,36 @@ public class CartServlet extends HttpServlet{
 		    	  Integer id = Integer.parseInt(request.getParameter("id"));
 		    	  
 		    	  //se id non è nullo, vuol dire che sto aggiungendo prodotti al carrello
-		    	  if(id!=null && cart!=null) {	  
+		    	  if(id!=null) {	  
 			    	
 		    		//prelevo articolo dal DB
 		    	    ArticoloBean add = model.doRetrieveByKey(id);
-		    	    //verifico le quantità inserite dall'utente
-		    	    Integer q = Integer.parseInt(request.getParameter("quantity"));
+		    	    		    	 
+		    	    //istanzio un nuovo articoloCart da aggiungere al carrello
+		    	    ArticoloCart aCart = new ArticoloCart(add);
+		    	    	
+		    	    //controllo se all'interno del carrello c'è articolo
+		    	    int i=0;
+		    	    for(ArticoloCart a : cart) {
+		    	    	if(a.equals(aCart))
+		    	    		break;
+		    	    	i++;	
+		    	    }
+		    	    	
+		    	    //se non ci sono duplicati aggiungo al carrello
+		    	    if(cart.size()==i) {
+		    	    	cart.add(aCart);
+		    	    }
 		    	    
-		    	     if(q!=null){
-		    	    	//istanzio un nuovo articoloCart da aggiungere al carrello
-		    	    	ArticoloCart aCart = new ArticoloCart(add);
-		    	    	
-		    	    	//controllo se all'interno del carrello c'è articolo
-		    	    	int i=0;
-		    	    	for(ArticoloCart a : cart) {
-		    	    		if(a.equals(aCart))
-		    	    			break;
-		    	    		i++;	
-		    	    	}
-		    	    	
-		    	    	//se non ci sono duplicati aggiungo al carrello
-		    	    	if(cart.size()==i) {
-		    	    		aCart.setQCorrente(q);
-		    	    		cart.add(aCart);
-		    	    	}else {
-		    	    		ArticoloCart ac = cart.get(i);
-		    	    		if(ac.setQCorrente(q)) {
-		    	    			//rimuovo l'articolo per poi aggiungerlo modificato
-		    	    			cart.remove(i);
-		    	    			cart.add(i, ac);
-		    	    		}else {
-		    	    			 RequestDispatcher error = null;
-		    	    			 String header = "Client Error";
-		    	    			 String details = "Hai inserito piu' elementi di quelli disponibili...";
-		    	    			 response.setStatus(400);
-		    	    			 error = sc.getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-		    	    			 error.forward(request, response);
-		    	    		 }
-		    	    	}
-		    	    	//aggiungo il carrello modificato nella sessione
-		    	    	  session.removeAttribute("cart");
-					      session.setAttribute("cart", cart);				    	 
+		    	  //aggiungo il carrello modificato nella sessione
+		    	     session.removeAttribute("cart");
+					 session.setAttribute("cart", cart);				    	 
 		    	  }	
 		    	  
-		      }	    	
 		    	  
 			  //rimuovo l'elemento dal carrello
 		      }if(action.equalsIgnoreCase("deleteByCart")) {
-				  Integer id = Integer.parseInt(request.getParameter("id"));
-				  
-				  @SuppressWarnings("unchecked")
-				  List<ArticoloCart>cart = (List<ArticoloCart>) session.getAttribute("cart");
+				  Integer id = Integer.parseInt(request.getParameter("id"));				 
 				  
 				  //ciclo il carrelo per eliminare l'item
 				  if(cart!=null && id!=null) {
@@ -124,26 +103,55 @@ public class CartServlet extends HttpServlet{
 						  }
 						  i++;
 					  }
-				  }
-				  
-				
-				  
-				  
+				  }  
+			  }if(action.equalsIgnoreCase("increment")) {
+				 String data = request.getParameter("data");
+				 if(data!=null) {
+					 int id = Integer.parseInt(data);
+					 
+					 //prendo l'elemento nel carrello 
+					 ArticoloCart articolo = cart.stream()
+						        .filter(a -> a.getBean().getID() == id)
+						        .findFirst().get();
+                     
+					 //per poi rimuoverlo
+					 cart.removeIf((a) -> a.getBean().getID()==id);
+					 
+					 //incremento la quantità selezionata nel carrello
+					 articolo.incrementa();
+                     cart.add(articolo);
+                      
+                     //aggiungo il carrello modificato nella sessione
+		    	     session.removeAttribute("cart");
+					 session.setAttribute("cart", cart);
+				 }
+				 
 			  }
-		      //ordinamento degli elementi nel carrello in base al prezzo
-			  }if(action.equalsIgnoreCase("sortCart")) {
-				  @SuppressWarnings("unchecked")
-				List<ArticoloCart>cart = (List<ArticoloCart>)session.getAttribute("cart");
-				  
-				  //uso gli stream per ordinare. sort(expression of comparator) 
-				  //expression = (a1,a2) -> {tot = prezzo1 - prezzo2 (sottoforma di intero)      return tot }
-				  cart.sort((a1,a2) -> {
-					  Double d = (((ArticoloBean)a1.getBean()).getPrezzo()*100*a1.getQCorrente() - 
-							      ((ArticoloBean)a2.getBean()).getPrezzo()*100*a2.getQCorrente());
-					  return d.intValue(); 
-				  });
-				  session.setAttribute("cart", cart);
-			  } 
+			  if(action.equalsIgnoreCase("decrement")) {
+					 String data = request.getParameter("data");
+					 if(data!=null) {
+						 int id = Integer.parseInt(data);
+						 
+						 //prendo l'elemento nel carrello 
+						 ArticoloCart articolo = cart.stream()
+							        .filter(a -> a.getBean().getID() == id)
+							        .findFirst().get();
+	                     
+						 //per poi rimuoverlo
+						 cart.removeIf((a) -> a.getBean().getID()==id);
+						 
+						 //decremento la quantità selezionata nel carrello
+						 articolo.decrementa();
+	                     cart.add(articolo);
+	                      
+	                     //aggiungo il carrello modificato nella sessione
+			    	     session.removeAttribute("cart");
+						 session.setAttribute("cart", cart);
+					 }
+					 
+				  }
+		      
+			}
 		   }catch(Exception e) {
 			e.printStackTrace();
 		}

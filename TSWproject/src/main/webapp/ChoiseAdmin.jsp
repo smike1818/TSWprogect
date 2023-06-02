@@ -4,7 +4,7 @@
 <%
 
 if(session.getAttribute("admin")==null){ 
-	 response.sendRedirect("/loginPageAdmin.jsp");
+	 response.sendRedirect("loginPageAdmin.jsp");
 }
 
 %>    
@@ -13,22 +13,20 @@ if(session.getAttribute("admin")==null){
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+      <script src="js/JQuery.js" type="text/javascript"></script>
+      <script src="js/not_autorized.js" type="text/javascript"></script>
 </head>
 <body>
 		
-   <h2> Che strumento vuoi inserire? </h2>
-                  
-
-	<form action="choise" method="post">
+   <h2> Che strumento vuoi inserire? </h2>                  
 		
-		<label for="select">Scegli che articolo vuoi inserire</label><br>
-		<select name="type" id="type">
-		   <option value="Strumento">Strumento</option>
-		   <option value="Pezzi di Ricambio">Altro</option>
-		</select>
-		<input type="submit" value="invia"><input type="reset" value="Reset">
-	</form><br>
+    <label for="select">Scegli che articolo vuoi inserire</label><br>
+    <select name="type" id="choise-type">
+	   <option value="strumento" selected>Strumento</option>
+	   <option value="pezzidiricambio">Altro</option>
+    </select>
 	
+   	 <script src="js/JQuery.js"></script>
+	 <script src="js/admin.js"></script>
 </body>
 </html>

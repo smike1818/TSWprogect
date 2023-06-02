@@ -60,12 +60,7 @@ public class ImageServlet extends HttpServlet {
             // Altre operazioni dopo l'elaborazione dei file
 
              } catch (SQLException se) {
-            	     RequestDispatcher error = null;
-	    			 String header = "Client Error";
-	    			 String details = "hai inserito un immagine gia salvata...";
-	    			 response.setStatus(400);
-	    			 error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-	    			 error.forward(request, response);
+            	     request.setAttribute("error-statement", "hai già inserito questa immagine");
              } catch (Exception e) {
             	     RequestDispatcher error = null;
 	    			 String header = "Server Error";
@@ -82,7 +77,7 @@ public class ImageServlet extends HttpServlet {
         	try {
 				model.doDelete(nome,code);
 			} catch (SQLException e) {
-				  RequestDispatcher error = null;
+				     RequestDispatcher error = null;
 	    			 String header = "Server Error";
 	    			 String details = "errore nell'eliminazione dell'immagine, riprova...";
 	    			 response.setStatus(500);

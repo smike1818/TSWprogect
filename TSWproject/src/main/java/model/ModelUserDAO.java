@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -30,6 +31,8 @@ public class ModelUserDAO implements UserDAO{
 	}
 
 	private static final String TABLE_NAME = "utente";
+	Collection<UserBean> users = null;
+	
 	@Override
 	public void doSave(UserBean user) throws SQLException {
 		// TODO Auto-generated method stub
@@ -114,8 +117,46 @@ public class ModelUserDAO implements UserDAO{
 
 	@Override
 	public Collection<UserBean> doRetrieveAll(String order) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Connection connection = null;
+		users = new ArrayList<UserBean>();
+		PreparedStatement preparedStatement = null;
+		UserBean user = null;
+        
+	  try {
+		String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE ruolo = 0";
+		
+		if (order != null && !order.equals("")) {
+			selectSQL += " ORDER BY " + order;
+		}
+		
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(selectSQL);
+		
+		ResultSet rs = preparedStatement.executeQuery();
+		while(rs.next()) { 
+			user = new UserBean();
+		    
+		    user.setCF(rs.getString("CF"));
+		    user.setPassword(rs.getString("pwd"));
+		    user.setUsername(rs.getString("username"));
+		    user.setCF(rs.getString("CF"));
+		    user.setNome(rs.getString("nome"));
+		    user.setCognome(rs.getString("cognome"));
+		    user.setEmail(rs.getString("email"));
+		    
+		    users.add(user);
+		}
+	  }finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
+	  return users;
 	}
 	
 	@Override
@@ -251,5 +292,45 @@ public class ModelUserDAO implements UserDAO{
 		 }
 	  
 	  return user;
+	}
+
+	@Override
+	public Collection<String> doRetrieveByIncompleteUsr(String value, String order) throws SQLException {
+		Connection connection = null;
+		Collection<String>sugg = new ArrayList<String>();    //collezione di username suggeriti
+		PreparedStatement preparedStatement = null;
+        
+	  try {
+		//query per prelevare l'utente
+		String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE ruolo = 0 AND username LIKE ?";
+		
+		if (order != null && !order.equals("")) {
+			selectSQL += " ORDER BY " + order;
+		}
+		
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(selectSQL);
+		if(value.equalsIgnoreCase(""))
+			preparedStatement.setString(1, "null");
+		else
+		    preparedStatement.setString(1, value+"%");
+		
+		ResultSet rs = preparedStatement.executeQuery();
+		while(rs.next()) { 
+            
+		    sugg.add(rs.getString("username"));
+		    
+		}
+		
+	  }finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
+	  return sugg;
 	}
 }

@@ -2,6 +2,8 @@ package bean;
 /*
  * crea istanze per ogni articolo  
  */
+import java.text.DecimalFormat;
+
 
 public class ArticoloBean {
     private int id;
@@ -15,9 +17,9 @@ public class ArticoloBean {
     private int corde = -1;
     private String tipologia;
     private CategoriaBean cat = null;
+    private IvaBean iva;
  
-   
-    
+
     public void setID(int i) {
     	id=i;
     }
@@ -54,9 +56,23 @@ public class ArticoloBean {
    	 prezzo=i;
     }
     
+    //arrotondo a 2 numeri dopo la virgola
+    //calcolo il prezzo da mostrare sul catalogo
     public double getPrezzo() {
-   	 return prezzo;
+        double importoIva = (prezzo) * (iva.getPercentuale() / 100);
+        double totale = prezzo + importoIva;
+
+        DecimalFormat df = new DecimalFormat("#0.00");
+        String totaleFormatted = df.format(totale);
+
+        // Sostituisci la virgola con un punto nella stringa
+        totaleFormatted = totaleFormatted.replace(",", ".");
+
+        return Double.parseDouble(totaleFormatted);
     }
+
+
+
     
     public void setNome(String n) {
    	 nome=n;
@@ -114,6 +130,13 @@ public class ArticoloBean {
    	 return cat;
     }
     
+    public void setIva(IvaBean i) {
+    	iva=i;
+    }
+    
+    public IvaBean getIva() {
+    	return iva;
+    }
     
    
 }

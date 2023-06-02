@@ -1,0 +1,134 @@
+.image-form {
+	display: none;
+}
+
+.categories-form {
+	display: none;
+}
+
+.error-statement{
+	color: red;
+}
+
+.type-col{
+	display: none !important;
+}
+
+#insert-product-form{
+	text-align: center;
+}
+
+.box-list {
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+
+.user-list-block {
+  width: 35%;
+  margin-left:10px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+#search-user-input {
+  width: 200px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+#search-user-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  list-style-type: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0;
+  margin: 0;
+  display: none;
+}
+
+#search-user-suggestions li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+#search-user-suggestions li:hover {
+  background-color: #f9f9f9;
+}
+
+#search-user-suggestions li.selected {
+  background-color: #f1f1f1;
+}
+
+#search-user-submit {
+  padding: 10px 20px;
+  background-color: #4285f4;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#search-user-submit:hover {
+  background-color: #3367d6;
+}
+
+/* Stile del label */
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.user-list-block {
+  width: 35%;
+  margin-left: 10px;
+}
+
+.box-list {
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+.user-list {
+  list-style: none;
+  padding: 0;
+}
+
+.user-list li {
+  padding: 10px;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.user-list li:last-child {
+  border-bottom: none;
+}
+
+.user-list li:before {
+  margin-right: 10px;
+}
+
+.no-users {
+  font-style: italic;
+  color: #999;
+}
+
+.complete-name {
+  color: #888;
+  font-weight: 100;
+  font-family: "Roboto Thin", "Helvetica Neue Thin", Arial, sans-serif;
+  font-size: 12px; /* Riduci la grandezza del font */
+}
+
+#insert-choise{
+	display: none;
+}

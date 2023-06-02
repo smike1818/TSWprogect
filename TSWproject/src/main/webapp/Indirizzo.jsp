@@ -2,29 +2,48 @@
     pageEncoding="ISO-8859-1"%>
     
 <%
-     application.removeAttribute("page");
+
+    //-----link per modificare un indirizzo
+    //------<a href="address?action=change">clicca per cambiarlo</a><br>
+    //------nella servlet address c'è una funzione già creata di modific della password
+    //------modificala se serve
+
+
+     String rend = null;
+     List<IndirizzoBean> indlist = null;
+     
      if(session.getAttribute("un")==null){
-    	    RequestDispatcher error = null;
-	        error = getServletContext().getRequestDispatcher("/LoginPageUtente.jsp");
-	        error.forward(request, response);
-     }
-     application.setAttribute("page", "Indirizzo.jsp");
-     String iban = request.getParameter("IBAN");
-     if(iban==null){
-    	 if(application.getAttribute("IBAN")==null){
-    	    RequestDispatcher error = null;
-	        String header = "Client Error";
-	        String details = "non puoi accedere a questa pagina senza aver effettuato tutti i passaggi...";
-	        response.setStatus(403);
-	        error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-	        error.forward(request, response);
-    	 } 
+	        rend = "LoginPageUtente.jsp";
      }else{
-          application.setAttribute("IBAN",iban);
+       String page_precedente = (String) application.getAttribute("page");       
+       if(page_precedente == null || (!page_precedente.equalsIgnoreCase("cardsPage.jsp") && !page_precedente.equalsIgnoreCase("Indirizzo.jsp"))){     
+    	   
+    	   System.out.println(page_precedente);
+    	   //controllo se l'utente registrato tenta di accedere direttamente alla pagina senza passare per cardsPage.jsp
+    	   String header = "Client Error";
+    	   String details = "esegui tutti i passaggi prima di accedere alla pagina...";
+    	   rend = "error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details +"&status=401";
+       }else{
+    	   
+    	   application.setAttribute("page","Indirizzo.jsp");    //salvo la pagina corrente
+    	   String iban = request.getParameter("IBAN");
+           if(iban==null){
+        	   if(application.getAttribute("IBAN")==null){
+        	     String header = "Client Error";
+        	     String details = "carta non selezionata...";
+        	     rend = "error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details +"&status=401";
+        	   }
+    	   }else{
+    		   application.setAttribute("IBAN", iban);
+    	   }
+           indlist = (List<IndirizzoBean>) request.getAttribute("indirizzo");
+           if(indlist==null){
+    	       rend = "./address";
+           }
+       }
      }
-     IndirizzoBean ind = (IndirizzoBean) request.getAttribute("indirizzo");
-     if(ind==null){
-    	 response.sendRedirect("address");
+     if(rend!=null){
+    	 response.sendRedirect(rend);
     	 return;
      }
 %>
@@ -33,6 +52,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Address Page</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -40,28 +60,41 @@
      <jsp:include page="header.jsp"></jsp:include>
  </header>
 
-<%if(ind.isEmpty()){%>
-    <h5>Aggiungi indirizzo: </h5><br>
-    <form action="address" method="post">
-       <input type="hidden" name="action" value="new">
-       <label for="via">Via:</label><br>
-       <input type="text" name="via" required placeholder="enter via"><br>
-       <label for="civico">Civico:</label><br>
-       <input type="number" name="civico" required placeholder="enter civico"><br>
-       <label for="citta">Città:</label><br>
-       <input type="text" name="citta" required placeholder="enter città"><br>
-       <label for="citta">CAP:</label><br>
-       <input type="number" name="CAP" required placeholder="enter CAP"><br>       
-       <input type=submit value="add">
-    </form>
+<%if(indlist==null || indlist.size()==0){%>
+   <jsp:include page="AddIndirizzo.jsp"></jsp:include>
 <%}else{ %>
-  <h5>questo è il tuo indirizzo:</h5>
-  <p>Via <%=ind.getVia() %> <%=ind.getCivico() %>,<%=ind.getCitta() %></p>
-  <a href="address?action=change">clicca per cambiarlo</a><br>
-  <a href="purchase">clicca per completare l'acquisto</a>
-<%}%>
 
+<h4>Seleziona un indirizzo</h4>
+<ol class="address-list">
+  
+ <%
+   IndirizzoBean ind = null;
+   if (indlist != null && indlist.size() != 0) {
+		Iterator<?> it = indlist.iterator();
+		while (it.hasNext()) {
+		    ind = (IndirizzoBean) it.next();
+
+%>
+
+<!-- quando invio i dati dell'indirizzo alla servlet -->
+  <li class="li-address">
+     <a href="purchase?via=<%=ind.getVia()%>&civico=<%=ind.getCivico() %>&citta=<%=ind.getCitta() %>">
+           <%=ind.getVia()%> <%=ind.getCivico() %>,<%=ind.getCitta() %></a>
+  </li>
+<%}}%>
+
+</ol>
+<span><button class="add-AddIndirizzo-link" >Aggiungi indirizzo</button></span><br>
+	   
+	   <!-- javascript al click del link di sopra importerà dinamicamente AddIndirizzo.jsp e lo mette nel div di sotto -->
+	   
+	   <div class="show-AddIndirizzo"></div>
+	   
 <jsp:include page="footer.jsp"></jsp:include>
 
+    <script src="js/JQuery.js" type="text/javascript"></script>
+    <script src="js/userFunctions.js" type="text/javascript"></script>
 </body>
+
+<%} %>
 </html>

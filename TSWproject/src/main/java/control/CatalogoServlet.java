@@ -2,6 +2,7 @@ package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+import bean.ArticoloBean;
 import dao.ArticoloDAO;
 import dao.CategoriaDAO;
 import dao.ImageDAO;
@@ -22,43 +26,72 @@ public class CatalogoServlet extends HttpServlet {
 	ArticoloDAO model = new MusicalModelArticoloBean();
 	CategoriaDAO categ = new ModelCategoriaDAO();
 	ImageDAO imagemodel = new ModelImageDAO();
+	Collection<String> suggerimenti = null;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		String action = request.getParameter("action");
+		String auto = request.getParameter("auto");
+		
+		if(auto!=null) {
+	    	if(auto.equalsIgnoreCase("autocomplete")) {
+	    		
+	    		//setto la risposta come stringa JSON
+	    		response.setContentType("application/json");
+	            response.setCharacterEncoding("UTF-8");
+	            
+	            //prendo la stringa scritta dall'utente
+	    		String value = request.getParameter("data");
+	    		String id = request.getParameter("key");
+	    		
+	    		//controllo per quando clicco sul bottone
+	    		if(id!=null) {
+	    			int key = Integer.parseInt(id);
+	    			try {
+						ArticoloBean test = model.doRetrieveByKey(key);
+						if(!test.getNome().equalsIgnoreCase(value))
+							response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "chiave e nome non corrispondenti");
+					} catch (SQLException e) {
+						response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Errore durante l'esecuzione della query");
+					}
+	    		}
+	    		
+	    		if(value!=null)
+					try {
+						//username che matchano con value
+						suggerimenti = model.doRetrieveByIncompleteProduct(value);
+						
+					} catch (SQLException e) {
+						
+						 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Errore durante l'esecuzione della query");
+					}       
+	    		if(suggerimenti!=null) {
+	    			response.getWriter().write(new Gson().toJson(suggerimenti));   //da Collection a stringa JSON che inserisco in response
+	    		}
+	    	}
+	    	if(auto.equalsIgnoreCase("idByName")) {
+	    		
+	    	}
+	    }else {	 
 		
 		if(action!=null) {
-			
-			if(action.equalsIgnoreCase("deletefromcatalogo")) {
-				int code = Integer.parseInt(request.getParameter("id"));
-				try {
-					model.doDelete(code);
-					imagemodel.doDeleteAll(code);
-				} catch (SQLException e) {
-					  RequestDispatcher error = null;
-		    			 String header = "Server Error";
-		    			 String details = "c'è stato un errore nella cancellazione del catalogo...";
-		    			 response.setStatus(500);
-		    			 error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-		    			 error.forward(request, response);
-				}
 				
-			}if(action.equalsIgnoreCase("deletefromcategorie")) {
+			if(action.equalsIgnoreCase("deletefromcategorie")) {
 				int code = Integer.parseInt(request.getParameter("id"));
 				try {
 					categ.doDelete(code);
 				} catch (SQLException e) {
 					  RequestDispatcher error = null;
 		    			 String header = "Server Error";
-		    			 String details = "c'è stato un errore nella cancellazione delle categorie...";
+		    			 String details = "c'e' stato un errore nella cancellazione delle categorie...";
 		    			 response.setStatus(500);
 		    			 error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
 		    			 error.forward(request, response);
 				}
 			}
-		}
-		
+	    }
+	
 	    String sort="codice";
 	
 	    try {
@@ -66,7 +99,7 @@ public class CatalogoServlet extends HttpServlet {
 	    } catch (SQLException e) {
 	    	 RequestDispatcher error = null;
  			 String header = "Server Error";
- 			 String details = "c'è stato un errore nella mostra del catalogo...";
+ 			 String details = "c'e' stato un errore nella mostra del catalogo...";
  			 response.setStatus(500);
  			 error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
  			 error.forward(request, response);
@@ -75,7 +108,7 @@ public class CatalogoServlet extends HttpServlet {
 	    try {
 		    request.setAttribute("categories",  categ.doRetrieveAll(sort));
 	    } catch (SQLException e) {
-	    	  RequestDispatcher error = null;
+	    	 RequestDispatcher error = null;
  			 String header = "Server Error";
  			 String details = "c'è stato un errore, nella mostra delle categorie...";
  			 response.setStatus(500);
@@ -88,7 +121,8 @@ public class CatalogoServlet extends HttpServlet {
 	    String page = (String) getServletContext().getAttribute("page");	   
 	    dispatcher = getServletContext().getRequestDispatcher("/"+page);
 	    dispatcher.forward(request, response);
-	}
+	    
+	}}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

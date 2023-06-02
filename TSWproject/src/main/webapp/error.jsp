@@ -6,6 +6,9 @@
    String header = request.getParameter("errorMessageHeader");
    String details = request.getParameter("errorMessageDetails");
    Integer status = response.getStatus();
+   if(status == 200 || status == 201 || status == 202){
+	   status = Integer.parseInt(request.getParameter("status"));
+   }
    if(header == null && details == null){
 	   //se header e details non vengono caricati tramite i parametri della richiesta
 	   //li carico tramite gli attributi

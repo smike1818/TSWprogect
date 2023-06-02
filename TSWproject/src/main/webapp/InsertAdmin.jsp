@@ -6,16 +6,22 @@
     List<?> products = null;
     List<?> cat = null;
     CategoriaBean categoria = null;
+    String error;
     
-    if(session.getAttribute("admin")==null){ 
-    	 rend = "loginPageAdmin.jsp";
-    }else{
+    //se ci sono errori fatti dall'utente li mostro all'utente
+    if((error = (String) request.getAttribute("error-statement"))==null)     error="";
+    request.removeAttribute("error-statement");
+    
+    
+    //if(session.getAttribute("admin")==null){ 
+    //	 rend = "loginPageAdmin.jsp";
+   // }else{
        this.getServletContext().setAttribute("page","InsertAdmin.jsp");
        products = (List<?>) request.getAttribute("products");	
        cat = (List<?>) request.getAttribute("categories");
 	   if(products == null || cat == null)
 		   rend = "./insertadmin";
-	}
+	//}
     
      if(rend!=null){
          response.sendRedirect(rend);
@@ -34,19 +40,17 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Insert Page</title>
+<link href="css/adminstyle.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	
+	 <jsp:include page="headerAdmin.jsp"></jsp:include>
 	 <jsp:include page="ChoiseAdmin.jsp"></jsp:include>
 	
-		<%
-		    Integer c = (Integer)application.getAttribute("choise");       //choise sarà 0 se si vuole inserire uno strumento, 1 se altro
-		    if(c!=null){
-		%>
-	
-
-		<form action="insertadmin" method="post">
+	    <!-- in questa sezione verranno mostrati tutti gli errori 400 in poi -->
+	    <p class="error-statement"><%=error %></p>
+        
+		<br><form id="insert-product-form" action="insertadmin" method="post">
 		<input type="hidden" name="action" value="Add">
 		   <label for="name">Name:</label><br> 
 		   <input name="name" type="text" maxlength="50" required placeholder="enter name"><br> 
@@ -57,6 +61,7 @@
 		        
 		   <!-- gestione ID -->
 		   <input type="hidden" name="id" value="<%=id%>">
+		   <input type="text" name="choise" id="insert-choise" value="">
 		   
 		   <label for="tipologia">Tipologia:</label><br> 
 		   <input name="tipologia" type="text" maxlength="50" required placeholder="enter tipologia"><br> 
@@ -74,42 +79,51 @@
            <label for="marca">Marca:</label><br> 
 		   <input name="marca" type="text" maxlength="50" required placeholder="enter marca"><br> 
 		
-		  <%  if(c==0) { %>
+		   <div class="insert-corde">
 		    <label for="corde">Corde:</label><br> 
 		    <input name="corde" type="number" min="3" max="6" value="3" required><br>  
-		   <%} %> 
+		   </div>
+
 		   <label for="colore">Colore:</label><br> 
 		   <input name="colore" type="color" value="#ff0000" required><br>
 		   
-		   <label for="categoria">Categoria</label><br>
-		   <select name="categoria" id="categoria" >
 		    
-		      <% if(cat!=null && cat.size()!=0){ 
+		      <% if(cat!=null && cat.size()!=0){  %>
+		      
+		      <label for="categoria">Categoria</label><br>
+		      <select name="categoria" id="categoria" >
+		      
+		      <%
 		    	  Iterator<?> it = cat.iterator();
 					while (it.hasNext()) {
 					    categoria = (CategoriaBean) it.next();
 		      %>
-		          <option value=<%=categoria.getID() %>><%=categoria.getNome() %></option>	          
-		      <%}}else{ %>
-		          <option value="nessuno" disabled>nessuno</option>
+		          <option value=<%=categoria.getID() %>><%=categoria.getNome() %></option>	          		      
+		   
+		   <%}%>
+		      </select><br><br>
+		    <%}else{ %>
+		          <p id="no-categories"> inserire prima una categoria per poter continuare l'inserimento del prodotto</p>
 		      <%} %>
-		   </select><br>
-	        
-		<input type="submit" value="Add"> 
+	    
+		<input id="insert-product-submit" type="submit" value="Add">
 	 </form>
 	 
-		   
-	 <%}else{		 %>
-	 <h3>PAGINA INSERIMENTO PRODOTTI ADMIN</h3>
-	 <%}%>
 	 
-	 <!-- quetso bottone deve essere nascosto una volta cliccato il bottone -->
-	 <button onclick="showCategoriesForm()">clicca per inserire categoria</button>
-	 <div class="categorie"></div>
+	 <br><br><div class="categories-form">
+	    <h3> inserimento della categoria </h3><br>
+        <form action="insertadmin" method="post">
+        <input type="hidden" name="action" value="cat">
+        <input name="name" type="text" maxlength="50" required placeholder="Enter name"><br>
+        <textarea name="descrizione" maxlength="1000" rows="5" required placeholder="Enter description"></textarea><br>
+        <input type="submit" value="Add">
+        </form>
+	 </div>
 	 
 	 <br><a href="CatalogoAdmin.jsp">Torna al Catalogo</a>
 	 
-	 <script src="js/insertAdmin.js"></script>
+	 <script src="js/JQuery.js"></script>
+	 <script src="js/admin.js"></script>
 	 
 	 
 </body>

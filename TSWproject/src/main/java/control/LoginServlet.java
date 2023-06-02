@@ -58,7 +58,8 @@ public class LoginServlet extends HttpServlet {
 		        
 		        String page = (String)getServletContext().getAttribute("page");
 		        
-		        if(page==null)    page = "catalogo.jsp";
+		        if(page==null || page.equalsIgnoreCase("acquisto.jsp")
+		        		|| page.equalsIgnoreCase("indirizzo.jsp"))    page = "catalogo.jsp";
 		        
 	        	dispatcher = getServletContext().getRequestDispatcher("/"+page);
 	        	dispatcher.forward(request, response);

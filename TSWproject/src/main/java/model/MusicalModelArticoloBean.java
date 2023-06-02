@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,8 +16,10 @@ import javax.sql.DataSource;
 
 import bean.ArticoloBean;
 import bean.CategoriaBean;
+import bean.IvaBean;
 import dao.ArticoloDAO;
 import dao.CategoriaDAO;
+import dao.IvaDAO;
 
 /*
  * Implementazione di ArticoloDAO
@@ -45,14 +49,13 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
         
-		String insertSQL = "INSERT INTO " + MusicalModelArticoloBean.TABLE_NAME +" VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String insertSQL = "INSERT INTO " + MusicalModelArticoloBean.TABLE_NAME +" VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setInt(1, product.getID());
-			preparedStatement.setString(2, product.getNome());
-			preparedStatement.setDouble(3, product.getPrezzo());
+			preparedStatement.setString(2, product.getNome());			
 			preparedStatement.setInt(4, product.getQuantita());
 			preparedStatement.setString(5, product.getColore());
 			preparedStatement.setString(6, product.getDescrizione());
@@ -60,7 +63,9 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 			preparedStatement.setInt(8, product.getTipo());
 			preparedStatement.setInt(9, product.getCorde());
 			preparedStatement.setString(10, product.getTipologia());
-			preparedStatement.setInt(11, product.getCategoria().getID());
+			preparedStatement.setInt(12, product.getCategoria().getID());
+			preparedStatement.setDouble(11, product.getIva().getID());
+			preparedStatement.setDouble(3, product.getPrezzo());
 
 			preparedStatement.executeUpdate();
 
@@ -109,6 +114,8 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		CategoriaBean cat = null;
+		IvaBean iva = null;
+		IvaDAO modeliva = new ModelIvaDAO();
 		CategoriaDAO model = new ModelCategoriaDAO();
 
 		List<ArticoloBean> products = new LinkedList<ArticoloBean>();
@@ -138,9 +145,11 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		    	ab.setPrezzo(rs.getDouble("prezzoBase"));
 		    	ab.setTipo(rs.getInt("tipo"));
 		    	ab.setCorde(rs.getInt("corde"));
-		    	
+		    
+		    	iva = modeliva.getIvaByModel();
 		    	cat = model.doRetrieveByKey(rs.getInt("categoria"));
 		    	
+		    	ab.setIva(iva);
 		    	ab.setCategoria(cat);	
 		    	products.add(ab);
 			}
@@ -161,6 +170,8 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 	public ArticoloBean doRetrieveByKey(int code) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		IvaBean iva = null;
+		IvaDAO modeliva = new ModelIvaDAO();
 		
 		String selectSQL = "SELECT * FROM " + MusicalModelArticoloBean.TABLE_NAME + " join categoria WHERE codice = ?";
 		ArticoloBean ab = null;
@@ -187,6 +198,9 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		    	ab.setPrezzo(rs.getDouble("prezzoBase"));
 		    	ab.setTipo(rs.getInt("tipo"));
 		    	ab.setCorde(rs.getInt("corde"));
+		    	
+		    	iva = modeliva.getIvaByModel();
+		    	ab.setIva(iva);
 		    	
 		    	cat.setID(rs.getInt("IDcat"));
 		    	cat.setNome(rs.getString("nome_cat"));
@@ -237,7 +251,8 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		PreparedStatement preparedStatement = null;
 		String ImageName = null;
 		
-		String selectSQL = "SELECT * FROM " + MusicalModelArticoloBean.TABLE_NAME + " a join image i WHERE a.codice = ?";
+		String selectSQL = "SELECT * FROM " + MusicalModelArticoloBean.TABLE_NAME + " a join image i "
+				+ "WHERE a.codice = ? AND a.codice = i.articolo";
 		
 		try {
 			connection = ds.getConnection();
@@ -261,6 +276,42 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		}
 		
 		return ImageName;
+	}
+
+	@Override
+	public Collection<String> doRetrieveByIncompleteProduct(String value) throws SQLException {
+		Connection connection = null;
+		Collection<String>sugg = new ArrayList<String>();    //collezione di username suggeriti
+		PreparedStatement preparedStatement = null;
+        
+	  try {
+		//query per prelevare l'utente
+		String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE nome LIKE ?";
+		
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(selectSQL);
+		if(value.equalsIgnoreCase(""))
+			preparedStatement.setString(1, "null");
+		else
+		    preparedStatement.setString(1, value+"%");
+		
+		ResultSet rs = preparedStatement.executeQuery();
+		while(rs.next()) { 
+            
+		    sugg.add(rs.getString("nome")+"("+rs.getString("codice")+")");
+		    
+		}
+		
+	  }finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
+	  return sugg;
 	}
 
 }

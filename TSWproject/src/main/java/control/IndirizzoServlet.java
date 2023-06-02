@@ -116,12 +116,11 @@ public class IndirizzoServlet extends HttpServlet{
 			}
    	    }
    	    try {
-			request.setAttribute("indirizzo", model.doRetrieveByKey(user.getCF()));
+			request.setAttribute("indirizzo", model.doRetrieveAll("via"));
 		} catch (SQLException e) {
 			 e.printStackTrace();
-			 request.setAttribute("indirizzo", new IndirizzoBean());
 		     RequestDispatcher dispatcher = null;   
-			 dispatcher = getServletContext().getRequestDispatcher("/Indirizzo.jsp");
+			 dispatcher = getServletContext().getRequestDispatcher("/500.jsp");
 			 dispatcher.forward(request, response);
 		}
    	    

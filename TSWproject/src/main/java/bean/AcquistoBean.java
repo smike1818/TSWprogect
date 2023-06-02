@@ -5,6 +5,7 @@ public class AcquistoBean {
 	 private UserBean consumer = null;
 	 private ContoBean conto = null;
 	 private String date = null;
+	 private IndirizzoBean indirizzo = null;
 	 private double importo;
 	 
 	 
@@ -32,6 +33,10 @@ public class AcquistoBean {
 		 return conto;
 	 }
 	 
+	 public void setDate(String d) {
+		 date=d;
+	 }
+	 
 	 public String getDate() {
 		 return date;
 	 }
@@ -43,5 +48,13 @@ public class AcquistoBean {
      public double getImporto() {
     	 return importo;
      }
+
+	public void setIndirizzo(IndirizzoBean ind) {
+		indirizzo = ind;
+	}
+	
+	public IndirizzoBean getIndirizzo() {
+		return indirizzo;
+	}
      
 }

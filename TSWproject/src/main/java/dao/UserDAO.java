@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.SQLException;
+import java.util.Collection;
 
 import bean.UserBean;
 
@@ -11,5 +12,6 @@ public interface UserDAO extends MasterDAO<UserBean> {
 	public UserBean doRetrieveByKey(String code) throws SQLException;
 	public boolean hasCard(String username) throws SQLException;
 	public UserBean doRetrieveByUsr(String code) throws SQLException;
+	public Collection<String> doRetrieveByIncompleteUsr(String value, String order) throws SQLException;
 	
 }

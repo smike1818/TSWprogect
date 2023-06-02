@@ -19,7 +19,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Dettaglio Prodotto</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <jsp:include page="header.jsp"></jsp:include>
@@ -59,21 +60,22 @@
          <span><%=bean.getCategoria().getNome() %></span><br>
        </div>
        <div>
-         <label for="quantita"><span><%=q=bean.getQuantita() %></span> prodott<%if(q==1){%>o<%}else{%>i<%} %> disponibil<%if(q==1){%>e<%}else{%>i<%} %> </label>
+         <label for="quantita"><span class="details-quantity"><%=q=bean.getQuantita() %></span> prodott<%if(q==1){%>o<%}else{%>i<%} %> disponibil<%if(q==1){%>e<%}else{%>i<%} %> </label>
        </div>
-       <div>
-            <form action="cart" method="post">
-                     <input type="hidden" name="action" value="cart">
-                     <input type="hidden" name="id" value="<%=bean.getID()%>">
-                     <label for="quantity">Quantity:</label><br> 
-		             <input name="quantity" type="number" min="1" max="<%=bean.getQuantita() %>" value="1">
-		             <button type="submit">Add to Cart</button>
-            </form>  
-       </div>
+       <div class="addtocart-block">
+           <form action="cart" method="post" class="addtocart-form">
+               <input type="hidden" name="action" value="cart">
+               <input type="hidden" name="id" value="<%=bean.getID() %>">
+		       <button type="submit" class="addtocart-submit">Add to Cart</button>
+           </form>  
+       </div>       
     </div>
     <%} %>
     <!-- fine corpo dettaglio -->
     
     <jsp:include page="footer.jsp"></jsp:include>
+    
+    <script src="js/JQuery.js" type="text/javascript"></script>
+    <script src="js/userFunctions.js" type="text/javascript"></script>
 </body>
 </html>

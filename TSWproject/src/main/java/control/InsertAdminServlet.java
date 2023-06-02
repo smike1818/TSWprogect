@@ -11,12 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.ArticoloBean;
 import bean.CategoriaBean;
+import bean.IvaBean;
 import dao.ArticoloDAO;
 import dao.CategoriaDAO;
 import dao.ImageDAO;
+import dao.IvaDAO;
 import model.ModelCategoriaDAO;
 import model.ModelImageDAO;
 import model.MusicalModelArticoloBean;
+import model.ModelIvaDAO;
 
 public class InsertAdminServlet extends HttpServlet {
 
@@ -24,6 +27,7 @@ public class InsertAdminServlet extends HttpServlet {
 	ArticoloDAO articoli = new MusicalModelArticoloBean();
 	CategoriaDAO categorie = new ModelCategoriaDAO();
 	ImageDAO images = new ModelImageDAO();
+	IvaDAO ivamodel = new ModelIvaDAO();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -32,8 +36,10 @@ public class InsertAdminServlet extends HttpServlet {
 		
 		if(action!=null) {
 			 if(action.equalsIgnoreCase("add")) {    //[AMMINISTRATORE] gestione insert nel db
-		    	  //da aggiungere immagine
 		    	  ArticoloBean ab = new ArticoloBean();
+		    	  String choise = null;
+		    	  
+		    	  choise = request.getParameter("choise");
 		    	  ab.setID(Integer.parseInt(request.getParameter("id")));
 		    	  ab.setColore(request.getParameter("colore"));
 		    	  ab.setNome(request.getParameter("name"));
@@ -42,7 +48,27 @@ public class InsertAdminServlet extends HttpServlet {
 		    	  ab.setMarca(request.getParameter("marca"));
 		    	  ab.setQuantita(Integer.parseInt(request.getParameter("quantity")));
 		    	  ab.setPrezzo(Double.parseDouble(request.getParameter("price")));
-		    	  if(((Integer) getServletContext().getAttribute("choise"))==0) {
+		    	  
+		    	  IvaBean iva = null;
+		    	  
+		    	  //aggiunta iva dal database
+		    	  try {
+					iva = ivamodel.getIvaByModel();
+				} catch (SQLException e) {
+					RequestDispatcher error = null;
+	    			String header = "Server Error";
+	    			String details = "errore nel prendere l'iva...";
+	    			response.setStatus(500);
+	    			error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
+	    			error.forward(request, response);
+					e.printStackTrace();
+				}
+		    	  if(iva!=null) {
+		    		  ab.setIva(iva);
+		    		  System.out.print(iva.getPercentuale());
+		    	  }
+		    	  
+		    	  if(choise.equalsIgnoreCase("strumento")) {
 		    	      ab.setTipo(0);
 		    	      ab.setCorde(Integer.parseInt(request.getParameter("corde")));
 		    	  } else 
@@ -73,12 +99,7 @@ public class InsertAdminServlet extends HttpServlet {
 				 try {
 					categorie.doSave(cat);
 				 } catch (SQLException e) {
-					  RequestDispatcher error = null;
-		    		  String header = "Server Error";
-		    		  String details = "errore nel salvataggio delle categorie, riprova...";
-		    		  response.setStatus(500);
-		    		  error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-		    		  error.forward(request, response);
+					  request.setAttribute("error-statement", "nome categoria già inserito, riprova");
 				 }
 				 
 			 }

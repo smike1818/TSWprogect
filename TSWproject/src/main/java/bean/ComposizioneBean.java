@@ -40,9 +40,7 @@ public class ComposizioneBean {
 	 }
 	 
 	 public void setPrezzo(double p) {
-		 double prezzoParziale = p*qAcquistate;
-		 double importoIva = (prezzoParziale)*(iva/100);
-		 prezzo = prezzoParziale + importoIva;
+		 prezzo = p;
 	 }
     
      public double getPrezzo() {

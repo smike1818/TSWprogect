@@ -19,39 +19,45 @@
          return;
      }
 %>
+<%
+        Integer c;
+        String choise = (String)application.getAttribute("choise");
+        if(choise!=null){
+        	c = Integer.parseInt(choise);
+        }else{
+        	c=0;
+        }
+%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Catalogo e Categorie per Admin</title>
+<title>CatalogoAdmin</title>
 </head>
 <body>
 
+   <jsp:include page="headerAdmin.jsp"></jsp:include>
    <jsp:include page="ChoiseAdmin.jsp"></jsp:include>
-		
-		<%
-		    Integer c = (Integer)application.getAttribute("choise");       //choise sarà 0 se si vuole inserire uno strumento, 1 se altro
-		    if(c!=null){
-		%>
-
 
 <h2>Elenco Articoli</h2>
 
 <!-- quando inserisco un elemento nel database e aggiorno la pagina me lo inserisce nuovamente. da migliorare -->
-<table border="1">
+<table border="1" class="table-catalogo">
+
 		<tr>
 			<th>Code</th>
 			<th>Name</th>
 			<th>Description</th>
 			<th>Marca</th>
 			<th>Quantità</th>
-			<% if(c==0){ %> <th>Corde</th> <%} %>
+            <th class="tag-choise">Corde</th> 
 			<th>Tipologia</th>
 			<th>Prezzo</th>
 			<th>Categoria</th>
+			<th>Iva</th>
+			<th class="type-col">Tipo </th>
 			<th>Immagini</th>
-			<th>Delete</th>
 		</tr>
 		
 		<%
@@ -60,40 +66,35 @@
 				Iterator<?> it = products.iterator();
 				while (it.hasNext()) {
 				    bean = (ArticoloBean) it.next();
-					
-					if(bean.getTipo()==c){
+				  
 		%>
-		<tr>
+		<tr class="product">
 			<td><%=bean.getID()%></td>
 			<td><%=bean.getName()%></td>
 			<td><%=bean.getDescrizione()%></td>
 			<td><%=bean.getMarca()%></td>
 			<td><%=bean.getQuantita()%></td>
-			<% if(c==0){ %> <td><%=bean.getCorde()%><br> <%} %>
+            <td class="tag-choise"><%=bean.getCorde()%><br>
 			<td><%=bean.getTipologia()%></td>
 			<td><%=bean.getPrezzo()%></td>
 			<td><%=bean.getCategoria().getNome() %>
+			<td><%=bean.getIva().getPercentuale() %>%</td>
+			<td class="type-col"><%=bean.getTipo() %></td>
 			<!-- pagina che mostra tutte le immagini di un determinato prodotto -->
 			<td><a href="ImagePage.jsp?id=<%=bean.getID()%>">visualizza immagini</a></td>
 			<!-- eliminazione dell'articolo dal database  -->
-			<td><a href="catalogo?action=deletefromcatalogo&id=<%=bean.getID()%>">Delete</a></td>
 			
 		</tr>
 		<%
-			}}} else {                   //quando non si sono prodotti nel database stampo a video il mess sotto
+			}} else {                   //quando non si sono prodotti nel database stampo a video il mess sotto
 		%>
 		<tr>
-			<td colspan="<%=(c==0)?10:9%>">No products available</td>        
+			<td class="no-products">No products available</td>        
 		</tr>
 		
 		<%}%>
 		
 		</table><br>
-		
-		
-	 <%}else{		 %>
-	 <h3>PAGINA DEL CATALOGO ADMIN</h3>
-	 <% }%>
 	 
 	 <jsp:include page="CategorieAdmin.jsp"></jsp:include>
 	 

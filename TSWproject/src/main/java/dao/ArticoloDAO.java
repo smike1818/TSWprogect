@@ -1,6 +1,8 @@
 package dao;
 
 import java.sql.SQLException;
+import java.util.Collection;
+
 import bean.ArticoloBean;
 
 /*
@@ -13,4 +15,5 @@ public interface ArticoloDAO extends MasterDAO<ArticoloBean>{
 	//funzione per modificare la quantità degli elementi
 	public void doChangeQuantity(int id, float q) throws SQLException;
 	public String getFirstImage(int code) throws SQLException;
+	public Collection<String> doRetrieveByIncompleteProduct(String value) throws SQLException;
 }

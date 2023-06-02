@@ -5,59 +5,41 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="ISO-8859-1">
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-		<style>
-			header{
-				background-color: light blue;
-			}
-		</style>
+	      <script src="js/JQuery.js" type="text/javascript"></script>
+          <script src="js/not_autorized.js" type="text/javascript"></script>
 	</head>
 	<body>
-	<!--Main Navigation-->
-	<!--Main Navigation-->
-	  <!-- Jumbotron -->
-	    <div>
-	      <div>
-	        <!-- Right elements -->
-	        <div>
-	          <div align="right">
+	    
+	        <div class="first-header">
 	          <nav>
+	             <ul class="voci-navbar">
 		          <% if(session==null || session.getAttribute("un")==null){ %>
-		               <a href="LoginPageUtente.jsp" target="_self"> Sign in </a><br>
+		               <li><a href="LoginPageUtente.jsp" target="_self" class="text-white"> Sign in </a></li>
 		          <%}else{ %>
-		               <a href="user" target="_self"> <%=(String) session.getAttribute("un") %> </a><br>
+		               <li><a href="user" target="_self" class="text-white"> <%=(String) session.getAttribute("un") %> </a><li>
 		          <%} %>
-					<a href="carrello.jsp">  My Cart  </a><br>
+					   <li><a href="carrello.jsp" class="text-white">  My Cart  </a></li>
+				  </ul>
+
+              <!-- SEARCH ELEMENTS -->
+	            <div class="search-products">
+	              <div class="dropdown">
+	               <input type="search" class="search-product-input">
+	               <ul class="search-product-suggestions"></ul>
+	              </div>
+	               <button class="search-product-submit">Search</button>
+	           </div>
 	          </nav>
-	          </div>
-	        </div>
-	        <!-- Right elements -->
-	
-	        <!-- Search elements (da attivare) -->
-	          <div>
-	            <div>
-	              <input type="search" id="form1">
-	              <input type="submit" value="search">
-	          </div>
 	         </div>
-	         <!-- Search elements -->
-	    </div>
-	  </div>
-	  <!-- Jumbotron -->
-	
-	  <!-- Heading -->
-	  <div class="bg-primary mb-4">
-	    <div>
-	      <h3> 
-	         Strumenti
+	         
+	    <div class="second-header">
+	      <h3 id="tipo-articolo"> 
+	         Articoli
 	      </h3>
-	      <!-- Breadcrumb -->
-	      <nav>
-	        <h6>
+	        <h5 id="catena-links">
 	        
 	          <!-- quando clicco su Strumenti/Pezzi di Ricmbio, mi riporta alla pagina iniziale -->
-	          <a href="catalogo.jsp" class="text-white-50">Strumenti</a>
+	          <a href="catalogo.jsp" class="text-white">Articoli</a>
 	
 	        <% 
 	           String id = request.getParameter("id"); 
@@ -73,35 +55,37 @@
 	        %>
 	
 	        <% 
-	           if(((String)application.getAttribute("page")).equalsIgnoreCase("carrello.jsp")){        
+	           String pagee = (String)application.getAttribute("page");
+	           if(pagee!=null){
+	              if(pagee.equalsIgnoreCase("carrello.jsp")){        
 	        %>
-	         <span class="text-white-50 mx-2"> > </span>
-	         <span class="text-white-50 mx-2"><a href="carrello.jsp" class="text-white-50">Carrello</a></span>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a href="carrello.jsp" class="text-white">Carrello</a></span>
 	         
 	         <%} %>
 	         
-	        <% if(((String)application.getAttribute("page")).equalsIgnoreCase("cardsPage.jsp")){%>
-	         <span class="text-white-50 mx-2"> > </span>
-	         <span class="text-white-50 mx-2"><a href="carrello.jsp" class="text-white-50">Carrello</a></span>
-	         <span class="text-white-50 mx-2"> > </span>
-	         <span class="text-white-50 mx-2"><a href="cardsPage.jsp" class="text-white-50">Conti</a></span>
+	        <% if(pagee.equalsIgnoreCase("cardsPage.jsp")){%>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a href="carrello.jsp" class="text-white">Carrello</a></span>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a href="cardsPage.jsp" class="text-white">Conti</a></span>
 	        
 	        <%} %>
 	        
-	         <% if(((String)application.getAttribute("page")).equalsIgnoreCase("Indirizzo.jsp")){%>
-	         <span class="text-white-50 mx-2"> > </span>
-	         <span class="text-white-50 mx-2"><a href="carrello.jsp" class="text-white-50">Carrello</a></span>
-	         <span class="text-white-50 mx-2"> > </span>
-	         <span class="text-white-50 mx-2"><a href="cardsPage.jsp" class="text-white-50">Conti</a></span>
-	         <span class="text-white-50 mx-2"> > </span>
-	         <span class="text-white-50 mx-2"><a href="Indirizzo.jsp" class="text-white-50">Indirizzo</a></span>
+	         <% if(pagee.equalsIgnoreCase("Indirizzo.jsp")){%>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a href="carrello.jsp" class="text-white">Carrello</a></span>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a href="cardsPage.jsp" class="text-white">Conti</a></span>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a href="Indirizzo.jsp" class="text-white">Indirizzo</a></span>
 	        
-	        <%} %>
-	       </h6>
-	      </nav>
-	      <!-- Breadcrumb -->
-	    </div>
-	  </div>
-	  <!-- Heading -->
+	        <%}}else{
+	        	application.setAttribute("page","catalogo.jsp");	
+	        }
+	        	%>
+	       </h5>
+	       </div>
+	       
 	</body>
 </html>

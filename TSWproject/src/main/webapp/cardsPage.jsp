@@ -4,21 +4,25 @@
 <%
 String rend = null;
 List<?> cards = null;
-String username = (String) session.getAttribute("un");
-application.removeAttribute("page");
+List<?>cart = (List<?>) session.getAttribute("cart");
+String username = (String) session.getAttribute("un");    //effettuo il controllo sull'utente, per verificare se l'utente                     
+                                                          //sia registrato o meno
 if(username==null){ 
+	 application.setAttribute("page","cardsPage.jsp");
 	 rend = "LoginPageUtente.jsp";
+}else if(cart==null || cart.size()==0){               //controllo sul carrello
+     String header = "Client Error";
+     String details = "carrello vuoto...";
+     rend = "error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details +"&status=401";
 }else{
+   application.setAttribute("page","cardsPage.jsp");      //controllo in che pagina sto e lo salvo nel contesto
    cards = (List<?>) request.getAttribute("products");	
    if(cards == null) 
 	   rend = "./cards";
 }
 
-application.setAttribute("page","cardsPage.jsp");
  if(rend!=null){
-	 RequestDispatcher dispatcher = null;
-	 dispatcher = getServletContext().getRequestDispatcher("/"+rend);
- 	 dispatcher.forward(request, response); 
+	 response.sendRedirect(rend);
  }
 
 %>
@@ -28,6 +32,7 @@ application.setAttribute("page","cardsPage.jsp");
 <head>
 <meta charset="ISO-8859-1">
 <title>Cards Page</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
  
@@ -70,26 +75,16 @@ application.setAttribute("page","cardsPage.jsp");
 		 </tr>
 		 
 		<%} %>
-	</table><br>
-	
-	<h5>inserisci metodo di pagamento</h5><br>
-	
-	<div id="card-form">
-	   <form action="cards" method="post">
-	      <input type="hidden" name="action" value="add">
-	      <label for="number-card">numero di carta</label>
-	      <input type="text" name="number-card" required placeholder="enter number card"><br>
-	      
-	      <label for="IBAN">IBAN</label>
-	      <input type="text" name="IBAN" required placeholder="enter IBAN"><br>
-	      
-	      <label for="cvv">CVV</label>
-	      <input type="text" name="cvv" required placeholder="enter cvv"><br>
-	      
-	      <input type="submit" value="add">
-	   </form>
-	</div>
-	
+	</table><br>	
+	<span><button class="add-InsertCards-link" >Aggiungi metodo di pagamento</button></span><br>
+	   
+	   <!-- javascript al click del link di sopra importerà dinamicamente InsertCards.jsp e lo mette nel div di sotto -->
+	   
+	   <div class="show-InsertCards"></div>
+	   
 	<jsp:include page="footer.jsp"></jsp:include>
+	
+	<script src="js/JQuery.js" type="text/javascript"></script>
+    <script src="js/userFunctions.js" type="text/javascript"></script>
 </body>
 </html>

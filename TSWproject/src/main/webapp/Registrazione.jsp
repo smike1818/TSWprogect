@@ -8,9 +8,15 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Pagina Registrazione</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
+
+<header>
+	<jsp:include page="header.jsp"></jsp:include>
+</header>
+
 <h1>Area registrazione</h1>
     
 
@@ -28,7 +34,12 @@
           <p>
             <input type="submit" value="Registrati!">
 		 </p>
-		 </form>
+	</form>
+	
+	<footer>
+	   <jsp:include page="footer.jsp"></jsp:include>
+    </footer>
+	
   </body>
 </html>
 

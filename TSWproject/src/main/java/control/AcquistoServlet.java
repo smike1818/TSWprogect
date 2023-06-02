@@ -24,7 +24,9 @@ import dao.ArticoloDAO;
 import dao.ComposizioneDAO;
 import dao.ContoDAO;
 import dao.UserDAO;
+import dao.IndirizzoDAO;
 import model.ModelAcquistoDAO;
+import model.ModelIndirizzoDAO;
 import model.ModelComposizioneDAO;
 import model.ModelContoDAO;
 import model.ModelUserDAO;
@@ -37,20 +39,26 @@ public class AcquistoServlet extends HttpServlet {
 	ComposizioneDAO comp = new ModelComposizioneDAO();
 	ComposizioneBean compbean = null;
 	IndirizzoBean ind = null;
+	IndirizzoDAO modelind = new ModelIndirizzoDAO();
 	UserBean user = null;
 	UserDAO usermodel = new ModelUserDAO();
 	HttpSession session = null;
 	AcquistoBean acq = null;
 	ContoDAO modelconto = new ModelContoDAO();
 	ContoBean conto = null;
-	double importo = 0;
 	ArticoloDAO modelarticolo = new MusicalModelArticoloBean();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		double importo = 0;
    	    session = request.getSession();
    	    String username = (String) session.getAttribute("un");
+   	    String via = request.getParameter("via");
+        String citta = request.getParameter("citta");
+   	    String civico = request.getParameter("civico");
+   	    getServletContext().setAttribute("page", "Acquisto.jsp");
+   	    
    	    if(username==null) {
    	    	RequestDispatcher error = null;
    	        String header = "Client Error";
@@ -68,6 +76,12 @@ public class AcquistoServlet extends HttpServlet {
    	        error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
    	        error.forward(request, response);
    	    }
+   	    
+   	    //elimino dal contesto l'iban
+   	    //per evitare che l'utente acceda alla pagina
+   	    //in modo errato
+   	    getServletContext().removeAttribute("IBAN");
+   	 
    	    @SuppressWarnings("unchecked")
 		List<ArticoloCart>cart = (List<ArticoloCart>) session.getAttribute("cart");
    	    List<ComposizioneBean>complist = new ArrayList<ComposizioneBean>();
@@ -114,10 +128,42 @@ public class AcquistoServlet extends HttpServlet {
    	      acq.setConto(conto);
    	      
    	      for(ComposizioneBean c : complist) {
-   	    	  importo += c.getPrezzo();
+   	    	  importo += c.getPrezzo()*c.getqAcquistate();
    	      }
    	      
    	      acq.setImporto(importo);
+   	      
+   	      //inserimento dell'indirizzo
+   	      
+   	      if(via==null || civico==null || citta==null) {
+			 RequestDispatcher error = null;
+		     String header = "Client Error";
+		     String details = "indirizzo non identificato...";
+		     response.setStatus(500);
+		     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
+		     error.forward(request, response);
+   	      }else {
+   	    	 try {
+   	    	    int civ = Integer.parseInt(civico);
+   	    	    ind = modelind.doRetrieveByKey(via,civ,citta);
+   	    	    acq.setIndirizzo(ind);
+   	    	 }catch(NumberFormatException ne) {
+   	    		RequestDispatcher error = null;
+   		        String header = "Client Error";
+   		        String details = "inserire un civico numerico...";
+   		        response.setStatus(401);
+   		        error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
+   		        error.forward(request, response);
+   	    	 }catch(SQLException e) {
+   	    		RequestDispatcher error = null;
+   		        String header = "Server Error";
+   		        String details = "errore nel salvataggio dell'indirizzo...";
+   		        response.setStatus(500);
+   		        error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
+   		        error.forward(request, response);
+   	    	 }
+   	      }
+   	      
    	      try {
 			model.doSave(acq);
 		} catch (SQLException e) {

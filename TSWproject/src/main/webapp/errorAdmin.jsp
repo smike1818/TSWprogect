@@ -11,6 +11,7 @@
 	   //li carico tramite gli attributi
 	   header = "Client Error";
 	   details = "non puoi accedere a questa pagina";
+	   status = 403;
    }
    if(header != null && details != null){
 

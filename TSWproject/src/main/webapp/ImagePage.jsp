@@ -2,27 +2,35 @@
     pageEncoding="ISO-8859-1"%>
     
 <%
+
     String rend = null;
     List<?> images = null;
-    Integer art;
+    Integer art = null;;
+    String error;
     
 
- if(request.getParameter("id")!=null){
-	art = Integer.parseInt(request.getParameter("id"));
+    if((error = (String) request.getAttribute("error-statement"))==null)     error="";
+    request.removeAttribute("error-statement");
+    
     if(session.getAttribute("admin")==null){ 
 	    images = (List<?>) request.getAttribute("images");
 	    rend = "loginPageAdmin.jsp";
-    }else{
-        this.getServletContext().setAttribute("page","ImagePage.jsp");
-        images = (List<?>) request.getAttribute("images");	
-        if(images == null) 
-	        rend = "./imagespage?code="+art;
+    }    	
+    
+
+if(request.getParameter("id")!=null){
+	art = Integer.parseInt(request.getParameter("id"));
+    this.getServletContext().setAttribute("page","ImagePage.jsp");
+    images = (List<?>) request.getAttribute("images");	
+    if(images == null) {
+	     rend = "./imagespage?code="+art;
      }
+}
 
    if(rend!=null){
      response.sendRedirect(rend);
      return;
-    }
+   }
    
    
 %>
@@ -31,9 +39,18 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Image Page</title>
+<link href="css/adminstyle.css" rel="stylesheet" type="text/css">
+
+<!-- quando ricarico la pagina rimuovo la variabile error così che non viene mostrata in modo fastidioso -->
+
 </head>
 <body>
+    <jsp:include page="headerAdmin.jsp"></jsp:include>
     <h1>Pagina immagini</h1>
+    
+    <!-- viene visto solo in caso di errore -->
+    <p class="error-statement"><%=error %></p>
+    
     <h3>articolo: <%=art%></h3>
     <p>click image for delete<p>
     <table border=1>
@@ -55,12 +72,20 @@
     </table>
     
      <!-- quetso bottone deve essere nascosto una volta cliccato il bottone -->
-	 <button onclick="showImageForm('<%=art%>')">clicca per inserire le immagini</button>
-	 <div class="image-form"></div>
+	 <br><button id="show-image-form">clicca per inserire le immagini</button>
+	 <div class="image-form">
+	    <br><h3> inserimento delle immagini </h3><br>
+        <form action="imagespage" method="post" enctype="multipart/form-data">
+           <input type="hidden" name="action" value="addImage">
+           <input type="hidden" name="code" value="<%=art %>">
+           <input name="images" type="file" multiple required accept="image/*"><br>
+           <input type="submit" value="Add">
+           </form>
+     </div>
 	 
-	 <br><a href="CatalogoAdmin.jsp">Torna al Catalogo</a>
-	 <script src="js/insertAdmin.js"></script>
+	 <br><br><a href="CatalogoAdmin.jsp">Torna al Catalogo</a>
+	 
+	 <script src="js/JQuery.js"></script>
+	 <script src="js/admin.js"></script>
 </body>
 </html>
-
-<%}%>
