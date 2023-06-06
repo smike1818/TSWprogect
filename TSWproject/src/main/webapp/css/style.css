@@ -2,6 +2,9 @@
 body{
 	background-color: white;
 	font-family: "Montserrat", Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 footer{
@@ -11,7 +14,7 @@ footer{
   	text-align: center;
 	position: relative;
 	padding-bottom: 110px;
-	margin-top: 20px;
+	margin-top: auto;
 }
 
 #card-form{

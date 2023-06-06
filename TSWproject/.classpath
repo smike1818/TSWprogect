@@ -13,6 +13,6 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Apache Software Foundation/Tomcat 9.0_Tomcat9.0.37/wtpwebapps/AjaxServletsIntegration/WEB-INF/lib/gson-2.3.jar"/>
+	<classpathentry kind="lib" path="/Users/francescogatto/git/TSWproject/TSWproject/src/main/webapp/WEB-INF/lib/gson-2.3.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

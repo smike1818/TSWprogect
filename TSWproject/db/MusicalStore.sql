@@ -52,23 +52,6 @@ create table categoria(
     descrizione varchar(200)
 );
 
-CREATE TABLE acquisto (
-   idAcquisto INT PRIMARY KEY AUTO_INCREMENT,
-   consumer VARCHAR(16) REFERENCES utente(id)
-        ON UPDATE CASCADE
-        ON DELETE SET NULL,
-   conto VARCHAR(27) REFERENCES conto(IBAN)
-        ON UPDATE CASCADE 
-        ON DELETE SET NULL,
-   data_acquisto DATETIME DEFAULT CURRENT_TIMESTAMP,
-   importo DOUBLE NOT NULL,
-   via VARCHAR(50),
-   citta VARCHAR(20),
-   civico int,
-   FOREIGN KEY (via, civico, citta) REFERENCES indirizzo(via, civico, citta)
-        ON UPDATE CASCADE
-        ON DELETE SET NULL
-);
 
 create table composizione(
     prezzo double not null,  
@@ -99,3 +82,21 @@ CREATE TABLE iva(
     percentuale double not null
 );
 
+
+CREATE TABLE acquisto (
+   idAcquisto INT PRIMARY KEY AUTO_INCREMENT,
+   consumer VARCHAR(16) REFERENCES utente(CF)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL,
+   conto VARCHAR(27) REFERENCES conto(IBAN)
+        ON UPDATE CASCADE 
+        ON DELETE SET NULL,
+   data_acquisto DATETIME DEFAULT CURRENT_TIMESTAMP,
+   importo DOUBLE NOT NULL,
+   via VARCHAR(50),
+   citta VARCHAR(20),
+   civico int,
+   FOREIGN KEY (via, civico, citta) REFERENCES indirizzo(via, civico, citta)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL
+);
