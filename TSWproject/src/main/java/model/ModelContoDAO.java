@@ -182,7 +182,46 @@ public class ModelContoDAO implements ContoDAO{
 		}
 		return cards;
 	}
+	public Collection<ContoBean> doRetrieveByUsr(String user) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+        List<ContoBean>cards = new LinkedList<ContoBean>();
+		ContoBean conto = null;
+		UserBean in = null;
+		UserDAO model = new ModelUserDAO();
+		
+		String selectSQL = "SELECT * FROM " + TABLE_NAME + "WHERE intestatario = ? ";
 
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1, user);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				conto = new ContoBean();
+		    	
+		    	conto.setIBAN(rs.getString("IBAN"));
+		    	conto.setNumCarta(rs.getString("numero_carta"));
+		    	conto.setCvv(rs.getString("cvv"));	
+		    	
+		    	in = model.doRetrieveByKey(rs.getString("intestatario"));
+		    	conto.setIntestatario(in);
+		    	
+		    	cards.add(conto);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return cards;
+	}
 	@Override
 	public boolean doDelete(int code) throws SQLException {
 		// TODO Auto-generated method stub

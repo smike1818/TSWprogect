@@ -10,11 +10,11 @@ String username = (String) session.getAttribute("un");    //effettuo il controll
 if(username==null){ 
 	 application.setAttribute("page","cardsPage.jsp");
 	 rend = "LoginPageUtente.jsp";
-}else if(cart==null || cart.size()==0){               //controllo sul carrello
+/*}else if(cart==null || cart.size()==0){               //controllo sul carrello
      String header = "Client Error";
      String details = "carrello vuoto...";
      rend = "error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details +"&status=401";
-}else{
+*/}else{
    application.setAttribute("page","cardsPage.jsp");      //controllo in che pagina sto e lo salvo nel contesto
    cards = (List<?>) request.getAttribute("products");	
    if(cards == null) 

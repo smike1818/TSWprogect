@@ -34,9 +34,9 @@ public class UserServlet extends HttpServlet{
 	        ModelUserDAO mud = new ModelUserDAO();
 	        
 	        try {
-	        	 mud.doRetrieveByUsr(user);
+	        	 user = mud.doRetrieveByUsr(userName);
 	        	 session.setAttribute("user-details", user);
-	        	 
+	        	response.sendRedirect("User.jsp");
 	        }catch(SQLException e) {
 	        	RequestDispatcher error = null;
 				String header = "Server Error";
@@ -45,9 +45,6 @@ public class UserServlet extends HttpServlet{
 				error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
 				error.forward(request, response);
 	        }
-	        
-	        response.sendRedirect("User.jsp");
-
         }
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 

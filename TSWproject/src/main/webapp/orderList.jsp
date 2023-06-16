@@ -23,11 +23,11 @@ if(rend!=null){
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Lista di Ordini</title>
-<link href="css/adminstyle.css" rel="stylesheet" type="text/css">
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title>Lista di Ordini</title>
+		<link href="css/adminstyle.css" rel="stylesheet" type="text/css">
+	</head>
 <body>
 
   <header>
@@ -58,6 +58,7 @@ if(rend!=null){
 			<th>Totale</th>
 			<th>Consumer</th>
 			<th colspan=3>Indirizzo</th>
+			<th>scarica la fattura</th>
 		</tr>
 		
 		<%
@@ -76,6 +77,7 @@ if(rend!=null){
 			<td>via <%=bean.getIndirizzo().getVia() %></td>
 			<td>(<%=bean.getIndirizzo().getCivico() %>) </td>
 			<td><%=bean.getIndirizzo().getCitta() %></td>
+			<th><a href="">scarica la fattura</a></th>
 		</tr>
 		<%
 			}} else {                   //quando non si sono prodotti nel database stampo a video il mess sotto
@@ -85,7 +87,6 @@ if(rend!=null){
 		</tr>
 		
 		<%}%>
-		
 		</table><br>
 
    <script src="js/JQuery.js" type="text/javascript"></script>

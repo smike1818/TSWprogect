@@ -95,6 +95,10 @@
     <servlet-name>AcquistoListServlet</servlet-name>
     <servlet-class>control.AcquistoListServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>userMods</servlet-name>
+    <servlet-class>control.userMods</servlet-class>
+  </servlet>
   
   <servlet-mapping>
     <servlet-name>StoricoUserServlet</servlet-name>
@@ -179,6 +183,10 @@
   <servlet-mapping>
   	<servlet-name>LoginAdmin</servlet-name>
   	<url-pattern>/loginadmin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>userMods</servlet-name>
+    <url-pattern>/userMods</url-pattern>
   </servlet-mapping>
   
   <error-page>

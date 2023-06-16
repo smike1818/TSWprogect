@@ -21,41 +21,62 @@
 %>
 
 
+
+
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>User Page</title>
-<link href="css/style.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-<header>
-	<jsp:include page="header.jsp"></jsp:include>
-</header>
-    <fieldset>
-       <legend>User Details</legend>
-       <label for="Name">Name: </label>
-       <p><%=bean.getNome() %></p>
-       
-       <label for="Surname">Surname: </label>
-       <p><%=bean.getCognome() %></p>
-       
-       <label for="Username">Username: </label>
-       <p><%=bean.getUsername() %></p>
-       
-       <label for="Email">Email: </label>
-       <p><%=bean.getEmail() %></p>
-       
-       <label for="CF">Codice Fiscale: </label>
-       <p><%=bean.getCF() %></p>  
-       
-    </fieldset>
-       <a href="logout" target="_self">Logout</a><br>
-       <a href="Storico.jsp" target="_self">Accedi allo storico degli ordini</a>
-<footer>
-	<jsp:include page="footer.jsp"></jsp:include>
-</footer>
-</body>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>User Page</title>
+		<link href="css/style.css" rel="stylesheet" type="text/css">
+		<script src="js/JQuery.js" type="text/javascript"></script>
+		<script src="js/userMods.js" type="text/javascript"></script>
+      	<script src="js/pagamenti.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<header>
+			<jsp:include page="header.jsp"></jsp:include>
+		</header>
+		    <fieldset>
+		       	<legend>User Details</legend>
+		       	<label for="Name">Name: </label>
+		       	<p id="name"><%=bean.getNome() %>
+  				<button id="button1">Edit</button> <!-- Specify the button ID here -->
+		       	</p>
+		       
+		       	<label for="Surname">Surname: </label>
+		       	<p id="surname"><%=bean.getCognome() %>
+		       	<button id="button2">Edit</button> <!-- Specify the button ID here -->
+				</p>
+		       
+		       	<label for="Username">Username: </label>
+		       	<p id="user"><%=bean.getUsername() %>
+		       	<button id="button3">Edit</button> <!-- Specify the button ID here -->
+		       	</p>
+		       
+		       	<label for="Email">Email: </label>
+		       	<p id="email"><%=bean.getEmail() %>
+		       	<button id="button4">Edit</button> <!-- Specify the button ID here -->
+		       	</p>
+		       
+		       <label for="CF">Codice Fiscale: </label>
+		       <p id="cf"><%=bean.getCF() %>
+		       <button id="button5">Edit</button> <!-- Specify the button ID here -->
+		       </p>
+		       <input type=button onClick="location.href='cardsPage.jsp'"value='metodi di pagamento'><br>
+		       <!-- <button id="generateBtn">show payment methods</button>
+		       	<div id="content">
+    				<div id="jspCodeContainer" style="display: none;"></div>
+ 				</div>
+  				<button id="addButton" style="display: none;">Add Payment Method</button>-->
+		    </fieldset>
+		   	<a href="logout" target="_self">Logout</a><br>
+		    <a href="Storico.jsp" target="_self">Accedi allo storico degli ordini</a>	  
+		</body>
+		<footer>
+			<jsp:include page="footer.jsp"></jsp:include>
+		</footer>
+	</body>
 </html>
 
 <% } %>

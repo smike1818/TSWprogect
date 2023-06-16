@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import bean.ContoBean;
 import bean.UserBean;
 import dao.UserDAO;
 
@@ -201,14 +202,14 @@ public class ModelUserDAO implements UserDAO{
 		preparedStatement = connection.prepareStatement(insertSQL);
 		preparedStatement.setString(1, user.getUsername());
 		preparedStatement.setString(2, user.getPassword());
-		preparedStatement.setInt(3,1);
+		preparedStatement.setBoolean(3,true);
 		
 		ResultSet rs = preparedStatement.executeQuery();
 		if (rs.next()) { 
 			    user.setCF(rs.getString("CF"));
 			    user.setNome(rs.getString("nome"));
 			    user.setCognome(rs.getString("cognome"));
-			    user.setCognome(rs.getString("email"));
+			    user.setEmail(rs.getString("email"));
 				preparedStatement.close();
 		}else 
 			throw new SQLException();
@@ -332,5 +333,31 @@ public class ModelUserDAO implements UserDAO{
 			}
 		 }
 	  return sugg;
+	}
+	
+	public UserBean modifyUser(String newText, String field, String user) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+       try {
+		String insertSQL = "UPDATE "+TABLE_NAME+" SET "+field+" = ? WHERE username = ?";
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(insertSQL);
+		preparedStatement.setString(1, newText);
+		preparedStatement.setString(2, user);
+		preparedStatement.executeUpdate();
+		if(field.equals("username")) {
+			return doRetrieveByUsr(newText);
+		}
+		else
+			return doRetrieveByUsr(user);
+	  }finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
 	}
 }

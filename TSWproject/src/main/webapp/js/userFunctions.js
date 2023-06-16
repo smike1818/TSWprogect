@@ -7,7 +7,6 @@ function showAddCardForm(){
   element.style.display = "block"; 
   // o 'inline', 'flex', 'grid', ecc. a seconda del tipo di visualizzazione desiderata
 }
-
 $(document).ready(function(){
 	
 	
@@ -374,12 +373,6 @@ $(".add-AddIndirizzo-link").click(function(){
       xhttp.send(); 
    }            //invio richiesta
 });
-
-
-
-
-
-
 })
    
 
