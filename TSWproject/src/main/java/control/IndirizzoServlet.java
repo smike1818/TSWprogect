@@ -32,14 +32,14 @@ public class IndirizzoServlet extends HttpServlet{
    	    String action = (String) request.getParameter("action");
    	    session = request.getSession();
    	    String username = (String) session.getAttribute("un");
-   	    
+   	   
    	    if(action!=null) {
    	    	if(action.equalsIgnoreCase("new")) {
    	    		ind = new IndirizzoBean();
    	    		
-   	    		String via = request.getParameter("via");
-   	    		Integer civico = Integer.parseInt(request.getParameter("civico"));
-   	    		String citta = request.getParameter("citta");
+   	    	    String via = request.getParameter("via");
+   			    Integer civico = Integer.parseInt(request.getParameter("civico"));
+   			    String citta = request.getParameter("citta");
    	    		Integer cap = Integer.parseInt(request.getParameter("CAP"));
    	    		
    	    		ind.setVia(via);
@@ -74,7 +74,12 @@ public class IndirizzoServlet extends HttpServlet{
 				}
    	    		
    	    	}
-   	    	if(action.equalsIgnoreCase("change")) {
+   	    	if(action.equalsIgnoreCase("delete")) {
+   	    		
+   	    	  String via = request.getParameter("via");
+   		      Integer civico = Integer.parseInt(request.getParameter("civico"));
+   			  String citta = request.getParameter("citta");
+   			
    	    		try {
 					user = usermodel.doRetrieveByUsr(username);
 				} catch (SQLException e) {
@@ -87,7 +92,7 @@ public class IndirizzoServlet extends HttpServlet{
 				     error.forward(request, response);
 				}
    	    		try {
-					model.doDelete(user.getCF());
+					model.doDelete(via,civico,citta);
 				} catch (SQLException e) {
 					e.printStackTrace();
 					e.printStackTrace();

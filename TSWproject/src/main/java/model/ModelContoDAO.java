@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -232,6 +233,46 @@ public class ModelContoDAO implements ContoDAO{
 	public ContoBean doRetrieveByKey(int code) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public List<ContoBean> doRetrieveByUsr(UserBean user) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		ContoBean conto = null;
+		List<ContoBean>conti = new ArrayList<ContoBean>();
+		
+		String selectSQL = "SELECT * FROM " + TABLE_NAME + " where intestatario = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1, user.getCF());
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				conto = new ContoBean();
+		    	
+		    	conto.setIBAN(rs.getString("IBAN"));
+		    	conto.setNumCarta(rs.getString("numero_carta"));
+		    	conto.setCvv(rs.getString("cvv"));	
+		    	conto.setIntestatario(user);
+		    	
+		    	conti.add(conto);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return conti;
 	}
 
 }

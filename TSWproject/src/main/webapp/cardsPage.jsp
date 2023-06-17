@@ -4,19 +4,16 @@
 <%
 String rend = null;
 List<?> cards = null;
+
 List<?>cart = (List<?>) session.getAttribute("cart");
 String username = (String) session.getAttribute("un");    //effettuo il controllo sull'utente, per verificare se l'utente                     
                                                           //sia registrato o meno
 if(username==null){ 
 	 application.setAttribute("page","cardsPage.jsp");
 	 rend = "LoginPageUtente.jsp";
-/*}else if(cart==null || cart.size()==0){               //controllo sul carrello
-     String header = "Client Error";
-     String details = "carrello vuoto...";
-     rend = "error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details +"&status=401";
-*/}else{
+}else{
    application.setAttribute("page","cardsPage.jsp");      //controllo in che pagina sto e lo salvo nel contesto
-   cards = (List<?>) request.getAttribute("products");	
+   cards = (List<?>) request.getAttribute("cards");	
    if(cards == null) 
 	   rend = "./cards";
 }
@@ -48,7 +45,6 @@ if(username==null){
     <tr>
       <th>numero di carta</th>
       <th>iban</th>
-      <th>seleziona</th>
       <th>cancella</th>
     </tr>
     
@@ -64,14 +60,13 @@ if(username==null){
 		    <tr>
 		       <td><%=bean.getNumCarta() %></td>
 		       <td><%=bean.getIBAN() %></td>
-		       <td><a href="Indirizzo.jsp?IBAN=<%=bean.getIBAN()%>">scegli</a></td>
 		       <td><a href="cards?action=delete&IBAN=<%=bean.getIBAN()%>">elimina</a></td>
 		    </tr>
 		    
 		<%}}}else{ %>
 		
 		  <tr>
-		    <td colspan=4>non hai carte inserite</td>
+		    <td colspan=3>non hai carte inserite</td>
 		 </tr>
 		 
 		<%} %>

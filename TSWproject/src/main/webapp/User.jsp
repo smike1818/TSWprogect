@@ -63,7 +63,8 @@
 		       <p id="cf"><%=bean.getCF() %>
 		       <button id="button5">Edit</button> <!-- Specify the button ID here -->
 		       </p>
-		       <input type=button onClick="location.href='cardsPage.jsp'"value='metodi di pagamento'><br>
+		       <input type=button onClick="location.href='cardsPage.jsp'"value='metodi di pagamento'><br><br>
+		        <input type=button onClick="location.href='Indirizzo.jsp'"value='indirizzi salvati'><br>
 		       <!-- <button id="generateBtn">show payment methods</button>
 		       	<div id="content">
     				<div id="jspCodeContainer" style="display: none;"></div>

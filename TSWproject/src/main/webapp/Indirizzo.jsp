@@ -10,37 +10,17 @@
 
 
      String rend = null;
-     List<IndirizzoBean> indlist = null;
+     List<?> indlist = null;
      
      if(session.getAttribute("un")==null){
 	        rend = "LoginPageUtente.jsp";
      }else{
-       String page_precedente = (String) application.getAttribute("page");       
-       if(page_precedente == null || (!page_precedente.equalsIgnoreCase("cardsPage.jsp") && !page_precedente.equalsIgnoreCase("Indirizzo.jsp"))){     
-    	   
-    	   System.out.println(page_precedente);
-    	   //controllo se l'utente registrato tenta di accedere direttamente alla pagina senza passare per cardsPage.jsp
-    	   String header = "Client Error";
-    	   String details = "esegui tutti i passaggi prima di accedere alla pagina...";
-    	   rend = "error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details +"&status=401";
-       }else{
-    	   
+      
     	   application.setAttribute("page","Indirizzo.jsp");    //salvo la pagina corrente
-    	   String iban = request.getParameter("IBAN");
-           if(iban==null){
-        	   if(application.getAttribute("IBAN")==null){
-        	     String header = "Client Error";
-        	     String details = "carta non selezionata...";
-        	     rend = "error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details +"&status=401";
-        	   }
-    	   }else{
-    		   application.setAttribute("IBAN", iban);
-    	   }
-           indlist = (List<IndirizzoBean>) request.getAttribute("indirizzo");
+           indlist = (List<?>) request.getAttribute("indirizzo");
            if(indlist==null){
     	       rend = "./address";
            }
-       }
      }
      if(rend!=null){
     	 response.sendRedirect(rend);
@@ -64,7 +44,7 @@
    <jsp:include page="AddIndirizzo.jsp"></jsp:include>
 <%}else{ %>
 
-<h4>Seleziona un indirizzo</h4>
+<h4>elenco indirizzi salvati</h4>
 <ol class="address-list">
   
  <%
@@ -78,8 +58,8 @@
 
 <!-- quando invio i dati dell'indirizzo alla servlet -->
   <li class="li-address">
-     <a href="purchase?via=<%=ind.getVia()%>&civico=<%=ind.getCivico() %>&citta=<%=ind.getCitta() %>">
-           <%=ind.getVia()%> <%=ind.getCivico() %>,<%=ind.getCitta() %></a>
+           <%=ind.getVia()%> <%=ind.getCivico() %>,<%=ind.getCitta() %> 
+           (<a href="address?action=delete&via=<%=ind.getVia()%>&civico=<%=ind.getCivico() %>&citta=<%=ind.getCitta() %>">rimuovi</a>)
   </li>
 <%}}%>
 

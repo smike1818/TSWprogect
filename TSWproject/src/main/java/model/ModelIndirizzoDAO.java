@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.Context;
@@ -176,18 +177,20 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 	}
 
 	@Override
-	public boolean doDelete(String CF) throws SQLException {
+	public boolean doDelete(String via, int civico, String citta) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + TABLE_NAME + " WHERE cliente = ?";
+		String deleteSQL = "DELETE FROM " + TABLE_NAME + " WHERE via = ? AND civico = ? AND citta = ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
-			preparedStatement.setString(1, CF);
+			preparedStatement.setString(1, via);
+			preparedStatement.setInt(2, civico);
+			preparedStatement.setString(3, citta);
 			result = preparedStatement.executeUpdate();
 
 		} finally {
@@ -245,7 +248,52 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public List<IndirizzoBean> doRetrieveByUsr(UserBean user) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		IndirizzoBean address = null;
+		List<IndirizzoBean>list_address = new ArrayList<IndirizzoBean>();
+		
+		String selectSQL = "SELECT * FROM " + TABLE_NAME +" WHERE cliente = ?" ;
 
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+            preparedStatement.setString(1, user.getCF());
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				address = new IndirizzoBean();
+								
+				address.setCap(rs.getInt("cap"));
+				address.setCitta(rs.getString("citta"));
+				address.setCivico(rs.getInt("civico"));
+				address.setVia(rs.getString("via"));			    	
+		    	address.setCliente(user);	
+		    	
+		    	list_address.add(address);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return list_address;
+	}
+
+	@Override
+	public boolean doDelete(String CF) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 
 }

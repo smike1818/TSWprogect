@@ -64,21 +64,21 @@
 	         
 	         <%} %>
 	         
-	        <% if(pagee.equalsIgnoreCase("cardsPage.jsp")){%>
+	        <% if(pagee.equalsIgnoreCase("ConfirmPayment.jsp")){%>
 	         <span class="text-white"> > </span>
 	         <span class="text-white"><a href="carrello.jsp" class="text-white">Carrello</a></span>
 	         <span class="text-white"> > </span>
-	         <span class="text-white"><a href="cardsPage.jsp" class="text-white">Conti</a></span>
+	         <span class="text-white"><a href="ConfirmPayment.jsp" class="text-white">Conferma</a></span>
 	        
 	        <%} %>
 	        
-	         <% if(pagee.equalsIgnoreCase("Indirizzo.jsp")){%>
+	         <% if(pagee.equalsIgnoreCase("Acquisto.jsp")){%>
 	         <span class="text-white"> > </span>
 	         <span class="text-white"><a href="carrello.jsp" class="text-white">Carrello</a></span>
 	         <span class="text-white"> > </span>
-	         <span class="text-white"><a href="cardsPage.jsp" class="text-white">Conti</a></span>
+	         <span class="text-white"><a href="ConfirmPayment.jsp" class="text-white">Conferma</a></span>
 	         <span class="text-white"> > </span>
-	         <span class="text-white"><a href="Indirizzo.jsp" class="text-white">Indirizzo</a></span>
+	         <span class="text-white"><a href="Acquisto.jsp" class="text-white">Acquisto</a></span>
 	        
 	        <%}}else{
 	        	application.setAttribute("page","catalogo.jsp");	

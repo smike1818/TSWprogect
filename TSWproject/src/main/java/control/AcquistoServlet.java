@@ -54,9 +54,15 @@ public class AcquistoServlet extends HttpServlet {
 		double importo = 0;
    	    session = request.getSession();
    	    String username = (String) session.getAttribute("un");
-   	    String via = request.getParameter("via");
-        String citta = request.getParameter("citta");
-   	    String civico = request.getParameter("civico");
+   	    String IBAN = request.getParameter("metodo-selezionato");
+   	    
+   	    String address = request.getParameter("indirizzo-selezionato");   //l'indirizzo è formato da via,civico,città
+        String[] addressParts = address.split(",");    //mi ricavo i parametri singolarmente
+
+        String via = addressParts[0].trim();
+        String civico = addressParts[1].trim();
+        String citta = addressParts[2].trim();
+        
    	    getServletContext().setAttribute("page", "Acquisto.jsp");
    	    
    	    if(username==null) {
@@ -67,11 +73,10 @@ public class AcquistoServlet extends HttpServlet {
    	        error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
    	        error.forward(request, response);
    	    }
-   	    String IBAN = (String) getServletContext().getAttribute("IBAN");
    	    if(IBAN==null) {
    	    	RequestDispatcher error = null;
    	        String header = "Client Error";
-   	        String details = "acesso alla pagina non autorizzato...";
+   	        String details = "carta non selezionata...";
    	        response.setStatus(403);
    	        error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
    	        error.forward(request, response);
@@ -138,7 +143,7 @@ public class AcquistoServlet extends HttpServlet {
    	      if(via==null || civico==null || citta==null) {
 			 RequestDispatcher error = null;
 		     String header = "Client Error";
-		     String details = "indirizzo non identificato...";
+		     String details = "indirizzo non selezionato...";
 		     response.setStatus(500);
 		     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
 		     error.forward(request, response);

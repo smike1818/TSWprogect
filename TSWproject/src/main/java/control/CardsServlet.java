@@ -93,7 +93,7 @@ public class CardsServlet extends HttpServlet{
 		
 		String order = "IBAN";
    	    try {
-			request.setAttribute("products", model.doRetrieveAll(order));
+			request.setAttribute("cards", model.doRetrieveAll(order));
 		} catch (SQLException e) {
 			 e.printStackTrace();
 			 RequestDispatcher error = null;

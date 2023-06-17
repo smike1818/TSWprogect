@@ -104,7 +104,7 @@
                    <span class="text-price">Totale: <span class="price"><%=String.format("%.2f", tot)%></span></span>
                  </div>
                  <div class="buy-block">
-                   <a id="buy-link" href="cardsPage.jsp">buy</a>
+                   <a id="buy-link" href="ConfirmPayment.jsp">buy</a>
                  </div>
     			   
     			<%
