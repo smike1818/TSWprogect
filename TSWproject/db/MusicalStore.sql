@@ -10,12 +10,24 @@ create table utente(
     ruolo boolean not null DEFAULT false
 );
 
+create table telefono(
+	numero int primary key,
+	prefisso varchar(3) not null default "+39",
+	utente varchar(16) not null references utente(CF)
+		on update cascade
+		on delete cascade,
+	isPrimary boolean not null default false
+);
+
 create table conto(
 	IBAN VARCHAR(27) PRIMARY key,
     intestatario varchar(16),
-    foreign key (intestatario) references utente(CF),
+    foreign key (intestatario) references utente(CF)
+    	on update cascade
+    	on delete set null,
     numero_carta varchar(20) unique not null,
-    cvv varchar(3) unique not null
+    cvv varchar(3) unique not null,
+    isPrimary boolean not null default false
 );
 
 create table articolo(
@@ -73,8 +85,9 @@ create table indirizzo(
     PRIMARY KEY(via, civico, citta),
     cap int not null,
     cliente varchar(16) references utente(CF)
-        on delete cascade
         on update cascade
+        on delete cascade,
+    isPrimary boolean not null default false
 );
 
 CREATE TABLE iva(

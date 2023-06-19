@@ -5,7 +5,6 @@
 String rend = null;
 List<?> cards = null;
 
-List<?>cart = (List<?>) session.getAttribute("cart");
 String username = (String) session.getAttribute("un");    //effettuo il controllo sull'utente, per verificare se l'utente                     
                                                           //sia registrato o meno
 if(username==null){ 
