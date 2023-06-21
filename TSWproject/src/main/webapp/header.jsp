@@ -13,7 +13,7 @@
 	<body>
 	    
 	        <div class="first-header">
-	          <nav>
+	          <nav class="navbar">
 	             <ul class="voci-navbar">
 		          <% if(session==null || session.getAttribute("un")==null){ %>
 		               <li><a href="LoginPageUtente.jsp" target="_self" class="text-white"> Sign in </a></li>
@@ -32,7 +32,6 @@
 	               <button class="search-product-submit">Search</button>
 	           </div>
 	          </nav>
-	         </div>
 	         
 	    <div class="second-header">
 	      <!--<h3 id="tipo-articolo"> 
@@ -49,8 +48,8 @@
 	        	   ArticoloBean bean = (ArticoloBean) request.getAttribute("bean");
 	        	   if(bean!=null){
 	        %>
-	                  <span class="text-white-50 mx-2"> > </span>
-	         <span class="text-white-50 mx-2"> <%=bean.getName()%> </span>
+	                  <span class="text-white"> > </span>
+	         <span class="text-white"> <%=bean.getName()%> </span>
 	        <%
 	        	   }
 	           }
@@ -87,6 +86,7 @@
 	        }
 	        	%>
 	       </h5>
+	       </div>
 	       </div>
 	       
 	</body>

@@ -13,7 +13,7 @@
 		 <jsp:include page="header.jsp"></jsp:include>
 	</header>
 	<div class="login-form">
-		<form action="login" action="post">
+		<form action="login" method="post" id="login-form">
 			Please enter your username
 			<input type="text" name="un" required/><br>
 			Please enter your password
@@ -25,5 +25,8 @@
 		<footer>
 			<jsp:include page="footer.jsp"></jsp:include>
 		</footer>
+		
+		<script src="js/JQuery.js" type="text/javascript"></script>
+	    <script src="js/validation.js" type="text/javascript"></script>
 	</body>
 </html>

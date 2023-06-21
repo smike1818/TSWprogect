@@ -33,6 +33,7 @@ public class ModelIvaDAO implements IvaDAO{
 	public IvaBean getIvaByModel() throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		PreparedStatement ps = null;
 		IvaBean iva = null;
         
 		String selectSQL = "SELECT * FROM iva";
@@ -46,9 +47,17 @@ public class ModelIvaDAO implements IvaDAO{
 				iva = new IvaBean();
 				iva.setID(rs.getInt("IDiva"));
 				iva.setPercentuale(rs.getDouble("percentuale"));
-			}else
-				throw new SQLException();
-
+			}else {
+				String insertIVA = "INSERT INTO iva (percentuale) VALUES(?)";   //al primo utilizzo salvo l'iva se non è presente nel db
+				ps = connection.prepareStatement(insertIVA);
+				ps.setDouble(1,22);
+				int result = ps.executeUpdate();
+				System.out.print(result);
+				iva = new IvaBean();
+				iva.setID(1);
+				iva.setPercentuale(22);
+			}
+				
 		}finally {
 			try {
 				if (preparedStatement != null)

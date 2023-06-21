@@ -20,7 +20,7 @@
 <h1>Area registrazione</h1>
     
 
-    <form action="register" method="post">
+    <form action="register" method="post" id="registration-form">
     
 		<p>Inserisci i dati <br>
           Nome: <input type="text" name="name" required><br>
@@ -40,6 +40,8 @@
 	   <jsp:include page="footer.jsp"></jsp:include>
     </footer>
 	
+	<script src="js/JQuery.js" type="text/javascript"></script>
+	<script src="js/validation.js" type="text/javascript"></script>
   </body>
 </html>
 
