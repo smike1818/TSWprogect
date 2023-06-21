@@ -5,6 +5,7 @@ public class ContoBean {
     private String IBAN;
     private String num_carta;
     private String cvv;
+    private boolean isPrimary = false;
     
     public void setIntestatario(UserBean i) {
 		 intestatario=i;
@@ -36,5 +37,13 @@ public class ContoBean {
     
      public String getCvv() {
    	    return cvv;
+     }
+     
+     public void setIsPrimary(boolean value) {
+    	 this.isPrimary = value;
+     }
+     
+     public boolean getIsPrimary() {
+    	 return this.isPrimary;
      }
 }

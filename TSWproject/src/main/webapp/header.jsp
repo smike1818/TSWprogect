@@ -5,8 +5,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	      <script src="js/JQuery.js" type="text/javascript"></script>
-          <script src="js/not_autorized.js" type="text/javascript"></script>
+	    <script src="js/JQuery.js" type="text/javascript"></script>
+        <script src="js/not_autorized.js" type="text/javascript"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
 	<body>
 	    
@@ -18,7 +20,7 @@
 		          <%}else{ %>
 		               <li><a href="user" target="_self" class="text-white"> <%=(String) session.getAttribute("un") %> </a><li>
 		          <%} %>
-					   <li><a href="carrello.jsp" class="text-white">  My Cart  </a></li>
+					   <li><a href="carrello.jsp" class="text-white"><i class="fa fa-shopping-cart"></i></a></li>
 				  </ul>
 
               <!-- SEARCH ELEMENTS -->

@@ -13,11 +13,11 @@ if(username==null){
 }else{
    application.setAttribute("page","cardsPage.jsp");      //controllo in che pagina sto e lo salvo nel contesto
    cards = (List<?>) request.getAttribute("cards");	
-   if(cards == null) 
+   if(cards == null){
 	   rend = "./cards";
-}
+	}
 
- if(rend!=null){
+}if(rend!=null){
 	 response.sendRedirect(rend);
  }
 

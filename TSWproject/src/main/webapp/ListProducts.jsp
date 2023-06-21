@@ -31,7 +31,7 @@
                   
                       <!-- IMMAGINE  -->
                       <a class="image-item" href="dettaglio.jsp?id=<%=bean.getID()%>">
-                         <img src="img/<%=model.getFirstImage(bean.getID()) %>" alt="no available" width="200" height="200"/>
+                         <img src="img/<%=model.getFirstImage(bean.getID()) %>" alt="no available" width="10%"/>
                       </a>
                       
                       <!-- NOME -->
