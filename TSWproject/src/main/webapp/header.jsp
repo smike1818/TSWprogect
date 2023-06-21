@@ -35,9 +35,6 @@
 	         </div>
 	         
 	    <div class="second-header">
-	      <h3 id="tipo-articolo"> 
-	         Articoli
-	      </h3>
 	        <h5 id="catena-links">
 	        
 	          <!-- quando clicco su Strumenti/Pezzi di Ricmbio, mi riporta alla pagina iniziale -->
