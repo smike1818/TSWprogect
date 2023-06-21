@@ -12,10 +12,11 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
- <link href="css/style.css" rel="stylesheet" type="text/css">
-</head>
+	<head>
+		<meta charset="ISO-8859-1" name="viewport" content="width=device-width, initial-scale=1">
+		<link href="css/style.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
 <body>
       <div class="list-products">
         	 
@@ -31,7 +32,7 @@
                   
                       <!-- IMMAGINE  -->
                       <a class="image-item" href="dettaglio.jsp?id=<%=bean.getID()%>">
-                         <img src="img/<%=model.getFirstImage(bean.getID()) %>" alt="no available" width="10%"/>
+                         <img src="img/<%=model.getFirstImage(bean.getID()) %>" alt="no available"/>
                       </a>
                       
                       <!-- NOME -->
@@ -69,11 +70,11 @@
                       <!-- FORM AGGIUNTA AL CARRELLO -->
                       <div class="addtocart-block">
                          <form action="cart" method="post" class="addtocart-form">
-                           <input type="hidden" name="action" value="cart">
-                           <input type="hidden" name="id" value="<%=bean.getID() %>">
-		                   <button type="submit" class="addtocart-submit">Add to Cart</button>
-                         </form>  
-                      </div> 
+                         <input type="hidden" name="action" value="cart">
+                         <input type="hidden" name="id" value="<%=bean.getID() %>">
+		                 <button type="submit" class="addtocart-submit"><i class="fa fa-shopping-cart"></i></button>
+                      </form>  
+                 	</div> 
                                                           
                   </div>
 
