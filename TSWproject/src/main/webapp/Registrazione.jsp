@@ -17,8 +17,9 @@
 	<jsp:include page="header.jsp"></jsp:include>
 </header>
 
-<h1>Area registrazione</h1>
+  <h1 class="access-h1">Area registrazione</h1>
     
+    <span class="error-statement"></span>
 
     <form action="register" method="post" id="registration-form">
     

@@ -60,7 +60,7 @@ public class CardsServlet extends HttpServlet{
 					try {
 						model.doSave(bean);
 					} catch (SQLException e) {
-						e.printStackTrace();
+						 e.printStackTrace();
 						 RequestDispatcher error = null;
 		    			 String header = "Server Error";
 		    			 String details = "errore nel salvataggio della carta, controlla se gia' hai salvato la carta...";
@@ -83,6 +83,21 @@ public class CardsServlet extends HttpServlet{
 					 RequestDispatcher error = null;
 	    			 String header = "Server Error";
 	    			 String details = "errore nella cancellazione della carta...";
+	    			 response.setStatus(500);
+	    			 error = sc.getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
+	    			 error.forward(request, response);
+				}
+			}
+			if(action.equalsIgnoreCase("prefer")) {
+				String iban = request.getParameter("IBAN");
+				try {
+					model.doPrefer(iban);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					 e.printStackTrace();
+					 RequestDispatcher error = null;
+	    			 String header = "Server Error";
+	    			 String details = "errore nella scelta della carta...";
 	    			 response.setStatus(500);
 	    			 error = sc.getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
 	    			 error.forward(request, response);

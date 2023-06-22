@@ -46,7 +46,7 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 				PreparedStatement ps = null;
 		        
 				String ifExists = "SELECT * FROM " + TABLE_NAME +" WHERE via = ? AND civico = ? AND citta = ?";
-				String insertSQL = "INSERT INTO " + TABLE_NAME +" VALUES (?, ?, ?, ?, ?)";
+				String insertSQL = "INSERT INTO " + TABLE_NAME +" (via,civico,citta,cap,cliente) VALUES (?, ?, ?, ?, ?)";
 
 				try {
 					connection = ds.getConnection();
@@ -109,6 +109,7 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 				address.setCitta(rs.getString("citta"));
 				address.setCivico(rs.getInt("civico"));
 				address.setVia(rs.getString("via"));
+				address.setIsPrimary(rs.getBoolean("isPrimary"));
 				
 				CFuser = rs.getString("cliente");
 		    	
@@ -155,6 +156,7 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 				address.setCitta(rs.getString("citta"));
 				address.setCivico(rs.getInt("civico"));
 				address.setVia(rs.getString("via"));
+				address.setIsPrimary(rs.getBoolean("isPrimary"));
 				
 				CFuser = rs.getString("cliente");
 		    	
@@ -224,6 +226,7 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 			    ind.setCitta(rs.getString("citta"));
 			    ind.setCivico(rs.getInt("civico"));
 			    ind.setVia(rs.getString("via"));
+			    ind.setIsPrimary(rs.getBoolean("isPrimary"));
 			    
 			    user = usermodel.doRetrieveByKey(CF);
 			    
@@ -271,7 +274,8 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 				address.setCap(rs.getInt("cap"));
 				address.setCitta(rs.getString("citta"));
 				address.setCivico(rs.getInt("civico"));
-				address.setVia(rs.getString("via"));			    	
+				address.setVia(rs.getString("via"));	
+				address.setIsPrimary(rs.getBoolean("isPrimary"));
 		    	address.setCliente(user);	
 		    	
 		    	list_address.add(address);
@@ -293,6 +297,45 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 	public boolean doDelete(String CF) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	public boolean doPrefer(String via, int civico, String citta) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		PreparedStatement ps = null;
+
+		int result = 0;
+		String updateToFalse = "UPDATE "+ TABLE_NAME + " SET isPrimary = ? WHERE isPrimary = ?";
+		String updateSQL = "UPDATE " + TABLE_NAME + " SET isPrimary = ? WHERE via = ? AND civico = ? AND citta = ?";
+
+		try {
+			connection = ds.getConnection();
+			ps = connection.prepareStatement(updateToFalse);
+			ps.setBoolean(1, false);
+			ps.setBoolean(2, true);
+			
+			if(ps.executeUpdate()>=0) {
+			
+			  preparedStatement = connection.prepareStatement(updateSQL);
+			  preparedStatement.setBoolean(1, true);
+			  preparedStatement.setString(2,via);
+			  preparedStatement.setInt(3,civico);
+			  preparedStatement.setString(4,citta);
+
+			  result = preparedStatement.executeUpdate();
+			}
+			
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return (result != 0);
 	}
 	
 

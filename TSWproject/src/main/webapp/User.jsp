@@ -29,9 +29,6 @@
 		<meta charset="ISO-8859-1">
 		<title>User Page</title>
 		<link href="css/style.css" rel="stylesheet" type="text/css">
-		<script src="js/JQuery.js" type="text/javascript"></script>
-		<script src="js/userMods.js" type="text/javascript"></script>
-      	<script src="js/pagamenti.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<header>
@@ -39,6 +36,9 @@
 		</header>
 		    <fieldset>
 		       	<legend>User Details</legend>
+		       	
+		       	<span class="error-statement"></span>
+		       	
 		       	<label for="Name">Name: </label>
 		       	<p id="name"><%=bean.getNome() %>
   				<button id="button1">Edit</button> <!-- Specify the button ID here -->
@@ -77,6 +77,10 @@
 		<footer>
 			<jsp:include page="footer.jsp"></jsp:include>
 		</footer>
+		
+		<script src="js/JQuery.js" type="text/javascript"></script>
+		<script src="js/userMods.js" type="text/javascript"></script>
+      	<script src="js/pagamenti.js" type="text/javascript"></script>
 	</body>
 </html>
 

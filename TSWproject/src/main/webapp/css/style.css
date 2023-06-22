@@ -4,6 +4,13 @@
   box-sizing: border-box; 
 }
 
+.access-h1{
+ padding-top: 30px;
+ padding-bottom: 20px;
+ color: white;
+ 	
+}
+
 body{
 	background-color: white;
 	background-image: url("background_home.jpg");
@@ -25,7 +32,7 @@ footer{
     text-align: center;
 	position: relative;
 	padding-bottom: 110px;
-	margin-top: auto;
+	margin-top: 30px;
 	/*border-radius: 10px 10px 0 0; /* Add round edges to the top */
 	
 } 

@@ -104,6 +104,36 @@ public class IndirizzoServlet extends HttpServlet{
 				     error.forward(request, response);
 				}
    	    	}
+   	    	if(action.equalsIgnoreCase("prefer")) {
+   	    	  String via = request.getParameter("via");
+  		      Integer civico = Integer.parseInt(request.getParameter("civico"));
+  			  String citta = request.getParameter("citta");
+  			  
+  			try {
+				user = usermodel.doRetrieveByUsr(username);
+			} catch (SQLException e) {
+				 e.printStackTrace();
+				 RequestDispatcher error = null;
+			     String header = "Client Error";
+			     String details = "errore cambio indirizzo, user not found...";
+			     response.setStatus(500);
+			     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
+			     error.forward(request, response);
+			}
+  			
+	    	try {
+				model.doPrefer(via,civico,citta);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				e.printStackTrace();
+				 RequestDispatcher error = null;
+			     String header = "Client Error";
+			     String details = "errore nella scelta dell'indirizzo...";
+			     response.setStatus(500);
+			     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
+			     error.forward(request, response);
+			}
+   	    	}
    	    }
 		
    	    if(user==null){

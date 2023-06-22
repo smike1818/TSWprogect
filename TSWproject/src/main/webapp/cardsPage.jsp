@@ -44,6 +44,7 @@ if(username==null){
     <tr>
       <th>numero di carta</th>
       <th>iban</th>
+      <th>setta come predefinito</th>
       <th>cancella</th>
     </tr>
     
@@ -59,6 +60,14 @@ if(username==null){
 		    <tr>
 		       <td><%=bean.getNumCarta() %></td>
 		       <td><%=bean.getIBAN() %></td>
+		       <%
+		         if(!bean.getIsPrimary()){
+		       %>
+		       <td><a href="cards?action=prefer&IBAN=<%=bean.getIBAN()%>">scegli</a></td>
+		       
+		       <%}else{ %>
+		       <td>PREDEFINITA</td>
+		       <%} %>
 		       <td><a href="cards?action=delete&IBAN=<%=bean.getIBAN()%>">elimina</a></td>
 		    </tr>
 		    

@@ -60,6 +60,11 @@
   <li class="li-address">
            <%=ind.getVia()%> <%=ind.getCivico() %>,<%=ind.getCitta() %> 
            (<a href="address?action=delete&via=<%=ind.getVia()%>&civico=<%=ind.getCivico() %>&citta=<%=ind.getCitta() %>">rimuovi</a>)
+           <%if(!ind.getIsPrimary()){ %>
+               [<a href="address?action=prefer&via=<%=ind.getVia()%>&civico=<%=ind.getCivico() %>&citta=<%=ind.getCitta() %>">imposta come predefinito</a>]
+           <%}else{ %>
+               [PREDEFINITO]
+           <%} %>
   </li>
 <%}}%>
 

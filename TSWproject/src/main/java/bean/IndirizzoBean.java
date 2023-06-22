@@ -6,7 +6,16 @@ public class IndirizzoBean {
      private String citta = null;
      private int cap;
      private UserBean cliente = null;
+     private boolean isPrimary = false;
      private boolean empty = true;
+     
+     public void setIsPrimary(boolean value) {
+    	 this.isPrimary = value;
+     }
+     
+     public boolean getIsPrimary() {
+    	 return this.isPrimary;
+     }
      
      public void setVia(String v) {
     	  via=v;

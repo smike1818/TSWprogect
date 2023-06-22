@@ -9,8 +9,10 @@
 <body>
   <h5>inserisci metodo di pagamento</h5><br>
 	
-	<div id="card-form">
-	   <form action="cards" method="post">
+	<span class="error-statement"></span>
+	
+	<div id="cards-form">
+	   <form action="cards" method="post" id="card-form">
 	      <input type="hidden" name="action" value="add">
 	      <label for="number-card">numero di carta</label>
 	      <input type="text" name="number-card" required placeholder="enter number card"><br>
@@ -26,6 +28,7 @@
 	</div>
 	
 	<script src="js/JQuery.js" type="text/javascript"></script>
-    <script src="js/userFunctions.js" type="text/javascript"></script>	
+    <script src="js/userFunctions.js" type="text/javascript"></script>
+    <script src="js/validation.js" type="text/javascript"></script>	
 </body>
 </html>

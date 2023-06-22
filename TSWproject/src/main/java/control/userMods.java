@@ -33,8 +33,12 @@ public class userMods extends HttpServlet {
 			request.getSession().setAttribute("un", ub.getUsername());
 			request.getSession().setAttribute("user-details", mdu.doRetrieveByUsr(ub.getUsername()));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if(field.equalsIgnoreCase("email"))
+			   response.sendError(401, "Email già esistente");
+			if(field.equalsIgnoreCase("CF"))
+			   response.sendError(401, "CF già esistente");
+			if(field.equalsIgnoreCase("username"))
+			   response.sendError(401, "Username già utilizzato");
 		}
     }
 }

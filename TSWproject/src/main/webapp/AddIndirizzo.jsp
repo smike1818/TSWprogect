@@ -4,12 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-      <script src="js/JQuery.js" type="text/javascript"></script>
-      <script src="js/not_autorized.js" type="text/javascript"></script>
+      
 </head>
 <body>
    <h5>Aggiungi indirizzo: </h5><br>
-    <form action="address" method="post">
+   
+   <span class="error-statement"></span>
+   
+    <form action="address" method="post" id="address-form">
        <input type="hidden" name="action" value="new">
        <label for="via">Via:</label><br>
        <input type="text" name="via" required placeholder="enter via"><br>
@@ -21,5 +23,9 @@
        <input type="number" name="CAP" required placeholder="enter CAP"><br>       
        <input type=submit value="add">
     </form>
+    
+      <script src="js/JQuery.js" type="text/javascript"></script>
+      <script src="js/not_autorized.js" type="text/javascript"></script>
+      <script src="js/validation.js" type="text/javascript"></script>
 </body>
 </html>

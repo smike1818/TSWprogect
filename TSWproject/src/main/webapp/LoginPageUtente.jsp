@@ -12,6 +12,11 @@
 	<header>
 		 <jsp:include page="header.jsp"></jsp:include>
 	</header>
+		
+	<h1 class="access-h1">Area Login</h1>
+	
+	<span class="error-statement"></span>
+	
 	<div class="login-form">
 		<form action="login" method="post" id="login-form">
 			Please enter your username

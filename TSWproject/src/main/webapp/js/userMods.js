@@ -25,7 +25,11 @@ $(document).ready(function() {
     var editButton = $('#' + buttonId);
 
     editButton.click(function() {
-		console.log("sono dentro");
+		
+	//validazione dei campi: mi prendo l'id del bottone per verificare poi che tipo di campo vado a controllare
+	  var result = true;
+	  var idButton = editButton.attr("id");
+	  		   
       // Step 2: Create an input field with the initial text value
       var inputField = $('<input type="text" id="inputText">');
       // Step 3: Create a send button and hide it initially
@@ -41,8 +45,24 @@ $(document).ready(function() {
       sendButton.show();
 
       sendButton.click(function() {
-        // Step 6: Get the new text from the input field
+		  
+	  // Step 6: Get the new text from the input field
         var newText = inputField.val();
+		  
+	   //prima di procedere controllo il campo
+	  if(idButton === "button1" || idButton === "button2")
+		result = allLetter(newText);
+	  if(idButton === "button3")
+	    result = userid_validation(newText);
+	  if(idButton === "button4")
+	    result = ValidateEmail(newText);
+	  if(idButton === "button5")
+	    result = cf_validation(newText);
+		  
+	  //se il testo passa i controlli allora proseguo
+	  if(result){
+		  
+        
         $.ajax({
           url: 'userMods', // Step 7: Specify the URL of the servlet
           method: 'POST',
@@ -54,11 +74,30 @@ $(document).ready(function() {
             // Step 9: Reload the page after a successful AJAX call
             location.reload();
           },
-          error: function() {
-            // Step 10: Handle error case if needed
-            alert("error");
-          }
+          error: function(xhr, status, error) {
+             // Ottieni il codice HTML della risposta d'errore
+             var errorMessageHTML = xhr.responseText;
+             console.log(errorMessageHTML);
+  
+             // Trova l'inizio del messaggio di errore
+             startIndex = errorMessageHTML.indexOf("<b>Message</b>");
+             startIndex = errorMessageHTML.indexOf(">", startIndex) + 1;
+  
+             // Trova la fine del messaggio di errore
+             var endIndex = errorMessageHTML.indexOf("</p>", startIndex);
+  
+             // Estrai il messaggio di errore desiderato
+             var errorMessage = errorMessageHTML.substring(startIndex, endIndex);
+             
+             var startIndex = errorMessage.indexOf("</b>") + 5;
+             var extractedMessage = errorMessage.substring(startIndex).trim();
+
+             //stampalo a video
+             $(".error-statement").html(extractedMessage);
+           }
+
         });
+        }
       });
     });
   }
@@ -70,3 +109,62 @@ $(document).ready(function() {
       setupEditSaveFunction('button4', 'email', 'email'); // Use the button ID and campText ID here
       setupEditSaveFunction('button5', 'cf', 'CF'); // Use the button ID and campText ID here
     });
+    
+    
+//VALIDAZIONE NOME E COGNOME
+function allLetter(uname){     
+	var letters = /^[A-Za-z]+$/;
+    if(uname.match(letters)){		
+        return true;
+    }else{
+       $(".error-statement").html("il nome e il cognome devono avere solo caratteri alfabetici");
+       return false;
+    }
+}
+
+//VAIDAZIONE EMAIL
+function ValidateEmail(uemail)
+{
+     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+     if(uemail.match(mailformat)){
+           return true;
+     }else{
+        $(".error-statement").html("email non valida");
+        return false;
+     }
+}
+
+//VALIDAZIONE USERNAME
+function userid_validation(uid,mx,my)
+{
+    var uid_len = uid.length;
+    if (uid_len == 0 || uid_len >= my || uid_len < mx){
+        $(".error-statement").html("lo username deve avere dai "+mx+" ai "+my+" caratteri");
+        return false;
+    }
+    
+    return alphanumeric(uid);
+}
+
+//CONTINUO USERNAME
+function alphanumeric(uadd)   //VERIFICA SIA ALPHANUMERICO 
+{ 
+    var letters = /^[0-9a-zA-Z]+$/;
+    if(uadd.match(letters)){
+         return true;
+    }else{
+         $(".error-statement").html("lo username deve avere solo caratteri alfanumerici");
+         return false;
+    }
+}
+
+//VALIDAZIONE CODICE FISCALE
+function cf_validation(ucf){
+	var letters = /^[A-Z]{6}\d{2}[A-Z]\d{2}[A-Z]\d{3}[A-Z]$/;
+    if(ucf.match(letters)){
+         return true;
+    }else{
+         $(".error-statement").html("Codice Fiscale non valido");
+         return false;
+    }
+}

@@ -45,7 +45,7 @@ public class ModelContoDAO implements ContoDAO{
 		PreparedStatement ps = null;
         
 		String ifExists = "SELECT * FROM " + TABLE_NAME +" WHERE IBAN = ?";
-		String insertSQL = "INSERT INTO " + TABLE_NAME +" VALUES (?, ?, ?, ?)";
+		String insertSQL = "INSERT INTO " + TABLE_NAME +" (IBAN,intestatario,numero_carta,cvv) VALUES (?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
@@ -125,6 +125,7 @@ public class ModelContoDAO implements ContoDAO{
 		    	conto.setIBAN(rs.getString("IBAN"));
 		    	conto.setNumCarta(rs.getString("numero_carta"));
 		    	conto.setCvv(rs.getString("cvv"));	
+		    	conto.setIsPrimary(rs.getBoolean("isPrimary"));
 		    	
 		    	in = model.doRetrieveByKey(rs.getString("intestatario"));
 		    	conto.setIntestatario(in);
@@ -165,6 +166,7 @@ public class ModelContoDAO implements ContoDAO{
 		    	conto.setIBAN(rs.getString("IBAN"));
 		    	conto.setNumCarta(rs.getString("numero_carta"));
 		    	conto.setCvv(rs.getString("cvv"));	
+		    	conto.setIsPrimary(rs.getBoolean("isPrimary"));
 		    	
 		    	in = model.doRetrieveByKey(rs.getString("intestatario"));
 		    	conto.setIntestatario(in);
@@ -205,6 +207,7 @@ public class ModelContoDAO implements ContoDAO{
 		    	conto.setIBAN(rs.getString("IBAN"));
 		    	conto.setNumCarta(rs.getString("numero_carta"));
 		    	conto.setCvv(rs.getString("cvv"));	
+		    	conto.setIsPrimary(rs.getBoolean("isPrimary"));
 		    	
 		    	in = model.doRetrieveByKey(rs.getString("intestatario"));
 		    	conto.setIntestatario(in);
@@ -257,7 +260,8 @@ public class ModelContoDAO implements ContoDAO{
 		    	
 		    	conto.setIBAN(rs.getString("IBAN"));
 		    	conto.setNumCarta(rs.getString("numero_carta"));
-		    	conto.setCvv(rs.getString("cvv"));	
+		    	conto.setCvv(rs.getString("cvv"));
+		    	conto.setIsPrimary(rs.getBoolean("isPrimary"));
 		    	conto.setIntestatario(user);
 		    	
 		    	conti.add(conto);
@@ -273,6 +277,43 @@ public class ModelContoDAO implements ContoDAO{
 			}
 		}
 		return conti;
+	}
+
+	@Override
+	public boolean doPrefer(String iban) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		PreparedStatement ps = null;
+
+		int result = 0;
+		String updateToFalse = "UPDATE "+ TABLE_NAME + " SET isPrimary = ? WHERE isPrimary = ?";
+		String updateSQL = "UPDATE " + TABLE_NAME + " SET isPrimary = ? WHERE IBAN = ?";
+
+		try {
+			connection = ds.getConnection();
+			ps = connection.prepareStatement(updateToFalse);
+			ps.setBoolean(1, false);
+			ps.setBoolean(2, true);
+			
+			if(ps.executeUpdate()>=0) {
+			
+			  preparedStatement = connection.prepareStatement(updateSQL);
+			  preparedStatement.setBoolean(1, true);
+			  preparedStatement.setString(2,iban);
+
+			  result = preparedStatement.executeUpdate();
+			}
+			
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return (result != 0);
 	}
 
 }
