@@ -10,7 +10,7 @@
        rend = "LoginPageUtente.jsp";
     }else{
         bean = (UserBean) session.getAttribute("user-details");
-        if(bean==null)    rend = "/user";
+        if(bean==null)    rend = "./user";
     }
     
     if(rend!=null){
@@ -34,6 +34,7 @@
 		<header>
 			<jsp:include page="header.jsp"></jsp:include>
 		</header>
+		
 		    <div class="main">
 				<div class="main-element">
 				<h1>account</h1><br>

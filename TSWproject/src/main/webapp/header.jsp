@@ -12,7 +12,7 @@
 	</head>
 	<body>
 	    
-	        <div class="first-header">
+	     <div class="first-header">
 		    <nav>
 		       <ul class="voci-navbar">
 		        <% if(session==null || session.getAttribute("un")==null){ %>
@@ -33,8 +33,7 @@
 		         <button class="search-product-submit">Search</button>
 		     </div>
 		    </nav>
-		   </div>
-	         
+	      </div>   
 	    <div class="second-header">
 	      <!--<h3 id="tipo-articolo"> 
 	         Articoli
@@ -89,7 +88,5 @@
 	        	%>
 	       </h5>
 	       </div>
-	       </div>
-	       
 	</body>
 </html>

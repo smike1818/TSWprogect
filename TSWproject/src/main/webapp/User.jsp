@@ -34,6 +34,9 @@
 		<header>
 			<jsp:include page="header.jsp"></jsp:include>
 		</header>
+		
+	    <span class="error-statement"></span>
+	    	
 		    <div class="main-utente">
 				<div class="utente">
 					<div>
@@ -81,6 +84,7 @@
 		<script src="js/JQuery.js" type="text/javascript"></script>
 		<script src="js/userMods.js" type="text/javascript"></script>
       	<script src="js/pagamenti.js" type="text/javascript"></script>
+      	<script src="js/validation.js" type="text/javascript"></script>
 	</body>
 </html>
 
