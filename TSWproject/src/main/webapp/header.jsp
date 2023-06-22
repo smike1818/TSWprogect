@@ -13,25 +13,27 @@
 	<body>
 	    
 	        <div class="first-header">
-	          <nav class="navbar">
-	             <ul class="voci-navbar">
-		          <% if(session==null || session.getAttribute("un")==null){ %>
-		               <li><a href="LoginPageUtente.jsp" target="_self" class="text-white"> Sign in </a></li>
-		          <%}else{ %>
-		               <li><a href="user" target="_self" class="text-white"> <%=(String) session.getAttribute("un") %> </a><li>
-		          <%} %>
-					   <li><a href="carrello.jsp" class="text-white"><i class="fa fa-shopping-cart"></i></a></li>
-				  </ul>
-
-              <!-- SEARCH ELEMENTS -->
-	            <div class="search-products">
-	              <div class="dropdown">
-	               <input type="search" class="search-product-input">
-	               <ul class="search-product-suggestions"></ul>
-	              </div>
-	               <button class="search-product-submit">Search</button>
-	           </div>
-	          </nav>
+		    <nav>
+		       <ul class="voci-navbar">
+		        <% if(session==null || session.getAttribute("un")==null){ %>
+		             <li><a href="LoginPageUtente.jsp" target="_self" class="text-white"><i style="font-size:24px" class="fa">&#xf007;</i></a></li>
+		        <%}else{ %>
+		             <li><a href="UserMods.jsp" target="_self" class="text-white"><i style="font-size:24px" class="fa">&#xf2c0;</i></a><li>
+		             <li><a href="" target="_self" class="text-white"><i style="font-size:24px" class="fa">&#xf004;</i></a><li>
+		        <%} %>
+		             <li><a href="carrello.jsp" class="text-white"><i style="font-size:24px" class="fa fa-shopping-cart"></i></a></li>
+		             <li><a href="catalogo.jsp" class="text-white"><i style="font-size:24px" class="fa fa-home" aria-hidden="true" ></i></a></li>
+		        </ul>
+		    <!-- SEARCH ELEMENTS -->
+		      <div class="search-products">
+		        <div class="dropdown">
+		         <input type="search" class="search-product-input">
+		         <ul class="search-product-suggestions"></ul>
+		        </div>
+		         <button class="search-product-submit">Search</button>
+		     </div>
+		    </nav>
+		   </div>
 	         
 	    <div class="second-header">
 	      <!--<h3 id="tipo-articolo"> 

@@ -35,7 +35,7 @@ $(document).ready(function() {
       // Step 3: Create a send button and hide it initially
       var sendButton = $('<button id="sendButton">Send</button>').hide();
       // Step 4: Create a new paragraph element to replace the campText element
-      var paragraph = $('<p></p>').append(inputField, sendButton);
+      var paragraph = $('<p class="user-field"></p>').append(inputField, sendButton);
 
       var campText = $('#' + campTextId);
 

@@ -367,6 +367,7 @@ a.text-white{
 .categorie h1{
 	color: white;
 	text-align: center;
+	padding: 1%;
 }
 
 .addtocart-submit{
@@ -376,4 +377,62 @@ a.text-white{
 .image-item img{
 	margin: 20px;
 	width: 30%;
+}
+
+.main-element h1{
+	padding: 10%;
+	text-align: center;	
+	color: black;
+}	
+
+.categorie{
+	display: inline-block;
+	margin: 50px;
+	flex: 1;
+	padding-top: 5%;
+	border-radius: 25px;
+ 	background-color: #7c878a;
+	opacity: .9;
+}
+
+.user-field{
+	border-radius: 25px;
+	padding: 5%;
+	margin: 5%;
+	background-color: lightgray;
+}
+
+.utente{
+	display: inline-block;
+	margin: 50px;
+	flex: 1;
+	padding-top: 5%;
+	border-radius: 25px;
+ 	background-color: #7c878a;
+	opacity: .9;
+}
+
+.utente p{
+	border-radius: 25px;
+	background-color: lightgray;
+	text-align: center;
+}
+
+.utente h1{
+	text-align: center;	
+	color: black;
+}	
+
+.main-utente{
+	text-align: center; /* Center the elements within the container */
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+}
+
+.utente,
+.utente p h1{
+	width: 50%; /* Adjust the width as needed */
+  	margin-left: 30%; 
+  	margin-right: 30%; 
 }

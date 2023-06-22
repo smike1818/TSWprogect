@@ -45,7 +45,7 @@
 	                	<a href=""><img src="img/pickups.png" width="43.7%"></a>
 	                    <h1>Accessori</h1><br>
 	                    <p>
-	                        tutto ci&ograve di cui hai bisogno<br>
+	                        tutto ci&ograve; di cui hai bisogno<br>
 	                        per i tuoi strumenti<br>
 	                    </p>
 	                </div>

@@ -34,46 +34,46 @@
 		<header>
 			<jsp:include page="header.jsp"></jsp:include>
 		</header>
-		    <fieldset>
-		       	<legend>User Details</legend>
-		       	
-		       	<span class="error-statement"></span>
-		       	
-		       	<label for="Name">Name: </label>
-		       	<p id="name"><%=bean.getNome() %>
-  				<button id="button1">Edit</button> <!-- Specify the button ID here -->
-		       	</p>
-		       
-		       	<label for="Surname">Surname: </label>
-		       	<p id="surname"><%=bean.getCognome() %>
-		       	<button id="button2">Edit</button> <!-- Specify the button ID here -->
-				</p>
-		       
-		       	<label for="Username">Username: </label>
-		       	<p id="user"><%=bean.getUsername() %>
-		       	<button id="button3">Edit</button> <!-- Specify the button ID here -->
-		       	</p>
-		       
-		       	<label for="Email">Email: </label>
-		       	<p id="email"><%=bean.getEmail() %>
-		       	<button id="button4">Edit</button> <!-- Specify the button ID here -->
-		       	</p>
-		       
-		       <label for="CF">Codice Fiscale: </label>
-		       <p id="cf"><%=bean.getCF() %>
-		       <button id="button5">Edit</button> <!-- Specify the button ID here -->
-		       </p>
-		       <input type=button onClick="location.href='cardsPage.jsp'"value='metodi di pagamento'><br><br>
-		        <input type=button onClick="location.href='Indirizzo.jsp'"value='indirizzi salvati'><br>
-		       <!-- <button id="generateBtn">show payment methods</button>
-		       	<div id="content">
-    				<div id="jspCodeContainer" style="display: none;"></div>
- 				</div>
-  				<button id="addButton" style="display: none;">Add Payment Method</button>-->
-		    </fieldset>
-		   	<a href="logout" target="_self">Logout</a><br>
-		    <a href="Storico.jsp" target="_self">Accedi allo storico degli ordini</a>	  
-		</body>
+		    <div class="main-utente">
+				<div class="utente">
+					<div>
+					    <label for="Name">Name: </label>
+					    <p class="user-field" id="name"><%=bean.getNome() %>
+					        <button id="button1">Edit</button>
+					    </p>
+					</div>
+					
+					<div>
+					    <label for="Surname">Surname: </label>
+					    <p class="user-field" id="surname"><%=bean.getCognome() %>
+					        <button id="button2">Edit</button>
+					    </p>
+					</div>
+					
+					<div>
+					    <label for="Username">Username: </label>
+					    <p class="user-field" id="user"><%=bean.getUsername() %>
+					        <button id="button3">Edit</button>
+					    </p>
+					</div>
+					
+					<div>
+					    <label for="Email">Email: </label>
+					    <p class="user-field" id="email"><%=bean.getEmail() %>
+					        <button id="button4">Edit</button>
+					    </p>
+					</div>
+					
+					<div>
+					    <label for="CF">Codice Fiscale: </label>
+					    <p class="user-field" id="cf"><%=bean.getCF() %>
+					        <button id="button5">Edit</button>
+					    </p>
+					</div>
+					<a href="logout" target="_self">Logout</a><br>
+				</div>
+			</div>
+		   	
 		<footer>
 			<jsp:include page="footer.jsp"></jsp:include>
 		</footer>
