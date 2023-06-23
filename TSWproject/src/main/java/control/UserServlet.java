@@ -36,7 +36,7 @@ public class UserServlet extends HttpServlet{
 	        try {
 	        	 user = mud.doRetrieveByUsr(userName);
 	        	 session.setAttribute("user-details", user);
-	        	response.sendRedirect("User.jsp");
+	        	 response.sendRedirect("User.jsp");
 	        }catch(SQLException e) {
 	        	RequestDispatcher error = null;
 				String header = "Server Error";

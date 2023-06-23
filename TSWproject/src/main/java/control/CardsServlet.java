@@ -32,6 +32,18 @@ public class CardsServlet extends HttpServlet{
 		ServletContext sc = request.getServletContext();
 		HttpSession session = request.getSession();
 		
+		try {
+		    user = us.doRetrieveByUsr((String) session.getAttribute("un"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+			 RequestDispatcher error = null;
+			 String header = "Server Error";
+			 String details = "errore nel salvataggio della carta...";
+			 response.setStatus(500);
+			 error = sc.getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
+			 error.forward(request, response);
+		}
+		
 		if(action!=null) {
 			if(action.equalsIgnoreCase("add")) {
 				String num_carta = request.getParameter("number-card");
@@ -41,19 +53,7 @@ public class CardsServlet extends HttpServlet{
 				ContoBean bean = new ContoBean();
 				bean.setCvv(cvv);
 				bean.setIBAN(iban);
-				bean.setNumCarta(num_carta);
-				
-				try {
-				    user = us.doRetrieveByUsr((String) session.getAttribute("un"));
-				} catch (SQLException e) {
-					e.printStackTrace();
-					 RequestDispatcher error = null;
-	    			 String header = "Server Error";
-	    			 String details = "errore nel salvataggio della carta...";
-	    			 response.setStatus(500);
-	    			 error = sc.getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-	    			 error.forward(request, response);
-				}
+				bean.setNumCarta(num_carta);				
 				
 				if(user!=null) {
 					bean.setIntestatario(user);
@@ -91,7 +91,7 @@ public class CardsServlet extends HttpServlet{
 			if(action.equalsIgnoreCase("prefer")) {
 				String iban = request.getParameter("IBAN");
 				try {
-					model.doPrefer(iban);
+					model.doPrefer(iban,user);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					 e.printStackTrace();

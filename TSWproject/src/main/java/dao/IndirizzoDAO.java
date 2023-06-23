@@ -12,5 +12,5 @@ public interface IndirizzoDAO extends MasterDAO <IndirizzoBean> {
 	IndirizzoBean doRetrieveByKey(String via, int civico, String citta) throws SQLException;
 	List<IndirizzoBean> doRetrieveByUsr(UserBean user) throws SQLException;
 	boolean doDelete(String via, int civico, String citta) throws SQLException;
-	boolean doPrefer(String via, int civico, String citta) throws SQLException;
+	boolean doPrefer(String via, int civico, String citta, UserBean user) throws SQLException;
 }

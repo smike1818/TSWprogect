@@ -32,6 +32,18 @@ public class IndirizzoServlet extends HttpServlet{
    	    String action = (String) request.getParameter("action");
    	    session = request.getSession();
    	    String username = (String) session.getAttribute("un");
+   	    
+   	 try {
+			user = usermodel.doRetrieveByUsr(username);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			 RequestDispatcher error = null;
+		     String header = "Client Error";
+		     String details = "utente non trovato, impossibile continuare il salvataggio dlel'indirizzo...";
+		     response.setStatus(400);
+		     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
+		     error.forward(request, response);
+		}
    	   
    	    if(action!=null) {
    	    	if(action.equalsIgnoreCase("new")) {
@@ -45,19 +57,7 @@ public class IndirizzoServlet extends HttpServlet{
    	    		ind.setVia(via);
    	    		ind.setCivico(civico);
    	    		ind.setCitta(citta);
-   	    		ind.setCap(cap);
-   	    		
-   	    		try {
-					user = usermodel.doRetrieveByUsr(username);
-				} catch (SQLException e) {
-					e.printStackTrace();
-					 RequestDispatcher error = null;
-				     String header = "Client Error";
-				     String details = "utente non trovato, impossibile continuare il salvataggio dlel'indirizzo...";
-				     response.setStatus(400);
-				     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-				     error.forward(request, response);
-				}
+   	    		ind.setCap(cap);  	    		  	    	
    	    		
    	    		ind.setCliente(user);
    	    		
@@ -81,17 +81,6 @@ public class IndirizzoServlet extends HttpServlet{
    			  String citta = request.getParameter("citta");
    			
    	    		try {
-					user = usermodel.doRetrieveByUsr(username);
-				} catch (SQLException e) {
-					 e.printStackTrace();
-					 RequestDispatcher error = null;
-				     String header = "Client Error";
-				     String details = "errore cambio indirizzo, user not found...";
-				     response.setStatus(500);
-				     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-				     error.forward(request, response);
-				}
-   	    		try {
 					model.doDelete(via,civico,citta);
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -108,21 +97,9 @@ public class IndirizzoServlet extends HttpServlet{
    	    	  String via = request.getParameter("via");
   		      Integer civico = Integer.parseInt(request.getParameter("civico"));
   			  String citta = request.getParameter("citta");
-  			  
-  			try {
-				user = usermodel.doRetrieveByUsr(username);
-			} catch (SQLException e) {
-				 e.printStackTrace();
-				 RequestDispatcher error = null;
-			     String header = "Client Error";
-			     String details = "errore cambio indirizzo, user not found...";
-			     response.setStatus(500);
-			     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-			     error.forward(request, response);
-			}
   			
 	    	try {
-				model.doPrefer(via,civico,citta);
+				model.doPrefer(via,civico,citta,user);
 			} catch (SQLException e) {
 				e.printStackTrace();
 				e.printStackTrace();
@@ -135,21 +112,7 @@ public class IndirizzoServlet extends HttpServlet{
 			}
    	    	}
    	    }
-		
-   	    if(user==null){
-   	    	 try {
-				user = usermodel.doRetrieveByUsr(username);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				e.printStackTrace();
-				 RequestDispatcher error = null;
-			     String header = "Client Error";
-			     String details = "errore nell'apertura della pagina Indirizzo.jsp (doRetrieveByUsr)...";
-			     response.setStatus(500);
-			     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-			     error.forward(request, response);
-			}
-   	    }
+		   	  
    	    try {
 			request.setAttribute("indirizzo", model.doRetrieveAll("via"));
 		} catch (SQLException e) {

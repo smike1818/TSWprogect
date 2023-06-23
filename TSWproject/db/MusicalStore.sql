@@ -11,7 +11,7 @@ create table utente(
 );
 
 create table telefono(
-	numero int primary key,
+	numero varchar(10) primary key,
 	prefisso varchar(3) not null default "+39",
 	utente varchar(16) not null references utente(CF)
 		on update cascade

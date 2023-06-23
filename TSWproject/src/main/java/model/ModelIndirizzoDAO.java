@@ -300,13 +300,13 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 	}
 	
 	@Override
-	public boolean doPrefer(String via, int civico, String citta) throws SQLException {
+	public boolean doPrefer(String via, int civico, String citta, UserBean user) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		PreparedStatement ps = null;
 
 		int result = 0;
-		String updateToFalse = "UPDATE "+ TABLE_NAME + " SET isPrimary = ? WHERE isPrimary = ?";
+		String updateToFalse = "UPDATE "+ TABLE_NAME + " SET isPrimary = ? WHERE isPrimary = ? AND cliente = ?";
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET isPrimary = ? WHERE via = ? AND civico = ? AND citta = ?";
 
 		try {
@@ -314,6 +314,7 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 			ps = connection.prepareStatement(updateToFalse);
 			ps.setBoolean(1, false);
 			ps.setBoolean(2, true);
+			ps.setString(3, user.getCF());
 			
 			if(ps.executeUpdate()>=0) {
 			

@@ -27,7 +27,24 @@ $(document).ready(function() {
     validateAddress($(this)); // Effettua la validazione e memorizza il risultato
   });
   
+  //INIZIO VALIDAZIONE NUMERO
+  $("#phone-form").submit(function(event) {
+    event.preventDefault();
+    validatePhone($(this)); // Effettua la validazione e memorizza il risultato
+  });
+  
 });
+
+
+
+
+
+
+
+
+
+
+
 
 
 // FUNZIONE DI VALIDAZIONE LOGIN 
@@ -150,6 +167,29 @@ function validateAddress(form){
 
 
 
+//FUNZIONE DI VALIDAZIONE NUMERO
+function validatePhone(form){
+  var valid = true;
+  
+  var numero = form.find("input[name='numero']").val();
+  
+  if (!checkPhonenumber(numero)) {
+    valid = false;
+  }
+  
+  if (valid) {
+	$(".error-statement").empty();
+    form.get(0).submit(); // Sottometti il modulo
+  }	
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -157,8 +197,14 @@ function validateAddress(form){
 //VALIDAZIONE NOME E COGNOME
 function allLetter(uname){     
 	var letters = /^[A-Za-z]+$/;
-    if(uname.match(letters)){		
-        return true;
+    if(uname.match(letters)){
+		var letters = /^[A-Za-z]{3,}$/;
+        if(uname.match(letters)){	
+           return true;
+        }else{
+			$(".error-statement").html("almeno 3 caratteri per nome e cognome");
+            return false;
+		}
     }else{
        $(".error-statement").html("il nome e il cognome devono avere solo caratteri alfabetici");
        return false;
@@ -319,3 +365,13 @@ function citta_validation(citta){
     }
 }
 
+//VALIDAZIONE NUMERO
+function checkPhonenumber(inputtxt) {
+	var phoneno = /^([0-9]{10})$/;
+	if(inputtxt.match(phoneno)) 
+		return true;
+	{
+         $(".error-statement").html("numero non valido");
+         return false;
+    }	
+}

@@ -14,7 +14,11 @@
 <servlet>
 	<servlet-name>ConfirmPaymentServlet</servlet-name>
 	<servlet-class>control.ConfirmPaymentServlet</servlet-class>
- </servlet>  
+ </servlet> 
+<servlet>
+	<servlet-name>PhoneServlet</servlet-name>
+	<servlet-class>control.PhoneServlet</servlet-class>
+ </servlet>   
 <servlet>
 	<servlet-name>StoricoUserServlet</servlet-name>
 	<servlet-class>control.StoricoUserServlet</servlet-class>
@@ -104,6 +108,10 @@
     <servlet-class>control.userMods</servlet-class>
   </servlet>
   
+  <servlet-mapping>
+    <servlet-name>PhoneServlet</servlet-name>
+    <url-pattern>/phone</url-pattern>
+  </servlet-mapping>
     <servlet-mapping>
     <servlet-name>ConfirmPaymentServlet</servlet-name>
     <url-pattern>/confirm</url-pattern>
