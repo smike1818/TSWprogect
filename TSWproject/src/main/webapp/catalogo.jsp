@@ -34,7 +34,7 @@
             	<h1>Categorie</h1>
 	            <div class="main">
 	                <div class="main-element">
-	                	<a href=""><img src="img/strato.png" width="10%"></a>
+	                	<a href="categories?tipo=false"><img src="img/strato.png" width="10%"></a>
 	                    <h1>Strumenti</h1><br>
 	                    <p>
 	                        Sezione dedicata ai nostri<br>
@@ -42,7 +42,7 @@
 	                    </p>
 	                </div>
 	                <div class="main-element">
-	                	<a href=""><img src="img/pickups.png" width="43.7%"></a>
+	                	<a href="categories?tipo=true"><img src="img/pickups.png" width="43.7%"></a>
 	                    <h1>Accessori</h1><br>
 	                    <p>
 	                        tutto ci&ograve; di cui hai bisogno<br>
@@ -55,6 +55,12 @@
         <div class="catalogo">
         	<h1>I nostri articoli in evidenza</h1>
 		    <div class="list-products">
+		    
+		        <%
+		           //setto un limite di 5 elementi da mostrare nella pagina principale
+		           request.setAttribute("limit",5);
+		        %>
+		        
 		        <jsp:include page="ListProducts.jsp"></jsp:include>
 		    </div>
         </div>

@@ -107,6 +107,10 @@
     <servlet-name>userMods</servlet-name>
     <servlet-class>control.userMods</servlet-class>
   </servlet>
+   <servlet>
+    <servlet-name>CategoriaServlet</servlet-name>
+    <servlet-class>control.CategoriaServlet</servlet-class>
+  </servlet>
   
   <servlet-mapping>
     <servlet-name>PhoneServlet</servlet-name>
@@ -203,6 +207,10 @@
   <servlet-mapping>
     <servlet-name>userMods</servlet-name>
     <url-pattern>/userMods</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CategoriaServlet</servlet-name>
+    <url-pattern>/categories</url-pattern>
   </servlet-mapping>
   
   <error-page>

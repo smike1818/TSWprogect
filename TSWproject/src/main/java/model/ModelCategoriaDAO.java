@@ -42,7 +42,7 @@ public class ModelCategoriaDAO implements CategoriaDAO{
 				PreparedStatement ps = null;
 		        
 				String ifExists = "SELECT * FROM " + TABLE_NAME +" WHERE IDcat = ? OR nome_cat = ?";
-				String insertSQL = "INSERT INTO " + TABLE_NAME +" VALUES (?, ?, ?)";
+				String insertSQL = "INSERT INTO " + TABLE_NAME +" VALUES (?, ?, ?, ?)";
 
 				try {
 					connection = ds.getConnection();
@@ -54,6 +54,7 @@ public class ModelCategoriaDAO implements CategoriaDAO{
 						preparedStatement.setInt(1, cat.getID());
 						preparedStatement.setString(2, cat.getNome());
 						preparedStatement.setString(3, cat.getDescrizione());
+						preparedStatement.setBoolean(4, cat.getTipo());
 						preparedStatement.executeUpdate();
 					}
 					else
@@ -119,7 +120,8 @@ public class ModelCategoriaDAO implements CategoriaDAO{
 		    	
 		    	cat.setID(rs.getInt("IDcat"));
 		    	cat.setNome(rs.getString("nome_cat"));
-		    	cat.setDescrizione(rs.getString("descrizione"));		    			    	    	
+		    	cat.setDescrizione(rs.getString("descrizione"));
+		    	cat.setTipo(rs.getBoolean("tipo"));
 			}
 
 		} finally {
@@ -155,6 +157,7 @@ public class ModelCategoriaDAO implements CategoriaDAO{
 		    	cat.setID(rs.getInt("IDcat"));
 		    	cat.setNome(rs.getString("nome_cat"));
 		    	cat.setDescrizione(rs.getString("descrizione"));
+		    	cat.setTipo(rs.getBoolean("tipo"));
 		    	
 		    	categories.add(cat);		    	    	
 			}

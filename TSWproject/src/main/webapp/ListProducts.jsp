@@ -1,13 +1,22 @@
 <%@ page language="java" import="java.util.*, bean.ArticoloBean, dao.ArticoloDAO, model.MusicalModelArticoloBean" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-<%
-	List<?> products = (List<?>) request.getAttribute("products");
-    if(products == null ){
-    	response.sendRedirect("./catalogo");	
-		return;
-    }
-	ArticoloDAO model = new MusicalModelArticoloBean();
+<%   
+     //ora mi prendo tutti i prodotti nel catalogo
+     List<?> products = (List<?>) request.getAttribute("products");
+     if(products == null ){
+        response.sendRedirect("./catalogo");	
+        return;
+     }
+     ArticoloDAO model = new MusicalModelArticoloBean();
+    
+	//implemento un limite di valori che posso mostrare 
+	//utilizzato per mostrare nella home page 5 prodotti
+	
+	Integer limit;
+	limit = (Integer) request.getAttribute("limit");
+	if(limit==null)   limit=0;    //se il limite non è impostato inserisco 0 che sta a idicare limite non settato
+
 %>
 
 <!DOCTYPE html>
@@ -78,7 +87,15 @@
                                                           
                   </div>
 
-        <%}} %>
+        <%
+        
+        //esco dal while se supero il limite 
+        
+        if(limit==1)  break;
+        else limit--; 
+        }} 
+			
+        %>
       </div>
       
       <script src="js/JQuery.js" type="text/javascript"></script>

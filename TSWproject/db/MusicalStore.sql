@@ -60,6 +60,7 @@ create table image(
 
 create table categoria(
 	IDcat int primary key auto_increment,
+	tipo boolean not null default false,                     
     nome_cat varchar(20) not null,
     descrizione varchar(200)
 );
