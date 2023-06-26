@@ -314,4 +314,42 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 	  return sugg;
 	}
 
+	@Override
+	public List<String> getImages(int code) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		List<String> ImagesName = new ArrayList<String>();
+		String ImageName = null;
+		
+		String selectSQL = "SELECT * FROM " + MusicalModelArticoloBean.TABLE_NAME + " a join image i "
+				+ "WHERE a.codice = ? AND a.codice = i.articolo";
+		
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, code);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				ImageName = rs.getString("i.nome");
+			    ImagesName.add(ImageName);
+			}
+			
+			if(ImagesName.size()==0) {
+				ImagesName.add("default.jpg");
+			}
+
+		}finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		
+		return ImagesName;
+	}
+
 }

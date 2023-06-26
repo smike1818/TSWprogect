@@ -59,7 +59,7 @@ if(rend!=null){
 		<tr class="acquisto-<%=bean.getID()%>">
 			<td><%=bean.getConto().getIBAN()%></td>
 			<td class="date-td"><%=bean.getDate()%></td>
-			<td><%=bean.getImporto()%></td>
+			<td><%=String.format("%.2f", bean.getImporto())%></td>
 			<td>via <%=bean.getIndirizzo().getVia() %></td>
 			<td>(<%=bean.getIndirizzo().getCivico() %>) </td>
 			<td><%=bean.getIndirizzo().getCitta() %></td>

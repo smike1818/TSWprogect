@@ -1,4 +1,4 @@
-<%@ page language="java" import="bean.ArticoloBean, dao.ArticoloDAO, model.MusicalModelArticoloBean" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" import="bean.*, dao.ArticoloDAO, model.MusicalModelArticoloBean, java.util.*" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
 <%
@@ -8,12 +8,15 @@
       if(bean==null){
           String id = request.getParameter("id");
           rend = "./details?id="+id;
+          response.sendRedirect(rend);
+          return;
       }
-      int q;
-      ArticoloDAO model = new MusicalModelArticoloBean();
       
-      if(rend!=null)
-    	  response.sendRedirect(rend);
+        int q;
+        ArticoloDAO model = new MusicalModelArticoloBean();
+        List<String>images =  model.getImages(bean.getID());
+      
+      
 %>
 <!DOCTYPE html>
 <html>
@@ -28,9 +31,40 @@
     <!-- inizio corpo dettaglio -->
     <% if(bean!=null){ %>
     <div align="center">
-       <div>
-         <img src="img/<%=model.getFirstImage(bean.getID()) %>" alt="no available" width="500" height="500"/>
-       </div>
+       
+       <!-- immagini con scorrimento automatico e manuale -->
+       
+  <%
+    if (images != null && images.size() >1) {
+  %>
+  
+ <div class="images-block">
+  <div class="cycle-slideshow" 
+       data-cycle-fx="scrollHorz"
+       data-cycle-prev=".prev"
+       data-cycle-next=".next"
+       data-cycle-timeout = 3000 >   
+    <div class="slice">
+      <a class="prev" href="#">&lt;</a>
+      <a class="next" href="#">&gt;</a>
+    </div>
+    <% for (String name : images) { %>
+      <img src="img/<%=name%>" alt="no available"/>
+    <% } %>
+  </div>
+</div>
+
+<!-- non implemento lo scorrimento nel caso in cui c'è una sola immagine -->
+
+<%}else if(images.size() == 1){ %>
+    <div class="images-block">
+       <img src="img/<%=images.get(0)%>" alt="no available"/>
+    </div>
+<% } %>
+ 
+  
+            
+              
        <div>
          <label for="name">Nome:  </label>
          <span><%=bean.getNome() %></span><br>
@@ -76,6 +110,8 @@
     <jsp:include page="footer.jsp"></jsp:include>
     
     <script src="js/JQuery.js" type="text/javascript"></script>
+    <script src="js/jquery.cycle2.min.js"></script>
     <script src="js/userFunctions.js" type="text/javascript"></script>
+    <script src="js/immagini.js" type="text/javascript"></script>
 </body>
 </html>
