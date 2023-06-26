@@ -58,7 +58,7 @@
 
 <%}else if(images.size() == 1){ %>
     <div class="images-block">
-       <img src="img/<%=images.get(0)%>" alt="no available"/>
+       <img src="img/<%=images.get(0)%>" alt="no available" width=500px height=500px/>
     </div>
 <% } %>
  
