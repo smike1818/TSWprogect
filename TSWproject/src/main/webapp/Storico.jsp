@@ -35,18 +35,9 @@ if(rend!=null){
 </header>
 
   <h3>STORICO DEGLI ORDINI</h3>
-  <h5>Utente: <%=username %></h5>
+  <h5>Utente: <%=username %></h5><br><br>
   
-  <table border="1" class="table-acquisti">
-
-		<tr>
-			<th>Conto</th>
-			<th>Data</th>
-			<th>Totale</th>
-			<th colspan=3>Indirizzo</th>
-			<th>Dettagli</th>
-			
-		</tr>
+  <div class="table-acquisti">
 		
 		<%
 		    AcquistoBean bean = null;
@@ -56,34 +47,42 @@ if(rend!=null){
 				    bean = (AcquistoBean) it.next();
 				  
 		%>
-		<tr class="acquisto-<%=bean.getID()%>">
-			<td><%=bean.getConto().getIBAN()%></td>
-			<td class="date-td"><%=bean.getDate()%></td>
-			<td><%=String.format("%.2f", bean.getImporto())%></td>
-			<td>via <%=bean.getIndirizzo().getVia() %></td>
-			<td>(<%=bean.getIndirizzo().getCivico() %>) </td>
-			<td><%=bean.getIndirizzo().getCitta() %></td>
-			
-			<!-- AGGIUNGI LA PAGINA CHE HAI CREATO AL POSTO DI pagina_dettaglio -->
-			<td><a href="pagina_dettaglio?acquisto=<%=bean.getID()%>">dettagli</a></td>   
-			
-			
-			 
-		</tr>
+	    <div class="acquisti-details" id="<%=bean.getID() %>">
+	      <div class="first-block">
+			<span><b>Conto:</b> <%=bean.getConto().getIBAN()%></span><br>
+			<span class="date-td"><b>Data:</b> <%=bean.getDate()%></span><br>
+			<span><b>Totale:</b> <%=String.format("%.2f", bean.getImporto())%>$</span><br>
+		  </div>
+		  <div class="second-block">
+			<span> <b>Indirizzo:</b> via <%=bean.getIndirizzo().getVia() %></span>		  
+			<span><%=bean.getIndirizzo().getCivico() %> </span>
+			<span>(<%=bean.getIndirizzo().getCitta() %>)</span><br>
+		  </div>		  
+		  <div class="terzo-block">
+			<button class="dettagli">dettagli</button> <br> 
+			<span><a>scarica fattura</a></span> <br> 
+		  </div>		  
+		</div>
+		
+		<!-- div in cui andrò a mettere gli articoli -->
+		<div class="artDetailsContainer" style="display: none;"></div>
 		<%
 			}} else {                   //quando non si sono prodotti nel database stampo a video il mess sotto
 		%>
-		<tr>
-			<td class="no-acquisti" colspan=7><%=username %> non ha ancora effettuato acquisti</td>        
-		</tr>
+		<div>
+			<span class="no-acquisti"><%=username %> non ha ancora effettuato acquisti</span>        
+		</div>
 		
 		<%}%>
 		
-		</table><br>
+		</div><br>
   
   
   <footer>
 	<jsp:include page="footer.jsp"></jsp:include>
 </footer>
+      <script src="js/JQuery.js" type="text/javascript"></script>
+      <script src="js/jquery.cycle2.min.js"></script>
+      <script src="js/storico.js" type="text/javascript"></script>
 </body>
 </html>

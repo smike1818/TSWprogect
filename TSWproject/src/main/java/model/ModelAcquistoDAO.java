@@ -13,16 +13,21 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import bean.AcquistoBean;
+import bean.ArticoloBean;
 import bean.ContoBean;
 import bean.UserBean;
 import bean.IndirizzoBean;
+import bean.IvaBean;
 import dao.AcquistoDAO;
 import dao.ContoDAO;
 import dao.IndirizzoDAO;
+import dao.IvaDAO;
 import dao.UserDAO;
+import dao.CategoriaDAO;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 public class ModelAcquistoDAO implements AcquistoDAO {
@@ -342,5 +347,64 @@ public class ModelAcquistoDAO implements AcquistoDAO {
 		 }
 	  return acq;
 	}
+
+	@Override
+	public List<ArticoloBean> getArticoliByAcquisti(int IDAcquisto) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		List<ArticoloBean> art = new ArrayList<ArticoloBean>();
+		ArticoloBean ab = null;
+		IvaBean iva = null;
+		IvaDAO modeliva = new ModelIvaDAO();
+		CategoriaDAO catmodel = new ModelCategoriaDAO();
+		
+		String selectSQL = "SELECT a.* "
+				+ "FROM articolo a JOIN composizione c ON a.codice = c.articolo "
+				+ "JOIN acquisto aq ON c.acquisto = aq.idAcquisto "
+				+ "WHERE idAcquisto = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, IDAcquisto);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				ab = new ArticoloBean();		    	
+				
+				ab.setID(rs.getInt("codice"));
+		    	ab.setColore(rs.getString("colore"));
+		    	ab.setNome(rs.getString("nome"));
+		    	ab.setTipologia(rs.getString("tipologia"));
+		    	ab.setDescrizione(rs.getString("descrizione"));
+		    	ab.setMarca(rs.getString("marca"));
+		    	ab.setQuantita(rs.getInt("quantita"));
+		    	ab.setPrezzo(rs.getDouble("prezzoBase"));
+		    	ab.setTipo(rs.getInt("tipo"));
+		    	ab.setCorde(rs.getInt("corde"));
+		    	
+		    	iva = modeliva.getIvaByModel();
+		    	ab.setIva(iva);
+		    	ab.setCategoria(catmodel.doRetrieveByKey(rs.getInt("categoria")));	
+				
+				art.add(ab);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return art;
+		
+	}
+	
+	
 
 }

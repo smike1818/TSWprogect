@@ -13,7 +13,7 @@
 
 body{
 	background-color: white;
-	background-image: url("background_home.jpg");
+	/*background-image: url("background_home.jpg");*/
 	background-repeat: no-repeat;
 	background-position: center; /* Center the image */
 	background-size: cover;
@@ -447,7 +447,7 @@ a.text-white{
   height: 500px;
 }
 
-.cycle-slideshow {
+.cycle-slideshow{
   position: relative;
   background-color: white;
   width: 90%;
@@ -463,7 +463,9 @@ a.text-white{
 }
 
 .cycle-slideshow .prev,
-.cycle-slideshow .next {
+.cycle-slideshow .next,
+.cycle-slideshow2 .prev,
+.cycle-slideshow2 .next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -497,5 +499,41 @@ a.text-white{
   padding: 20%;
 }
 
+.acquisti-details, .artDetails{
+  position: relative;
+  margin-left: 3%;
+  margin-right: 3%;
+  padding: 2%;
+  border: 1px solid lightgrey;
+}
+
+.artDetails{
+	border-top: none;
+}
+
+.first-block, .second-block, .terzo-block {
+  display: inline-block;
+}
+
+.first-block{
+	width: 40%
+}
+
+.second-block{
+    width: 30%	
+}
+
+.terzo-block{
+	width: 15%
+}
+
+.cycle-slideshow2 img {
+  width: 100px;
+  height: 100px;
+}
+
+.cycle-slideshow2, .text {
+  display: inline-block;
+}
 
 

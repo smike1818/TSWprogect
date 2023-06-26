@@ -63,8 +63,7 @@
 <% } %>
  
   
-            
-              
+                         
        <div>
          <label for="name">Nome:  </label>
          <span><%=bean.getNome() %></span><br>
