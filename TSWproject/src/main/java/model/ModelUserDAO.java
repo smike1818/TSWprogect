@@ -359,4 +359,31 @@ public class ModelUserDAO implements UserDAO{
 			}
 		 }
 	}
+
+	public boolean checkEmail(String email) throws SQLException{
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+        
+	  try {
+		String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE email = ?";
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(insertSQL);
+		preparedStatement.setString(1, email);
+		
+		ResultSet rs = preparedStatement.executeQuery();
+		if (rs.next()) { 
+			throw new SQLException();
+		}			   
+	  }finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
+	  
+	  return true;
+	}
 }

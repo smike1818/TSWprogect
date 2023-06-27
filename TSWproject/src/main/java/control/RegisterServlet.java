@@ -12,9 +12,34 @@ import bean.UserBean;
 import model.ModelUserDAO;
 
 public class RegisterServlet extends HttpServlet {
+	
     private static final long serialVersionUID = 14L;
+    ModelUserDAO mud = new ModelUserDAO();
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
     		throws ServletException, IOException {
+    	
+    	String action = request.getParameter("action");
+    	if(action!=null) {
+    		if(action.equalsIgnoreCase("ajax")) {
+    			String email = request.getParameter("data");
+    			if(email==null) {
+				     RequestDispatcher error = null;
+	    			 String header = "Client Error";
+	    			 String details = "errore nel controllo dell'email ...";
+	    			 response.setStatus(403);
+	    			 error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
+	    			 error.forward(request, response);
+    			}
+    			try {
+					mud.checkEmail(email);
+					response.getWriter().write("email mai usata");
+				} catch (SQLException e) {
+					response.sendError(403);
+				}
+    		}
+    	}else {
+    	    	
         // Get the form data from request parameters
         String firstName = request.getParameter("name");
         String lastName = request.getParameter("cognome");
@@ -54,13 +79,12 @@ public class RegisterServlet extends HttpServlet {
             user.setUsername(userName);
             user.setEmail(email);
             user.setValid(true);
-            
-            ModelUserDAO mud = new ModelUserDAO();
+                       
             try {
 				mud.doSave(user);
 				response.sendRedirect("LoginPageUtente.jsp");
 			} catch (SQLException e) {
-				e.printStackTrace();
+				     e.printStackTrace();
 				     RequestDispatcher error = null;
 	    			 String header = "Client Error";
 	    			 String details = "sei gia' registrato ...";
@@ -76,6 +100,7 @@ public class RegisterServlet extends HttpServlet {
 			 error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
 			 error.forward(request, response);
         }
+     }
                 
     }
     

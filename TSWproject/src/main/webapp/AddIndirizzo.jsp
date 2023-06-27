@@ -14,13 +14,13 @@
     <form action="address" method="post" id="address-form">
        <input type="hidden" name="action" value="new">
        <label for="via">Via:</label><br>
-       <input type="text" name="via" required placeholder="enter via"><br>
+       <input type="text" name="via" required placeholder="Giovanni Pascoli"><br>
        <label for="civico">Civico:</label><br>
-       <input type="number" name="civico" required placeholder="enter civico"><br>
+       <input type="number" name="civico" required placeholder="999"><br>
        <label for="citta">Città:</label><br>
-       <input type="text" name="citta" required placeholder="enter città"><br>
+       <input type="text" name="citta" required placeholder="Roma"><br>
        <label for="citta">CAP:</label><br>
-       <input type="number" name="CAP" required placeholder="enter CAP"><br>       
+       <input type="number" name="CAP" required placeholder="12345"><br>       
        <input type=submit value="add">
     </form>
     

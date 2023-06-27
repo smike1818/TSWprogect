@@ -139,9 +139,9 @@
 		</footer>
 		
 		<script src="js/JQuery.js" type="text/javascript"></script>
+		<script src="js/validation.js" type="text/javascript"></script>s
 		<script src="js/userMods.js" type="text/javascript"></script>
-      	<script src="js/pagamenti.js" type="text/javascript"></script>
-      	<script src="js/validation.js" type="text/javascript"></script>
+      	<script src="js/pagamenti.js" type="text/javascript"></script>      	
 	</body>
 </html>
 

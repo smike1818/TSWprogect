@@ -13,5 +13,6 @@ public interface UserDAO extends MasterDAO<UserBean> {
 	public boolean hasCard(String username) throws SQLException;
 	public UserBean doRetrieveByUsr(String code) throws SQLException;
 	public Collection<String> doRetrieveByIncompleteUsr(String value, String order) throws SQLException;
+	public boolean checkEmail(String email) throws SQLException;
 	
 }

@@ -20,7 +20,7 @@
 	<div class="login-form">
 		<form action="login" method="post" id="login-form">
 			Please enter your username
-			<input type="text" name="un" required/><br>
+			<input type="text" name="un" required placeholder="MarioRossi123"/><br>
 			Please enter your password
 			<input type="password" name="pw" required/><br>
 			<input type="submit" value="Accedi!">

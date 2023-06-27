@@ -29,9 +29,32 @@ $(document).ready(function() {
 	//validazione dei campi: mi prendo l'id del bottone per verificare poi che tipo di campo vado a controllare
 	  var result = true;
 	  var idButton = editButton.attr("id");
-	  		   
-      // Step 2: Create an input field with the initial text value
+	  
+	  // Step 2: Create an input field with the initial text value
       var inputField = $('<input type="text" id="inputText">');
+	  
+	  //aggiunta del placeholder spcifico
+      switch (idButton) {
+      case "button1":
+             inputField.attr("placeholder", "Mario");
+      break;
+      case "button2":
+             inputField.attr("placeholder", "Rossi");
+      break;
+      case "button3":
+             inputField.attr("placeholder", "example123");
+      break;
+      case "button4":
+             inputField.attr("placeholder", "example123@gmail.com");
+      break;
+      case "button5":
+             inputField.attr("placeholder", "XXXXXX00X0X000X");
+      break;
+      default:
+             inputField.attr("placeholder", ""); // Valore predefinito nel caso in cui l'id del pulsante non corrisponda a nessun caso sopra
+      }
+   
+	         
       // Step 3: Create a send button and hide it initially
       var sendButton = $('<button id="sendButton">Send</button>').hide();
       // Step 4: Create a new paragraph element to replace the campText element
@@ -46,22 +69,22 @@ $(document).ready(function() {
 
       sendButton.click(function() {
 		  
-	  // Step 6: Get the new text from the input field
-        var newText = inputField.val();
-		  
+	 		  
 	   //prima di procedere controllo il campo
 	  if(idButton === "button1" || idButton === "button2")
-		result = allLetter(newText);
+		result = allLetter(inputField);
 	  if(idButton === "button3")
-	    result = userid_validation(newText);
+	    result = userid_validation(inputField,7,12);
 	  if(idButton === "button4")
-	    result = ValidateEmail(newText);
+	    result = ValidateEmail(inputField);
 	  if(idButton === "button5")
-	    result = cf_validation(newText);
+	    result = cf_validation(inputField);
 		  
 	  //se il testo passa i controlli allora proseguo
 	  if(result){
 		  
+		// Step 6: Get the new text from the input field
+        var newText = inputField.val();
         
         $.ajax({
           url: 'userMods', // Step 7: Specify the URL of the servlet
@@ -108,63 +131,26 @@ $(document).ready(function() {
       setupEditSaveFunction('button3', 'user', 'username'); // Use the button ID and campText ID here
       setupEditSaveFunction('button4', 'email', 'email'); // Use the button ID and campText ID here
       setupEditSaveFunction('button5', 'cf', 'CF'); // Use the button ID and campText ID here
+
+      $(document).click(function(event) {
+        var target = $(event.target);
+  
+  // Verifica se l'elemento cliccato non è il campo di input e nemmeno il pulsante di invio
+  if (!target.is("input#inputText") && !target.is("button#sendButton")) {
+    var inputField = $("input#inputText");
+    var sendButton = $("button#sendButton");
+    var paragraph = $("<p class='user-field'></p>").text(originalText); // Ripristina il testo originale
+    
+    // Sostituisci il campo di input e il pulsante di invio con il paragrafo contenente il testo originale
+    inputField.replaceWith(paragraph);
+    sendButton.hide();
+    paragraph.parent().find("#" + buttonId).show();
+  }
+});
+    
     });
     
     
-//VALIDAZIONE NOME E COGNOME
-function allLetter(uname){     
-	var letters = /^[A-Za-z]+$/;
-    if(uname.match(letters)){		
-        return true;
-    }else{
-       $(".error-statement").html("il nome e il cognome devono avere solo caratteri alfabetici");
-       return false;
-    }
-}
-
-//VAIDAZIONE EMAIL
-function ValidateEmail(uemail)
-{
-     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-     if(uemail.match(mailformat)){
-           return true;
-     }else{
-        $(".error-statement").html("email non valida");
-        return false;
-     }
-}
-
-//VALIDAZIONE USERNAME
-function userid_validation(uid,mx,my)
-{
-    var uid_len = uid.length;
-    if (uid_len == 0 || uid_len >= my || uid_len < mx){
-        $(".error-statement").html("lo username deve avere dai "+mx+" ai "+my+" caratteri");
-        return false;
-    }
     
-    return alphanumeric(uid);
-}
+    
 
-//CONTINUO USERNAME
-function alphanumeric(uadd)   //VERIFICA SIA ALPHANUMERICO 
-{ 
-    var letters = /^[0-9a-zA-Z]+$/;
-    if(uadd.match(letters)){
-         return true;
-    }else{
-         $(".error-statement").html("lo username deve avere solo caratteri alfanumerici");
-         return false;
-    }
-}
-
-//VALIDAZIONE CODICE FISCALE
-function cf_validation(ucf){
-	var letters = /^[A-Z]{6}\d{2}[A-Z]\d{2}[A-Z]\d{3}[A-Z]$/;
-    if(ucf.match(letters)){
-         return true;
-    }else{
-         $(".error-statement").html("Codice Fiscale non valido");
-         return false;
-    }
-}
