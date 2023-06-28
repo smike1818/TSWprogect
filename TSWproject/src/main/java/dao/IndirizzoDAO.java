@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.List;
 
 import bean.IndirizzoBean;
@@ -13,4 +14,5 @@ public interface IndirizzoDAO extends MasterDAO <IndirizzoBean> {
 	List<IndirizzoBean> doRetrieveByUsr(UserBean user) throws SQLException;
 	boolean doDelete(String via, int civico, String citta) throws SQLException;
 	boolean doPrefer(String via, int civico, String citta, UserBean user) throws SQLException;
+	public Collection<IndirizzoBean> doRetrieveAll(String string, String cf) throws SQLException;;
 }

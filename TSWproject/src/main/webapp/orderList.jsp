@@ -73,7 +73,7 @@ if(rend!=null){
 			<td><%=bean.getConto().getIBAN()%></td>
 			<td class="date-td"><%=bean.getDate()%></td>
 			<td><%=bean.getImporto()%></td>
-			<td><%=bean.getConsumer().getUsername() %>
+			<td><%=bean.getConsumer().getCF() %>
 			<td>via <%=bean.getIndirizzo().getVia() %></td>
 			<td>(<%=bean.getIndirizzo().getCivico() %>) </td>
 			<td><%=bean.getIndirizzo().getCitta() %></td>

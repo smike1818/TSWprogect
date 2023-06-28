@@ -117,6 +117,12 @@ $("#change-iva-submit").click(function(){
 	}
 })
 
+//-------------InsertAdmin.jsp----------------------
+
+//mi seleziono il tipo di articolo a cui spetta la categoria
+var selectedValue = $('#choise-type').val();
+$('input[name="tipo"]').val(selectedValue);
+
 })
 
 

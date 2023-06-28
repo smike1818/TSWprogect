@@ -52,9 +52,9 @@ public class ModelCategoriaDAO implements CategoriaDAO{
 					if(!ps.executeQuery().next()) {
 						preparedStatement = connection.prepareStatement(insertSQL);
 						preparedStatement.setInt(1, cat.getID());
-						preparedStatement.setString(2, cat.getNome());
-						preparedStatement.setString(3, cat.getDescrizione());
-						preparedStatement.setBoolean(4, cat.getTipo());
+						preparedStatement.setString(3, cat.getNome());
+						preparedStatement.setString(4, cat.getDescrizione());
+						preparedStatement.setBoolean(2, cat.getTipo());
 						preparedStatement.executeUpdate();
 					}
 					else
@@ -75,6 +75,7 @@ public class ModelCategoriaDAO implements CategoriaDAO{
 	public boolean doDelete(int code) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		PreparedStatement ps = null;
 
 		int result = 0;
 
@@ -86,6 +87,15 @@ public class ModelCategoriaDAO implements CategoriaDAO{
 			preparedStatement.setInt(1, code);
 
 			result = preparedStatement.executeUpdate();
+			
+			//elimino anche tutti gli articoli con una determinata categoria
+			//CASCADE NON VA
+			
+			String delete2SQL = "DELETE FROM " + "articolo" + " WHERE categoria = ?";
+			ps = connection.prepareStatement(delete2SQL);
+			ps.setInt(1, code);
+			
+			result = ps.executeUpdate();
 
 		} finally {
 			try {

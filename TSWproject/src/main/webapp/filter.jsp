@@ -15,11 +15,6 @@
     
     <div class="filters-list">
      <h3> Filters for searching</h3>
-		<label for="Tipo">Tipo</label>
-		<select name="Tipo" id="filter-select">
-		  <option value="Strumenti">Strumenti</option>
-		  <option value="Pezzi di Ricambio">Pezzi di Ricambio</option>
-		</select>
 		<br><br><h5><label for="Price">Price</label></h5>
 		
 		<!-- impostare che min<max in seguito-->

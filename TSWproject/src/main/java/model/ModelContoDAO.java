@@ -145,45 +145,7 @@ public class ModelContoDAO implements ContoDAO{
 
 	@Override
 	public Collection<ContoBean> doRetrieveAll(String order) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-        List<ContoBean>cards = new LinkedList<ContoBean>();
-		ContoBean conto = null;
-		UserBean in = null;
-		UserDAO model = new ModelUserDAO();
-		
-		String selectSQL = "SELECT * FROM " + TABLE_NAME;
-
-		try {
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(selectSQL);
-
-			ResultSet rs = preparedStatement.executeQuery();
-
-			while (rs.next()) {
-				conto = new ContoBean();
-		    	
-		    	conto.setIBAN(rs.getString("IBAN"));
-		    	conto.setNumCarta(rs.getString("numero_carta"));
-		    	conto.setCvv(rs.getString("cvv"));	
-		    	conto.setIsPrimary(rs.getBoolean("isPrimary"));
-		    	
-		    	in = model.doRetrieveByKey(rs.getString("intestatario"));
-		    	conto.setIntestatario(in);
-		    	
-		    	cards.add(conto);
-			}
-
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
-		}
-		return cards;
+		return null;
 	}
 	public Collection<ContoBean> doRetrieveByUsr(String user) throws SQLException {
 		Connection connection = null;
@@ -315,6 +277,50 @@ public class ModelContoDAO implements ContoDAO{
 			}
 		}
 		return (result != 0);
+	}
+
+	@Override
+	public Object doRetrieveAll(String order, String cf) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+        List<ContoBean>cards = new LinkedList<ContoBean>();
+		ContoBean conto = null;
+		UserBean in = null;
+		UserDAO model = new ModelUserDAO();
+		
+		String selectSQL = "SELECT * FROM " + TABLE_NAME +" WHERE intestatario = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1,cf);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				conto = new ContoBean();
+		    	
+		    	conto.setIBAN(rs.getString("IBAN"));
+		    	conto.setNumCarta(rs.getString("numero_carta"));
+		    	conto.setCvv(rs.getString("cvv"));	
+		    	conto.setIsPrimary(rs.getBoolean("isPrimary"));
+		    	
+		    	in = model.doRetrieveByKey(rs.getString("intestatario"));
+		    	conto.setIntestatario(in);
+		    	
+		    	cards.add(conto);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return cards;
 	}
 
 }

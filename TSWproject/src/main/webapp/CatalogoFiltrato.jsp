@@ -23,11 +23,9 @@
 
 //mi prelevo la categoria dal contesto
 categoria = (String) application.getAttribute("cat");
-application.removeAttribute("cat");
 
 //verifico la validità di categoria
 if(categoria!=null){
-	application.setAttribute("can-show",true);
 	try {
 	    Integer cat = Integer.parseInt(categoria);
 	    products.removeIf(product -> product.getCategoria().getID() != cat);    	    
@@ -39,17 +37,13 @@ if(categoria!=null){
          error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
          error.forward(request, response);
 	}
-}else{
-	application.removeAttribute("can-show");
 }
 
 //controllo del tipo
 tipo = (String) application.getAttribute("tipo");
-application.removeAttribute("tipo");
 
 //controllo validità del tipo
 if(tipo!=null){
-	application.setAttribute("can-show",true);
 	try {
 	    Integer t = Boolean.parseBoolean(tipo)?1:0;
 	    products.removeIf(product -> product.getTipo() != t);    	    
@@ -61,13 +55,10 @@ if(tipo!=null){
          error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
          error.forward(request, response);
 	}
-}else{
-	application.removeAttribute("can-show");
 }
 
-
 //nell'attributo can-show proteggo la pagina da accessi non consentiti
-if(application.getAttribute("can-show")==null){
+if(tipo==null || categoria==null){
 	 RequestDispatcher error = null;
      String header = "Client Error";
      String details = "accesso illegale alla pagina...";
@@ -92,6 +83,7 @@ application.removeAttribute("can-show");
 	       <jsp:include page="header.jsp"></jsp:include>
 	    </header>
 	       
+	       <jsp:include page="filter.jsp"></jsp:include>
 	       <div class="list-products">
         	 
        <%

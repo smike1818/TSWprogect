@@ -82,6 +82,7 @@ footer{
 .first-header{
 	background-color: #4F4F4F;
 	position: sticky;
+	margin-bottom: 7%;    /*utilizzato perchè gli elementi venivano posizionati sotto second-header*/
 	height: 70px;
 }	
 

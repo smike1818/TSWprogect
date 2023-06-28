@@ -57,24 +57,22 @@ if(username==null){
               
               <%
                  ContoBean bean = null;
-                 int cont=0;
   			     if (cards != null && cards.size() != 0) {
   				    Iterator<?> it = cards.iterator();
   			    	while (it.hasNext()) {
   				        bean = (ContoBean) it.next();			    
   				        if(bean.getIntestatario().getUsername().equalsIgnoreCase(username)){
               %>              
-                <option id="<%=cont %>" 
+                <option
                 <%
-                   if(cont==0){
+                   if(bean.getIsPrimary()){
                 %>
                   selected                 
                 <%} %> 
                 value="<%=bean.getIBAN() %>"
                 ><%=bean.getNumCarta()%> [<%=bean.getIBAN() %>]</option>                                
-              <%
-  				   cont++;}}}
-              %>
+              
+              <%}}}%>
               
               </select>
            </label>
@@ -83,23 +81,21 @@ if(username==null){
               
               <%
                  IndirizzoBean ind = null;
-                 cont=0;
   			     if (indlist != null && indlist.size() != 0) {
   				    Iterator<?> it = indlist.iterator();
   			    	while (it.hasNext()) {
   			    		 ind = (IndirizzoBean) it.next();
               %>              
-                <option id="<%=cont %>" 
+                <option 
                 <%
-                   if(cont==0){
+                   if(ind.getIsPrimary()){
                 %>
                   selected                 
                 <%} %> 
                 value="<%=ind.getVia() %>,<%=ind.getCivico()%>,<%=ind.getCitta()%>"
                 ><%=ind.getVia() %> <%=ind.getCivico() %> , <%=ind.getCitta() %></option>                                
-              <%
-  				   cont++;}}
-              %>
+              
+              <%}}%>
               
               </select>
            </label>
@@ -113,7 +109,8 @@ if(username==null){
 	   
 	<jsp:include page="footer.jsp"></jsp:include>
 	
+	<!-- inseriti esclusivamente per poter nascondere la barra di ricerca -->
 	<script src="js/JQuery.js" type="text/javascript"></script>
-    <script src="js/ConfirmPayment.js" type="text/javascript"></script>
+	<script src="js/userFunctions.js" type="text/javascript"></script>
 </body>
 </html>

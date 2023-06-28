@@ -4,6 +4,7 @@
 <%
    List<?>categorie = null;
    categorie = (List<?>) request.getAttribute("categorieFiltrate");
+   application.setAttribute("page", "categorie.jsp");
    if(categorie==null){
 	   RequestDispatcher error = null;
        String header = "Client Error";

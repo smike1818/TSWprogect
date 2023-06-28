@@ -9,6 +9,10 @@ function showAddCardForm(){
 }
 $(document).ready(function(){
 	
+	$(window).on('beforeunload', function() {
+  location.reload();
+});
+
 	
 	if(document.title === "Musical Store"){
 	$("#filter-submit").click(function(){
@@ -110,8 +114,12 @@ $(document).ready(function(){
 			 catalogo.show();
 		 })
 	}
-	
-if(document.title === "Cart Section" || document.title === "Musical Store" || document.title === "Dettaglio Prodotto"){
+
+//nascondo la barra di ricerca se si entra in determinate pagine	
+if(document.title === "Confirm Payment" || document.title === "Acquisto effettuato"){
+	$(".search-products").css('display','none');
+ }
+ 
 	//attivo la barra di ricerca
  $(".search-product-input").on("input", function() {
   var selectedValue = $(this).val();
@@ -145,9 +153,7 @@ if(document.title === "Cart Section" || document.title === "Musical Store" || do
     }
   });
 });
-}else{
-	$(".search-products").css('display','none');
-}
+
 
 // Nascondi la lista di suggerimenti quando si clicca altrove sulla pagina
   $(document).on("click", function(event) {
@@ -161,9 +167,6 @@ if(document.title === "Cart Section" || document.title === "Musical Store" || do
     var suggestion = $(this).text();
     $(".search-product-input").val(suggestion);
     $(".search-product-suggestions").hide();
-
-    // Esegui altre azioni in base al suggerimento selezionato
-    // ...
   });
   
     //fiuttosto che usare un form utilizzo una funzione js
@@ -208,7 +211,6 @@ if(document.title === "Cart Section" || document.title === "Musical Store" || do
   //se l'articolo non è disponibile
   //quindi se ha quantità = 0
  
- if(document.title === "Musical Store"){
   var catalogo = $(".catalogo-items");
   catalogo.each(function() {
     var item = $(this);
@@ -217,20 +219,6 @@ if(document.title === "Cart Section" || document.title === "Musical Store" || do
       button.prop("disabled", true);
     }
    });
-  }
-  
-   
-   //faccio lo stesso per dettaglio.jsp
-   if(document.title === "Dettaglio Prodotto"){
-    var text_span = $(".details-quantity").text();
-    
-    if(text_span === "0"){
-      var button = $(".addtocart-submit");
-      button.prop("disabled", true);
-    }
-   }
-   
-   
    
    //-------------CARRELLO-----------------------
    //funzioni per il carrello

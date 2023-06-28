@@ -41,5 +41,9 @@
    <a href="catalogo.jsp">torna al catalogo per altri acquisti</a>
    
    <jsp:include page="footer.jsp"></jsp:include>
+   
+    <!-- inseriti esclusivamente per poter nascondere la barra di ricerca -->
+	<script src="js/JQuery.js" type="text/javascript"></script>
+	<script src="js/userFunctions.js" type="text/javascript"></script>
 </body>
 </html>

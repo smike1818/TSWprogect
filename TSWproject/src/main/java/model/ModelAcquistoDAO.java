@@ -127,8 +127,20 @@ public class ModelAcquistoDAO implements AcquistoDAO {
 			// Assegnare la data formattata all'oggetto "acquisto"
 			acquisto.setDate(dataFormattata);
 			
-	    	in = model.doRetrieveByKey(rs.getString("consumer"));
-	    	cont = modelc.doRetrieveByKey(rs.getString("conto"));
+			//gestione per consentire la mostra di acquisti nel caso in cui utenti e conti siano nulli
+	    	String buff = rs.getString("consumer");
+	    	try {
+		    	  in = model.doRetrieveByKey(buff);
+				}catch(SQLException e) {
+				  in=new UserBean();
+		    	  in.setCF(buff);
+				}
+	    	buff = rs.getString("conto");
+	    	cont = modelc.doRetrieveByKey(buff);
+	    	if(cont==null) {
+	    		cont=new ContoBean();
+	    		cont.setIBAN(buff);
+	    	}
 	    	
 	    	acquisto.setConsumer(in);
 	    	acquisto.setConto(cont);
@@ -183,8 +195,21 @@ public class ModelAcquistoDAO implements AcquistoDAO {
 				acq = new AcquistoBean();
 		    	
 		    	acq.setImporto(rs.getDouble("importo"));
-		    	in = model.doRetrieveByKey(rs.getString("consumer"));
-		    	cont = modelc.doRetrieveByKey(rs.getString("conto"));
+		    	
+		    	//gestione per consentire la mostra di acquisti nel caso in cui utenti e conti siano nulli
+		    	String buff = rs.getString("consumer");
+		    	try {
+			    	  in = model.doRetrieveByKey(buff);
+					}catch(SQLException e) {
+					  in=new UserBean();
+			    	  in.setCF(buff);
+					}
+		    	buff = rs.getString("conto");
+		    	cont = modelc.doRetrieveByKey(buff);
+		    	if(cont==null) {
+		    		cont=new ContoBean();
+		    		cont.setIBAN(buff);
+		    	}
 		    	
 		    	// Ottenere la data_acquisto come java.util.Date dal ResultSet
 		    	Date dataAcquisto = rs.getTimestamp("data_acquisto");
@@ -245,8 +270,22 @@ public class ModelAcquistoDAO implements AcquistoDAO {
 		    	
 				acq.setID(rs.getInt("idAcquisto"));
 		    	acq.setImporto(rs.getDouble("importo"));
-		    	in = model.doRetrieveByKey(rs.getString("consumer"));
-		    	cont = modelc.doRetrieveByKey(rs.getString("conto"));
+		    	
+		    	String buff = rs.getString("consumer");
+		    	
+		    	try {
+			    	  in = model.doRetrieveByKey(buff);
+					}catch(SQLException e) {
+					  in=new UserBean();
+			    	  in.setCF(buff);
+				}
+		    	
+		    	buff = rs.getString("conto");
+		    	cont = modelc.doRetrieveByKey(buff);
+		    	if(cont==null) {
+		    		cont=new ContoBean();
+		    		cont.setIBAN(buff);
+		    	}
 		    	
 		    	// Ottenere la data_acquisto come java.util.Date dal ResultSet
 		    	Date dataAcquisto = rs.getTimestamp("data_acquisto");
@@ -309,8 +348,21 @@ public class ModelAcquistoDAO implements AcquistoDAO {
 	    	
 			acquisto.setID(rs.getInt("idAcquisto"));
 			acquisto.setImporto(rs.getDouble("importo"));
-	    	in = model.doRetrieveByKey(rs.getString("consumer"));
-	    	cont = modelc.doRetrieveByKey(rs.getString("conto"));
+			
+			String buff = rs.getString("consumer");
+			try {
+	    	  in = model.doRetrieveByKey(buff);
+			}catch(SQLException e) {
+			  in=new UserBean();
+	    	  in.setCF(buff);
+			}
+			
+	    	buff = rs.getString("conto");
+	    	cont = modelc.doRetrieveByKey(buff);
+	    	if(cont==null) {
+	    		cont=new ContoBean();
+	    		cont.setIBAN(buff);
+	    	}
 	    	
 	    	// Ottenere la data_acquisto come java.util.Date dal ResultSet
 	    	Date dataAcquisto = rs.getTimestamp("data_acquisto");

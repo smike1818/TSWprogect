@@ -89,7 +89,7 @@
 			}} else {                   //quando non si sono prodotti nel database stampo a video il mess sotto
 		%>
 		<tr>
-			<td class="no-products">No products available</td>        
+			<td class="no-products" colspan=10>No products available</td>        
 		</tr>
 		
 		<%}%>

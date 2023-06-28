@@ -34,6 +34,7 @@ public class AcquistoListServlet extends HttpServlet{
 	   try {
 		request.setAttribute("acquisti", model.doRetrieveAll("idAcquisto"));
 	} catch (SQLException e) {
+		    e.printStackTrace();
 		    RequestDispatcher error = null;
 	        String header = "Server Error";
 	        String details = "errore nella mostra degli acquisti...";

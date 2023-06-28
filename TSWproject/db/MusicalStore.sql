@@ -24,9 +24,9 @@ create table conto(
     intestatario varchar(16),
     foreign key (intestatario) references utente(CF)
     	on update cascade
-    	on delete set null,
+    	on delete cascade,
     numero_carta varchar(20) unique not null,
-    cvv varchar(3) unique not null,
+    cvv varchar(3) not null,
     isPrimary boolean not null default false
 );
 
@@ -46,7 +46,7 @@ create table articolo(
        on delete set null,
     categoria int references categoria(IDcat)
 		on UPDATE cascade
-        on delete set null
+        on delete cascade
 );
 
 create table image(
@@ -101,10 +101,10 @@ CREATE TABLE acquisto (
    idAcquisto INT PRIMARY KEY AUTO_INCREMENT,
    consumer VARCHAR(16) REFERENCES utente(CF)
         ON UPDATE CASCADE
-        ON DELETE SET NULL,
+        ON DELETE SET NO ACTION,
    conto VARCHAR(27) REFERENCES conto(IBAN)
         ON UPDATE CASCADE 
-        ON DELETE SET NULL,
+        ON DELETE SET NO ACTION,
    data_acquisto DATETIME DEFAULT CURRENT_TIMESTAMP,
    importo DOUBLE NOT NULL,
    via VARCHAR(50),
@@ -114,3 +114,8 @@ CREATE TABLE acquisto (
         ON UPDATE CASCADE
         ON DELETE SET NULL
 );
+
+
+/*QUERY DI INSERIMENTO*/
+/*amministratore*/
+insert into utente values ('PSCMHL01E30E791A','Mario','Rossi','mariorossi@gmail.com','root','root',1);

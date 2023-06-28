@@ -43,7 +43,7 @@
        data-cycle-fx="scrollHorz"
        data-cycle-prev=".prev"
        data-cycle-next=".next"
-       data-cycle-timeout = 3000 >   
+       data-cycle-timeout = 0 >   
     <div class="slice">
       <a class="prev" href="#">&lt;</a>
       <a class="next" href="#">&gt;</a>

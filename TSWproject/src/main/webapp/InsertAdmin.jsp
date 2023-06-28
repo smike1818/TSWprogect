@@ -114,6 +114,7 @@
 	    <h3> inserimento della categoria </h3><br>
         <form action="insertadmin" method="post">
         <input type="hidden" name="action" value="cat">
+        <input type="hidden" name="tipo" value="">
         <input name="name" type="text" maxlength="50" required placeholder="Enter name"><br>
         <textarea name="descrizione" maxlength="1000" rows="5" required placeholder="Enter description"></textarea><br>
         <input type="submit" value="Add">

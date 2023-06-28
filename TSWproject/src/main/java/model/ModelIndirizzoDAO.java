@@ -113,7 +113,12 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 				
 				CFuser = rs.getString("cliente");
 		    	
-		    	user = model.doRetrieveByKey(CFuser);
+				try {
+		    	   user = model.doRetrieveByKey(CFuser);
+				}catch(SQLException e) {
+					user=new UserBean();
+					user.setCF(CFuser);
+				}
 		    	
 		    	address.setCliente(user);	
 			}
@@ -132,50 +137,7 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 
 	@Override
 	public Collection<IndirizzoBean> doRetrieveAll(String order) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		IndirizzoBean address = null;
-		String CFuser = null;
-		UserBean user = null;
-		UserDAO model = new ModelUserDAO();
-
-		List<IndirizzoBean> indlist = new LinkedList<IndirizzoBean>();
-		
-		String selectSQL = "SELECT * FROM " + TABLE_NAME ;
-
-		try {
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(selectSQL);
-
-			ResultSet rs = preparedStatement.executeQuery();
-
-			while (rs.next()) {
-				address = new IndirizzoBean();
-								
-				address.setCap(rs.getInt("cap"));
-				address.setCitta(rs.getString("citta"));
-				address.setCivico(rs.getInt("civico"));
-				address.setVia(rs.getString("via"));
-				address.setIsPrimary(rs.getBoolean("isPrimary"));
-				
-				CFuser = rs.getString("cliente");
-		    	
-		    	user = model.doRetrieveByKey(CFuser);
-		    	
-		    	address.setCliente(user);	
-		    	indlist.add(address);
-			}
-
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
-		}
-		return indlist;
+		return null;		
 	}
 
 	@Override
@@ -228,7 +190,12 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 			    ind.setVia(rs.getString("via"));
 			    ind.setIsPrimary(rs.getBoolean("isPrimary"));
 			    
-			    user = usermodel.doRetrieveByKey(CF);
+			    try {
+			    	   user = usermodel.doRetrieveByKey(CF);
+					}catch(SQLException e) {
+						user=new UserBean();
+						user.setCF(CF);
+					}
 			    
 			    ind.setCliente(user);
 		}else 
@@ -337,6 +304,55 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 			}
 		}
 		return (result != 0);
+	}
+
+	@Override
+	public Collection<IndirizzoBean> doRetrieveAll(String string, String cf) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		IndirizzoBean address = null;
+		String CFuser = null;
+		UserBean user = null;
+		UserDAO model = new ModelUserDAO();
+
+		List<IndirizzoBean> indlist = new LinkedList<IndirizzoBean>();
+		
+		String selectSQL = "SELECT * FROM " + TABLE_NAME +" WHERE cliente = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1, cf);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				address = new IndirizzoBean();
+								
+				address.setCap(rs.getInt("cap"));
+				address.setCitta(rs.getString("citta"));
+				address.setCivico(rs.getInt("civico"));
+				address.setVia(rs.getString("via"));
+				address.setIsPrimary(rs.getBoolean("isPrimary"));
+				
+				CFuser = rs.getString("cliente");
+		    	
+		    	user = model.doRetrieveByKey(CFuser);
+		    	
+		    	address.setCliente(user);	
+		    	indlist.add(address);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return indlist;
 	}
 	
 

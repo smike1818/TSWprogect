@@ -35,7 +35,7 @@ public class CardsServlet extends HttpServlet{
 		try {
 		    user = us.doRetrieveByUsr((String) session.getAttribute("un"));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			 e.printStackTrace();
 			 RequestDispatcher error = null;
 			 String header = "Server Error";
 			 String details = "errore nel salvataggio della carta...";
@@ -108,7 +108,7 @@ public class CardsServlet extends HttpServlet{
 		
 		String order = "IBAN";
    	    try {
-			request.setAttribute("cards", model.doRetrieveAll(order));
+			request.setAttribute("cards", model.doRetrieveAll(order,user.getCF()));
 		} catch (SQLException e) {
 			 e.printStackTrace();
 			 RequestDispatcher error = null;

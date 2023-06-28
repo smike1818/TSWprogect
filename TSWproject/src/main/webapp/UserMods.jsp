@@ -9,6 +9,7 @@
     if(username==null){ 
        rend = "LoginPageUtente.jsp";
     }else{
+    	application.setAttribute("page", "UserMods.jsp");
         bean = (UserBean) session.getAttribute("user-details");
         if(bean==null)    rend = "./user";
     }

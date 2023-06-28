@@ -132,23 +132,8 @@ $(document).ready(function() {
       setupEditSaveFunction('button4', 'email', 'email'); // Use the button ID and campText ID here
       setupEditSaveFunction('button5', 'cf', 'CF'); // Use the button ID and campText ID here
 
-      $(document).click(function(event) {
-        var target = $(event.target);
-  
-  // Verifica se l'elemento cliccato non è il campo di input e nemmeno il pulsante di invio
-  if (!target.is("input#inputText") && !target.is("button#sendButton")) {
-    var inputField = $("input#inputText");
-    var sendButton = $("button#sendButton");
-    var paragraph = $("<p class='user-field'></p>").text(originalText); // Ripristina il testo originale
-    
-    // Sostituisci il campo di input e il pulsante di invio con il paragrafo contenente il testo originale
-    inputField.replaceWith(paragraph);
-    sendButton.hide();
-    paragraph.parent().find("#" + buttonId).show();
-  }
 });
     
-    });
     
     
     

@@ -95,10 +95,13 @@ public class InsertAdminServlet extends HttpServlet {
 				 CategoriaBean cat = new CategoriaBean();
 				 cat.setNome(request.getParameter("name"));
 				 cat.setDescrizione(request.getParameter("descrizione"));
+				 String tipo = request.getParameter("tipo");
+				 cat.setTipo(tipo.equalsIgnoreCase("strumento"));
 				 
 				 try {
 					categorie.doSave(cat);
 				 } catch (SQLException e) {
+					  e.printStackTrace();
 					  request.setAttribute("error-statement", "nome categoria già inserito, riprova");
 				 }
 				 

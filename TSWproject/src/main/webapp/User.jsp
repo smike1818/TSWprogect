@@ -4,12 +4,13 @@
 <%
     String rend = null;
     UserBean bean = null;
-    List<?> telefoni = null;
+    List<?> telefoni = null;   
     String username = (String) session.getAttribute("un");    //effettuo il controllo sull'utente, per verificare se l'utente                     
                                                               //sia registrato o meno
     if(username==null){ 
        rend = "LoginPageUtente.jsp";
     }else{
+    	application.setAttribute("page", "User.jsp");
         bean = (UserBean) session.getAttribute("user-details");
         if(bean==null)    rend = "/user";
         telefoni = (List<?>) request.getAttribute("user-phones");

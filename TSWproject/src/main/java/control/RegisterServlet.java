@@ -2,22 +2,27 @@ package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import bean.UserBean;
 import model.ModelUserDAO;
 
 public class RegisterServlet extends HttpServlet {
 	
     private static final long serialVersionUID = 14L;
-    ModelUserDAO mud = new ModelUserDAO();
+    ModelUserDAO mud = new ModelUserDAO();   
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
     		throws ServletException, IOException {
+    	
+    	HttpSession session = request.getSession();
     	
     	String action = request.getParameter("action");
     	if(action!=null) {
@@ -82,7 +87,11 @@ public class RegisterServlet extends HttpServlet {
                        
             try {
 				mud.doSave(user);
-				response.sendRedirect("LoginPageUtente.jsp");
+				List<?>cart = (List<?>)session.getAttribute("cart");
+				session.setAttribute("cart", cart);
+				session.setAttribute("un", userName);
+		        session.setAttribute("pw",password);
+				response.sendRedirect("catalogo.jsp");				
 			} catch (SQLException e) {
 				     e.printStackTrace();
 				     RequestDispatcher error = null;

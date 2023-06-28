@@ -8,7 +8,6 @@ public class AcquistoBean {
 	 private IndirizzoBean indirizzo = null;
 	 private double importo;
 	 
-	 
 	 public void setID(int id) {
 		 idAcquisto=id;
 	 }

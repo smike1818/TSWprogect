@@ -32,8 +32,7 @@
 		        </div>
 		         <button class="search-product-submit">Search</button>
 		     </div>
-		    </nav>
-	      </div>   
+		    </nav>   
 	    <div class="second-header">
 	      <!--<h3 id="tipo-articolo"> 
 	         Articoli
@@ -62,7 +61,7 @@
 	              if(pagee.equalsIgnoreCase("carrello.jsp")){        
 	        %>
 	         <span class="text-white"> > </span>
-	         <span class="text-white"><a href="carrello.jsp" class="text-white">Carrello</a></span>
+	         <span class="text-white"><a href="" class="text-white">Carrello</a></span>
 	         
 	         <%} %>
 	         
@@ -70,17 +69,84 @@
 	         <span class="text-white"> > </span>
 	         <span class="text-white"><a href="carrello.jsp" class="text-white">Carrello</a></span>
 	         <span class="text-white"> > </span>
-	         <span class="text-white"><a href="ConfirmPayment.jsp" class="text-white">Conferma</a></span>
+	         <span class="text-white"><a href="" class="text-white">Conferma</a></span>
 	        
 	        <%} %>
+	        
+	        <% if(pagee.equalsIgnoreCase("cardsPage.jsp")){%>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a href="UserMods.jsp" class="text-white">Utente</a></span>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a href="" class="text-white">Metodi di pagamento</a></span>
+	        
+	        <%} %>
+	        
+	        <% if(pagee.equalsIgnoreCase("indirizzo.jsp")){%>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a href="UserMods.jsp" class="text-white">Utente</a></span>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a href="" class="text-white">Indirizzi</a></span>
+	        
+	        <%} %>
+	        
+	        <% if(pagee.equalsIgnoreCase("User.jsp")){%>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a href="UserMods.jsp" class="text-white">Utente</a></span>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a href="" class="text-white">Dettagli</a></span>
+	        
+	        <%} %>
+	        
+	         <% if(pagee.equalsIgnoreCase("UserMods.jsp")){%>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a href="" class="text-white">Utente</a></span>	        
+	        <%} %>
+	        
+	        <% if(pagee.equalsIgnoreCase("Storico.jsp")){%>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a href="UserMods.jsp" class="text-white">Utente</a></span>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a class="text-white">Storico Ordini</a></span>
+	        
+	        <%} %>
+	        
+	        <% if(pagee.equalsIgnoreCase("categorie.jsp")){%>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a class="text-white">Categorie</a></span>	        
+	        <%} %>
+	        
+	          <% if(pagee.equalsIgnoreCase("CatalogoFiltrato.jsp")){%>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a href="categorie.jsp" class="text-white">Categorie</a></span>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a class="text-white">Prodotti</a></span>
+	        
+	        <%} %>
+	        
+	          <% if(application.getAttribute("loginPageShowed")!=null){
+	        	  application.removeAttribute("loginPageShowed");
+	          %>
+	          
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a class="text-white">Login</a></span>
+	        
+	        <%} %>
+	        
+	          <% if(pagee.equalsIgnoreCase("Registrazione.jsp")){%>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a href="LoginPageUtente.jsp" class="text-white">Login</a></span>
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a class="text-white">Registrazione</a></span>
+	        <%} %>
+	        
 	        
 	         <% if(pagee.equalsIgnoreCase("Acquisto.jsp")){%>
 	         <span class="text-white"> > </span>
 	         <span class="text-white"><a href="carrello.jsp" class="text-white">Carrello</a></span>
 	         <span class="text-white"> > </span>
-	         <span class="text-white"><a href="ConfirmPayment.jsp" class="text-white">Conferma</a></span>
+	         <span class="text-white"><a class="text-white">Conferma</a></span>
 	         <span class="text-white"> > </span>
-	         <span class="text-white"><a href="Acquisto.jsp" class="text-white">Acquisto</a></span>
+	         <span class="text-white"><a class="text-white">Acquisto</a></span>
 	        
 	        <%}}else{
 	        	application.setAttribute("page","catalogo.jsp");	
@@ -88,5 +154,6 @@
 	        	%>
 	       </h5>
 	       </div>
+	     </div>
 	</body>
 </html>

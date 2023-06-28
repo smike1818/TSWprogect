@@ -9,6 +9,7 @@ String username = (String) session.getAttribute("un");    //effettuo il controll
 if(username==null){ 
    rend = "LoginPageUtente.jsp";
 }else{
+	application.setAttribute("page", "Storico.jsp");
 	storico = (Collection<?>) request.getAttribute("storico");
 	if(storico==null){
        rend = "./storico";

@@ -3,14 +3,13 @@
     pageEncoding="ISO-8859-1" %>
     
 <%
-    ServletContext sc = this.getServletContext();
     List<?>cart = (List<?>)session.getAttribute("cart");
     
     //utilizzato per gestire i prezzi e visualizzarli con massimo 2 cifre dopo la virgola
     DecimalFormat frmt = new DecimalFormat();
 	frmt.setMaximumFractionDigits(2);
 	   
-    sc.setAttribute("page","carrello.jsp");
+    application.setAttribute("page","carrello.jsp");
     if((cart==null)){  
     	response.sendRedirect("./cart?action=cart");
     	return;

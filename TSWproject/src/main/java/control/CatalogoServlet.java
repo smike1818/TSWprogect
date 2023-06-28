@@ -82,7 +82,8 @@ public class CatalogoServlet extends HttpServlet {
 				try {
 					categ.doDelete(code);
 				} catch (SQLException e) {
-					  RequestDispatcher error = null;
+					     e.printStackTrace();
+					     RequestDispatcher error = null;
 		    			 String header = "Server Error";
 		    			 String details = "c'e' stato un errore nella cancellazione delle categorie...";
 		    			 response.setStatus(500);
@@ -97,6 +98,7 @@ public class CatalogoServlet extends HttpServlet {
 	    try {
 		    request.setAttribute("products",  model.doRetrieveAll(sort));
 	    } catch (SQLException e) {
+	    	e.printStackTrace();
 	    	 RequestDispatcher error = null;
  			 String header = "Server Error";
  			 String details = "c'e' stato un errore nella mostra del catalogo...";
@@ -108,6 +110,7 @@ public class CatalogoServlet extends HttpServlet {
 	    try {
 		    request.setAttribute("categories",  categ.doRetrieveAll(sort));
 	    } catch (SQLException e) {
+	    	 e.printStackTrace();
 	    	 RequestDispatcher error = null;
  			 String header = "Server Error";
  			 String details = "c'è stato un errore, nella mostra delle categorie...";
