@@ -17,7 +17,8 @@
 	<jsp:include page="header.jsp"></jsp:include>
 </header>
 
-  <h1 class="access-h1">Area registrazione</h1>
+	<div class="login-main">
+  	<h1 class="access-h1">Area registrazione</h1>
     
     <span class="error-statement"></span>
 
@@ -37,6 +38,7 @@
 		 </p>
 	</form>
 	
+	</div>
 	<footer>
 	   <jsp:include page="footer.jsp"></jsp:include>
     </footer>

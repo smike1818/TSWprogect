@@ -74,11 +74,10 @@
 					        <button id="button5">Edit</button>
 					    </p>
 					</div>
-					<a href="logout" target="_self">Logout</a><br>
-				</div>
-				
-				<div class="main-phone-block">
-				   <div class="phone-list-block">
+					<div>
+						<a href="logout" target="_self">Logout</a><br>
+					</div>
+				   <div class="user-field">
 				      <ul class="phone-list">
 				      
 				      <!-- mostro i numeri di telefono salvati al telefono -->
@@ -108,7 +107,7 @@
                           
 				      </ul>
 				   </div>
-				   <div class="insert-phones">				  				       
+				   <div class="user-field">				  				       
 				       
 				       <form id="phone-form" action="phone" method="post">
 				         <input type="hidden" name="action" value="add">
