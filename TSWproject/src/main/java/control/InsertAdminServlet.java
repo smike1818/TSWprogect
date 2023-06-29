@@ -96,7 +96,7 @@ public class InsertAdminServlet extends HttpServlet {
 				 cat.setNome(request.getParameter("name"));
 				 cat.setDescrizione(request.getParameter("descrizione"));
 				 String tipo = request.getParameter("tipo");
-				 cat.setTipo(tipo.equalsIgnoreCase("strumento"));
+				 cat.setTipo(tipo.equalsIgnoreCase("strumento")?false:true);
 				 
 				 try {
 					categorie.doSave(cat);

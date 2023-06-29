@@ -61,7 +61,7 @@
 		        
 		   <!-- gestione ID -->
 		   <input type="hidden" name="id" value="<%=id%>">
-		   <input type="text" name="choise" id="insert-choise" value="">
+		   <input type="hidden" name="choise" id="insert-choise">
 		   
 		   <label for="tipologia">Tipologia:</label><br> 
 		   <input name="tipologia" type="text" maxlength="50" required placeholder="enter tipologia"><br> 
@@ -90,7 +90,7 @@
 		    
 		      <% if(cat!=null && cat.size()!=0){  %>
 		      
-		      <label for="categoria">Categoria</label><br>
+		      <label id="label-categoria" for="categoria">Categoria</label><br>
 		      <select name="categoria" id="categoria" >
 		      
 		      <%
@@ -98,12 +98,13 @@
 					while (it.hasNext()) {
 					    categoria = (CategoriaBean) it.next();
 		      %>
-		          <option value=<%=categoria.getID() %>><%=categoria.getNome() %></option>	          		      
+		          <option value=<%=categoria.getID() %> class=<%=categoria.getTipo() %>><%=categoria.getNome() %></option>	          		      
 		   
 		   <%}%>
-		      </select><br><br>
+		      </select>
+		       <p class="no-categories" style="display:none"> inserire prima una categoria per poter continuare l'inserimento del prodotto</p><br><br>
 		    <%}else{ %>
-		          <p id="no-categories"> inserire prima una categoria per poter continuare l'inserimento del prodotto</p>
+		          <p class="no-categories"> inserire prima una categoria per poter continuare l'inserimento del prodotto</p>
 		      <%} %>
 	    
 		<input id="insert-product-submit" type="submit" value="Add">

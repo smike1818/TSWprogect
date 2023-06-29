@@ -23,10 +23,65 @@ $(document).ready(function(){
    //quando non ci sono categorie disattivo il submit del form
    //la mancanza di categorie fa si che venga mostrato il tag <p id="no-categories">
    //al suo caricamento quindi viene eseguita questa funzione
-   if ($("#no-categories").is(":visible")) {
+   if ($(".no-categories").is(":visible")) {
       $("#insert-product-form #insert-product-submit").prop('disabled', true);
    }
    
+   //funzione per inserire la scelta del tipo di articoli da aggiungere nella pagina di inserimento
+   //PER CHI LEGGERA' IL CODICE 
+   //HO MISCHIATO I TAG DI 2 PAGINE, QUELLE CITATE NELL'IF QUA SOTTO
+   //PERDONATEMI SONO FATTO COSI'...
+   
+	 if(document.title === "Insert Page" || document.title === "CatalogoAdmin"){
+		 var choise = $("#choise-type").val();
+		 $("#insert-choise").prop("value",choise);
+		 
+		 if(choise !== "strumento"){
+			 $("#categoria .false").hide();
+		     $("#categoria .true").show();
+		     $(".product .type-col:contains('1')").closest("tr").show();
+		     $(".product .type-col:contains('0')").closest("tr").hide();
+		     $(".no-products").attr('colspan', '10');
+		     
+		     // Imposta l'elemento selezionato sul primo option non nascosto
+             var primoOptionVisibile = $("#categoria .true").first();
+             if (primoOptionVisibile.length) {
+			   $("#categoria").show();
+               $("#label-categoria").show();
+               $(".no-categories").hide();
+               $("#insert-product-form #insert-product-submit").prop('disabled', false);
+               primoOptionVisibile.prop("selected", true);
+             }else{
+			   $("#categoria").hide();
+               $("#label-categoria").hide();
+               $(".no-categories").show();
+               $("#insert-product-form #insert-product-submit").prop('disabled', true);
+		     }
+          		     		     
+		 }else{
+			 $("#categoria .true").hide();
+		     $("#categoria .false").show();
+		     $(".product .type-col:contains('1')").closest("tr").hide();
+		     $(".product .type-col:contains('0')").closest("tr").show();
+		     $(".no-products").attr('colspan', '11');
+		     
+		      // Imposta l'elemento selezionato sul primo option non nascosto
+             var primoOptionVisibile = $("#categoria .false").first();
+             if (primoOptionVisibile.length) {
+			   $("#categoria").show();
+               $("#label-categoria").show();
+               $(".no-categories").hide();
+               $("#insert-product-form #insert-product-submit").prop('disabled', false);
+               primoOptionVisibile.prop("selected", true);
+             }else{
+			   $("#categoria").hide();
+               $("#label-categoria").hide();
+               $(".no-categories").show();
+               $("#insert-product-form #insert-product-submit").prop('disabled', true);
+		     }
+		 }
+		 
+	 }
   
 $.ajaxSetup({
   beforeSend: function() {
@@ -41,6 +96,9 @@ $.ajaxSetup({
 
 $("#choise-type").change(function() {
   var selectedValue = $(this).val();
+  $('input[name="tipo"]').val(selectedValue);
+  var choise = $("#choise-type").val();
+  $("#insert-choise").val(choise);
 
   // Effettua la chiamata AJAX
   $.ajax({
@@ -52,20 +110,63 @@ $("#choise-type").change(function() {
       //funzione da eseguire in caso di successo, la stringa json non verrà  
       console.log("la servlet e' stata eseguita correttamente");
       console.log(json);
+      		 		 
+	  
       
       if(json.value==1){
 		  $(".tag-choise").css('display','none');
 		  $(".product .type-col:contains('0')").closest("tr").hide();
 		  $(".product .type-col:contains('1')").closest("tr").show();
-		  $(".no-products").attr('colspan', '9');
+		  $(".no-products").attr('colspan', '10');
 		  $(".insert-corde").hide();
+		  
+		  $("#categoria .false").hide();
+		  $("#categoria .true").show();
+		  
+		  // Imposta l'elemento selezionato sul primo option non nascosto
+          var primoOptionVisibile = $("#categoria .true").first();         
+          if (primoOptionVisibile.length) {
+			   $("#categoria").show();
+               $("#label-categoria").show();
+               $(".no-categories").hide();
+               $("#insert-product-form #insert-product-submit").prop('disabled', false);
+               primoOptionVisibile.prop("selected", true);
+          }else{
+			  $("#categoria").hide();
+              $("#label-categoria").hide();
+              $(".no-categories").show();
+              $("#insert-product-form #insert-product-submit").prop('disabled', true);
+		  }
+		           
 	  }else{
 		  $(".tag-choise").css('display','block');
-		   $(".product .type-col:contains('1')").closest("tr").hide();
+		  $(".product .type-col:contains('1')").closest("tr").hide();
 		  $(".product .type-col:contains('0')").closest("tr").show();
-		  $(".no-products").attr('colspan', '10');
+		  $(".no-products").attr('colspan', '11');
 		  $(".insert-corde").show()
+		  
+	      $("#categoria .true").hide();
+	      $("#categoria .false").show();
+	      
+	      // Imposta l'elemento selezionato sul primo option non nascosto
+          var primoOptionVisibile = $("#categoria .false").first();
+          if (primoOptionVisibile.length) {
+			   $("#categoria").show();
+               $("#label-categoria").show();
+               $(".no-categories").hide();
+               $("#insert-product-form #insert-product-submit").prop('disabled', false);
+               primoOptionVisibile.prop("selected", true);
+          }else{
+			  $("#categoria").hide();
+              $("#label-categoria").hide();
+              $(".no-categories").show();              
+              $("#insert-product-form #insert-product-submit").prop('disabled', true);
+		  }
+
 	  }
+	  
+	  
+       
     },
     error: function(error) {
       // Funzione da eseguire in caso di errore
@@ -77,12 +178,6 @@ $("#choise-type").change(function() {
 
 //funzione per nascondere i td e i th che inseriscono il tipo dell'articolo
 $(".type-col").hide();
-
-//funzione per inserire la scelta del tipo di articoli da aggiungere nella pagina di inserimento
-	 if(document.title === "Insert Page"){
-		 var choise = $("#choise-type").val();
-		 $("#insert-choise").val(choise);
-	 }
 	 
 	 
 //-------------PAGINA cambia.iva--------------
@@ -120,8 +215,12 @@ $("#change-iva-submit").click(function(){
 //-------------InsertAdmin.jsp----------------------
 
 //mi seleziono il tipo di articolo a cui spetta la categoria
+//non dipende dall'evento change
+//l'ho riscritto per assegnare un valore qunado si carica la pagina
+
 var selectedValue = $('#choise-type').val();
 $('input[name="tipo"]').val(selectedValue);
+
 
 })
 

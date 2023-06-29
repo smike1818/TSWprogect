@@ -75,7 +75,6 @@ public class ModelCategoriaDAO implements CategoriaDAO{
 	public boolean doDelete(int code) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		PreparedStatement ps = null;
 
 		int result = 0;
 
@@ -88,15 +87,6 @@ public class ModelCategoriaDAO implements CategoriaDAO{
 
 			result = preparedStatement.executeUpdate();
 			
-			//elimino anche tutti gli articoli con una determinata categoria
-			//CASCADE NON VA
-			
-			String delete2SQL = "DELETE FROM " + "articolo" + " WHERE categoria = ?";
-			ps = connection.prepareStatement(delete2SQL);
-			ps.setInt(1, code);
-			
-			result = ps.executeUpdate();
-
 		} finally {
 			try {
 				if (preparedStatement != null)
