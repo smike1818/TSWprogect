@@ -323,4 +323,60 @@ public class ModelContoDAO implements ContoDAO{
 		return cards;
 	}
 
+	@Override
+	public boolean checkNum(String data) throws SQLException {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+	        
+		  try {
+			String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE numero_carta = ?";
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(insertSQL);
+			preparedStatement.setString(1, data);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			if (rs.next()) { 
+				throw new SQLException();
+			}			   
+		  }finally {
+				try {
+					if (preparedStatement != null)
+						preparedStatement.close();
+				} finally {
+					if (connection != null)
+						connection.close();
+				}
+			 }
+		  
+		  return true;
+		}
+
+	@Override
+	public boolean checkIban(String data) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+        
+	  try {
+		String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE IBAN = ?";
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(insertSQL);
+		preparedStatement.setString(1, data);
+		
+		ResultSet rs = preparedStatement.executeQuery();
+		if (rs.next()) { 
+			throw new SQLException();
+		}			   
+	  }finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
+	  
+	  return true;
+	 }
 }
+

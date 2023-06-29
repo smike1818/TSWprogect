@@ -21,7 +21,7 @@ if(session.getAttribute("admin")==null){
     <p class="correct-statement"></p>
        
     <h2>Pagina di cambio Iva</h2>
-    <input type="number" step="0.01" min="1" max="100" id="change-iva-input">
+    <input type="number" step="0.01" min="1.00" max="100.00" id="change-iva-input">
     <button id="change-iva-submit">Cambia</button>
     
 	 <script src="js/JQuery.js"></script>

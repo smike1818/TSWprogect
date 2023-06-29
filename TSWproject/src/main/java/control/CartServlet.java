@@ -59,7 +59,7 @@ public class CartServlet extends HttpServlet{
 		    	  }
 		    	  
 		    	  //prendo elemento con codice 'id' e lo aggiungo al carrello
-		    	  Integer id = Integer.parseInt(request.getParameter("id"));
+		    	  Integer id = Integer.parseInt(request.getParameter("id"));    //da un eccezione che non da problemi al flusso di esecuzione del sito
 		    	  
 		    	  //se id non è nullo, vuol dire che sto aggiungendo prodotti al carrello
 		    	  if(id!=null) {	  

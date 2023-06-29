@@ -354,6 +354,36 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 		}
 		return indlist;
 	}
+
+	@Override
+	public boolean checkAddress(String via, String civico, String cap) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+        
+	  try {
+		String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE via = ? AND civico = ? AND cap = ?";
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(insertSQL);
+		preparedStatement.setString(1, via);
+		preparedStatement.setString(2, civico);
+		preparedStatement.setString(3, cap);
+		
+		ResultSet rs = preparedStatement.executeQuery();
+		if (rs.next()) { 
+			throw new SQLException();
+		}			   
+	  }finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
+	  
+	  return true;
+	}
 	
 
 }

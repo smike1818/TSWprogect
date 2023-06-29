@@ -386,4 +386,60 @@ public class ModelUserDAO implements UserDAO{
 	  
 	  return true;
 	}
+
+	@Override
+	public boolean checkUsername(String data) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+        
+	  try {
+		String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE username = ?";
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(insertSQL);
+		preparedStatement.setString(1, data);
+		
+		ResultSet rs = preparedStatement.executeQuery();
+		if (rs.next()) { 
+			throw new SQLException();
+		}			   
+	  }finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
+	  
+	  return true;
+	}
+	
+	@Override
+	public boolean checkCF(String data) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+        
+	  try {
+		String insertSQL = "SELECT * FROM " + TABLE_NAME +" WHERE CF = ?";
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(insertSQL);
+		preparedStatement.setString(1, data);
+		
+		ResultSet rs = preparedStatement.executeQuery();
+		if (rs.next()) { 
+			throw new SQLException();
+		}			   
+	  }finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
+	  
+	  return true;
+	}
 }

@@ -47,7 +47,7 @@ if(request.getParameter("id")!=null){
 <body>
     <jsp:include page="headerAdmin.jsp"></jsp:include>
     <h1>Pagina immagini</h1>
-    
+    <p class="error-statement">ATTENZIONE! Si devono inserire solo immagini dalla cartella 'img'</p>
     <!-- viene visto solo in caso di errore -->
     <p class="error-statement"><%=error %></p>
     
@@ -75,7 +75,7 @@ if(request.getParameter("id")!=null){
 	 <br><button id="show-image-form">clicca per inserire le immagini</button>
 	 <div class="image-form">
 	    <br><h3> inserimento delle immagini </h3><br>
-        <form action="imagespage" method="post" enctype="multipart/form-data">
+        <form action="imagespage" method="post" enctype="multipart/form-data" id="image-form">
            <input type="hidden" name="action" value="addImage">
            <input type="hidden" name="code" value="<%=art %>">
            <input name="images" type="file" multiple required accept="image/*"><br>
@@ -87,5 +87,6 @@ if(request.getParameter("id")!=null){
 	 
 	 <script src="js/JQuery.js"></script>
 	 <script src="js/admin.js"></script>
+	  <script src="js/validation.js"></script>
 </body>
 </html>

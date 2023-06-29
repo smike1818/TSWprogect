@@ -65,7 +65,9 @@
 	         
 	         <%} %>
 	         
-	        <% if(pagee.equalsIgnoreCase("ConfirmPayment.jsp")){%>
+	        <% if(pagee.equalsIgnoreCase("ConfirmPayment.jsp")){
+	        	application.removeAttribute("loginPageShowed");
+	        %>
 	         <span class="text-white"> > </span>
 	         <span class="text-white"><a href="carrello.jsp" class="text-white">Carrello</a></span>
 	         <span class="text-white"> > </span>
@@ -73,7 +75,9 @@
 	        
 	        <%} %>
 	        
-	        <% if(pagee.equalsIgnoreCase("cardsPage.jsp")){%>
+	        <% if(pagee.equalsIgnoreCase("cardsPage.jsp")){
+	        	application.removeAttribute("loginPageShowed");
+	        %>
 	         <span class="text-white"> > </span>
 	         <span class="text-white"><a href="UserMods.jsp" class="text-white">Utente</a></span>
 	         <span class="text-white"> > </span>
@@ -81,7 +85,9 @@
 	        
 	        <%} %>
 	        
-	        <% if(pagee.equalsIgnoreCase("indirizzo.jsp")){%>
+	        <% if(pagee.equalsIgnoreCase("indirizzo.jsp")){
+	        	application.removeAttribute("loginPageShowed");
+	        %>
 	         <span class="text-white"> > </span>
 	         <span class="text-white"><a href="UserMods.jsp" class="text-white">Utente</a></span>
 	         <span class="text-white"> > </span>
@@ -89,7 +95,9 @@
 	        
 	        <%} %>
 	        
-	        <% if(pagee.equalsIgnoreCase("User.jsp")){%>
+	        <% if(pagee.equalsIgnoreCase("User.jsp")){
+	        	application.removeAttribute("loginPageShowed");
+	        %>
 	         <span class="text-white"> > </span>
 	         <span class="text-white"><a href="UserMods.jsp" class="text-white">Utente</a></span>
 	         <span class="text-white"> > </span>
@@ -97,12 +105,16 @@
 	        
 	        <%} %>
 	        
-	         <% if(pagee.equalsIgnoreCase("UserMods.jsp")){%>
+	         <% if(pagee.equalsIgnoreCase("UserMods.jsp")){
+	        	 application.removeAttribute("loginPageShowed");
+	         %>
 	         <span class="text-white"> > </span>
 	         <span class="text-white"><a href="" class="text-white">Utente</a></span>	        
 	        <%} %>
 	        
-	        <% if(pagee.equalsIgnoreCase("Storico.jsp")){%>
+	        <% if(pagee.equalsIgnoreCase("Storico.jsp")){
+	        	application.removeAttribute("loginPageShowed");
+	        %>
 	         <span class="text-white"> > </span>
 	         <span class="text-white"><a href="UserMods.jsp" class="text-white">Utente</a></span>
 	         <span class="text-white"> > </span>
@@ -110,29 +122,26 @@
 	        
 	        <%} %>
 	        
-	        <% if(pagee.equalsIgnoreCase("categorie.jsp")){%>
+	        <% if(pagee.equalsIgnoreCase("categorie.jsp")){
+	        	application.removeAttribute("loginPageShowed");
+	        %>
 	         <span class="text-white"> > </span>
 	         <span class="text-white"><a class="text-white">Categorie</a></span>	        
 	        <%} %>
 	        
-	          <% if(pagee.equalsIgnoreCase("CatalogoFiltrato.jsp")){%>
+	          <% if(pagee.equalsIgnoreCase("CatalogoFiltrato.jsp")){
+	        	  application.removeAttribute("loginPageShowed");
+	          %>
 	         <span class="text-white"> > </span>
 	         <span class="text-white"><a href="categorie.jsp" class="text-white">Categorie</a></span>
 	         <span class="text-white"> > </span>
 	         <span class="text-white"><a class="text-white">Prodotti</a></span>
 	        
-	        <%} %>
+	        <%} %>	       
 	        
-	          <% if(application.getAttribute("loginPageShowed")!=null){
+	          <% if(pagee.equalsIgnoreCase("Registrazione.jsp")){
 	        	  application.removeAttribute("loginPageShowed");
 	          %>
-	          
-	         <span class="text-white"> > </span>
-	         <span class="text-white"><a class="text-white">Login</a></span>
-	        
-	        <%} %>
-	        
-	          <% if(pagee.equalsIgnoreCase("Registrazione.jsp")){%>
 	         <span class="text-white"> > </span>
 	         <span class="text-white"><a href="LoginPageUtente.jsp" class="text-white">Login</a></span>
 	         <span class="text-white"> > </span>
@@ -140,7 +149,9 @@
 	        <%} %>
 	        
 	        
-	         <% if(pagee.equalsIgnoreCase("Acquisto.jsp")){%>
+	         <% if(pagee.equalsIgnoreCase("Acquisto.jsp")){
+	        	 application.removeAttribute("loginPageShowed");
+	         %>
 	         <span class="text-white"> > </span>
 	         <span class="text-white"><a href="carrello.jsp" class="text-white">Carrello</a></span>
 	         <span class="text-white"> > </span>
@@ -148,10 +159,17 @@
 	         <span class="text-white"> > </span>
 	         <span class="text-white"><a class="text-white">Acquisto</a></span>
 	        
+	        <%}%>
+	        
+	        <% if(application.getAttribute("loginPageShowed")!=null){	%>
+	          
+	         <span class="text-white"> > </span>
+	         <span class="text-white"><a class="text-white">Login</a></span>
+	        
 	        <%}}else{
 	        	application.setAttribute("page","catalogo.jsp");	
-	        }
-	        	%>
+	          }
+	        %>
 	       </h5>
 	       </div>
 	     </div>

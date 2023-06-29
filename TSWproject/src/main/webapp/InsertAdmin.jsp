@@ -71,7 +71,7 @@
 		
 		   <!-- prevedere uso del "." e della "," nella scrittura del prezzo. protopido, da migliorare -->
 		   <label for="price">Price:</label><br> 
-		   <input name="price" type="number" step="0.01" value="0.00" min="0.00" required placeholder="enter price"><br>
+		   <input name="price" type="number" step="0.01" value="1.00" min="1.00" required placeholder="enter price"><br>
 
 		   <label for="quantity">Quantity:</label><br> 
 		   <input name="quantity" type="number" min="1" value="1" required placeholder="enter quantity"><br>
@@ -113,7 +113,7 @@
 	 
 	 <br><br><div class="categories-form">
 	    <h3> inserimento della categoria </h3><br>
-        <form action="insertadmin" method="post">
+        <form id="categories-form" action="insertadmin" method="post">
         <input type="hidden" name="action" value="cat">
         <input type="hidden" name="tipo" value="">
         <input name="name" type="text" maxlength="50" required placeholder="Enter name"><br>
@@ -126,6 +126,7 @@
 	 
 	 <script src="js/JQuery.js"></script>
 	 <script src="js/admin.js"></script>
+	 <script src="js/validation.js" type="text/javascript"></script>
 	 
 	 
 </body>

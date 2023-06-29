@@ -13,4 +13,6 @@ public interface ContoDAO extends MasterDAO <ContoBean>{
 	List<ContoBean> doRetrieveByUsr(UserBean user) throws SQLException;
 	public boolean doPrefer(String iban, UserBean user) throws SQLException;
 	public Object doRetrieveAll(String order, String cf) throws SQLException;
+	public boolean checkNum(String data) throws SQLException;
+	public boolean checkIban(String data) throws SQLException;
 }
