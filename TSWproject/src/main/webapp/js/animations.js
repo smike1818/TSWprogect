@@ -7,24 +7,27 @@ $(document).ready(function() {
       opacity: "0.9"
     });
 
-    $divs.on("mouseover", function(event) {
-      $(this).css({
-        transform: "scale(1.05)",
-        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
-        opacity: "1"
-      });
-    });
+    $divs.each(function() {
+      var $div = $(this);
 
-    $divs.on("mouseout", function(event) {
-      $(this).css({
-        transform: "scale(1)",
-        boxShadow: "none",
-        opacity: "0.9"
+      $div.on("mouseover", function(event) {
+        $div.css({
+          transform: "scale(1.05)",
+          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
+          opacity: "1"
+        });
+      });
+
+      $div.on("mouseout", function(event) {
+        $div.css({
+          transform: "scale(1)",
+          boxShadow: "none",
+          opacity: "0.9"
+        });
       });
     });
   }
 
   // Call the function for elements with a specific class
-  applyHoverEffect('catalogo-items');
+  applyHoverEffect('your-class-name');
 });
-

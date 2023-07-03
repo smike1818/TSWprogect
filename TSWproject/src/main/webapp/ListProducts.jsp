@@ -35,7 +35,7 @@
           Iterator<?> it = products.iterator();
           while (it.hasNext()) {
             bean = (ArticoloBean) it.next();
-            Int divId = counter; // Unique ID for each product div
+            int divId = counter; // Unique ID for each product div
       %> 
         <div class="catalogo-items" align="center" id="<%=divId%>">          
           <!-- IMMAGINE  -->
