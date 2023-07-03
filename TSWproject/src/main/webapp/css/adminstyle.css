@@ -128,3 +128,33 @@ label {
   font-family: "Roboto Thin", "Helvetica Neue Thin", Arial, sans-serif;
   font-size: 12px; /* Riduci la grandezza del font */
 }
+
+body{
+  background-color: blue;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.main-admin{
+  border-radius: 25px;
+  margin: 5%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 200px; /* Default width */
+  height: 200px; /* Default height */
+  background-color: #f0f0f0;
+  text-align: center;
+  padding: 20%;
+  box-shadow: 5px 5px 5px rgba(1, 1, 1, 0.7); /* Shadow style */
+  /*
+  In this code, the box-shadow property is added to
+  the .container class. The box-shadow property accepts values for horizontal
+  offset, vertical offset, blur radius, and color. In this example, 0 2px 5px
+  rgba(0, 0, 0, 0.3) 
+  is used as the value, which creates a shadow effect.
+  */
+}
