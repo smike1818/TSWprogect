@@ -20,7 +20,7 @@
 	</head>
 	<body>
 	    <header>
-	       <jsp:include page="header.jsp"></jsp:include>
+	       	<jsp:include page="header.jsp"></jsp:include>
 	    </header>
 	    <div class="body">
             <div class="main-body">
