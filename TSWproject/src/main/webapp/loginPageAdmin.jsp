@@ -8,7 +8,7 @@
 		<meta charset="ISO-8859-1">
 		<title>Login page Admin</title>
 	</head>
-
+	<link rel="stylesheet" href="css/adminstyle.css">
 	<body>
 		<div class="main-admin">
 			<form action="loginadmin">
