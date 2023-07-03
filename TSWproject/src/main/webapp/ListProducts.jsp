@@ -80,11 +80,11 @@
         </script>
         <%
               counter++; // Increment the counter
+              //esco dal while se supero il limite 
+              if(limit==1)  break;
+              else limit--; 
             }
           }
-        //esco dal while se supero il limite 
-        if(limit==1)  break;
-        else limit--; 
         %>
       </div>
     <script src="js/JQuery.js" type="text/javascript"></script>
