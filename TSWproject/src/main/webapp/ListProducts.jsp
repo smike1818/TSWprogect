@@ -27,7 +27,6 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
   <body>
-    <div class="list-products">  	 
       <%
         ArticoloBean bean = null;
         int counter = 1; // Counter variable
@@ -83,7 +82,6 @@
             }
           }
         %>
-      </div>
     <script src="js/JQuery.js" type="text/javascript"></script>
     <script src="js/userFunctions.js" type="text/javascript"></script>
     <script src="js/animations.js" type="text/javascript"></script>
