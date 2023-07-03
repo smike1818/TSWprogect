@@ -69,5 +69,6 @@
 	    
 	    <script src="js/JQuery.js" type="text/javascript"></script>
 	    <script src="js/userFunctions.js" type="text/javascript"></script>
+		<script src="js/animations.js" type="text/javascript"></script>
 	</body>
 </html>
