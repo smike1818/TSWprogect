@@ -35,9 +35,9 @@
           Iterator<?> it = products.iterator();
           while (it.hasNext()) {
             bean = (ArticoloBean) it.next();
-            String divId = "product_" + counter; // Unique ID for each product div
+            String divId = counter; // Unique ID for each product div
       %> 
-        <div class="catalogo-items" align="center" id="<%=divId%>">          
+        <div class="catalogo-items" align="center" id="<%=divId%>" onmouseover="add">          
           <!-- IMMAGINE  -->
           <a class="image-item" href="dettaglio.jsp?id=<%=bean.getID()%>">
             <img src="img/<%=model.getFirstImage(bean.getID()) %>" alt="no available"/>
@@ -75,9 +75,6 @@
             </form>  
           </div>                                                   
         </div>
-        <script>
-          addHoverAnimation("<%=divId%>"); // Pass divId as parameter
-        </script>
         <%
               counter++; // Increment the counter
               //esco dal while se supero il limite 
