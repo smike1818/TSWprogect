@@ -361,6 +361,11 @@ a.text-white{
 	text-align: center;
 }
 
+.catalogo{
+  background-color: lightgray;
+  opacity: 0.9;
+  border-radius: 25px;
+}
 .catalogo h1{
 	padding: 5%;
 	text-align: center;
