@@ -351,8 +351,6 @@ a.text-white{
 .list-products{
 	display: flex;
   margin: 10%;
-	margin-top: 25%;
-	margin-bottom: 25%;
 }
 .catalogo-items{
 	flex: 1;
