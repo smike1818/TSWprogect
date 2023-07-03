@@ -29,5 +29,5 @@ $(document).ready(function() {
   }
 
   // Call the function for elements with a specific class
-  applyHoverEffect('your-class-name');
+  applyHoverEffect('catalogo-items');
 });
