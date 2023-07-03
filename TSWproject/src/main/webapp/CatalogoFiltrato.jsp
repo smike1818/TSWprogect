@@ -87,14 +87,16 @@ application.removeAttribute("can-show");
 	       <div class="list-products">
         	 
        <%
-		    ArticoloBean bean = null;
-			if (products != null && products.size() != 0) {
-				Iterator<?> it = products.iterator();
-				while (it.hasNext()) {
-				    bean = (ArticoloBean) it.next();
+        ArticoloBean bean = null;
+        int counter = 1; // Counter variable
+        if (products != null && products.size() != 0) {
+            Iterator<?> it = products.iterator();
+            while (it.hasNext()) {
+                bean = (ArticoloBean) it.next();
+                String divId = counter; // Unique ID for each product div
 		%>
            
-                  <div class="catalogo-items" align="center">
+                  <div class="catalogo-items" align="center" id="<%=divId%>">
                   
                       <!-- IMMAGINE  -->
                       <a class="image-item" href="dettaglio.jsp?id=<%=bean.getID()%>">
@@ -143,9 +145,11 @@ application.removeAttribute("can-show");
                  	</div> 
                                                           
                   </div>
-                  
-                  <%}} %>
-                  
+                  <%
+              counter++; // Increment the counter
+            }
+          }
+        %>      
                 </div>
 	       
 	       
@@ -153,5 +157,6 @@ application.removeAttribute("can-show");
 	    
 	    <script src="js/JQuery.js" type="text/javascript"></script>
 	    <script src="js/userFunctions.js" type="text/javascript"></script>
+        <script src="js/animations.js" type="text/javascript"></script>
 </body>
 </html>

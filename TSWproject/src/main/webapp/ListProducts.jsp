@@ -37,7 +37,7 @@
             bean = (ArticoloBean) it.next();
             String divId = counter; // Unique ID for each product div
       %> 
-        <div class="catalogo-items" align="center" id="<%=divId%>" onmouseover="add">          
+        <div class="catalogo-items" align="center" id="<%=divId%>">          
           <!-- IMMAGINE  -->
           <a class="image-item" href="dettaglio.jsp?id=<%=bean.getID()%>">
             <img src="img/<%=model.getFirstImage(bean.getID()) %>" alt="no available"/>
