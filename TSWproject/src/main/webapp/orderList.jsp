@@ -50,44 +50,40 @@ if(rend!=null){
   <button id="form-data-button">Click!</button>
 </div>
 
-<br><table border="1" class="table-acquisti">
+<br><div class="table-acquisti">
+    <div class="table-header">
+        <span>Conto</span>
+        <span>Data</span>
+        <span>Totale</span>
+        <span>Consumer</span>
+        <span class="address" colspan="3">Indirizzo</span>
+        <span>scarica la fattura</span>
+    </div>
+    
+    <% AcquistoBean bean = null;
+       if (acquisti != null && acquisti.size() != 0) {
+           Iterator<?> it = acquisti.iterator();
+           while (it.hasNext()) {
+               bean = (AcquistoBean) it.next();
+    %>
+    <div class="table-row">
+        <span><%=bean.getConto().getIBAN()%></span>
+        <span class="date-td"><%=bean.getDate()%></span>
+        <span><%=bean.getImporto()%></span>
+        <span><%=bean.getConsumer().getCF() %></span>
+        <span>via <%=bean.getIndirizzo().getVia() %></span>
+        <span>(<%=bean.getIndirizzo().getCivico() %>)</span>
+        <span><%=bean.getIndirizzo().getCitta() %></span>
+        <span><a href="">scarica la fattura</a></span>
+    </div>
+    <% } } else { %>
+    <div class="table-row">
+        <span class="no-acquisti" colspan="6">nessun acquisto effettuato</span>
+    </div>
+    <% } %>
+</div>
+<br>
 
-		<tr>
-			<th>Conto</th>
-			<th>Data</th>
-			<th>Totale</th>
-			<th>Consumer</th>
-			<th colspan=3>Indirizzo</th>
-			<th>scarica la fattura</th>
-		</tr>
-		
-		<%
-		    AcquistoBean bean = null;
-			if (acquisti != null && acquisti.size() != 0) {
-				Iterator<?> it = acquisti.iterator();
-				while (it.hasNext()) {
-				    bean = (AcquistoBean) it.next();
-				  
-		%>
-		<tr>
-			<td><%=bean.getConto().getIBAN()%></td>
-			<td class="date-td"><%=bean.getDate()%></td>
-			<td><%=bean.getImporto()%></td>
-			<td><%=bean.getConsumer().getCF() %>
-			<td>via <%=bean.getIndirizzo().getVia() %></td>
-			<td>(<%=bean.getIndirizzo().getCivico() %>) </td>
-			<td><%=bean.getIndirizzo().getCitta() %></td>
-			<th><a href="">scarica la fattura</a></th>
-		</tr>
-		<%
-			}} else {                   //quando non si sono prodotti nel database stampo a video il mess sotto
-		%>
-		<tr>
-			<td class="no-acquisti" colspan=6>nessun acquisto effettuato</td>        
-		</tr>
-		
-		<%}%>
-		</table><br>
 
    <script src="js/JQuery.js" type="text/javascript"></script>
    <script src="js/orderList.js" type="text/javascript"></script>

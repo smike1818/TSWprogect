@@ -355,7 +355,6 @@ a.text-white{
 .catalogo-items{
 	flex: 1;
 	padding: 16px;
-	margin: 50px;
 	border-radius: 25px;
 	border: 1px solid gray;
 	background-color: white;
@@ -544,13 +543,51 @@ a.text-white{
 
 .login-main{
 	display: flex;
-  	margin-left: 20%;
-  	margin-right: 20%;
-  	flex: 1;
-  	padding-top: 10%;
-  	border-radius: 25px;
-  	background-color: white;
-  	opacity: .9;
-  	text-align: center;
+  margin-left: 20%;
+  margin-right: 20%;
+  flex: 1;
+  padding-top: 10%;
+  border-radius: 25px;
+  background-color: white;
+  opacity: .9;
+  text-align: center;
 }
 
+/*
+  tags relativi alla pagina orderList.jsp
+  e alla tabella nella pagina cardsPage.jsp
+  - tags sulla tabella contenente gli ordini
+*/
+.table-container{
+
+}
+
+.table-acquisti{
+
+}
+
+.table-header{
+
+}
+
+.table-row{
+
+}
+/*
+  elementi della tabella 
+*/
+.address{
+
+}
+
+.date-id{
+
+}
+
+.no-acquisti{
+
+}
+
+.no-cards{
+  
+}
