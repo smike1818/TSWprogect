@@ -44,39 +44,39 @@
 					<div>
 					    <label for="Name">Name: </label>
 					    <p class="user-field" id="name"><%=bean.getNome() %>
-					        <button id="button1">Edit</button>
+					        <button class="modern-button" id="button1">Edit</button>
 					    </p>
 					</div>
 					
 					<div>
 					    <label for="Surname">Surname: </label>
 					    <p class="user-field" id="surname"><%=bean.getCognome() %>
-					        <button id="button2">Edit</button>
+					        <button class="modern-button" id="button2">Edit</button>
 					    </p>
 					</div>
 					
 					<div>
 					    <label for="Username">Username: </label>
 					    <p class="user-field" id="user"><%=bean.getUsername() %>
-					        <button id="button3">Edit</button>
+					        <button class="modern-button" id="button3">Edit</button>
 					    </p>
 					</div>
 					
 					<div>
 					    <label for="Email">Email: </label>
 					    <p class="user-field" id="email"><%=bean.getEmail() %>
-					        <button id="button4">Edit</button>
+					        <button class="modern-button" id="button4">Edit</button>
 					    </p>
 					</div>
 					
 					<div>
 					    <label for="CF">Codice Fiscale: </label>
 					    <p class="user-field" id="cf"><%=bean.getCF() %>
-					        <button id="button5">Edit</button>
+					        <button class="modern-button" id="button5">Edit</button>
 					    </p>
 					</div>
 					<div>
-						<a href="logout" target="_self">Logout</a><br>
+						<a class="redbutton-a" href="logout" target="_self">Logout</a><br>
 					</div>
 				   <div class="user-field">
 				      <ul class="phone-list">
@@ -91,12 +91,12 @@
 
                           %>
                             <li id="<%=phone.getNumero()%>"><%=phone.getNumero()%>
-                            <a href="phone?action=delete&phone=<%=phone.getNumero()%>">(elimina)</a>
+                            <a class="redbutton-a" href="phone?action=delete&phone=<%=phone.getNumero()%>">(elimina)</a>
                             
                             <!-- gestione numeri predefiniti -->
                             
                             <% if(!phone.getIsPrimary()){ %>                            
-                               <a href="phone?action=prefer&phone=<%=phone.getNumero()%>">(seleziona come predefinito)</a>
+                               <a class="modern-a" href="phone?action=prefer&phone=<%=phone.getNumero()%>">(seleziona come predefinito)</a>
                             <%}else{ %>
                                (PREDEFINITO)
                             <%} %>

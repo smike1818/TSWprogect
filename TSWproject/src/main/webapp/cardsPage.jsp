@@ -57,11 +57,11 @@ if(username==null){
         <span class="table-cell"><%=bean.getNumCarta() %></span>
         <span class="table-cell"><%=bean.getIBAN() %></span>
         <% if (!bean.getIsPrimary()) { %>
-        <span class="table-cell"><a href="cards?action=prefer&IBAN=<%=bean.getIBAN()%>">scegli</a></span>
+        <span class="table-cell"><a class="modern-a" href="cards?action=prefer&IBAN=<%=bean.getIBAN()%>">scegli</a></span>
         <% } else { %>
         <span class="table-cell">PREDEFINITA</span>
         <% } %>
-        <span class="table-cell"><a href="cards?action=delete&IBAN=<%=bean.getIBAN()%>">elimina</a></span>
+        <span class="table-cell"><a class="redbutton-a" href="cards?action=delete&IBAN=<%=bean.getIBAN()%>">elimina</a></span>
     </div>
     <% } } } else { %>
     <div class="table-row">

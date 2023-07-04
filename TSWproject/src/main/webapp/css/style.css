@@ -557,7 +557,19 @@ a.text-white{
   opacity: .9;
   text-align: center;
 }
-
+/*
+  generico per gli h5, ma usato principalmente per quelli presenti in cardsPage
+*/
+h5{
+  text-align: center;
+  padding: 5%;
+  background-color: lightgray;
+  border-radius: 25px;
+  /*box-shadow: 0 2px 4px rgba(1, 1, 1, 0.7);*/
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 5%;
+}
 /*
   tags relativi alla pagina orderList.jsp
   e alla tabella nella pagina cardsPage.jsp
@@ -603,4 +615,57 @@ a.text-white{
 
 .no-cards{
   
+}
+
+/*
+  classi di stile per bottoni vari.
+  serve ad uniformare lo stile dei bottoni presenti nelle pagine
+*/
+.modern-button,
+.add-InsertCards-link {
+  display: inline-block;
+  border: none;
+  background-color: off-white;
+  color: black;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+.modern-button:hover,
+.add-InsertCards-link:hover {
+  background-color: white;
+}
+/*
+  stile per il tag a appartenente a questa classe.
+  serve per dare al tag l'aspetto di un pulsante
+*/
+.modern-a,
+.redbutton-a {
+  display: inline-block;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  text-decoration: none; /* Remove default link underline */
+}
+.modern-a{
+  background-color: lightgray;
+  color: black;
+}
+.modern-a:hover {
+  background-color: offwhite;
+}
+
+.redbutton-a{
+  background-color: red;
+  color: white;
+}
+.redbutton-a:hover{
+  background-color: darkred;
 }

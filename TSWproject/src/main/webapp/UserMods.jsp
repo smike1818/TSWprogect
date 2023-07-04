@@ -40,25 +40,25 @@
 				<div class="main-element">
 				<h1>account</h1><br>
 					<p>
-						<input type="button" onClick="location.href='User.jsp'" value="dettagli"><br>
+						<input type="button" class="modern-button" onClick="location.href='User.jsp'" value="dettagli"><br>
 					</p>
 				</div>
 				<div class="main-element">
 					<h1>pagamento</h1><br>
 					<p>
-						<input type="button" onClick="location.href='cardsPage.jsp'" value="metodi di pagamento"><br>
+						<input type="button" class="modern-button" onClick="location.href='cardsPage.jsp'" value="metodi di pagamento"><br>
 					</p>
 				</div>
 				<div class="main-element">
 					<h1>indirizzi salvati</h1><br>
 					<p>
-						<input type="button" onClick="location.href='Indirizzo.jsp'" value="indirizzi salvati"><br>
+						<input type="button" class="modern-button" onClick="location.href='Indirizzo.jsp'" value="indirizzi salvati"><br>
 					</p>
 				</div>
 			</div>
 		   	
 		   	<div class="main-body">
-		    	<h1><a href="Storico.jsp" target="_self">Accedi allo storico degli ordini</a></h1>
+		    	<h1><a class="modern-a" href="Storico.jsp" target="_self">Accedi allo storico degli ordini</a></h1>
 		    </div>
 		<footer>
 			<jsp:include page="footer.jsp"></jsp:include>
