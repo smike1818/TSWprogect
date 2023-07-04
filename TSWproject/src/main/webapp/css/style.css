@@ -563,19 +563,27 @@ a.text-white{
   - tags sulla tabella contenente gli ordini
 */
 .table-container{
-
+  text-align: center;
+  padding: 5%;
+  margin: 2%;
+  background-color: whitesmoke;
+  opacity: 0.9;
+  border-radius: 25px;
+  box-shadow: 0 2px 4px rgba(1, 1, 1, 0.7);
 }
-
-.table-acquisti{
-
-}
-
+.table-row,
+.table-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+  }
+  .table-cell {
+    flex: 1;
+    padding: 0 10px;
+  }
 .table-header{
-
-}
-
-.table-row{
-
+  font-family: copperplate;
 }
 /*
   elementi della tabella 

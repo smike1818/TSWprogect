@@ -40,37 +40,34 @@ if(username==null){
   <h5>Scegli un metodo di pagamento</h5> <br>
 
   <div class="table-container">
-    <div class="table-acquisti">
-        <div class="table-header">
-            <span>numero di carta</span>
-            <span>iban</span>
-            <span>setta come predefinito</span>
-            <span>cancella</span>
-        </div>
-        
-        <% ContoBean bean = null;
-           if (cards != null && cards.size() != 0) {
-               Iterator<?> it = cards.iterator();
-               while (it.hasNext()) {
-                   bean = (ContoBean) it.next();			    
-                   if (bean.getIntestatario().getUsername().equalsIgnoreCase(username)) {
-        %>
-        <div class="table-row">
-            <span><%=bean.getNumCarta() %></span>
-            <span><%=bean.getIBAN() %></span>
-            <% if (!bean.getIsPrimary()) { %>
-            <span><a href="cards?action=prefer&IBAN=<%=bean.getIBAN()%>">scegli</a></span>
-            <% } else { %>
-            <span>PREDEFINITA</span>
-            <% } %>
-            <span><a href="cards?action=delete&IBAN=<%=bean.getIBAN()%>">elimina</a></span>
-        </div>
-        <% } } } else { %>
-        <div class="table-row">
-            <span class="no-cards" colspan="4">non hai carte inserite</span>
-        </div>
+    <div class="table-header">
+        <span class="table-row">numero di carta</span>
+        <span class="table-row">iban</span>
+        <span class="table-row">setta come predefinito</span>
+        <span class="table-row">cancella</span>
+    </div>    
+    <% ContoBean bean = null;
+       if (cards != null && cards.size() != 0) {
+           Iterator<?> it = cards.iterator();
+           while (it.hasNext()) {
+               bean = (ContoBean) it.next();			    
+               if (bean.getIntestatario().getUsername().equalsIgnoreCase(username)) {
+    %>
+    <div class="table-row">
+        <span class="table-row"><%=bean.getNumCarta() %></span>
+        <span class="table-row"><%=bean.getIBAN() %></span>
+        <% if (!bean.getIsPrimary()) { %>
+        <span class="table-row"><a href="cards?action=prefer&IBAN=<%=bean.getIBAN()%>">scegli</a></span>
+        <% } else { %>
+        <span class="table-row">PREDEFINITA</span>
         <% } %>
+        <span class="table-row"><a href="cards?action=delete&IBAN=<%=bean.getIBAN()%>">elimina</a></span>
     </div>
+    <% } } } else { %>
+    <div class="table-row">
+        <span class="table-row">non hai carte inserite</span>
+    </div>
+    <% } %>
 </div>
 <br>
 
