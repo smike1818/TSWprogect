@@ -41,10 +41,10 @@ if(username==null){
 
   <div class="table-container">
     <div class="table-header">
-        <span class="table-row">numero di carta</span>
-        <span class="table-row">iban</span>
-        <span class="table-row">setta come predefinito</span>
-        <span class="table-row">cancella</span>
+        <span class="table-cell">numero di carta</span>
+        <span class="table-cell">iban</span>
+        <span class="table-cell">setta come predefinito</span>
+        <span class="table-cell">cancella</span>
     </div>    
     <% ContoBean bean = null;
        if (cards != null && cards.size() != 0) {
@@ -54,18 +54,18 @@ if(username==null){
                if (bean.getIntestatario().getUsername().equalsIgnoreCase(username)) {
     %>
     <div class="table-row">
-        <span class="table-row"><%=bean.getNumCarta() %></span>
-        <span class="table-row"><%=bean.getIBAN() %></span>
+        <span class="table-cell"><%=bean.getNumCarta() %></span>
+        <span class="table-cell"><%=bean.getIBAN() %></span>
         <% if (!bean.getIsPrimary()) { %>
-        <span class="table-row"><a href="cards?action=prefer&IBAN=<%=bean.getIBAN()%>">scegli</a></span>
+        <span class="table-cell"><a href="cards?action=prefer&IBAN=<%=bean.getIBAN()%>">scegli</a></span>
         <% } else { %>
-        <span class="table-row">PREDEFINITA</span>
+        <span class="table-cell">PREDEFINITA</span>
         <% } %>
-        <span class="table-row"><a href="cards?action=delete&IBAN=<%=bean.getIBAN()%>">elimina</a></span>
+        <span class="table-cell"><a href="cards?action=delete&IBAN=<%=bean.getIBAN()%>">elimina</a></span>
     </div>
     <% } } } else { %>
     <div class="table-row">
-        <span class="table-row">non hai carte inserite</span>
+        <span class="table-cell">non hai carte inserite</span>
     </div>
     <% } %>
 </div>
