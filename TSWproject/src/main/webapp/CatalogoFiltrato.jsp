@@ -95,7 +95,7 @@ application.removeAttribute("can-show");
                 bean = (ArticoloBean) it.next();
                 int divId = counter; // Unique ID for each product div
 		%>
-           
+                                    
                   <div class="catalogo-items" align="center" id="<%=divId%>">
                   
                       <!-- IMMAGINE  -->
@@ -157,6 +157,7 @@ application.removeAttribute("can-show");
 	    
 	    <script src="js/JQuery.js" type="text/javascript"></script>
 	    <script src="js/userFunctions.js" type="text/javascript"></script>
+	    <script src="js/filters.js" type="text/javascript"></script>
         <script src="js/animations.js" type="text/javascript"></script>
 </body>
 </html>

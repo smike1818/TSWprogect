@@ -10,11 +10,10 @@
 <body>
 
  <div class="filter-form">
-
-    <span class="error-statement"></span>
     
     <div class="filters-list">
      <h3> Filters for searching</h3>
+         <span class="error-statement"></span>
 		<br><br><h5><label for="Price">Price</label></h5>
 		
 		<!-- impostare che min<max in seguito-->
@@ -33,6 +32,5 @@
 		
      </div>
   </div>
-
 </body>   
 </html>
