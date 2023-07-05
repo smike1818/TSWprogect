@@ -182,7 +182,7 @@ public class ModelAcquistoDAO implements AcquistoDAO {
 		IndirizzoBean ind = null;
 		IndirizzoDAO modelind = new ModelIndirizzoDAO();
 		
-		String selectSQL = "SELECT * FROM " + TABLE_NAME + " idAcquisto = ?";
+		String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE idAcquisto = ?";
 
 		try {
 			connection = ds.getConnection();

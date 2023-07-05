@@ -2,16 +2,19 @@ package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import bean.ComposizioneBean;
-import dao.ComposizioneDAO;
+import bean.*;
+import dao.*;
 
 public class ModelComposizioneDAO implements ComposizioneDAO{
 	
@@ -85,6 +88,55 @@ public class ModelComposizioneDAO implements ComposizioneDAO{
 	public Collection<ComposizioneBean> doRetrieveAll(String order) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<ComposizioneBean> doRetrieveByAcq(int code) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+        
+		AcquistoDAO modelacq = new ModelAcquistoDAO();
+		ArticoloDAO modelart = new MusicalModelArticoloBean();
+		
+		List<ComposizioneBean> complist = new ArrayList<ComposizioneBean>();
+		AcquistoBean acq = null;
+		ArticoloBean art = null;
+		ComposizioneBean comp = null;
+		
+		String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE acquisto = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, code);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+		    	comp = new ComposizioneBean();
+		    	
+		    	comp.setIva(rs.getInt("iva"));
+		    	comp.setqAcquistate(rs.getInt("qAcquistate"));
+		    	comp.setPrezzo(rs.getDouble("prezzo"));
+		    	
+		    	acq = modelacq.doRetrieveByKey(rs.getInt("acquisto"));
+		    	art = modelart.doRetrieveByKey(rs.getInt("articolo"));
+		    	comp.setAcquisto(acq);
+		    	comp.setArticolo(art);
+		    	
+		    	complist.add(comp);		    	
+		    }
+		    	
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return complist;
 	}
 
 }

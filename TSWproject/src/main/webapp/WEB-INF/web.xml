@@ -12,6 +12,10 @@
   </resource-ref>
 
 <servlet>
+	<servlet-name>FatturaServlet</servlet-name>
+	<servlet-class>control.FatturaServlet</servlet-class>
+</servlet> 
+<servlet>
 	<servlet-name>ConfirmPaymentServlet</servlet-name>
 	<servlet-class>control.ConfirmPaymentServlet</servlet-class>
  </servlet> 
@@ -219,6 +223,10 @@
   <servlet-mapping>
     <servlet-name>AJAXvalidation</servlet-name>
     <url-pattern>/validation</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>FatturaServlet</servlet-name>
+    <url-pattern>/fattura</url-pattern>
   </servlet-mapping>
   
   <error-page>

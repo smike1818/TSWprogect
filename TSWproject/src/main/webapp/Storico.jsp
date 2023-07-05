@@ -61,7 +61,7 @@ if(rend!=null){
 		  </div>		  
 		  <div class="terzo-block">
 			<button class="dettagli">dettagli</button> <br> 
-			<span><a>scarica fattura</a></span> <br> 
+			<button class="fattura" id="<%=bean.getID()%>">scarica fattura</button><br> 
 		  </div>		  
 		</div>
 		
@@ -85,5 +85,6 @@ if(rend!=null){
       <script src="js/JQuery.js" type="text/javascript"></script>
       <script src="js/jquery.cycle2.min.js"></script>
       <script src="js/storico.js" type="text/javascript"></script>
+      <script src="js/fattura.js" type="text/javascript"></script>
 </body>
 </html>
