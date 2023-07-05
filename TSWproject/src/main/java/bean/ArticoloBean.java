@@ -70,10 +70,17 @@ public class ArticoloBean {
 
         return Double.parseDouble(totaleFormatted);
     }
-
-
-
     
+    public double getPrezzoBase() {
+    	DecimalFormat df = new DecimalFormat("#0.00");
+        String totaleFormatted = df.format(prezzo);
+
+        // Sostituisci la virgola con un punto nella stringa
+        totaleFormatted = totaleFormatted.replace(",", ".");
+
+        return Double.parseDouble(totaleFormatted);
+    }
+  
     public void setNome(String n) {
    	 nome=n;
     }

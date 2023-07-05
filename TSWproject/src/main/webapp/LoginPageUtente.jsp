@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-<!-- aggiunto esclusivamente -->
+<!-- aggiunto esclusivamente per il funzionamento dell'header -->
 <% application.setAttribute("loginPageShowed", true); %>
 
 <!DOCTYPE html>
