@@ -3,22 +3,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<head>
+ 		<meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <link href="css/style.css" rel="stylesheet" type="text/css">
-<title>SERVER ERROR</title>
-       <script src="js/JQuery.js" type="text/javascript"></script>
-      <script src="js/not_autorized.js" type="text/javascript"></script>
+	    <link href="css/error.css" rel="stylesheet" type="text/css">
+		<title>SERVER ERROR</title>
+		      
 </head>
-<body>
-     <div class="text-error">
-		<span> Attenzione! C'è stato un problema col server! Riprova!</span>
-	 </div>
-	 
-	 <div class="torna">
-		 <a href="catalogo.jsp"><input class="error-comeback" type="button" value="Torna all'Homepage"> </a>
-	</div>
-	
+</head>
+<body class="error-page">
+            <div>
+               <img src="css/500.avif" alt="no-available" class="image-error">
+            </div>
+            <div class="text-error">
+				<span><b> Attenzione!</b></span>
+				 <br><br>
+				<span> Errore col server!</span>
+			</div>	
+					
+				<input class="error-comeback" type="button" value="Torna all'Homepage" 
+				       onclick="window.location.href = 'catalogo.jsp';">
+				
+			
 </body>
 </html>

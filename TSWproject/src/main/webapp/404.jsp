@@ -8,18 +8,24 @@
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <link href="css/style.css" rel="stylesheet" type="text/css">
+	    <link href="css/error.css" rel="stylesheet" type="text/css">
 		<title>NOT FOUND</title>
-		      <script src="js/JQuery.js" type="text/javascript"></script>
-              <script src="js/not_autorized.js" type="text/javascript"></script>
+		      
 </head>
 </head>
-<body>
+<body class="error-page">
+            <div>
+               <img src="css/404.avif" alt="no-available" class="image-error">
+            </div>
             <div class="text-error">
-				<span> Attenzione! La pagina che stai cercando non esiste!</span>
-			</div>
+				<span><b> Attenzione!</b></span>
+				 <br><br>
+				<span> La pagina che stai cercando non esiste!</span>
+			</div>	
+					
+				<input class="error-comeback" type="button" value="Torna all'Homepage" 
+				       onclick="window.location.href = 'catalogo.jsp';">
+				
 			
-			<div class="torna">
-				<a href="catalogo.jsp"><input class="error-comeback" type="button" value="Torna all'Homepage"> </a>
-			</div>
 </body>
 </html>
