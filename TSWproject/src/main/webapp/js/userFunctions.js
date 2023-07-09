@@ -216,6 +216,7 @@ if(document.title === "Confirm Payment" || document.title === "Acquisto effettua
 
 var click = 0;
 $(".add-InsertCards-link").click(function(){
+	$(this).hide();
 	click++;
 	var div = $(".show-InsertCards");
 	

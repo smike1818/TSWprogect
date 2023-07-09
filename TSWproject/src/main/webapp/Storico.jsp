@@ -31,13 +31,15 @@ if(rend!=null){
 <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div class="wrapper">
 <header>
 	<jsp:include page="header.jsp"></jsp:include>
 </header>
 <header class="visited-pages-header">
-	    	<jsp:include page="second-header.jsp"></jsp:include>
-	    </header>
-
+	<jsp:include page="second-header.jsp"></jsp:include>
+</header>
+<div class="content">
+<div class="main">
   <h3>STORICO DEGLI ORDINI</h3>
   <h5>Utente: <%=username %></h5><br><br>
   
@@ -81,10 +83,11 @@ if(rend!=null){
 		
 		</div><br>
   
-  
+  </div></div>
   <footer>
 	<jsp:include page="footer.jsp"></jsp:include>
 </footer>
+</div>
       <script src="js/JQuery.js" type="text/javascript"></script>
       <script src="js/jquery.cycle2.min.js"></script>
       <script src="js/storico.js" type="text/javascript"></script>

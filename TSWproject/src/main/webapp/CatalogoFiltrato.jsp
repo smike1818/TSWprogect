@@ -79,85 +79,88 @@ application.removeAttribute("can-show");
 <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+	<div class="wrapper">
         <header>
 	       <jsp:include page="header.jsp"></jsp:include>
 	    </header>
 	    <header class="visited-pages-header">
 	    	<jsp:include page="second-header.jsp"></jsp:include>
 	    </header>
-	       
+	   	<div class="content">
 	       <jsp:include page="filter.jsp"></jsp:include>
-	       <div class="list-products">
-        	 
-       <%
-        ArticoloBean bean = null;
-        int counter = 1; // Counter variable
-        if (products != null && products.size() != 0) {
-            Iterator<?> it = products.iterator();
-            while (it.hasNext()) {
-                bean = (ArticoloBean) it.next();
-                int divId = counter; // Unique ID for each product div
-		%>
-                                    
-                  <div class="catalogo-items" align="center" id="<%=divId%>">
-                  
-                      <!-- IMMAGINE  -->
-                      <a class="image-item" href="dettaglio.jsp?id=<%=bean.getID()%>">
-                         <img src="img/<%=model.getFirstImage(bean.getID()) %>" alt="no available"/>
-                      </a>
-                      
-                      <!-- NOME -->
-                      <h5><a class="name-item" href="dettaglio.jsp?id=<%=bean.getID()%>"><%= bean.getName() %></a></h5><br>
-                      
-                      <!-- TIPO -->
-                      <% if(bean.getTipo()==0){ %>
-                          <input type="hidden" value="Strumenti" class="type-item">
-                      <%}else{ %>
-                          <input type="hidden" value="Pezzi di Ricambio" class="type-item">
-                      <%} %>
-                      
-                    
-                      <!-- se la quantità è 0 lo rendo non accessibile -->
-                      <% if(bean.getQuantita()==0){ %>
-                        <span class="product-no-available">prodotto non disponibile</span>
-                      <%}else{ %>
-                        <span class="product-available"></span>
-                      <%} %>
-
-                      <!-- DESCRIZIONE -->
-                      <p class="item-description">
-                         <%=bean.getDescrizione() %>
-                      </p>
-                      
-                      <!-- MARCA -->
-                      <span class="item-marca"><%=bean.getMarca() %></span>
-                      
-                      <!-- TIPOLOGIA -->
-                      <span class="item-tipologia"><%=bean.getTipologia() %></span>
-                      
-                      <!-- PREZZO, in formato 0,00 -->
-                      <h4 class="item-prezzo"><%=String.format("%.2f", bean.getPrezzo())%></h4><br>
-                         
-                      <!-- FORM AGGIUNTA AL CARRELLO -->
-                      <div class="addtocart-block">
-                         <form action="cart" method="post" class="addtocart-form">
-                         <input type="hidden" name="action" value="cart">
-                         <input type="hidden" name="id" value="<%=bean.getID() %>">
-		                 <button type="submit" class="addtocart-submit"><i class="fa fa-shopping-cart"></i></button>
-                      </form>  
-                 	</div> 
-                                                          
-                  </div>
-                  <%
-              counter++; // Increment the counter
-            }
-          }
-        %>      
+	       <div class="table-container">
+				<div class="main">
+		       <%
+		        ArticoloBean bean = null;
+		        int counter = 1; // Counter variable
+		        if (products != null && products.size() != 0) {
+		            Iterator<?> it = products.iterator();
+		            while (it.hasNext()) {
+		                bean = (ArticoloBean) it.next();
+		                int divId = counter; // Unique ID for each product div
+				%>
+		              <div class="table-row">                  
+		                  <div class="table-cell" align="center" id="<%=divId%>">
+		                  
+		                      <!-- IMMAGINE  -->
+		                      <a class="image-item" href="dettaglio.jsp?id=<%=bean.getID()%>">
+		                         <img src="img/<%=model.getFirstImage(bean.getID()) %>" alt="no available"/>
+		                      </a>
+		                      
+		                      <!-- NOME -->
+		                      <h5><a class="name-item" href="dettaglio.jsp?id=<%=bean.getID()%>"><%= bean.getName() %></a></h5><br>
+		                      
+		                      <!-- TIPO -->
+		                      <% if(bean.getTipo()==0){ %>
+		                          <input type="hidden" value="Strumenti" class="type-item">
+		                      <%}else{ %>
+		                          <input type="hidden" value="Pezzi di Ricambio" class="type-item">
+		                      <%} %>
+		                      
+		                    
+		                      <!-- se la quantità è 0 lo rendo non accessibile -->
+		                      <% if(bean.getQuantita()==0){ %>
+		                        <span class="product-no-available">prodotto non disponibile</span>
+		                      <%}else{ %>
+		                        <span class="product-available"></span>
+		                      <%} %>
+		
+		                      <!-- DESCRIZIONE -->
+		                      <p class="item-description">
+		                         <%=bean.getDescrizione() %>
+		                      </p>
+		                      
+		                      <!-- MARCA -->
+		                      <span class="item-marca"><%=bean.getMarca() %></span>
+		                      
+		                      <!-- TIPOLOGIA -->
+		                      <span class="item-tipologia"><%=bean.getTipologia() %></span>
+		                      
+		                      <!-- PREZZO, in formato 0,00 -->
+		                      <h4 class="item-prezzo"><%=String.format("%.2f", bean.getPrezzo())%></h4><br>
+		                         
+		                      <!-- FORM AGGIUNTA AL CARRELLO -->
+		                      <div class="addtocart-block">
+		                         <form action="cart" method="post" class="addtocart-form">
+		                         <input type="hidden" name="action" value="cart">
+		                         <input type="hidden" name="id" value="<%=bean.getID() %>">
+				                 <button type="submit" class="addtocart-submit"><i class="fa fa-shopping-cart"></i></button>
+		                      </form>  
+		                 	</div>
+						</div>
+					</div>
+		                  <%
+		              counter++; // Increment the counter
+		            }
+		          }
+		        %> 
+		        	</div>     
                 </div>
-	       
-	       
-	        <jsp:include page="footer.jsp"></jsp:include>
-	    
+            </div>
+			<footer>
+	        	<jsp:include page="footer.jsp"></jsp:include>
+			</footer>
+	    </div>
 	    <script src="js/JQuery.js" type="text/javascript"></script>
 	    <script src="js/userFunctions.js" type="text/javascript"></script>
 	    <script src="js/filters.js" type="text/javascript"></script>

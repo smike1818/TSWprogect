@@ -37,7 +37,7 @@
 		            </div>
         	</div>
         	<div class="header-center">
-            	<img src="icon.png" alt="Logo" width="70%">
+            	<img src="MusicalStore.png" alt="Logo">
         	</div>
         	<div class="header-right">
 		        	<div class="dropdown">

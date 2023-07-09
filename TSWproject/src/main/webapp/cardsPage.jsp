@@ -38,45 +38,48 @@ if(username==null){
     		<header class="visited-pages-header">
 	    		<jsp:include page="second-header.jsp"></jsp:include>
 	    	</header> 
-  			<h5> Intestatario: <%=username %> </h5>  <br>
-  			<h5>Scegli un metodo di pagamento</h5> <br>
-
-  			<div class="table-container">
-    			<div class="table-row">
-			        <span class="table-cell">numero di carta</span>
-			        <span class="table-cell">iban</span>
-			        <span class="table-cell">setta come predefinito</span>
-			        <span class="table-cell">cancella</span>
-   		 		</div>    
-    			<% 	ContoBean bean = null;
-       				if (cards != null && cards.size() != 0) {
-           				Iterator<?> it = cards.iterator();
-           				while (it.hasNext()) {
-               				bean = (ContoBean) it.next();			    
-               				if (bean.getIntestatario().getUsername().equalsIgnoreCase(username)) {
-    			%>
-    			<div class="table-row">
-			        <span class="table-cell"><%=bean.getNumCarta() %></span>
-			        <span class="table-cell"><%=bean.getIBAN() %></span>
-        			<% if (!bean.getIsPrimary()) { %>
-			        <span class="table-cell"><a class="modern-a" href="cards?action=prefer&IBAN=<%=bean.getIBAN()%>">scegli</a></span>
-			        <% } else { %>
-			        <span class="table-cell">PREDEFINITA</span>
-			        <% } %>
-			        <span class="table-cell"><a class="redbutton-a" href="cards?action=delete&IBAN=<%=bean.getIBAN()%>">elimina</a></span>
-    			</div>
-   	 		<% } } } else { %>
-    		<div class="table-row">
-        		<span class="table-cell">non hai carte inserite</span>
-    		</div>
-    		<% } %>
-    			<div class="table-row">
-	    			<span class="table-cell"><button class="add-InsertCards-link" >Aggiungi metodo di pagamento</button></span><br>
-		   			<!-- javascript al click del link di sopra importer� dinamicamente InsertCards.jsp e lo mette nel div di sotto -->
-		   			<div class="show-InsertCards"></div>
-				</div>
-    		</div>
-			<br>   
+	    	<div class="content">
+	    		<div class="main">
+		  			<h1>Scegli un metodo di pagamento</h1>
+		
+		  			<div class="table-container" id="pagamenti">
+		    			<div class="table-row">
+					        <span class="table-cell">numero di carta</span>
+					        <span class="table-cell">iban</span>
+					        <span class="table-cell">setta come predefinito</span>
+					        <span class="table-cell">cancella</span>
+		   		 		</div>    
+		    			<% 	ContoBean bean = null;
+		       				if (cards != null && cards.size() != 0) {
+		           				Iterator<?> it = cards.iterator();
+		           				while (it.hasNext()) {
+		               				bean = (ContoBean) it.next();			    
+		               				if (bean.getIntestatario().getUsername().equalsIgnoreCase(username)) {
+		    			%>
+		    			<div class="table-row">
+					        <span class="table-cell"><%=bean.getNumCarta() %></span>
+					        <span class="table-cell"><%=bean.getIBAN() %></span>
+		        			<% if (!bean.getIsPrimary()) { %>
+					        <span class="table-cell"><a class="modern-a" href="cards?action=prefer&IBAN=<%=bean.getIBAN()%>">scegli</a></span>
+					        <% } else { %>
+					        <span class="table-cell">PREDEFINITA</span>
+					        <% } %>
+					        <span class="table-cell"><a class="redbutton-a" href="cards?action=delete&IBAN=<%=bean.getIBAN()%>">elimina</a></span>
+		    			</div>
+		   	 		<% } } } else { %>
+		    		<div class="table-row">
+		        		<span class="table-cell">non hai carte inserite</span>
+		    		</div>
+		    		<% } %>
+		    			<div class="table-row">
+			    			<span class="table-cell"><button class="add-InsertCards-link" >Aggiungi metodo di pagamento</button></span><br>
+				   			<!-- javascript al click del link di sopra importer� dinamicamente InsertCards.jsp e lo mette nel div di sotto -->
+				   		</div>	
+				   		<div class="show-InsertCards"></div>
+						
+		    		</div>
+		    	</div>
+		    </div>
 			<jsp:include page="footer.jsp"></jsp:include>
 	
 		</div>

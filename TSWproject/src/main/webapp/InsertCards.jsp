@@ -14,16 +14,16 @@
 	<div id="cards-form">
 	   <form action="cards" method="post" id="card-form">
 	      <input type="hidden" name="action" value="add">
-	      <label for="number-card">numero di carta</label>
-	      <input type="text" name="number-card" required placeholder="1234 1234 1234 1234"><br>
+	      <label for="number-card">numero di carta</label><br>
+	      <input type="text" name="number-card" required placeholder="1234 1234 1234 1234" class="search-product-input"><br>
 	      
-	      <label for="IBAN">IBAN</label>
-	      <input type="text" name="IBAN" required placeholder="only 27"><br>
+	      <label for="IBAN">IBAN</label><br>
+	      <input type="text" name="IBAN" required placeholder="only 27" class="search-product-input"><br>
 	      
-	      <label for="cvv">CVV</label>
-	      <input type="text" name="cvv" required placeholder="111"><br>
+	      <label for="cvv">CVV</label><br>
+	      <input type="text" name="cvv" required placeholder="111" class="search-product-input"><br>
 	      
-	      <input type="submit" value="add">
+	      <input type="submit" value="add" class="modern-a">
 	   </form>
 	</div>
 	

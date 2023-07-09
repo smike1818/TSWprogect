@@ -10,9 +10,16 @@
 <body>
  <!-- Footer -->
 <footer class="footer">
-   <div class="footer-content">
-      <h1>Footer</h1>
-   </div>
+	<div class="footer-content">
+		<h1>Footer</h1>
+		<div class="table-container">
+     		<div class="table-row">
+     			<span class="table-cell">Gatto Francesco</span>
+     			<span class="table-cell">Pesce Michele</span>
+     			<span class="table-cell">Castelluccio Antonio</span>
+     		</div>
+      	</div>
+	</div>
 </footer>
 <!-- Footer -->
 

@@ -14,6 +14,7 @@ html, body {
     background-size: cover;
   	background-attachment: fixed;
     opacity: 0.9;
+    /*background-color: white;*/
     color: black;
     padding: 20px;
 }	
@@ -24,7 +25,9 @@ html, body {
     margin: 2%;
     border-radius: 25px;
 }
-
+.main h1{
+	margin: 5%;
+}
 /*
 	tags relativi all'header
 */
@@ -50,7 +53,7 @@ header {
 
 .header-center img {
     padding: 1%;
-    max-width: 100px;
+    max-width: 200px;
 }
 
 .voci-navbar {
@@ -137,7 +140,8 @@ nav {
 */
 
 .visited-pages-header {
-    background-color: black;
+	background-color: black;
+   	height: 20px;
 }
 
 .visited-pages-container {
@@ -147,7 +151,6 @@ nav {
 }
 
 #catena-links{
-	padding: 5%;
 	text-align: center;
 	display: -webkit-flex;
 }
@@ -180,8 +183,12 @@ nav {
 
 .filter-form{
 	 width: 360px;
-	 border: 1px solid gray;
+	 background-color: white;
+	 color: black;
+	 border-radius: 25px;
+	 border: 1px solid black;
 	 clear: left;
+	 padding: 1%;
 }
 
 .voci-navbar {
@@ -238,23 +245,20 @@ a.text-white{
 	font-size: 14px;
 }
 
-#title-cart{
-	margin-right: 10px;
-}
-
 .item-in-cart{
-	border: 1px solid #ddd;
+	background-color: white;
+	opacity: 0.8;
 	border-bottom: none;
 }
 
 .image-block{
-  margin-top:15px;
-  margin-left: 5px;
-  border: 1px solid #ccc;
+	display: inline-block;
+  	/*margin-top:15px;
+ 	margin-left: 5px;*/
 }
 
 .image-block img {
-   width: 20%;
+   width: 50%;
 }
 
 .name-item-block, 
@@ -372,7 +376,8 @@ a.text-white{
   padding: 20%;
 }
 
-.acquisti-details, .artDetails{
+.acquisti-details, 
+.artDetails{
   position: relative;
   margin-left: 3%;
   margin-right: 3%;
@@ -448,19 +453,7 @@ a.text-white{
 .product-price {
     margin-bottom: 10px;
 }
-/*
-  generico per gli h5, ma usato principalmente per quelli presenti in cardsPage
-*/
-h5{
-  text-align: center;
-  padding: 5%;
-  background-color: lightgray;
-  border-radius: 25px;
-  /*box-shadow: 0 2px 4px rgba(1, 1, 1, 0.7);*/
-  margin-left: 20%;
-  margin-right: 20%;
-  margin-top: 5%;
-}
+
 /*
   tags relativi alla pagina orderList.jsp
   e alla tabella nella pagina cardsPage.jsp
@@ -498,17 +491,14 @@ h5{
 	modifiche alla tabella per lo user.jsp
 */
 #user-table,
-#phoneList {
+#phoneList,
+#cart,
+#userMods-table,
+#pagamenti {
 	background-color: white;
 	color: black;
 	margin-left: 10%;
 	margin-right: 10%;
-}
-/*
-	modifiche della tabella per l'utente
-*/
-#userMods-table{
-	opacity: 1;
 }
 /*
   classi di stile per bottoni vari.
@@ -594,6 +584,13 @@ select:focus {
 	padding: 2%;
 }
 #login-form input,
-#registration-form input{
+#registration-form input,
+#cards-form input{
 	margin: 2%;
+}
+
+#cards-form{
+	text-align: center;
+	padding: 5%;
+}
 }
