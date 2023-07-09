@@ -47,6 +47,9 @@ if(username==null){
     <header>
        <jsp:include page="header.jsp"></jsp:include>
     </header>
+    <header class="visited-pages-header">
+	    	<jsp:include page="second-header.jsp"></jsp:include>
+	    </header>
     
     <section class="body">
        <h5>Conferma l'acquisto</h5>

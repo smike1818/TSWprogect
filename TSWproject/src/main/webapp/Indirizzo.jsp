@@ -39,6 +39,9 @@
  <header>
      <jsp:include page="header.jsp"></jsp:include>
  </header>
+ <header class="visited-pages-header">
+	    	<jsp:include page="second-header.jsp"></jsp:include>
+	    </header>
 
 <%if(indlist==null || indlist.size()==0){%>
    <jsp:include page="AddIndirizzo.jsp"></jsp:include>

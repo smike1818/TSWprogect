@@ -36,6 +36,9 @@
  <header>
     <jsp:include page="header.jsp"></jsp:include>
  </header>
+ <header class="visited-pages-header">
+	    	<jsp:include page="second-header.jsp"></jsp:include>
+	    </header>
 
    <h3>Acquisto effettuato!</h3>
    <a href="catalogo.jsp">torna al catalogo per altri acquisti</a>

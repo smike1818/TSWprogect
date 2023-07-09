@@ -29,6 +29,9 @@
  <header>
     <jsp:include page="header.jsp"></jsp:include>
  </header>
+ <header class="visited-pages-header">
+	    	<jsp:include page="second-header.jsp"></jsp:include>
+	    </header>
     <section class="cart-section">
                 <h5><a href="catalogo.jsp" class="text-body"><i
                       class="redirect-catalogo"></i>Continue shopping</a>

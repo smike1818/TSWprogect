@@ -26,7 +26,12 @@
 <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <jsp:include page="header.jsp"></jsp:include>
+	<header>
+	    <jsp:include page="header.jsp"></jsp:include>
+	</header>
+    <header class="visited-pages-header">
+	    	<jsp:include page="second-header.jsp"></jsp:include>
+	    </header>
     
     <!-- inizio corpo dettaglio -->
     <% if(bean!=null){ %>

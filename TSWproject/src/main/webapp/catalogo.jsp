@@ -19,54 +19,53 @@
 		<link href="css/style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
-	    <header>
-	       	<jsp:include page="header.jsp"></jsp:include>
-	    </header>
-	    <div class="body">
-            <div class="main-body">
-                <% if(session==null || session.getAttribute("un")==null){ %>
-		        	<h1>Benvenuto</h1>
-		    	<%}else{%>
-            		<h1>Benvenuto <%= (String) session.getAttribute("un") %></h1>  
-            	<%} %>
-            </div>
-            <div class="categorie">
-            	<h1>Categorie</h1>
+		<div class="wrapper">
+		    <header>
+		       	<jsp:include page="header.jsp"></jsp:include>
+		    </header>
+		    <header class="visited-pages-header">
+		    	<jsp:include page="second-header.jsp"></jsp:include>
+		    </header>
+		    <div class="content">
 	            <div class="main">
-	                <div class="main-element">
-	                	<a href="categories?tipo=false"><img src="img/strato.png" width="10%"></a>
-	                    <h1>Strumenti</h1><br>
-	                    <p>
-	                        Sezione dedicata ai nostri<br>
-	                        strumenti musicali<br>
-	                    </p>
-	                </div>
-	                <div class="main-element">
-	                	<a href="categories?tipo=true"><img src="img/pickups.png" width="43.7%"></a>
-	                    <h1>Accessori</h1><br>
-	                    <p>
-	                        tutto ci&ograve; di cui hai bisogno<br>
-	                        per i tuoi strumenti<br>
-	                    </p>
-	                </div>
-	            </div>
-	         </div>
-        </div>
-        <div class="catalogo">
-        	<h1>I nostri articoli in evidenza</h1>
-		    <div class="list-products">
-		    
-		        <%
-		           //setto un limite di 5 elementi da mostrare nella pagina principale
-		           request.setAttribute("limit",5);
-		        %>
-		        
-		        <jsp:include page="ListProducts.jsp"></jsp:include>
+	                <% if(session==null || session.getAttribute("un")==null){ %>
+			        	<h1>Benvenuto</h1>
+			    	<%}else{%>
+	            		<h1>Benvenuto <%= (String) session.getAttribute("un") %></h1>  
+	            	<%} %>
+		         	<div class="table-container" id="categorie">
+			         	<div class="table-row">
+			         		<h1 class="table-cell">Categorie</h1>
+			         	</div>
+			         	<div class="table-row">
+			         		<div class="table-cell" id="cat1">
+			         			<a href="categories?tipo=true"><img src="img/pickups.png" width="20%"></a>
+			         			<p>	
+			         				accessori
+			         			</p>
+		         			</div>
+		         		<div class="table-cell" id="cat2">
+		         			<a href="categories?tipo=true"><img src="img/strato.png" width="5%"></a>
+		         			<p>	
+		         				strumenti
+		         			</p>
+		         		</div>
+		         	</div>
+		        	<div class="catalogo">
+			        	<h1>I nostri articoli in evidenza</h1>
+					    <div class="products-list">
+					        <%
+					           //setto un limite di 5 elementi da mostrare nella pagina principale
+					           request.setAttribute("limit",5);
+					        %>
+				        	<jsp:include page="ListProducts.jsp"></jsp:include>
+				    	</div>
+		        		</div>
+		        	</div>
+		    	</div>
 		    </div>
-        </div>
-	    
-	    <jsp:include page="footer.jsp"></jsp:include>
-	    
+		    <jsp:include page="footer.jsp"></jsp:include>
+		</div>
 	    <script src="js/JQuery.js" type="text/javascript"></script>
 	    <script src="js/userFunctions.js" type="text/javascript"></script>
 		<script src="js/animations.js" type="text/javascript"></script>

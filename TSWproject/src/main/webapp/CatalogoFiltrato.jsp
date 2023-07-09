@@ -82,6 +82,9 @@ application.removeAttribute("can-show");
         <header>
 	       <jsp:include page="header.jsp"></jsp:include>
 	    </header>
+	    <header class="visited-pages-header">
+	    	<jsp:include page="second-header.jsp"></jsp:include>
+	    </header>
 	       
 	       <jsp:include page="filter.jsp"></jsp:include>
 	       <div class="list-products">

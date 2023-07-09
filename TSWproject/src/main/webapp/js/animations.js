@@ -1,33 +1,35 @@
 $(document).ready(function() {
-  function applyHoverEffect(className) {
-    var $divs = $('.' + className);
+  function applyHoverEffect(className, IDname) {
+	  if(IDname === null){
+		var $divs = $('.' + className);  
+	  }
+	  else{
+		  var $divs = $('#' + IDname); 
+	  }
 
     $divs.css({
-      transition: "transform 0.3s, box-shadow 0.3s",
-      opacity: "0.9"
+      transition: "transform 0.2s"
     });
 
     $divs.each(function() {
       var $div = $(this);
 
-      $div.on("mouseover", function(event) {
+      $div.on("mouseover", function() {
         $div.css({
-          transform: "scale(1.05)",
-          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
-          opacity: "1"
+          transform: "scale(1.05)"
         });
       });
 
-      $div.on("mouseout", function(event) {
+      $div.on("mouseout", function() {
         $div.css({
-          transform: "scale(1)",
-          boxShadow: "none",
-          opacity: "0.9"
+          transform: "scale(1)"
         });
       });
     });
   }
 
   // Call the function for elements with a specific class
-  applyHoverEffect('catalogo-items');
+  applyHoverEffect('product-container', null);
+  applyHoverEffect('table-cell', 'cat1');
+  applyHoverEffect('table-cell', 'cat2');
 });

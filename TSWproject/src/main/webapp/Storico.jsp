@@ -34,6 +34,9 @@ if(rend!=null){
 <header>
 	<jsp:include page="header.jsp"></jsp:include>
 </header>
+<header class="visited-pages-header">
+	    	<jsp:include page="second-header.jsp"></jsp:include>
+	    </header>
 
   <h3>STORICO DEGLI ORDINI</h3>
   <h5>Utente: <%=username %></h5><br><br>

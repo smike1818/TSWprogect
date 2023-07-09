@@ -32,38 +32,50 @@
 		<link href="css/style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
-		<header>
-			<jsp:include page="header.jsp"></jsp:include>
-		</header>
-		
-		    <div class="main">
-				<div class="main-element">
-				<h1>account</h1><br>
-					<p>
-						<input type="button" class="modern-button" onClick="location.href='User.jsp'" value="dettagli"><br>
-					</p>
-				</div>
-				<div class="main-element">
-					<h1>pagamento</h1><br>
-					<p>
-						<input type="button" class="modern-button" onClick="location.href='cardsPage.jsp'" value="metodi di pagamento"><br>
-					</p>
-				</div>
-				<div class="main-element">
-					<h1>indirizzi salvati</h1><br>
-					<p>
-						<input type="button" class="modern-button" onClick="location.href='Indirizzo.jsp'" value="indirizzi salvati"><br>
-					</p>
+		<div class="wrapper">
+			<header>
+				<jsp:include page="header.jsp"></jsp:include>
+			</header>
+			<header class="visited-pages-header">
+		    	<jsp:include page="second-header.jsp"></jsp:include>
+		    </header>
+		    <div class="content">
+		    	<div class="main">
+					<div class="table-container" id="userMods-table">
+					    <div class="table-row">
+							<div class="table-cell">
+							<h1>account</h1><br>
+								<p>
+									<input type="button" class="modern-button" onClick="location.href='User.jsp'" value="dettagli"><br>
+								</p>
+							</div>
+							<div class="table-cell">
+								<h1>pagamento</h1><br>
+								<p>
+									<input type="button" class="modern-button" onClick="location.href='cardsPage.jsp'" value="metodi di pagamento"><br>
+								</p>
+							</div>
+							<div class="table-cell">
+								<h1>indirizzi salvati</h1><br>
+								<p>
+									<input type="button" class="modern-button" onClick="location.href='Indirizzo.jsp'" value="indirizzi salvati"><br>
+								</p>
+							</div>
+						</div>
+				   		<div class="table-row">
+				   			<div class="table-cell">
+				   				<h1>
+				    				<a class="modern-a" href="Storico.jsp" target="_self">Accedi allo storico degli ordini</a>
+				    			</h1>
+				   			</div>
+				   		</div>
+				    </div>
 				</div>
 			</div>
-		   	
-		   	<div class="main-body">
-		    	<h1><a class="modern-a" href="Storico.jsp" target="_self">Accedi allo storico degli ordini</a></h1>
-		    </div>
-		<footer>
-			<jsp:include page="footer.jsp"></jsp:include>
-		</footer>
-		
+			<footer>
+				<jsp:include page="footer.jsp"></jsp:include>
+			</footer>
+		</div>
 		<script src="js/JQuery.js" type="text/javascript"></script>
 		<script src="js/userMods.js" type="text/javascript"></script>
       	<script src="js/pagamenti.js" type="text/javascript"></script>

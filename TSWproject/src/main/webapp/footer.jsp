@@ -9,14 +9,9 @@
 </head>
 <body>
  <!-- Footer -->
-<footer>
-   <div class="text-footer">
+<footer class="footer">
+   <div class="footer-content">
       <h1>Footer</h1>
-   </div>
-   <div class="artby">
-     <span class="michele pesce">Michele Pesce</span><br>
-     <span class="francesco gatto">Francesco Gatto</span><br>
-     <span class="antonio castelluccio">Antonio Castelluccio</span><br>
    </div>
 </footer>
 <!-- Footer -->
