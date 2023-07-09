@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
-<head>
 <head>
  		<meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,8 +10,14 @@
 	    <link href="css/style.css" rel="stylesheet" type="text/css">
 	    <link href="css/error.css" rel="stylesheet" type="text/css">
 		<title>FORBIDDEN</title>
-		      
-</head>
+		
+		<script>
+            var urlWithoutPrefix = location.href.replace(/.*:\d+\//, "");
+             console.log(urlWithoutPrefix);
+             if (urlWithoutPrefix !== "TSWproject/403.jsp") {
+                  location.replace("/TSWproject/403.jsp");
+             }
+        </script>     
 </head>
 <body class="error-page">
             <div>

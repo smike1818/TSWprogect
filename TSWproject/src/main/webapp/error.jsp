@@ -15,7 +15,7 @@
 	   header = (String) request.getAttribute("errorMessageHeader");
 	   details = (String) request.getAttribute("errorMessageDetails");
    }
-   if(header != null && details != null){
+   if(header != null && details != null){   
 
 %>
 <!DOCTYPE html>
@@ -23,12 +23,22 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Error Page</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="css/error.css" rel="stylesheet" type="text/css">
 </head>
-<body>
-       <h2>Error: <%=status%></h2>
-       <h3><%=header %></h3>
-       <h4><code><%=details %></code></h4>
-       <h3><a href="catalogo.jsp">Ritorna al catalogo</a></h3>
-       <%} %>
+<body class="error-page">
+       <div>
+           <img src="css/error.jpg" alt="no-available" class="image-error">
+       </div>
+       <div class="text-error">
+          <h2>Error: <%=status %></h2>
+          <h3><%=header %></h3><br>
+          <h4><code><%=details %></code></h4>
+       </div>
+       
+       <input class="error-comeback" type="button" value="Torna all'Homepage" 
+				       onclick="window.location.href = 'catalogo.jsp';">
 </body>
 </html>
+
+<%} %>

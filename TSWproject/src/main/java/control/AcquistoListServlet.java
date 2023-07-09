@@ -30,6 +30,7 @@ public class AcquistoListServlet extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
    	   
 	   try {
 		request.setAttribute("acquisti", model.doRetrieveAll("idAcquisto"));

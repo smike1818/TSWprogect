@@ -45,7 +45,7 @@
 			         			</p>
 		         			</div>
 		         		<div class="table-cell" id="cat2">
-		         			<a href="categories?tipo=true"><img src="img/strato.png" width="5%"></a>
+		         			<a href="categories?tipo=false"><img src="img/strato.png" width="5%"></a>
 		         			<p>	
 		         				strumenti
 		         			</p>

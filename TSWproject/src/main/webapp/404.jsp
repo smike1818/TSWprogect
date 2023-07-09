@@ -3,15 +3,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<head>
  		<meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <link href="css/style.css" rel="stylesheet" type="text/css">
 	    <link href="css/error.css" rel="stylesheet" type="text/css">
 		<title>NOT FOUND</title>
-		      
-</head>
+		
+<script>
+    var urlWithoutPrefix = location.href.replace(/.*:\d+\//, "");
+    console.log(urlWithoutPrefix);
+    if (urlWithoutPrefix !== "TSWproject/404.jsp") {
+        location.replace("/TSWproject/404.jsp");
+    }
+</script>
+
+      
 </head>
 <body class="error-page">
             <div>

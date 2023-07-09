@@ -10,8 +10,8 @@ function showAddCardForm(){
 $(document).ready(function(){
 	
 	$(window).on('beforeunload', function() {
-  location.reload();
-});
+      location.reload();
+    });
 	
 
 //nascondo la barra di ricerca se si entra in determinate pagine	
