@@ -153,7 +153,7 @@ if(document.title === "Confirm Payment" || document.title === "Acquisto effettua
      });
      
      //modifico il prezzo del prodotto mostrato nel carrello
-     var priceblock = $(this).parents(".item-in-cart").find(".prezzo-item-block h5");
+     var priceblock = $(this).parents(".table-row").find(".table-cell .prezzo-item-block h4");
      var priceText = $.trim(priceblock.text()).replace(",",".");
      var price = parseFloat(priceText) + base;
      priceblock.text((price).toFixed(2).replace(".",","));
@@ -193,7 +193,7 @@ if(document.title === "Confirm Payment" || document.title === "Acquisto effettua
         }
      });
      
-     var priceblock = $(this).parents(".item-in-cart").find(".prezzo-item-block h5");
+     var priceblock = $(this).parents(".table-row").find(".table-cell .prezzo-item-block h4");
      var priceText = $.trim(priceblock.text()).replace(",",".");
      var price = parseFloat(priceText);
      priceblock.text((price - base).toFixed(2).replace(".",","));

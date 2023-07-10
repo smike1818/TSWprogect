@@ -91,7 +91,7 @@ header {
   border-radius: 4px;
   padding: 0;
   margin: 0;
-  display: none;
+  display: none;	
 }
 
 .search-product-suggestions li {
@@ -592,5 +592,4 @@ select:focus {
 #cards-form{
 	text-align: center;
 	padding: 5%;
-}
 }
