@@ -38,9 +38,11 @@ public class PhoneServlet extends HttpServlet {
         		RequestDispatcher error = null;
 				String header = "Server Error";
 				String details = "errore con lo username...";
-				response.setStatus(500);
-				error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-				error.forward(request, response);
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
+		        response.setStatus(500);
+		        error = getServletContext().getRequestDispatcher("/error.jsp");
+		        error.forward(request, response);
             }
         }
         
@@ -62,9 +64,11 @@ public class PhoneServlet extends HttpServlet {
 					 RequestDispatcher error = null;
 				     String header = "Client Error";
 				     String details = "errori nel salvataggio del numero...";
-				     response.setStatus(500);
-				     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-				     error.forward(request, response);
+			   	        request.setAttribute("errorMessageHeader", header);
+				        request.setAttribute("errorMessageDetails", details);
+				        response.setStatus(500);
+				        error = getServletContext().getRequestDispatcher("/error.jsp");
+				        error.forward(request, response);
 				}
         	}
         	if(action.equalsIgnoreCase("delete")) {
@@ -79,9 +83,11 @@ public class PhoneServlet extends HttpServlet {
 					 RequestDispatcher error = null;
 				     String header = "Client Error";
 				     String details = "errore nella cancellazione del telefono...";
-				     response.setStatus(500);
-				     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-				     error.forward(request, response);
+			   	        request.setAttribute("errorMessageHeader", header);
+				        request.setAttribute("errorMessageDetails", details);
+				        response.setStatus(500);
+				        error = getServletContext().getRequestDispatcher("/error.jsp");
+				        error.forward(request, response);
 				}
         	}
         	if(action.equalsIgnoreCase("prefer")) {
@@ -95,9 +101,11 @@ public class PhoneServlet extends HttpServlet {
 					 RequestDispatcher error = null;
 	    			 String header = "Server Error";
 	    			 String details = "errore nella scelta del numero predefinito...";
-	    			 response.setStatus(500);
-	    			 error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-	    			 error.forward(request, response);
+	    	   	        request.setAttribute("errorMessageHeader", header);
+	    		        request.setAttribute("errorMessageDetails", details);
+	    		        response.setStatus(500);
+	    		        error = getServletContext().getRequestDispatcher("/error.jsp");
+	    		        error.forward(request, response);
 				}
 			}
         }

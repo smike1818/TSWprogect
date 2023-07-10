@@ -65,9 +65,11 @@ public class ImageServlet extends HttpServlet {
             	     RequestDispatcher error = null;
 	    			 String header = "Server Error";
 	    			 String details = "c'è stato un errore...";
-	    			 response.setStatus(500);
-	    			 error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-	    			 error.forward(request, response);
+	    	   	        request.setAttribute("errorMessageHeader", header);
+	    		        request.setAttribute("errorMessageDetails", details);
+	    		        response.setStatus(500);
+	    		        error = getServletContext().getRequestDispatcher("/errorAdmin.jsp");
+	    		        error.forward(request, response);
               } 
         } 
         	
@@ -80,9 +82,11 @@ public class ImageServlet extends HttpServlet {
 				     RequestDispatcher error = null;
 	    			 String header = "Server Error";
 	    			 String details = "errore nell'eliminazione dell'immagine, riprova...";
-	    			 response.setStatus(500);
-	    			 error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-	    			 error.forward(request, response);
+	    	   	        request.setAttribute("errorMessageHeader", header);
+	    		        request.setAttribute("errorMessageDetails", details);
+	    		        response.setStatus(500);
+	    		        error = getServletContext().getRequestDispatcher("/errorAdmin.jsp");
+	    		        error.forward(request, response);
 			}
         	
         }
@@ -96,9 +100,11 @@ public class ImageServlet extends HttpServlet {
         	  RequestDispatcher error = null;
  			 String header = "Server Error";
  			 String details = "errore nella visualizzazione delle immagini, riprova...";
- 			 response.setStatus(500);
- 			 error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
- 			 error.forward(request, response);
+    	        request.setAttribute("errorMessageHeader", header);
+    	        request.setAttribute("errorMessageDetails", details);
+    	        response.setStatus(500);
+    	        error = getServletContext().getRequestDispatcher("/errorAdmin.jsp");
+    	        error.forward(request, response);
         }
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ImagePage.jsp?id=" + code);

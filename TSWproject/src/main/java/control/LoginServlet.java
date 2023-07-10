@@ -46,9 +46,11 @@ public class LoginServlet extends HttpServlet {
 	            	  RequestDispatcher error = null;
 					  String header = "Client Error";
 					  String details = "already logged...";
-					  response.setStatus(400);
-					  error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-					  error.forward(request, response);
+			   	        request.setAttribute("errorMessageHeader", header);
+				        request.setAttribute("errorMessageDetails", details);
+				        response.setStatus(500);
+				        error = getServletContext().getRequestDispatcher("/error.jsp");
+				        error.forward(request, response);
 	                }
 				}
 	            
@@ -69,9 +71,11 @@ public class LoginServlet extends HttpServlet {
 				RequestDispatcher error = null;
 				String header = "Client Error";
 				String details = "client not registered ...";
-				response.setStatus(400);
-				error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-				error.forward(request, response);
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
+		        response.setStatus(500);
+		        error = getServletContext().getRequestDispatcher("/error.jsp");
+		        error.forward(request, response);
 				
 			}
 			

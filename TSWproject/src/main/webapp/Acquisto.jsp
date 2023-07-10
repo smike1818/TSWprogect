@@ -11,16 +11,20 @@
 	   RequestDispatcher error = null;
 	   String header = "Client Error";
 	   String details = "accesso alla pagina non autorizzato...";
-	   response.setStatus(403);
-	   error = application.getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-	   error.forward(request, response);
+	   request.setAttribute("errorMessageHeader", header);
+       request.setAttribute("errorMessageDetails", details);
+       response.setStatus(500);
+       error = getServletContext().getRequestDispatcher("/error.jsp");
+       error.forward(request, response);
    }else if (!pagee.equalsIgnoreCase("Acquisto.jsp")){
 	   RequestDispatcher error = null;
 	   String header = "Client Error";
 	   String details = "accesso alla pagina non autorizzato...";
-	   response.setStatus(403);
-	   error = application.getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-	   error.forward(request, response);
+	   request.setAttribute("errorMessageHeader", header);
+       request.setAttribute("errorMessageDetails", details);
+       response.setStatus(500);
+       error = getServletContext().getRequestDispatcher("/error.jsp");
+       error.forward(request, response);
    }
 %>
 

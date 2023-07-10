@@ -86,9 +86,11 @@ public class CatalogoServlet extends HttpServlet {
 					     RequestDispatcher error = null;
 		    			 String header = "Server Error";
 		    			 String details = "c'e' stato un errore nella cancellazione delle categorie...";
-		    			 response.setStatus(500);
-		    			 error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-		    			 error.forward(request, response);
+		    	   	        request.setAttribute("errorMessageHeader", header);
+		    		        request.setAttribute("errorMessageDetails", details);
+		    		        response.setStatus(500);
+		    		        error = getServletContext().getRequestDispatcher("/errorAdmin.jsp");
+		    		        error.forward(request, response);
 				}
 			}
 	    }
@@ -102,9 +104,11 @@ public class CatalogoServlet extends HttpServlet {
 	    	 RequestDispatcher error = null;
  			 String header = "Server Error";
  			 String details = "c'e' stato un errore nella mostra del catalogo...";
- 			 response.setStatus(500);
- 			 error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
- 			 error.forward(request, response);
+    	        request.setAttribute("errorMessageHeader", header);
+    	        request.setAttribute("errorMessageDetails", details);
+    	        response.setStatus(500);
+    	        error = getServletContext().getRequestDispatcher("/errorAdmin.jsp");
+    	        error.forward(request, response);
 	   }
 	    
 	    try {
@@ -114,9 +118,11 @@ public class CatalogoServlet extends HttpServlet {
 	    	 RequestDispatcher error = null;
  			 String header = "Server Error";
  			 String details = "c'è stato un errore, nella mostra delle categorie...";
- 			 response.setStatus(500);
- 			 error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
- 			 error.forward(request, response);
+    	        request.setAttribute("errorMessageHeader", header);
+    	        request.setAttribute("errorMessageDetails", details);
+    	        response.setStatus(500);
+    	        error = getServletContext().getRequestDispatcher("/errorAdmin.jsp");
+    	        error.forward(request, response);
 	   }
 	    
 	    RequestDispatcher dispatcher = null;

@@ -30,15 +30,19 @@ public class CategoriaServlet extends HttpServlet{
 			    RequestDispatcher error = null;
 		        String header = "Client Error";
 		        String details = "categorie null...";
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
 		        response.setStatus(500);
-		        error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
+		        error = getServletContext().getRequestDispatcher("/error.jsp");
 		        error.forward(request, response);
 		}else if(tipo.equalsIgnoreCase("")) {
 			    RequestDispatcher error = null;
 		        String header = "Client Error";
 		        String details = "categorie emptys...";
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
 		        response.setStatus(500);
-		        error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
+		        error = getServletContext().getRequestDispatcher("/error.jsp");
 		        error.forward(request, response);
 		}
 		
@@ -59,8 +63,10 @@ public class CategoriaServlet extends HttpServlet{
 		    RequestDispatcher error = null;
 	        String header = "Server Error";
 	        String details = "errore nella mostra delle categorie...";
+   	        request.setAttribute("errorMessageHeader", header);
+	        request.setAttribute("errorMessageDetails", details);
 	        response.setStatus(500);
-	        error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
+	        error = getServletContext().getRequestDispatcher("/error.jsp");
 	        error.forward(request, response);
 	}
    	   

@@ -44,9 +44,11 @@ public class ConfirmPaymentServlet extends HttpServlet {
 			 RequestDispatcher error = null;
 			 String header = "Server Error";
 			 String details = "c'e' stato un errore nella corrispondenza con l'utente in sessione...";
-			 response.setStatus(500);
-			 error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-			 error.forward(request, response);
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
+		        response.setStatus(500);
+		        error = getServletContext().getRequestDispatcher("/error.jsp");
+		        error.forward(request, response);
 		}
 		
 		
@@ -58,9 +60,11 @@ public class ConfirmPaymentServlet extends HttpServlet {
 			 RequestDispatcher error = null;
 			 String header = "Server Error";
 			 String details = "c'e' stato un errore nel mostrare la pagina...";
-			 response.setStatus(500);
-			 error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-			 error.forward(request, response);
+   	            request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
+		        response.setStatus(500);
+		        error = getServletContext().getRequestDispatcher("/error.jsp");
+		        error.forward(request, response);
 		}
    	    
    	    RequestDispatcher dispatcher = null;   

@@ -33,9 +33,11 @@ if(categoria!=null){
 		 RequestDispatcher error = null;
          String header = "Client Error";
          String details = "errore nella conversione tra string e intero (categoria)...";
-         response.setStatus(500);
-         error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-         error.forward(request, response);
+	        request.setAttribute("errorMessageHeader", header);
+	        request.setAttribute("errorMessageDetails", details);
+	        response.setStatus(500);
+	        error = getServletContext().getRequestDispatcher("/error.jsp");
+	        error.forward(request, response);
 	}
 }
 
@@ -51,9 +53,11 @@ if(tipo!=null){
 		 RequestDispatcher error = null;
          String header = "Client Error";
          String details = "errore nella conversione tra string e intero (tipo)...";
-         response.setStatus(500);
-         error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-         error.forward(request, response);
+	        request.setAttribute("errorMessageHeader", header);
+	        request.setAttribute("errorMessageDetails", details);
+	        response.setStatus(500);
+	        error = getServletContext().getRequestDispatcher("/error.jsp");
+	        error.forward(request, response);
 	}
 }
 
@@ -62,8 +66,10 @@ if(tipo==null || categoria==null){
 	 RequestDispatcher error = null;
      String header = "Client Error";
      String details = "accesso illegale alla pagina...";
-     response.setStatus(403);
-     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
+     request.setAttribute("errorMessageHeader", header);
+     request.setAttribute("errorMessageDetails", details);
+     response.setStatus(500);
+     error = getServletContext().getRequestDispatcher("/error.jsp");
      error.forward(request, response);
 }
 

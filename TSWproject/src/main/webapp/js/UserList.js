@@ -77,7 +77,8 @@ $(document).ready(function() {
           if (Object.keys(json).length === 0) {       //controllo se nella stringa json c'è almeno una key
               $(".error-statement").html("username non trovato, riprova");
           }else{
-			  window.location.href = "UserDetails.jsp?us="+json[0];
+			  var encodedValue = encodeURIComponent(json[0]);
+              window.location.href = "UserDetails.jsp?us=" + encodedValue;
 		  }
       },
       error: function(error) {

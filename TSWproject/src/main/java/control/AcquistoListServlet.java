@@ -39,8 +39,10 @@ public class AcquistoListServlet extends HttpServlet{
 		    RequestDispatcher error = null;
 	        String header = "Server Error";
 	        String details = "errore nella mostra degli acquisti...";
+	        request.setAttribute("errorMessageHeader", header);
+	        request.setAttribute("errorMessageDetails", details);
 	        response.setStatus(500);
-	        error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
+	        error = getServletContext().getRequestDispatcher("/errorAdmin.jsp");
 	        error.forward(request, response);
 	}
    	   

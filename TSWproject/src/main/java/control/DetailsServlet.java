@@ -35,9 +35,11 @@ public class DetailsServlet extends HttpServlet{
 		      RequestDispatcher error = null;
 		      String header = "Client Error";
 		      String details = "Errore nell'apertura della pagina...";
-		      response.setStatus(500);
-		      error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-		      error.forward(request, response);
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
+		        response.setStatus(500);
+		        error = getServletContext().getRequestDispatcher("/error.jsp");
+		        error.forward(request, response);
 		    }
 		  }
 		} else {
@@ -46,9 +48,11 @@ public class DetailsServlet extends HttpServlet{
 		    RequestDispatcher error = null;
 		    String header = "Client Error";
 		    String details = "Errore nell'apertura della pagina...";
-		    response.setStatus(500);
-		    error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-		    error.forward(request, response);
+   	        request.setAttribute("errorMessageHeader", header);
+	        request.setAttribute("errorMessageDetails", details);
+	        response.setStatus(500);
+	        error = getServletContext().getRequestDispatcher("/error.jsp");
+	        error.forward(request, response);
 		  }
 		}
 

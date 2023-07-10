@@ -39,9 +39,11 @@ public class UserDetailsServlet extends HttpServlet {
 				RequestDispatcher error = null;
 				String header = "Server Error";
 				String details = "utente non trovato...";
-				response.setStatus(500);
-				error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-				error.forward(request, response);		
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
+		        response.setStatus(500);
+		        error = getServletContext().getRequestDispatcher("/errorAdmin.jsp");
+		        error.forward(request, response);	
 			}
 		   
 		    try {
@@ -50,18 +52,22 @@ public class UserDetailsServlet extends HttpServlet {
 				RequestDispatcher error = null;
 				String header = "Server Error";
 				String details = "errore nella stampa degli acquisti...";
-				response.setStatus(500);
-				error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-				error.forward(request, response);	
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
+		        response.setStatus(500);
+		        error = getServletContext().getRequestDispatcher("/errorAdmin.jsp");
+		        error.forward(request, response);
 			}
 		    
 		    }else {
 		    	RequestDispatcher error = null;
 				String header = "Server Error";
 				String details = "username nullo...";
-				response.setStatus(500);
-				error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-				error.forward(request, response);	
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
+		        response.setStatus(500);
+		        error = getServletContext().getRequestDispatcher("/errorAdmin.jsp");
+		        error.forward(request, response);	
 		    }
 		    
 	        

@@ -12,9 +12,11 @@
     	RequestDispatcher error = null;
 		String header = "Server Error";
 		String details = "username nullo...";
-		response.setStatus(500);
-		error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-		error.forward(request, response);	
+	    request.setAttribute("errorMessageHeader", header);
+        request.setAttribute("errorMessageDetails", details);
+        response.setStatus(500);
+        error = getServletContext().getRequestDispatcher("/error.jsp");
+        error.forward(request, response);	
     }else{
        acquisti = (Collection<?>) request.getAttribute("acquisti");
        if(acquisti == null){

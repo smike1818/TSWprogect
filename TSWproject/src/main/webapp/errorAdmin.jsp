@@ -3,8 +3,8 @@
 
  <% 
    //creazione di una pagina d'errore dinamica dove costruisco
-   String header = request.getParameter("errorMessageHeader");
-   String details = request.getParameter("errorMessageDetails");
+   String header = (String) request.getAttribute("errorMessageHeader");
+   String details =(String) request.getAttribute("errorMessageDetails");
    Integer status = response.getStatus();
    if(header == null && details == null){
 	   //se header e details non vengono caricati tramite i parametri della richiesta

@@ -40,9 +40,11 @@ public class IndirizzoServlet extends HttpServlet{
 			 RequestDispatcher error = null;
 		     String header = "Client Error";
 		     String details = "utente non trovato, impossibile continuare il salvataggio dlel'indirizzo...";
-		     response.setStatus(400);
-		     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-		     error.forward(request, response);
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
+		        response.setStatus(500);
+		        error = getServletContext().getRequestDispatcher("/error.jsp");
+		        error.forward(request, response);
 		}
    	   
    	    if(action!=null) {
@@ -68,9 +70,11 @@ public class IndirizzoServlet extends HttpServlet{
 					 RequestDispatcher error = null;
 				     String header = "Client Error";
 				     String details = "errori nel salvataggio dell'indirizzo...";
-				     response.setStatus(500);
-				     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-				     error.forward(request, response);
+			   	        request.setAttribute("errorMessageHeader", header);
+				        request.setAttribute("errorMessageDetails", details);
+				        response.setStatus(500);
+				        error = getServletContext().getRequestDispatcher("/error.jsp");
+				        error.forward(request, response);
 				}
    	    		
    	    	}
@@ -88,9 +92,11 @@ public class IndirizzoServlet extends HttpServlet{
 					 RequestDispatcher error = null;
 				     String header = "Client Error";
 				     String details = "errore nella cancellazione dell'indirizzo...";
-				     response.setStatus(500);
-				     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-				     error.forward(request, response);
+			   	        request.setAttribute("errorMessageHeader", header);
+				        request.setAttribute("errorMessageDetails", details);
+				        response.setStatus(500);
+				        error = getServletContext().getRequestDispatcher("/error.jsp");
+				        error.forward(request, response);
 				}
    	    	}
    	    	if(action.equalsIgnoreCase("prefer")) {
@@ -106,9 +112,11 @@ public class IndirizzoServlet extends HttpServlet{
 				 RequestDispatcher error = null;
 			     String header = "Client Error";
 			     String details = "errore nella scelta dell'indirizzo...";
-			     response.setStatus(500);
-			     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-			     error.forward(request, response);
+		   	        request.setAttribute("errorMessageHeader", header);
+			        request.setAttribute("errorMessageDetails", details);
+			        response.setStatus(500);
+			        error = getServletContext().getRequestDispatcher("/error.jsp");
+			        error.forward(request, response);
 			}
    	    	}
    	    }

@@ -59,9 +59,11 @@ public class UserListServlet extends HttpServlet {
 	        	RequestDispatcher error = null;
 				String header = "Server Error";
 				String details = "errore nel caricamento degli utenti...";
-				response.setStatus(500);
-				error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-				error.forward(request, response);
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
+		        response.setStatus(500);
+		        error = getServletContext().getRequestDispatcher("/errorAdmin.jsp");
+		        error.forward(request, response);
 	        }
 	        
 	        RequestDispatcher dispatcher = null;		    	   

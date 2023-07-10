@@ -9,8 +9,10 @@
 	   RequestDispatcher error = null;
        String header = "Client Error";
        String details = "accesso illegale alla pagina...";
+	   request.setAttribute("errorMessageHeader", header);
+       request.setAttribute("errorMessageDetails", details);
        response.setStatus(500);
-       error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
+       error = getServletContext().getRequestDispatcher("/error.jsp");
        error.forward(request, response);
    }
 %>

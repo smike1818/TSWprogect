@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +28,6 @@ public class CardsServlet extends HttpServlet{
 			throws ServletException, IOException {
 
 		String action = request.getParameter("action");    //action salva l'azione effettuata dall'utente
-		ServletContext sc = request.getServletContext();
 		HttpSession session = request.getSession();
 		
 		try {
@@ -39,9 +37,11 @@ public class CardsServlet extends HttpServlet{
 			 RequestDispatcher error = null;
 			 String header = "Server Error";
 			 String details = "errore nel salvataggio della carta...";
-			 response.setStatus(500);
-			 error = sc.getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-			 error.forward(request, response);
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
+		        response.setStatus(500);
+		        error = getServletContext().getRequestDispatcher("/error.jsp");
+		        error.forward(request, response);
 		}
 		
 		if(action!=null) {
@@ -64,9 +64,11 @@ public class CardsServlet extends HttpServlet{
 						 RequestDispatcher error = null;
 		    			 String header = "Server Error";
 		    			 String details = "errore nel salvataggio della carta, controlla se gia' hai salvato la carta...";
-		    			 response.setStatus(500);
-		    			 error = sc.getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-		    			 error.forward(request, response);
+		    	   	        request.setAttribute("errorMessageHeader", header);
+		    		        request.setAttribute("errorMessageDetails", details);
+		    		        response.setStatus(500);
+		    		        error = getServletContext().getRequestDispatcher("/error.jsp");
+		    		        error.forward(request, response);
 					}
 				}
 					
@@ -83,9 +85,11 @@ public class CardsServlet extends HttpServlet{
 					 RequestDispatcher error = null;
 	    			 String header = "Server Error";
 	    			 String details = "errore nella cancellazione della carta...";
-	    			 response.setStatus(500);
-	    			 error = sc.getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-	    			 error.forward(request, response);
+	    	   	        request.setAttribute("errorMessageHeader", header);
+	    		        request.setAttribute("errorMessageDetails", details);
+	    		        response.setStatus(500);
+	    		        error = getServletContext().getRequestDispatcher("/error.jsp");
+	    		        error.forward(request, response);
 				}
 			}
 			if(action.equalsIgnoreCase("prefer")) {
@@ -98,9 +102,11 @@ public class CardsServlet extends HttpServlet{
 					 RequestDispatcher error = null;
 	    			 String header = "Server Error";
 	    			 String details = "errore nella scelta della carta...";
-	    			 response.setStatus(500);
-	    			 error = sc.getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-	    			 error.forward(request, response);
+	    	   	        request.setAttribute("errorMessageHeader", header);
+	    		        request.setAttribute("errorMessageDetails", details);
+	    		        response.setStatus(500);
+	    		        error = getServletContext().getRequestDispatcher("/error.jsp");
+	    		        error.forward(request, response);
 				}
 			}
 		}
@@ -114,9 +120,11 @@ public class CardsServlet extends HttpServlet{
 			 RequestDispatcher error = null;
 			 String header = "Server Error";
 			 String details = "c'e' stato un errore nella stampa dei conti...";
-			 response.setStatus(500);
-			 error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-			 error.forward(request, response);
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
+		        response.setStatus(500);
+		        error = getServletContext().getRequestDispatcher("/error.jsp");
+		        error.forward(request, response);
 		}
    	    
    	    RequestDispatcher dispatcher = null;   

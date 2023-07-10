@@ -32,9 +32,11 @@ public class RegisterServlet extends HttpServlet {
 				     RequestDispatcher error = null;
 	    			 String header = "Client Error";
 	    			 String details = "errore nel controllo dell'email ...";
-	    			 response.setStatus(403);
-	    			 error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-	    			 error.forward(request, response);
+	    	   	        request.setAttribute("errorMessageHeader", header);
+	    		        request.setAttribute("errorMessageDetails", details);
+	    		        response.setStatus(500);
+	    		        error = getServletContext().getRequestDispatcher("/error.jsp");
+	    		        error.forward(request, response);
     			}
     			try {
 					mud.checkEmail(email);
@@ -97,17 +99,21 @@ public class RegisterServlet extends HttpServlet {
 				     RequestDispatcher error = null;
 	    			 String header = "Client Error";
 	    			 String details = "sei gia' registrato ...";
-	    			 response.setStatus(400);
-	    			 error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-	    			 error.forward(request, response);
+	    	   	        request.setAttribute("errorMessageHeader", header);
+	    		        request.setAttribute("errorMessageDetails", details);
+	    		        response.setStatus(500);
+	    		        error = getServletContext().getRequestDispatcher("/error.jsp");
+	    		        error.forward(request, response);
 			}
         } else { // If form data is invalid, display error message on registration page
         	 RequestDispatcher error = null;
 			 String header = "Client Error";
 			 String details = errorMsg;
-			 response.setStatus(400);
-			 error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-			 error.forward(request, response);
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
+		        response.setStatus(500);
+		        error = getServletContext().getRequestDispatcher("/error.jsp");
+		        error.forward(request, response);
         }
      }
                 

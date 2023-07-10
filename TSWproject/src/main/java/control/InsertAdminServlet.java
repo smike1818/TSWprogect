@@ -58,9 +58,11 @@ public class InsertAdminServlet extends HttpServlet {
 					RequestDispatcher error = null;
 	    			String header = "Server Error";
 	    			String details = "errore nel prendere l'iva...";
-	    			response.setStatus(500);
-	    			error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-	    			error.forward(request, response);
+	       	        request.setAttribute("errorMessageHeader", header);
+	    	        request.setAttribute("errorMessageDetails", details);
+	    	        response.setStatus(500);
+	    	        error = getServletContext().getRequestDispatcher("/errorAdmin.jsp");
+	    	        error.forward(request, response);
 					e.printStackTrace();
 				}
 		    	  if(iva!=null) {
@@ -85,9 +87,11 @@ public class InsertAdminServlet extends HttpServlet {
 					     RequestDispatcher error = null;
 		    			 String header = "Server Error";
 		    			 String details = "errore nel salvataggio dell'articolo, riprova...";
-		    			 response.setStatus(500);
-		    			 error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-		    			 error.forward(request, response);
+		    	   	        request.setAttribute("errorMessageHeader", header);
+		    		        request.setAttribute("errorMessageDetails", details);
+		    		        response.setStatus(500);
+		    		        error = getServletContext().getRequestDispatcher("/errorAdmin.jsp");
+		    		        error.forward(request, response);
 				  }
 		      }
 			 
@@ -117,9 +121,11 @@ public class InsertAdminServlet extends HttpServlet {
 	    	 RequestDispatcher error = null;
  			 String header = "Server Error";
  			 String details = "errore nel caricamento del catalogo, riprova...";
- 			 response.setStatus(500);
- 			 error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
- 			 error.forward(request, response);
+    	        request.setAttribute("errorMessageHeader", header);
+    	        request.setAttribute("errorMessageDetails", details);
+    	        response.setStatus(500);
+    	        error = getServletContext().getRequestDispatcher("/errorAdmin.jsp");
+    	        error.forward(request, response);
 	   }
 	    
 	    RequestDispatcher dispatcher = null;

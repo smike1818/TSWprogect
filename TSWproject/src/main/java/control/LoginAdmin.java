@@ -31,9 +31,11 @@ public class LoginAdmin extends HttpServlet {
         	 RequestDispatcher error = null;
 			 String header = "Client Error";
 			 String details = "admin already logged...";
-			 response.setStatus(400);
-			 error = getServletContext().getRequestDispatcher("/errorAdmin.jsp?errorMessageHeader="+header+"&errorMessageDetails="+details);
-			 error.forward(request, response);
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
+		        response.setStatus(500);
+		        error = getServletContext().getRequestDispatcher("/errorAdmin.jsp");
+		        error.forward(request, response);
         }
         else {
         // If form data is valid, create a new user and redirect to success page

@@ -69,17 +69,21 @@ public class AcquistoServlet extends HttpServlet {
    	    	RequestDispatcher error = null;
    	        String header = "Client Error";
    	        String details = "utente non loggato...";
-   	        response.setStatus(400);
-   	        error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-   	        error.forward(request, response);
+   	        request.setAttribute("errorMessageHeader", header);
+	        request.setAttribute("errorMessageDetails", details);
+	        response.setStatus(500);
+	        error = getServletContext().getRequestDispatcher("/error.jsp");
+	        error.forward(request, response);
    	    }
    	    if(IBAN==null) {
    	    	RequestDispatcher error = null;
    	        String header = "Client Error";
    	        String details = "carta non selezionata...";
-   	        response.setStatus(403);
-   	        error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-   	        error.forward(request, response);
+   	        request.setAttribute("errorMessageHeader", header);
+	        request.setAttribute("errorMessageDetails", details);
+	        response.setStatus(500);
+	        error = getServletContext().getRequestDispatcher("/error.jsp");
+	        error.forward(request, response);
    	    }
    	    
    	    //elimino dal contesto l'iban
@@ -111,9 +115,11 @@ public class AcquistoServlet extends HttpServlet {
 			 RequestDispatcher error = null;
 		     String header = "Client Error";
 		     String details = "errore nell'acquisto, salvataggio utente non effettuato...";
+	   	     request.setAttribute("errorMessageHeader", header);
+		     request.setAttribute("errorMessageDetails", details);
 		     response.setStatus(500);
-		     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-		     error.forward(request, response);
+		     error = getServletContext().getRequestDispatcher("/error.jsp");
+		     error.forward(request, response);		     
 		}
    	      
    	      acq.setConsumer(user);
@@ -125,9 +131,11 @@ public class AcquistoServlet extends HttpServlet {
 			 RequestDispatcher error = null;
 		     String header = "Client Error";
 		     String details = "errore nell'acquisto, salvataggio conto non effettuato...";
-		     response.setStatus(500);
-		     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-		     error.forward(request, response);
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
+		        response.setStatus(500);
+		        error = getServletContext().getRequestDispatcher("/error.jsp");
+		        error.forward(request, response);
 		}
    	      
    	      acq.setConto(conto);
@@ -144,9 +152,11 @@ public class AcquistoServlet extends HttpServlet {
 			 RequestDispatcher error = null;
 		     String header = "Client Error";
 		     String details = "indirizzo non selezionato...";
-		     response.setStatus(500);
-		     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-		     error.forward(request, response);
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
+		        response.setStatus(500);
+		        error = getServletContext().getRequestDispatcher("/error.jsp");
+		        error.forward(request, response);
    	      }else {
    	    	 try {
    	    	    int civ = Integer.parseInt(civico);
@@ -156,15 +166,19 @@ public class AcquistoServlet extends HttpServlet {
    	    		RequestDispatcher error = null;
    		        String header = "Client Error";
    		        String details = "inserire un civico numerico...";
-   		        response.setStatus(401);
-   		        error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
+   	   	        request.setAttribute("errorMessageHeader", header);
+   		        request.setAttribute("errorMessageDetails", details);
+   		        response.setStatus(500);
+   		        error = getServletContext().getRequestDispatcher("/error.jsp");
    		        error.forward(request, response);
    	    	 }catch(SQLException e) {
    	    		RequestDispatcher error = null;
    		        String header = "Server Error";
    		        String details = "errore nel salvataggio dell'indirizzo...";
+   	   	        request.setAttribute("errorMessageHeader", header);
+   		        request.setAttribute("errorMessageDetails", details);
    		        response.setStatus(500);
-   		        error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
+   		        error = getServletContext().getRequestDispatcher("/error.jsp");
    		        error.forward(request, response);
    	    	 }
    	      }
@@ -176,9 +190,11 @@ public class AcquistoServlet extends HttpServlet {
 			 RequestDispatcher error = null;
 		     String header = "Client Error";
 		     String details = "errore nell'acquisto, salvataggio acquisto non effettuato...";
-		     response.setStatus(500);
-		     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-		     error.forward(request, response);
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
+		        response.setStatus(500);
+		        error = getServletContext().getRequestDispatcher("/error.jsp");
+		        error.forward(request, response);
 		}  
    	      
    	      AcquistoBean ab = null;
@@ -198,9 +214,11 @@ public class AcquistoServlet extends HttpServlet {
 				 RequestDispatcher error = null;
 			     String header = "Client Error";
 			     String details = "errore nell'acquisto, salvataggio composizione non effettuato...";
-			     response.setStatus(500);
-			     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-			     error.forward(request, response);
+		   	        request.setAttribute("errorMessageHeader", header);
+			        request.setAttribute("errorMessageDetails", details);
+			        response.setStatus(500);
+			        error = getServletContext().getRequestDispatcher("/error.jsp");
+			        error.forward(request, response);
 			}
    	      }}
    	     
@@ -215,9 +233,11 @@ public class AcquistoServlet extends HttpServlet {
 		    String header = "Client Error";
 		    String details = "errore nell'acquisto, e' possibile che le quantita' inserite nel carrello "
 		    		+ "siano superiori a quelle disponibili. altrimenti errore nella modifica delle quantita' nel database... ";
-		    response.setStatus(500);
-		    error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-		    error.forward(request, response);
+   	        request.setAttribute("errorMessageHeader", header);
+	        request.setAttribute("errorMessageDetails", details);
+	        response.setStatus(500);
+	        error = getServletContext().getRequestDispatcher("/error.jsp");
+	        error.forward(request, response);
 		}
    	   }
    	          
@@ -225,9 +245,11 @@ public class AcquistoServlet extends HttpServlet {
 		 RequestDispatcher error = null;
 	     String header = "Client Error";
 	     String details = "carrello vuoto...";
-	     response.setStatus(400);
-	     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-	     error.forward(request, response);
+	        request.setAttribute("errorMessageHeader", header);
+	        request.setAttribute("errorMessageDetails", details);
+	        response.setStatus(500);
+	        error = getServletContext().getRequestDispatcher("/error.jsp");
+	        error.forward(request, response);
    	   }
    	   
    	   getServletContext().setAttribute("by_address_page", true);

@@ -53,9 +53,11 @@ public class StoricoUserServlet extends HttpServlet {
 						 RequestDispatcher error = null;
 			 		     String header = "Server Error";
 			 		     String details = "impossibile convertire da string a int...";
-			 		     response.setStatus(500);
-			 		     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-			 		     error.forward(request, response);
+			    	        request.setAttribute("errorMessageHeader", header);
+			    	        request.setAttribute("errorMessageDetails", details);
+			    	        response.setStatus(500);
+			    	        error = getServletContext().getRequestDispatcher("/error.jsp");
+			    	        error.forward(request, response);
 					}
 				}
 				
@@ -82,9 +84,11 @@ public class StoricoUserServlet extends HttpServlet {
 						 RequestDispatcher error = null;
 			 		     String header = "Server Error";
 			 		     String details = "impossibile convertire da string a int...";
-			 		     response.setStatus(500);
-			 		     error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
-			 		     error.forward(request, response);
+			    	        request.setAttribute("errorMessageHeader", header);
+			    	        request.setAttribute("errorMessageDetails", details);
+			    	        response.setStatus(500);
+			    	        error = getServletContext().getRequestDispatcher("/error.jsp");
+			    	        error.forward(request, response);
 					}
 				}
 				
@@ -114,8 +118,10 @@ public class StoricoUserServlet extends HttpServlet {
 			  RequestDispatcher error = null;
  		       String header = "Server Error";
  		       String details = "errore nel reperire l'utente dal database...";
+ 	   	        request.setAttribute("errorMessageHeader", header);
+ 		        request.setAttribute("errorMessageDetails", details);
  		        response.setStatus(500);
- 		        error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
+ 		        error = getServletContext().getRequestDispatcher("/error.jsp");
  		        error.forward(request, response);
 		  }
 		
@@ -134,8 +140,10 @@ public class StoricoUserServlet extends HttpServlet {
 				 RequestDispatcher error = null;
 	 		       String header = "Server Error";
 	 		       String details = "errore nel reperire gli ordini dal database...";
+	 	   	        request.setAttribute("errorMessageHeader", header);
+	 		        request.setAttribute("errorMessageDetails", details);
 	 		        response.setStatus(500);
-	 		        error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
+	 		        error = getServletContext().getRequestDispatcher("/error.jsp");
 	 		        error.forward(request, response);
 
 			}
@@ -143,8 +151,10 @@ public class StoricoUserServlet extends HttpServlet {
 			    RequestDispatcher error = null;
 		        String header = "Server Error";
 		        String details = "utente non trovato...";
-		        response.setStatus(401);
-		        error = getServletContext().getRequestDispatcher("/error.jsp?errorMessageHeader=" + header + "&errorMessageDetails=" + details);
+	   	        request.setAttribute("errorMessageHeader", header);
+		        request.setAttribute("errorMessageDetails", details);
+		        response.setStatus(500);
+		        error = getServletContext().getRequestDispatcher("/error.jsp");
 		        error.forward(request, response);
 		}
 		
