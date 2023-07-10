@@ -3,8 +3,8 @@
     
 <% 
    //creazione di una pagina d'errore dinamica dove costruisco
-   String header = (String) session.getAttribute("errorMessageHeader");
-   String details = request.getParameter("errorMessageDetails");
+   String header = (String) request.getAttribute("errorMessageHeader");
+   String details = (String) request.getAttribute("errorMessageDetails");
    Integer status = response.getStatus();
    if(status == 200 || status == 201 || status == 202){
 	   status = Integer.parseInt(request.getParameter("status"));
