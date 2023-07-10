@@ -12,7 +12,7 @@
 		
 <script>
     var urlWithoutPrefix = location.href.replace(/.*:\d+\//, "");
-    console.log(urlWithoutPrefix);
+    console.log(urlWithoutPrefix);		
     if (urlWithoutPrefix !== "TSWproject/404.jsp") {
         location.replace("/TSWproject/404.jsp");
     }
