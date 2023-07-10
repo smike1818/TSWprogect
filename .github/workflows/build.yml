@@ -2,7 +2,7 @@ name: Build
 on:
   push:
     branches:
-      - TSWProject
+      - michele
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
