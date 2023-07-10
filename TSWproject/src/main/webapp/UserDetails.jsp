@@ -3,7 +3,7 @@
     
 <%
     String rend = null;
-    String username = request.getParameter("us");
+    String username = (String) session.getAttribute("us");
     Collection<?>acquisti = null;
     
     if(session.getAttribute("admin")==null){ 

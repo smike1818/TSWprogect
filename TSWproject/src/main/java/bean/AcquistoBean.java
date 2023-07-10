@@ -1,5 +1,7 @@
 package bean;
 
+import java.text.DecimalFormat;
+
 public class AcquistoBean {
 	 private int idAcquisto;
 	 private UserBean consumer = null;
@@ -45,7 +47,13 @@ public class AcquistoBean {
 	 }
      
      public double getImporto() {
-    	 return importo;
+    	 DecimalFormat df = new DecimalFormat("#0.00");
+         String totaleFormatted = df.format(importo);
+
+         // Sostituisci la virgola con un punto nella stringa
+         totaleFormatted = totaleFormatted.replace(",", ".");
+
+         return Double.parseDouble(totaleFormatted);
      }
 
 	public void setIndirizzo(IndirizzoBean ind) {

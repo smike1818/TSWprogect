@@ -69,30 +69,11 @@ $(document).ready(function() {
 		  $.ajax({
            url: "users",
            method: "GET",
-          dataType: "json",
-          data: { data: element, action: "autocomplete" },
-      success: function(json) {
-          //se json è vuoto mi stampa messaggio d'errore
-          //altrimenti di indirizza a UserDetails
-          if (Object.keys(json).length === 0) {       //controllo se nella stringa json c'è almeno una key
-              $(".error-statement").html("username non trovato, riprova");
-          }else{
-			  //FIXED VULNERABILITY
-			  //EFFETTUO CHIAMATA POST E NON GET
-			  var form = document.createElement("form");
-form.setAttribute("method", "post");
-form.setAttribute("action", "UserDetails.jsp");
-
-var input = document.createElement("input");
-input.setAttribute("type", "hidden");
-input.setAttribute("name", "us");
-input.setAttribute("value", json[0]);
-
-form.appendChild(input);
-document.body.appendChild(form);
-
-form.submit();
-		  }
+           dataType: "json",
+           data: { data: element, action: "first-user" },
+           success: function(json) {
+               console.log(json);	   
+			   window.location.href = "UserDetails.jsp";
       },
       error: function(error) {
         console.log("Errore durante la chiamata AJAX:", error);

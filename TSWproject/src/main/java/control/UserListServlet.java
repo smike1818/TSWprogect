@@ -9,8 +9,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+
+import bean.UserBean;
 import dao.UserDAO;
 import model.ModelUserDAO;
 
@@ -48,8 +51,26 @@ public class UserListServlet extends HttpServlet {
 							 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Errore durante l'esecuzione della query");
 						}       
 		    		if(suggerimenti!=null) {
-		    			response.getWriter().write(new Gson().toJson(suggerimenti));   //da Collection a stringa JSON che inserisco in response
+		    			String users = new Gson().toJson(suggerimenti);
+		    			response.getWriter().write(users);   //da Collection a stringa JSON che inserisco in response
 		    		}
+		    	}
+		    	if(action.equalsIgnoreCase("first-user")) {
+		    		 //prendo la stringa scritta dall'utente
+		    		String value = request.getParameter("data");
+		    		if(value!=null )
+						try {
+							//username che matchano con value
+							UserBean user = mud.doRetrieveByUsr(value);
+							HttpSession session = request.getSession();
+							session.setAttribute("us", user.getUsername());
+							String userJSON = new Gson().toJson(user.getUsername());
+			    			response.getWriter().write(userJSON);   //da Collection a stringa JSON che inserisco in response
+							
+						} catch (SQLException e) {
+							
+							 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Errore durante l'esecuzione della query");
+						}       
 		    	}
 		    }else {	        
 	        
