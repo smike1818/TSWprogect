@@ -1,23 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" %>
     
-<% 
-   //creazione di una pagina d'errore dinamica dove costruisco
-   String header = request.getParameter("errorMessageHeader");
-   String details = request.getParameter("errorMessageDetails");
-   Integer status = response.getStatus();
-   if(status == 200 || status == 201 || status == 202){
-	   status = Integer.parseInt(request.getParameter("status"));
-   }
-   if(header == null && details == null){
+<%
+//creazione di una pagina d'errore dinamica dove costruisco
+String header = (String) session.getAttribute("errorMessageHeader");
+String details = (String) session.getAttribute("errorMessageDetails");
+Integer status = response.getStatus();
+if(header == null && details == null){
 	   //se header e details non vengono caricati tramite i parametri della richiesta
 	   //li carico tramite gli attributi
-	   header = (String) request.getAttribute("errorMessageHeader");
-	   details = (String) request.getAttribute("errorMessageDetails");
-   }
-   if(header != null && details != null){   
+	   header = "Client Error";
+	   details = "non puoi accedere a questa pagina";
+	   status = 403;
+}
+if(header != null && details != null){
 
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,4 +40,4 @@
 </body>
 </html>
 
-<%} %>
+<%}%>
