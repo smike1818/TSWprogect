@@ -192,10 +192,17 @@ public class FatturaServlet extends HttpServlet {
             //ADD BODY OF TABLE
             double sum = 0;
             for(ComposizioneBean c : complist) {
+            	
+            	DecimalFormat df1 = new DecimalFormat("#0.00");
+            	String SumFormatted = df1.format(c.getArticolo().getPrezzoBase()*c.getqAcquistate());
+            	
+            	// Sostituisci la virgola con un punto nella stringa
+                SumFormatted = SumFormatted.replace(",", ".");
+            	
             	PdfPCell Cell1 = new PdfPCell(new Phrase(""+c.getqAcquistate(), Font10));
                 PdfPCell Cell2 = new PdfPCell(new Phrase(""+c.getArticolo().getName(), Font10));
                 PdfPCell Cell3 = new PdfPCell(new Phrase(""+c.getArticolo().getPrezzoBase()+" euro", Font10));
-                PdfPCell Cell4 = new PdfPCell(new Phrase(""+c.getArticolo().getPrezzoBase()*c.getqAcquistate()+" euro", Font10));
+                PdfPCell Cell4 = new PdfPCell(new Phrase(""+SumFormatted+" euro", Font10));
                 
                 // Set the text alignment to center
                 Cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -256,18 +263,20 @@ public class FatturaServlet extends HttpServlet {
             phrase2.add(Chunk.NEWLINE); // Aggiunge un carattere di nuova linea
             
             DecimalFormat df = new DecimalFormat("#0.00");
-            String totaleFormatted = df.format(sum);
+            String SumFormatted = df.format(sum);
+            String TotaleFormatted = df.format(acquisto.getImporto());
 
             // Sostituisci la virgola con un punto nella stringa
-            totaleFormatted = totaleFormatted.replace(",", ".");
+            SumFormatted = SumFormatted.replace(",", ".");
+            TotaleFormatted = TotaleFormatted.replace(",", ".");
            
-            phrase2.add(new Phrase(""+totaleFormatted+" euro",Font10));
+            phrase2.add(new Phrase(""+SumFormatted+" euro",Font10));
             phrase2.add(Chunk.NEWLINE); // Aggiunge un carattere di nuova linea
             phrase2.add(Chunk.NEWLINE); // Aggiunge un carattere di nuova linea
             phrase2.add(new Phrase(""+iva+"%", Font10));
             phrase2.add(Chunk.NEWLINE); // Aggiunge un carattere di nuova linea
             phrase2.add(Chunk.NEWLINE); // Aggiunge un carattere di nuova linea
-            phrase2.add(new Phrase(""+acquisto.getImporto()+" euro", Font12Bold));
+            phrase2.add(new Phrase(""+TotaleFormatted+" euro", Font12Bold));
             phrase2.add(Chunk.NEWLINE); // Aggiunge un carattere di nuova linea
             
             PdfPCell lastCell2 = new PdfPCell(phrase2);

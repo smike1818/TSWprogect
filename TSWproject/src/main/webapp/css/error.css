@@ -1,11 +1,12 @@
 @charset "UTF-8";
 
-.error-page{
-	background-image: none;
-	display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Verdana", Arial, sans-serif;
+.error-page {
+  background-image: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Verdana", Arial, sans-serif;
 }
 
 .text-error{
