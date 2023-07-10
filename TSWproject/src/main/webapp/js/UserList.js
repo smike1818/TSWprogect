@@ -77,8 +77,21 @@ $(document).ready(function() {
           if (Object.keys(json).length === 0) {       //controllo se nella stringa json c'è almeno una key
               $(".error-statement").html("username non trovato, riprova");
           }else{
-			  var encodedValue = encodeURIComponent(json[0]);
-              window.location.href = "UserDetails.jsp?us=" + encodedValue;
+			  //FIXED VULNERABILITY
+			  //EFFETTUO CHIAMATA POST E NON GET
+			  var form = document.createElement("form");
+form.setAttribute("method", "post");
+form.setAttribute("action", "UserDetails.jsp");
+
+var input = document.createElement("input");
+input.setAttribute("type", "hidden");
+input.setAttribute("name", "us");
+input.setAttribute("value", json[0]);
+
+form.appendChild(input);
+document.body.appendChild(form);
+
+form.submit();
 		  }
       },
       error: function(error) {
