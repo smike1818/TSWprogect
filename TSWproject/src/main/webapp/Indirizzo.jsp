@@ -46,32 +46,40 @@
 				<div class="main">
 					<%if(indlist==null || indlist.size()==0){%>
 				   		<jsp:include page="AddIndirizzo.jsp"></jsp:include>
+				   		</div>
+				   		</div>
+				   		<footer>
+				   			<jsp:include page="footer.jsp"></jsp:include>
+				   		</footer>
+				   		</div>
 					<%}else{ %>
 					<h4>elenco indirizzi salvati</h4>
-					<ol class="address-list">
-				 	<%
-				   	IndirizzoBean ind = null;
-				   	if (indlist != null && indlist.size() != 0) {
-						Iterator<?> it = indlist.iterator();
-						while (it.hasNext()) {
-						    ind = (IndirizzoBean) it.next();
-				
-					%>
-					<!-- quando invio i dati dell'indirizzo alla servlet -->
-					<li class="li-address">
-				           <%=ind.getVia()%> <%=ind.getCivico() %>,<%=ind.getCitta() %> 
-				           (<a href="address?action=delete&via=<%=ind.getVia()%>&civico=<%=ind.getCivico() %>&citta=<%=ind.getCitta() %>">rimuovi</a>)
-				           <%if(!ind.getIsPrimary()){ %>
-				               [<a href="address?action=prefer&via=<%=ind.getVia()%>&civico=<%=ind.getCivico() %>&citta=<%=ind.getCitta() %>">imposta come predefinito</a>]
-				           <%}else{ %>
-				               [PREDEFINITO]
-				           <%} %>
-					</li>
-					<%}}%>
-					</ol>
-					<span>
+					<div class="table-container" id="indirizzi">
+					 	<%
+					   	IndirizzoBean ind = null;
+					   	if (indlist != null && indlist.size() != 0) {
+							Iterator<?> it = indlist.iterator();
+							while (it.hasNext()) {
+							    ind = (IndirizzoBean) it.next();
+					
+						%>
+						<!-- quando invio i dati dell'indirizzo alla servlet -->
+						<div class="table-row">
+					           <span class="table-cell"><%=ind.getVia()%> <%=ind.getCivico() %>,<%=ind.getCitta() %> </span>
+					           <span class="table-cell"><a href="address?action=delete&via=<%=ind.getVia()%>&civico=<%=ind.getCivico() %>&citta=<%=ind.getCitta() %>" class="redbutton-a">rimuovi</a></span>
+					           <span class="table-cell">
+					           <%if(!ind.getIsPrimary()){ %>
+					               <a href="address?action=prefer&via=<%=ind.getVia()%>&civico=<%=ind.getCivico() %>&citta=<%=ind.getCitta() %>" class="modern-a">imposta come predefinito</a>
+					           <%}else{ %>
+					               [PREDEFINITO]
+					           <%} %>
+					           </span>
+						</div>
+						<%}}%>
+					</div>
+					<div>
 						<button class="add-AddIndirizzo-link" >Aggiungi indirizzo</button>
-					</span><br>
+					</div>
 					<!-- javascript al click del link di sopra importerà dinamicamente AddIndirizzo.jsp e lo mette nel div di sotto -->
 					<div class="show-AddIndirizzo"></div>
 				</div>

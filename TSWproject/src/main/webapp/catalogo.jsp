@@ -39,29 +39,31 @@
 			         	</div>
 			         	<div class="table-row">
 			         		<div class="table-cell" id="cat1">
-			         			<a href="categories?tipo=true"><img src="img/pickups.png" width="20%"></a>
+			         			<a href="categories?tipo=true"><img src="img/pickups.png" width="50%"></a>
 			         			<p>	
 			         				accessori
 			         			</p>
 		         			</div>
 		         		<div class="table-cell" id="cat2">
-		         			<a href="categories?tipo=false"><img src="img/strato.png" width="5%"></a>
+		         			<a href="categories?tipo=false"><img src="img/strato.png" width="15%"></a>
 		         			<p>	
 		         				strumenti
 		         			</p>
 		         		</div>
 		         	</div>
+		        	</div>
 		        	<div class="catalogo">
 			        	<h1>I nostri articoli in evidenza</h1>
-					    <div class="products-list">
-					        <%
-					           //setto un limite di 5 elementi da mostrare nella pagina principale
-					           request.setAttribute("limit",5);
-					        %>
-				        	<jsp:include page="ListProducts.jsp"></jsp:include>
-				    	</div>
+						    <div class="products-list">
+						        <%
+						           //setto un limite di 5 elementi da mostrare nella pagina principale
+						           request.setAttribute("limit",5);
+						        %>
+					        	<jsp:include page="ListProducts.jsp"></jsp:include>
+					    	</div>
 		        		</div>
-		        	</div>
+		    	<h1 style="color: white">La redazione consiglia</h1>
+		        	<iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/it/playlist/gaylist/pl.u-pMylDZmHW2zYYLa"></iframe>
 		    	</div>
 		    </div>
 		    <jsp:include page="footer.jsp"></jsp:include>

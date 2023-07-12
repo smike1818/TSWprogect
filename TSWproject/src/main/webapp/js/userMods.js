@@ -23,8 +23,9 @@ $(document).ready(function() {
     // Step 1: Get the initial text from the campText element
     var originalText = $('#' + campTextId).text();
     var editButton = $('#' + buttonId);
+    var resetButton = $('<input type="reset" value="ripristina" class="redbutton-a">').hide();
 
-    editButton.click(function() {
+	editButton.click(function() {
 		
 	//validazione dei campi: mi prendo l'id del bottone per verificare poi che tipo di campo vado a controllare
 	  var result = true;
@@ -56,7 +57,7 @@ $(document).ready(function() {
    
 	         
       // Step 3: Create a send button and hide it initially
-      var sendButton = $('<button id="sendButton">Send</button>').hide();
+      var sendButton = $('<button class="modern-button" id="sendButton">Send</button>').hide();
       // Step 4: Create a new paragraph element to replace the campText element
       var paragraph = $('<p class="user-field"></p>').append(inputField, sendButton);
 
@@ -64,8 +65,10 @@ $(document).ready(function() {
 
       // Step 5: Replace the campText element with the input field and send button
       campText.replaceWith(paragraph);
+      editButton.replaceWith(sendButton, resetButton);
       editButton.hide();
       sendButton.show();
+      resetButton.show();
 
       sendButton.click(function() {
 		  
@@ -122,7 +125,14 @@ $(document).ready(function() {
         });
         }
       });
-    });
+      resetButton.click(function(){
+	  	paragraph.replaceWith(originalText);
+    	sendButton.replaceWith(editButton);
+		editButton.show();
+      	sendButton.hide();
+      	resetButton.hide();
+	 });
+   });
   }
 
   // Step 11: Call the setupEditSaveFunction with button

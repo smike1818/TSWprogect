@@ -108,10 +108,14 @@
 					            	phone = (TelefonoBean) it.next();
 			             %>
 			             <div class="table-row">
-				    		<div class="table-cell" id="<%=phone.getNumero()%>"><%=phone.getNumero()%>
+				    		<div class="table-cell" id="<%=phone.getNumero()%>">
+				    			<%=phone.getNumero()%>
+				    		</div>
+				    		<div class="table-cell">
 				               	<a class="redbutton-a" href="phone?action=delete&phone=<%=phone.getNumero()%>">(elimina)</a>
-				               	<!-- gestione numeri predefiniti -->
-				                           
+							</div>
+							<div class="table-cell">
+				               	<!-- gestione numeri predefiniti -->         
 				               	<% if(!phone.getIsPrimary()){ %>                            
 				               	<a class="modern-a" href="phone?action=prefer&phone=<%=phone.getNumero()%>">(seleziona come predefinito)</a>
 				           		<%}else{ %>
