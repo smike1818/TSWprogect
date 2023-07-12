@@ -649,3 +649,12 @@ select:focus {
 	text-align: center;
 	padding: 5%;
 }
+
+/*
+	responsive layout
+*/
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
+}
