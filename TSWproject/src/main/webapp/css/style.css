@@ -653,8 +653,49 @@ select:focus {
 /*
 	responsive layout
 */
-@media only screen and (max-width: 600px) {
-  body {
-    background-color: lightblue;
-  }
+@media only screen and (max-width: 800px) {
+	.header-center img {
+		display: none;
+	}
+	.content{
+		flex: 1;
+		background-image: none;
+	    background-color: white;
+	    color: black;
+	    padding: 20px;
+	}	
+	.main{
+	    color: black;
+	}
+ 	.table-container{
+  		text-align: center;
+		padding: 5%;
+		/*margin: 2%;*/
+		/*opacity: 0.9;*/
+		border-radius: 5px;
+	}
+	.table-row
+	 {
+	 	display: block;
+	 	align-items: center;	
+	 	border-bottom: 1px solid #ccc;
+	 	padding: 10px 0;
+	 }
+	 .table-cell {
+	 	flex: 1;
+	 	padding: 0 10px;
+	 	display: block;
+	}
+	.list-products{
+		display: block;
+	}
+
+	.product-container {
+	    display: block;
+	    flex-direction: column;
+	    align-items: center;
+	    text-align: center;
+	    width: 95%;
+	    margin: 2%;
+	}
 }
