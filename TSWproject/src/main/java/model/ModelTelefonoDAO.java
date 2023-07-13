@@ -172,11 +172,15 @@ public class ModelTelefonoDAO implements TelefonoDAO {
 		} finally {
 			try {
 				if (preparedStatement != null)
-					preparedStatement.close();   
-				ps.close();
-			} finally {
-				if (connection != null)
-					connection.close();
+					preparedStatement.close();				 
+			}finally {
+				 try{
+					 if(ps!=null)    
+						ps.close();
+				 }finally {
+				   if (connection != null)
+					  connection.close();
+				 }
 			}
 		}
 		return (result != 0);
