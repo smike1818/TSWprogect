@@ -21,7 +21,7 @@
 %>
 
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
 <meta charset="ISO-8859-1">
       <script src="js/JQuery.js" type="text/javascript"></script>

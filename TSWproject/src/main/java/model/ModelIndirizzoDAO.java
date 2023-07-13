@@ -67,8 +67,10 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 						throw new SQLException();
 				}finally {
 					try {
-						if (preparedStatement != null)
+						if (preparedStatement != null || ps!=null) {
 							preparedStatement.close();
+							ps.close();
+						}
 					} finally {
 						if (connection != null)
 							connection.close();
@@ -296,7 +298,8 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 			
 		} finally {
 			try {
-				if (preparedStatement != null)
+				if (preparedStatement != null || ps!=null)
+					ps.close();
 					preparedStatement.close();
 			} finally {
 				if (connection != null)

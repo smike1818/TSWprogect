@@ -55,7 +55,7 @@ public class ArticoloCart {
     //ovverride del metodo equals di Object per confrontare
     //gli 'id' di 2 ArticoloBean
     
-    public boolean equals(ArticoloCart ac) {
+    public boolean equals2(ArticoloCart ac) {
     	return this.bean.getID() == ac.bean.getID();
     }
 }

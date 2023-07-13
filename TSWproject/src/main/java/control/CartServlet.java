@@ -73,7 +73,7 @@ public class CartServlet extends HttpServlet{
 		    	    //controllo se all'interno del carrello c'è articolo
 		    	    int i=0;
 		    	    for(ArticoloCart a : cart) {
-		    	    	if(a.equals(aCart))
+		    	    	if(a.equals2(aCart))
 		    	    		break;
 		    	    	i++;	
 		    	    }

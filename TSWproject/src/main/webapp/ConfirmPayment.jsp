@@ -36,7 +36,7 @@ if(username==null){
 %>
 
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
 <meta charset="ISO-8859-1">
 <title>Confirm Payment</title>
