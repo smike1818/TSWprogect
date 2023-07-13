@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+<title></title>
       <script src="js/JQuery.js" type="text/javascript"></script>
       <script src="js/not_autorized.js" type="text/javascript"></script>
 </head>
