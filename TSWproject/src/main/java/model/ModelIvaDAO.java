@@ -60,9 +60,9 @@ public class ModelIvaDAO implements IvaDAO{
 				
 		}finally {
 			try {
-				if (preparedStatement != null || ps!=null)
-					ps.close();
+				if (preparedStatement != null)
 					preparedStatement.close();
+				if(ps!=null)    ps.close();
 			} finally {
 				if (connection != null)
 					connection.close();

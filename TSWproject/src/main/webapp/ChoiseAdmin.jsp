@@ -13,6 +13,7 @@ if(session.getAttribute("admin")==null){
 <html lang="it">
 <head>
 <meta charset="ISO-8859-1">
+<title></title>
       <script src="js/JQuery.js" type="text/javascript"></script>
       <script src="js/not_autorized.js" type="text/javascript"></script>
 </head>

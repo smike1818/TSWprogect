@@ -5,6 +5,7 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
+<title></title>
 </head>
 <body>
   <h5>inserisci metodo di pagamento</h5><br>

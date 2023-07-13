@@ -39,13 +39,13 @@
 			         	</div>
 			         	<div class="table-row no-border">
 			         		<div class="table-cell" id="cat1">
-			         			<a href="categories?tipo=true"><img src="img/pickups.png" width="50%"></a>
+			         			<a href="categories?tipo=true"><img src="img/pickups.png" alt="no-available" width="50%"></a>
 			         			<p>	
 			         				accessori
 			         			</p>
 		         			</div>
 		         		<div class="table-cell" id="cat2">
-		         			<a href="categories?tipo=false"><img src="img/strato.png" width="15%"></a>
+		         			<a href="categories?tipo=false"><img src="img/strato.png" alt="no-available" width="15%"></a>
 		         			<p>	
 		         				strumenti
 		         			</p>
@@ -63,7 +63,7 @@
 					    	</div>
 		        		</div>
 		    	<h1 style="color: white">La redazione consiglia</h1>
-		        	<iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/it/playlist/gaylist/pl.u-pMylDZmHW2zYYLa"></iframe>
+		        	<iframe title="" allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/it/playlist/gaylist/pl.u-pMylDZmHW2zYYLa"></iframe>
 		    	</div>
 		    </div>
 		    <jsp:include page="footer.jsp"></jsp:include>
