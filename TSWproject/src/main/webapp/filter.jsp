@@ -17,16 +17,16 @@
 		<br><br><h5><label for="Price">Price</label></h5>
 		
 		<!-- impostare che min<max in seguito-->
-		<label for="min">Min <input id="filter-min" type="number" step="0.01" min="0.00" max="4000.00" name="min"></label>
-		<label for="max">Max <input id="filter-max" type="number" step="0.01" min="0.00" max="4000.00" name="max"></label>
+		<br><label for="min">Min <input class="filter-input nascondi-frecce" id="filter-min" type="number" step="0.01" min="0.00" max="4000.00" name="min"></label>
+		<br><label for="max">Max <input class="filter-input nascondi-frecce" id="filter-max" type="number" step="0.01" min="0.00" max="4000.00" name="max"></label>
 		
 		<!-- impostare anche le marche tramite tecnologie frontend, per ora si usa un classico input di testo-->
 		<br><br><h5><label for="marca">Marca</label></h5>
-		<input id="filter-marca" type="text" name="marca" placeholder="enter marca">
+		<input class="filter-input" id="filter-marca" type="text" name="marca" placeholder="enter marca">
 		
 		<br><br><h5><label for="tipologia">Tipologia</label></h5>
-		<input id="filter-tipologia" type=text name="tipologia" placeholder="enter tipologia">		
-		<br><br><input id="filter-submit" type="submit" value="filtra">
+		<input class="filter-input" id="filter-tipologia" type=text name="tipologia" placeholder="enter tipologia">		
+		<br><br><input class="modern-button" id="filter-submit" type="submit" value="filtra">
 		
 		<!-- farla per categoria, aspettare studio di AJAX -->
 		

@@ -6,6 +6,7 @@ $(document).ready(function() {
         var AcquistoID = $(this).closest('.acquisti-details').attr('id');
         var $dettagliButton = $(this); // Salva il riferimento all'elemento $(this)
         var artDetailsContainer = $dettagliButton.closest('.acquisti-details').next('.artDetailsContainer');
+        artDetailsContainer.addClass('table-row');
         
         if (artDetailsContainer.is(':visible')) {
             // Se il container è visibile, esegui l'effetto fadeOut
@@ -24,14 +25,19 @@ $(document).ready(function() {
                         var div = $('<div class="artDetails">');
                         div.attr('id',element.id);
                         var secondiv = $('<div class="text">');
-                        secondiv.append($('<h3>').text("id articolo: "+element.id));
-                        secondiv.append($('<br>'));
-                        secondiv.append($('<br>'));
-                        secondiv.append($('<span>').text("nome: "+element.nome));
-                        secondiv.append($('<br>'));
-                        secondiv.append($('<span>').text("prezzo: "+ element.prezzo));
-                        secondiv.append($('<br>'));
-                        secondiv.append($('<span>').text("categoria: "+element.cat.nome));
+                        secondiv.append($('<h3>').text("id articolo: " + element.id));
+secondiv.append($('<br>'));
+secondiv.append($('<span>').text("Nome: ").css({'font-weight': 'bold', 'font-style': 'italic'}));
+secondiv.append($('<span>').text(element.nome));
+secondiv.append($('<br>'));
+secondiv.append($('<span>').text("Prezzo: ").css({'font-weight': 'bold', 'font-style': 'italic'}));
+secondiv.append($('<span>').text(element.prezzo));
+secondiv.append($('<br>'));
+secondiv.append($('<span>').text("Categoria: ").css({'font-weight': 'bold', 'font-style': 'italic'}));
+secondiv.append($('<span>').text(element.cat.nome));
+secondiv.append($('<br>'));
+secondiv.append($('<br>'));
+secondiv.append($('<br>'));
                         div.append(secondiv);
                         
                         //in quest'altra chiamata ajax andrò a prendere tutte le immagini dei vari articoli

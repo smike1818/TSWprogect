@@ -37,7 +37,7 @@
 			         	<div class="table-row">
 			         		<h1 class="table-cell">Categorie</h1>
 			         	</div>
-			         	<div class="table-row">
+			         	<div class="table-row no-border">
 			         		<div class="table-cell" id="cat1">
 			         			<a href="categories?tipo=true"><img src="img/pickups.png" width="50%"></a>
 			         			<p>	

@@ -43,7 +43,7 @@ if(username==null){
 <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
- 
+  <div class="wrapper">
     <header>
        <jsp:include page="header.jsp"></jsp:include>
     </header>
@@ -51,11 +51,13 @@ if(username==null){
 	    	<jsp:include page="second-header.jsp"></jsp:include>
 	    </header>
     
-    <section class="body">
-       <h5>Conferma l'acquisto</h5>
-       <div class="selected-parameters">
+    <div class="content">
+	  <div class="main">
+       <h3>Conferma l'acquisto</h3>
+       <div class="table-container" id="confirmPayment">
+         <div class="table-row no-border center-align">
          <form action="purchase" method="post">
-           <label id="metodo-selezionato-label">METODO DI PAGAMENTO: 
+           <label id="metodo-selezionato-label">METODO DI PAGAMENTO: <br><br>
               <select id="metodo-selezionato" name="metodo-selezionato">
               
               <%
@@ -66,20 +68,20 @@ if(username==null){
   				        bean = (ContoBean) it.next();			    
   				        if(bean.getIntestatario().getUsername().equalsIgnoreCase(username)){
               %>              
-                <option
+                <option class="opt"
                 <%
                    if(bean.getIsPrimary()){
                 %>
                   selected                 
                 <%} %> 
                 value="<%=bean.getIBAN() %>"
-                ><%=bean.getNumCarta()%> [<%=bean.getIBAN() %>]</option>                                
+                ><%=bean.getIBAN() %></option>                                
               
               <%}}}%>
               
               </select>
            </label>
-           <br><label id="indirizzo-selezionato-label">INDIRIZZO: 
+           <br><br><label id="indirizzo-selezionato-label">INDIRIZZO: <br><br>
                 <select id="indirizzo-selezionto" name="indirizzo-selezionato">
               
               <%
@@ -103,17 +105,22 @@ if(username==null){
               </select>
            </label>
            
-           <br><br><input type="submit" value="scegli"> 
+           
+           <br><br><input type="submit" class="modern-button" value="scegli"> 
            </form>
+          </div>
        </div>
        
-       
-    </section>
+       </div>
+    </div>
+    
 	   
 	<jsp:include page="footer.jsp"></jsp:include>
 	
+   </div>
 	<!-- inseriti esclusivamente per poter nascondere la barra di ricerca -->
 	<script src="js/JQuery.js" type="text/javascript"></script>
 	<script src="js/userFunctions.js" type="text/javascript"></script>
+  
 </body>
 </html>

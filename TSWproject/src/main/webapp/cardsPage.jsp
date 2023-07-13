@@ -42,13 +42,7 @@ if(username==null){
 	    		<div class="main">
 		  			<h1>Scegli un metodo di pagamento</h1>
 		
-		  			<div class="table-container" id="pagamenti">
-		    			<div class="table-row">
-					        <span class="table-cell">numero di carta</span>
-					        <span class="table-cell">iban</span>
-					        <span class="table-cell">setta come predefinito</span>
-					        <span class="table-cell">cancella</span>
-		   		 		</div>    
+		  			<div class="table-container" id="pagamenti">  
 		    			<% 	ContoBean bean = null;
 		       				if (cards != null && cards.size() != 0) {
 		           				Iterator<?> it = cards.iterator();
@@ -57,12 +51,12 @@ if(username==null){
 		               				if (bean.getIntestatario().getUsername().equalsIgnoreCase(username)) {
 		    			%>
 		    			<div class="table-row">
-					        <span class="table-cell"><%=bean.getNumCarta() %></span>
-					        <span class="table-cell"><%=bean.getIBAN() %></span>
+					        <span class="table-cell"><b><i>N° : </i></b><br> <%=bean.getNumCarta() %></span><br>
+					        <span class="table-cell"><b><i>IBAN :</i> </b><br> <%=bean.getIBAN() %></span><br>
 		        			<% if (!bean.getIsPrimary()) { %>
 					        <span class="table-cell"><a class="modern-a" href="cards?action=prefer&IBAN=<%=bean.getIBAN()%>">scegli</a></span>
 					        <% } else { %>
-					        <span class="table-cell">PREDEFINITA</span>
+					        <span class="table-cell"><br><i>PREDEFINITO</i></span><br>
 					        <% } %>
 					        <span class="table-cell"><a class="redbutton-a" href="cards?action=delete&IBAN=<%=bean.getIBAN()%>">elimina</a></span>
 		    			</div>
@@ -71,7 +65,7 @@ if(username==null){
 		        		<span class="table-cell">non hai carte inserite</span>
 		    		</div>
 		    		<% } %>
-		    			<div class="table-row">
+		    			<div class="table-row no-border">
 			    			<span class="table-cell"><button class="add-InsertCards-link" >Aggiungi metodo di pagamento</button></span><br>
 				   			<!-- javascript al click del link di sopra importerï¿½ dinamicamente InsertCards.jsp e lo mette nel div di sotto -->
 				   		</div>	

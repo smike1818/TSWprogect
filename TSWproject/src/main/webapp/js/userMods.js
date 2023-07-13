@@ -23,7 +23,7 @@ $(document).ready(function() {
     // Step 1: Get the initial text from the campText element
     var originalText = $('#' + campTextId).text();
     var editButton = $('#' + buttonId);
-    var resetButton = $('<input type="reset" value="ripristina" class="redbutton-a">').hide();
+    var resetButton = $('<input type="reset" value="ripristina" class="redbutton-a">');
 
 	editButton.click(function() {
 		
@@ -55,20 +55,16 @@ $(document).ready(function() {
              inputField.attr("placeholder", ""); // Valore predefinito nel caso in cui l'id del pulsante non corrisponda a nessun caso sopra
       }
    
-	         
+	         console.log(originalText);
       // Step 3: Create a send button and hide it initially
-      var sendButton = $('<button class="modern-button" id="sendButton">Send</button>').hide();
+      var sendButton = $('<button class="modern-button" id="sendButton">Send</button>');
       // Step 4: Create a new paragraph element to replace the campText element
-      var paragraph = $('<p class="user-field"></p>').append(inputField, sendButton);
+      var paragraph = editButton.closest(".table-row").find("p");
 
-      var campText = $('#' + campTextId);
-
-      // Step 5: Replace the campText element with the input field and send button
-      campText.replaceWith(paragraph);
+      paragraph.empty();
+      paragraph.append(inputField);
+      
       editButton.replaceWith(sendButton, resetButton);
-      editButton.hide();
-      sendButton.show();
-      resetButton.show();
 
       sendButton.click(function() {
 		  
@@ -126,11 +122,11 @@ $(document).ready(function() {
         }
       });
       resetButton.click(function(){
-	  	paragraph.replaceWith(originalText);
+	  	inputField.replaceWith(originalText);
     	sendButton.replaceWith(editButton);
-		editButton.show();
-      	sendButton.hide();
-      	resetButton.hide();
+      	sendButton.remove();
+      	resetButton.remove();
+      	setupEditSaveFunction(buttonId, campTextId, parameter); // riabilita il bottone editButton
 	 });
    });
   }
@@ -145,6 +141,12 @@ $(document).ready(function() {
 });
     
     
+    
+    
+    
+
+    
+
     
     
     

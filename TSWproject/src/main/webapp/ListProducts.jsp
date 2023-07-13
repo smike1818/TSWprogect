@@ -47,12 +47,12 @@
           	</h4>        
           	<!-- se la quantità è 0 lo rendo non accessibile -->
           	<% if(bean.getQuantita()==0){ %>
-            <span class="product-no-available">prodotto non disponibile</span>
+            <span class="product-no-available">non disponibile</span>
           	<%}else{ %>
-            <span class="product-available"></span>
+            <span class="product-available"> disponibile</span>
           	<%} %>      
           	<!-- MARCA -->
-          	<span class="item-marca"><%=bean.getMarca() %></span>           
+          	<br><span class="item-marca"><%=bean.getMarca() %></span>           
           	<!-- PREZZO, in formato 0,00 -->
           	<p class="product-price"><%=String.format("%.2f", bean.getPrezzo())%></p>         
           	<!-- FORM AGGIUNTA AL CARRELLO -->

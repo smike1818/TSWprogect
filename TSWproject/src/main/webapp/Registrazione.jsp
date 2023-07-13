@@ -26,17 +26,16 @@
 			<div class="registrationForm">
 			    <form action="register" method="post" id="registration-form">
 			    
-					<p>Inserisci i dati <br>
-			          Nome: <input type="text" name="name" required placeholder="Mario"><br>
-			          Cognome:<input type="text" name="cognome" required placeholder="Rossi"> <br>
-			          Codice Fiscale:<input type="text" name="cf" required placeholder="XXXXXX00X00X000X"> <br>
-			          E-mail:<input type="email" name="email" required placeholder="example123@gmail.com"> <br>
-			          Username:<input type="text" name="us" required placeholder="MarioRossi12"> <br>
-			          Password:<input type="password" name="pws" required> <br>
-					  Conferma Password:<input type="password" name="pws1" required> <br>
-					</p>
+			          <br><br>Nome:<br> <input class="registration-input" type="text" name="name" required placeholder="Mario"><br>
+			          Cognome:<br> <input class="registration-input" type="text" name="cognome" required placeholder="Rossi"> <br>
+			          Codice Fiscale:<br> <input class="registration-input" type="text" name="cf" required placeholder="XXXXXX00X00X000X"> <br>
+			          E-mail:<br> <input class="registration-input" type="email" name="email" required placeholder="example123@gmail.com"> <br>
+			          Username:<br> <input class="registration-input" type="text" name="us" required placeholder="MarioRossi12"> <br>
+			          Password:<br> <input class="registration-input" type="password" name="pws" required> <br>
+					  Conferma Password:<br><input class="registration-input" type="password" name="pws1" required> <br>
+					  
 			          <p>
-			            <input type="submit" value="Registrati!">
+			            <input class="modern-button" type="submit" value="Registrati!">
 					 </p>
 				</form>
 			</div>

@@ -26,10 +26,10 @@
 					<h1>Area Login</h1><br>
 					<div class="login-form">
 						<form action="login" method="post" id="login-form">
-							Please enter your username
+							<br><br>Please enter your username
 							<input type="text" name="un" class="add-Phone-number" required placeholder="MarioRossi123"/><br>
-							Please enter your password
-							<input type="password" name="pw" class="add-Phone-number" required/><br>
+							<br><br>Please enter your password
+							<input type="password" name="pw" class="add-Phone-number" required/><br><br>
 							<input type="submit" value="Accedi!" class="modern-button">
 						</form><br>
 						<a href="Registrazione.jsp" class="modern-a"> Non sei registrato? </a>

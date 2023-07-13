@@ -2,8 +2,16 @@
     pageEncoding="UTF-8"%>
     
 <%
-   List<?>categorie = null;
-   categorie = (List<?>) request.getAttribute("categorieFiltrate");
+   List<CategoriaBean>categorie = null;
+   categorie = (List<CategoriaBean>) request.getAttribute("categorieFiltrate");
+   String cat = null;
+   
+   //prelevo il tipo 
+   if(categorie.get(0).getTipo())
+	   cat = "Pezzi di Ricambio";
+   else
+	   cat = "Strumenti";
+   
    application.setAttribute("page", "categorie.jsp");
    if(categorie==null){
 	   RequestDispatcher error = null;
@@ -34,7 +42,8 @@
 		    </header>
 			<div class="content">
 				<div class="main">  	
-			   		<div class="table-container">
+			   		<div class="table-container" id="categorie-table">
+			   		    <h3><%=cat %></h3><br>
 			   			<div class="table-row">
 				       	<%
 							CategoriaBean bean = null;

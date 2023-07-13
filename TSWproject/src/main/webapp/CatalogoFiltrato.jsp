@@ -117,7 +117,7 @@ application.removeAttribute("can-show");
 									</a>
 								</div>
 							</div>
-							<div class="table-cell" id="<%=divId%>">
+							<div class="table-cell product-name" id="<%=divId%>">
 							<!-- NOME -->
 								<h5>
 									<a class="name-item" href="dettaglio.jsp?id=<%=bean.getID()%>"><%= bean.getName() %></a>
@@ -134,17 +134,12 @@ application.removeAttribute("can-show");
 							<div class="table-cell" id="<%=divId%>">
 							<!-- se la quantità è 0 lo rendo non accessibile -->
 								<% if(bean.getQuantita()==0){ %>
-								<span class="product-no-available">prodotto non disponibile</span>
+								<span class="product-no-available">Non disponibile</span>
 								<%}else{ %>
-								<span class="product-available"></span>
+								<span class="product-available">Disponibile</span>
 								<%} %>
 							</div>
-							<div class="table-cell" id="<%=divId%>">
-							<!-- DESCRIZIONE -->
-								<p class="item-description">
-								<%=bean.getDescrizione() %>
-								</p>
-							</div>
+							
 							<div class="table-cell" id="<%=divId%>">
 							<!-- MARCA -->
 								<span class="item-marca"><%=bean.getMarca() %></span>
@@ -171,8 +166,10 @@ application.removeAttribute("can-show");
 						 <%
 								counter++; // Increment the counter
 								}
-							}
+							}else{
 						%> 
+						   <h3> Nessun prodotto aggiunto</h3>
+						<%} %>
 					</div>     
 				</div>
 			</div>

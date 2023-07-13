@@ -47,8 +47,8 @@
 					       	<%
 					    	if (images != null && images.size() >1) {
 					  		%>
-					  		<div class="table-cell" id="product-img">
-						 		<div class="images-block">
+						 	  <div class="images-block">
+						 		 <div class="table-cell" id="product-img">
 						  			<div class="cycle-slideshow" 
 										data-cycle-fx="scrollHorz"
 						       			data-cycle-prev=".prev"
@@ -73,6 +73,9 @@
 					    	</div>
 							<% } %>
 							<div class="table-cell" id="product-details">
+							    
+							    
+							    
 								<div class="product-element">
 							       	<h1><%=bean.getPrezzo() %> euro</h1><br>
 								</div>
@@ -89,13 +92,29 @@
 							       	<span><%=bean.getMarca() %></span><br>
 							    </div>
 							    <div class="product-element">
-									<label for="marca">Categoria:  </label>
+									<label for="categoria">Categoria:  </label>
 							       	<span><%=bean.getCategoria().getNome() %></span><br>
+								</div>
+								 <div class="product-element">
+									<label for="tipo">Tipo:  </label>
+							       	<span><%if(bean.getTipo()==0){ %>
+							       	          Strumento
+							       	      <%}else{ %>
+							       	          Pezzo di Ricambio
+							       	      <%} %>
+							       	</span><br>
 								</div>
 								<div class="product-element">
 							    	<label for="quantita">
 							    	<span class="details-quantity"><%=q=bean.getQuantita() %></span> prodott<%if(q==1){%>o<%}else{%>i<%} %> disponibil<%if(q==1){%>e<%}else{%>i<%} %> </label>
-								</div>
+								
+								<%if(bean.getQuantita()==0){ %>
+								
+							         <br><br><span class="product-no-available">Non disponibile</span>
+							    <%} %>
+							    
+							    </div>
+							    
 								<div class="addtocart-block">
 									<form action="cart" method="post" class="addtocart-form">
 										<input type="hidden" name="action" value="cart">
@@ -106,9 +125,9 @@
 						    </div>
 					    <%} %>
 			    		</div>
-					    <div class="table-row">
+					    <div class="table-row row-left no-border">
 					    	<div class="table-cell">
-										<label for="descrizione">Descrizione:  </label>
+										<label for="descrizione">DESCRIZIONE:  </label>
 							         	<p><%=bean.getDescrizione() %></p>
 					    	</div>
 					    </div>

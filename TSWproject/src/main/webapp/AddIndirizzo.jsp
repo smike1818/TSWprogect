@@ -9,7 +9,7 @@
 <body>
    <span class="error-statement"></span>
    <div class="table-container" id="indirizzi">
-   <div class="table-row">
+   <div class="table-row no-border">
    		<h5 class="table-cell">Aggiungi indirizzo: </h5>
    </div>
     <form action="address" method="post" id="address-form">

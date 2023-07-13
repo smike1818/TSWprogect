@@ -82,14 +82,15 @@
 								</div>
 							</div>
 							<!-- QUANTITA' -->
-							<div class="table-cell">
+							<div class="table-row" id="q_and_d">
+							 <div class="table-cell">
 								<div class="add-quantity">
-									<button class="meno"> - </button>
+									<button class="meno modern-button"> - </button>
 									<input type="number" value="<%=q%>" disabled class="input-number">
 									<input type="hidden" value="<%=a.getQTotale()%>" class="max-quantity">
 									<input type="hidden" value="<%=bean.getID() %>" class="id-item">
 									<input type="hidden" value="<%=bean.getPrezzo() %>" class="prezzo-base">
-									<button class="piu"> + </button>
+									<button class="piu modern-button"> + </button>
 								</div>
 							</div>
 							<!-- DELETE BY CART --> 
@@ -97,6 +98,7 @@
 								<div class="delete-item-block">
 									<p class="delete-section"><a href="cart?action=deleteByCart&id=<%=bean.getID()%>" class="redbutton-a">Delete By Cart</a></p>
 								</div>
+							</div>
 							</div>
 							</div>
 							<%  } %>

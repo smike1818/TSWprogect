@@ -1,6 +1,8 @@
-/**
- * 
- */
+$(document).ready(function() {
+  $('#filter-toggle').click(function() {
+    $('#filters').slideToggle();
+  });
+
 $("#filter-submit").click(function(){
 		var min = $("#filter-min").val();
 		var max = $("#filter-max").val();
@@ -22,7 +24,7 @@ $("#filter-submit").click(function(){
 	
 	//i tag input non assegnati non varranno
    	function validateFilters(min, max, marca, tipologia) {
-       var catalogo = $(".catalogo-items");
+       var catalogo = $(".table-row");
        var flag = true;
 
        if (min !== "" && max !== "") {
@@ -66,14 +68,14 @@ $("#filter-submit").click(function(){
 	//se ci sono tag senza valore non si effettua nessun hide()
      function makefilters(min, max, marca, tipologia) {
 		
-        var catalogo = $(".catalogo-items");
+        var catalogo = $(".table-row");
   
         catalogo.each(function() {
            var item = $(this);
-           var mar = item.find(".item-marca").text();
-           var tipol = item.find(".item-tipologia").text();
+           var mar = item.find(".table-cell .item-marca").text();
+           var tipol = item.find(".table-cell .item-tipologia").text();
            
-           var prezzoText = item.find(".item-prezzo").text();
+           var prezzoText = item.find(".table-cell .item-prezzo").text();
            var prezzo = parseFloat(prezzoText.replace(",", "."));     // Converte il prezzo in formato numerico
     
            if  ((min=="" || prezzo >= parseFloat(min)) && // Confronta come numeri e controlla se min è NaN
@@ -90,9 +92,11 @@ $("#filter-submit").click(function(){
 	
 	//mostro tutti i prodotti nel catalogo
 	function showAll(){
-		var catalogo = $(".catalogo-items");
+		var catalogo = $(".table-row");
 		 
 		 $.each(catalogo,function(){
 			 catalogo.show();
 		 })
 	}
+	
+});

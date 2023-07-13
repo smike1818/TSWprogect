@@ -43,6 +43,7 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 	}
 
 	private static final String TABLE_NAME = "articolo";
+	CategoriaDAO modelcat = new ModelCategoriaDAO();
 	
 	@Override
 	public void doSave(ArticoloBean product) throws SQLException {
@@ -173,7 +174,7 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		IvaBean iva = null;
 		IvaDAO modeliva = new ModelIvaDAO();
 		
-		String selectSQL = "SELECT * FROM " + MusicalModelArticoloBean.TABLE_NAME + " join categoria WHERE codice = ?";
+		String selectSQL = "SELECT * FROM " + MusicalModelArticoloBean.TABLE_NAME + " WHERE codice = ?";
 		ArticoloBean ab = null;
 		CategoriaBean cat = null;
 		
@@ -186,7 +187,6 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 
 			while (rs.next()) {
 				ab = new ArticoloBean();
-				cat = new CategoriaBean();
 				
 				ab.setID(rs.getInt("codice"));
 		    	ab.setColore(rs.getString("colore"));
@@ -202,8 +202,7 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		    	iva = modeliva.getIvaByModel();
 		    	ab.setIva(iva);
 		    	
-		    	cat.setID(rs.getInt("IDcat"));
-		    	cat.setNome(rs.getString("nome_cat"));
+		    	cat = modelcat.doRetrieveByKey(rs.getInt("categoria"));
 		    	
 		    	ab.setCategoria(cat);	
 

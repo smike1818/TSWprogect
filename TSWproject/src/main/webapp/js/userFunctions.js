@@ -45,6 +45,7 @@ if(document.title === "Confirm Payment" || document.title === "Acquisto effettua
 
         // Mostra la lista di suggerimenti
         $(".search-product-suggestions").show();
+        $(".search-product-suggestions").css("z-index","100");
     },
     error: function(error) {
       // Funzione da eseguire in caso di errore
@@ -262,9 +263,19 @@ $(".add-AddIndirizzo-link").click(function(){
    }            //invio richiesta
 });
 
-})
-   
 
+// DISABILITARE IL BOTTONE ADD TO CART QUANDO LA QUANTITA' DEGLI ITEM E' 0
+
+if ($(".product-no-available").is(":visible")) {
+	//list-product
+  $(".product-no-available").closest(".product-container").find("button").prop("disabled", true);
+  //catalogofiltrato
+   $(".product-no-available").closest(".table-row").find("button").prop("disabled", true);
+   //dettaglio
+   $("#details-addtocart").prop("disabled", true);
+}
+   
+})
 
 
 

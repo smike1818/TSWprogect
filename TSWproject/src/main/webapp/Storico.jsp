@@ -43,7 +43,7 @@ if(rend!=null){
   <h3>STORICO DEGLI ORDINI</h3>
   <h5>Utente: <%=username %></h5><br><br>
   
-  <div class="table-acquisti">
+  <div class="table-acquisti table-container" id="storico">
 		
 		<%
 		    AcquistoBean bean = null;
@@ -53,21 +53,23 @@ if(rend!=null){
 				    bean = (AcquistoBean) it.next();
 				  
 		%>
-	    <div class="acquisti-details" id="<%=bean.getID() %>">
-	      <div class="first-block">
-			<span><b>Conto:</b> <%=bean.getConto().getIBAN()%></span><br>
-			<span class="date-td"><b>Data:</b> <%=bean.getDate()%></span><br>
-			<span><b>Totale:</b> <%=String.format("%.2f", bean.getImporto())%>$</span><br>
+	    <div class="table-row acquisti-details" id="<%=bean.getID() %>">
+	      <div class="first-block table-cell">
+			<span><b><i>Conto:</i></b> <br><%=bean.getConto().getIBAN()%></span><br>
+			<br><span class="date-td"><b><i>Data: </i></b><%=bean.getDate()%></span><br><br>
 		  </div>
-		  <div class="second-block">
-			<span> <b>Indirizzo:</b> via <%=bean.getIndirizzo().getVia() %></span>		  
+		  <div class="second-block table-cell">
+			<span> <b><i>Indirizzo:</i></b><br><br> via <%=bean.getIndirizzo().getVia() %></span>		  
 			<span><%=bean.getIndirizzo().getCivico() %> </span>
-			<span>(<%=bean.getIndirizzo().getCitta() %>)</span><br>
+			<span>(<%=bean.getIndirizzo().getCitta() %>)</span><br><br><br>
 		  </div>		  
-		  <div class="terzo-block">
-			<button class="dettagli">dettagli</button> <br> 
-			<button class="fattura" id="<%=bean.getID()%>">scarica fattura</button><br> 
-		  </div>		  
+		  <div class="terzo-block table-cell">
+			<button class="dettagli modern-button">Dettagli</button> <br> 
+			<button class="fattura modern-button" id="<%=bean.getID()%>">Fattura</button><br> 
+		  </div>
+		  <div class="total-storico">
+		    <br><br> <span><i>Totale: </i><%=String.format("%.2f", bean.getImporto())%>$</span><br>
+		  </div>	  
 		</div>
 		
 		<!-- div in cui andrò a mettere gli articoli -->

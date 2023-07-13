@@ -48,7 +48,7 @@
 						<h2 class="table-cell">Dettagli utente</h2>
 					</div>
 					<div class="table-row">
-						<span class="table-cell">Name:</span>
+						<span class="table-cell"><b><i>Name:</i></b></span><br>
 						<div class="table-cell">
 						    <p class="user-field" id="name"><%=bean.getNome() %></p>
 						</div>
@@ -57,7 +57,7 @@
 						</div>
 					</div>
 					<div class="table-row">
-						<span class="table-cell">Surname:</span>
+						<span class="table-cell"><b><i>Surname:</i></b></span><br>
 						<div class="table-cell">
 						    <p class="user-field" id="surname"><%=bean.getCognome() %></p>
 						</div>
@@ -66,7 +66,7 @@
 						</div>
 					</div>
 					<div class="table-row">
-						<span class="table-cell">Username:</span>
+						<span class="table-cell"><b><i>Username:</i></b></span><br>
 						<div class="table-cell">
 						    <p class="user-field" id="user"><%=bean.getUsername() %></p>
 						</div>
@@ -75,7 +75,7 @@
 						</div>
 					</div>
 					<div class="table-row">
-						<span class="table-cell">Email: </span>
+						<span class="table-cell"><b><i>Email:</i></b> </span><br>
 						<div class="table-cell">
 							<p class="user-field" id="email"><%=bean.getEmail() %></p>
 						</div>
@@ -84,7 +84,7 @@
 						</div>
 					</div>
 					<div class="table-row">
-						<span class="table-cell">Codice Fiscale:</span>
+						<span class="table-cell"><b><i>Codice Fiscale:</i></b></span><br>
 						<div class="table-cell">
 						    <p class="user-field" id="cf"><%=bean.getCF() %></p>
 						</div>
@@ -92,7 +92,7 @@
 							<button class="modern-button" id="button5">Edit</button>
 						</div>
 					</div>	
-					<div class="table-row">
+					<div class="table-row no-border">
 						<div class="table-cell">
 							<a class="redbutton-a" href="logout" target="_self">Logout</a><br>
 						</div>
@@ -109,17 +109,17 @@
 			             %>
 			             <div class="table-row">
 				    		<div class="table-cell" id="<%=phone.getNumero()%>">
-				    			<%=phone.getNumero()%>
+				    			<b><i>Tel:</i></b><br><%=phone.getNumero()%>
 				    		</div>
 				    		<div class="table-cell">
-				               	<a class="redbutton-a" href="phone?action=delete&phone=<%=phone.getNumero()%>">(elimina)</a>
+				               	<a class="redbutton-a" href="phone?action=delete&phone=<%=phone.getNumero()%>">elimina</a>
 							</div>
 							<div class="table-cell">
 				               	<!-- gestione numeri predefiniti -->         
 				               	<% if(!phone.getIsPrimary()){ %>                            
-				               	<a class="modern-a" href="phone?action=prefer&phone=<%=phone.getNumero()%>">(seleziona come predefinito)</a>
+				               	<a class="modern-a" href="phone?action=prefer&phone=<%=phone.getNumero()%>">seleziona come predefinito</a>
 				           		<%}else{ %>
-				               	(PREDEFINITO)
+				               	<br><i>PREDEFINITO</i><br><br>
 				               	<%} %>
 					       	</div>
 				        </div>
@@ -128,7 +128,7 @@
 			           		<div class="table-cell" id="no-phones">nessun telefono inserito</div>
 			           	</div>
 			           	<%} %>
-			           	<div class="table-row">
+			           	<div class="table-row no-border">
 							<div class="table-cell">
 								<h1>Aggiungi Recapito</h1><br>			  				       		       
 								<form id="phone-form" action="phone" method="post">

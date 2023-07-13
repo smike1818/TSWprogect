@@ -37,18 +37,27 @@
 </head>
 <body>
 <div class="wrapper">
+
  	<header>
     	<jsp:include page="header.jsp"></jsp:include>
  	</header>
  	<header class="visited-pages-header">
  		<jsp:include page="second-header.jsp"></jsp:include>	
 	</header>
-
-   <h3>Acquisto effettuato!</h3>
-   <a href="catalogo.jsp">torna al catalogo per altri acquisti</a>
+	
+ <div class="content">
+   <div class="main">
+   <div class="table-container" id="acquistoDone">
    
-   <jsp:include page="footer.jsp"></jsp:include>
+   <h3 class="product-available">Acquisto effettuato!</h3>
+   <a class="modern-a" href="catalogo.jsp">torna al catalogo per altri acquisti</a>
+   
    </div>
+   </div>
+   </div>
+   
+      <jsp:include page="footer.jsp"></jsp:include>
+ </div>
     <!-- inseriti esclusivamente per poter nascondere la barra di ricerca -->
 	<script src="js/JQuery.js" type="text/javascript"></script>
 	<script src="js/userFunctions.js" type="text/javascript"></script>

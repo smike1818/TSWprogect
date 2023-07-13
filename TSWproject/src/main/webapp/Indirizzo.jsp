@@ -65,13 +65,13 @@
 						%>
 						<!-- quando invio i dati dell'indirizzo alla servlet -->
 						<div class="table-row">
-					           <span class="table-cell"><%=ind.getVia()%> <%=ind.getCivico() %>,<%=ind.getCitta() %> </span>
+					           <span class="table-cell"><b><i>Indirizzo: </i></b><br><%=ind.getVia()%> <%=ind.getCivico() %>, <%=ind.getCitta() %> </span><br>
 					           <span class="table-cell"><a href="address?action=delete&via=<%=ind.getVia()%>&civico=<%=ind.getCivico() %>&citta=<%=ind.getCitta() %>" class="redbutton-a">rimuovi</a></span>
 					           <span class="table-cell">
 					           <%if(!ind.getIsPrimary()){ %>
 					               <a href="address?action=prefer&via=<%=ind.getVia()%>&civico=<%=ind.getCivico() %>&citta=<%=ind.getCitta() %>" class="modern-a">imposta come predefinito</a>
 					           <%}else{ %>
-					               [PREDEFINITO]
+					               <br><i>PREDEFINITO</i>
 					           <%} %>
 					           </span>
 						</div>
