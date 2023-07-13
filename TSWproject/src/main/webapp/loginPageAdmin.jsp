@@ -10,9 +10,6 @@
 	</head>
 	<link rel="stylesheet" href="css/adminstyle.css">
 	<body>
-		<header>
-			<jsp:include page="headerAdmin.jsp"></jsp:include>
-		</header>
 		<div class="container">
 			<div class="main-admin">
 				<form action="loginadmin">

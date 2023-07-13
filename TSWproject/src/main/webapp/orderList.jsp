@@ -33,10 +33,7 @@ if(rend!=null){
   <header>
     <jsp:include page="headerAdmin.jsp"></jsp:include>
   </header>
-  <header class="visited-pages-header">
-	    	<jsp:include page="second-header.jsp"></jsp:include>
-	    </header>
-  
+
   <br><span class="error-statement"></span><br>
 
 <!-- FORM INSERIMENTO DATE -->

@@ -193,7 +193,7 @@ function validateCategoria(form){
   var nome = form.find("input[name='name']");
   var descrizione = form.find("textarea");
   
-  if (!allLetter(nome)) {
+  if (!allLetterWithSpace(nome)) {
     valid = false;
   }
   if(!firstBeLetter(descrizione)){
@@ -219,7 +219,7 @@ function validateProdotto(form){
   var marca = form.find("input[name='marca']");
   var corde = form.find("input[name='corde']");
   
-  if(!allLetter(nome)){ 
+  if(!allLetterWithSpace(nome)){ 
 	  valid=false;
   }
   if(!firstBeLetter(tipologia)){
@@ -261,10 +261,10 @@ function soloCifre(item){
 
 //VALIDAZIONE PREZZO
 function price_validation(price){
-	var letters = /^(?:[1-9]\d{0,4}|0)(?:.\d{1,2})?$/;
+	var letters = /^(?:[1-9]\d{0,5}|0)(?:\.\d{1,2})?$/	;
 	console.log(price.val());	
 	if(!price.val().match(letters)){
-		$(".error-statement").html("esempio di prezzo: 111,11");
+		$(".error-statement").html("esempio di prezzo: 111.11");
 		price.focus();
         return false;
 	}
@@ -295,6 +295,18 @@ function allLetter(uname){
 			uname.focus();
             return false;
 		}
+    }else{
+       $(".error-statement").html("parola selezionata non valida");
+       uname.focus();
+       return false;
+    }
+}
+
+//VALIDAZIONE NOMI PRODOTTO E CATEGORIA
+function allLetterWithSpace(uname){     
+	var letters = /^([A-Z][a-z]*)(\s[A-Z][a-z]*)*$/;
+    if(uname.val().match(letters)){
+           return true;
     }else{
        $(".error-statement").html("parola selezionata non valida");
        uname.focus();

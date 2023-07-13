@@ -350,5 +350,29 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		
 		return ImagesName;
 	}
+	
+	public boolean modifyProduct(String newText, String field, int id) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		System.out.print(id);
+       try {
+		String insertSQL = "UPDATE "+TABLE_NAME+" SET "+field+" = ? WHERE codice = ?";
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(insertSQL);
+		preparedStatement.setString(1, newText);
+		preparedStatement.setInt(2, id);
+		
+		return preparedStatement.executeUpdate()>0 ;
+
+	  }finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
+	}
 
 }

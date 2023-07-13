@@ -18,4 +18,5 @@ public interface ArticoloDAO extends MasterDAO<ArticoloBean>{
 	public String getFirstImage(int code) throws SQLException;
 	public Collection<String> doRetrieveByIncompleteProduct(String value) throws SQLException;
 	public List<String> getImages(int code) throws SQLException;
+	public boolean modifyProduct(String newText, String field, int id) throws SQLException;
 }

@@ -41,9 +41,6 @@
 			<header>
 		    	<jsp:include page="headerAdmin.jsp"></jsp:include>
 		  	</header>
-		  	<header class="visited-pages-header">
-			    <jsp:include page="second-header.jsp"></jsp:include>
-	    	</header>
 	    	<div class="content">
 	    		<div class="main">
 					<h3>Ordini di <span class="userdetails-span"><%=username %></span></h3>

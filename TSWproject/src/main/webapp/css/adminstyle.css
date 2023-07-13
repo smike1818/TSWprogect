@@ -1,3 +1,25 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content{
+	flex: 1;
+    background-size: cover;
+  	background-attachment: fixed;
+    opacity: 0.9;
+    /*background-color: white;*/
+    color: black;
+    padding: 20px;
+}	
+
 .image-form {
 	display: none;
 }
@@ -180,8 +202,7 @@ body {
   cursor: pointer;
 }
 
-header,
-footer {
+header{
   background-color: #fff;
   border-bottom: 1px solid #ddd;
   padding: 20px;
@@ -191,3 +212,272 @@ footer {
 nav span {
   margin: 10px;
 }
+
+.table-row,
+.table-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+  }
+.table-cell {
+    flex: 1;
+    padding: 0 10px;
+ }
+ .modern-button {
+  display: inline-block;
+  border: none;
+  background-color: off-white;
+  color: black;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+.modern-button:hover {
+  background-color: white;
+}
+/*
+  stile per il tag a appartenente a questa classe.
+  serve per dare al tag l'aspetto di un pulsante
+*/
+.modern-a,
+.redbutton-a{
+  display: inline-block;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 1%;
+  transition: background-color 0.3s;
+  text-decoration: none; /* Remove default link underline */
+}
+.modern-a{
+  background-color: lightgray;
+  color: black;
+}
+.modern-a:hover {
+  background-color: offwhite;
+}
+
+.redbutton-a{
+  background-color: red;
+  color: white;
+}
+.redbutton-a:hover{
+  background-color: darkred;
+}
+
+select {
+  appearance: none;
+  padding: 10px 15px;
+  line-height: 1.5;
+  border: none;
+  border-radius: 4px;
+  background-color: #999;
+  color: #fff;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+select:hover {
+  background-color: #888;
+}
+
+select:focus {
+  outline: none;
+  background-color: #888;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input, textarea {
+  width: 200px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+input:focus, textarea:focus,
+input:active, textarea:active {
+  outline: none;
+  border-color: black;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="color"] {
+  padding: 4px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+input[type="color"]:hover {
+  background-color: #e6e6e6;
+}
+
+input[type="color"]:focus {
+  outline: none;
+  background-color: #d9d9d9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input[type="date"]::-webkit-datetime-edit {
+  color: #888;
+  font-family: "Arial", sans-serif;
+  font-style: italic;
+}
+
+
+
+ textarea{
+    resize: none;
+    height: 200px;
+ }
+
+.menu {
+  position: fixed;
+  top: 0;
+  width: 200px;
+  height: 300px;
+  left: -200px; 
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: auto;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.closeButton a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 30% 0;
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu li {
+  margin: 10px 0;
+  font-size: 13px;
+}
+
+.menu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+header {
+			background-color: #333;
+			color: #fff;
+			height: 50px;
+			display: flex;
+			align-items: center;
+			padding: 0 20px;
+			box-sizing: border-box;
+		}
+
+		#menuButton {
+			display: flex;
+			align-items: center;
+			margin-right: 20px;
+			cursor: pointer;
+		}
+
+		.icon-menu {
+			display: block;
+			width: 20px;
+			height: 20px;
+			fill: #fff;
+		}
+
+		.icon-menu path {
+			stroke: #fff;
+			stroke-width: 2;
+			stroke-linecap: round;
+			transition: stroke-dasharray 0.3s ease-in-out;
+		}
+
+		.icon-menu:hover path {
+			stroke-dasharray: 20 40;
+		}
+		
+		ul li, .closemenù{
+		  z-index: 100px;
+		}
+		
+		
+		
+@media screen and (max-width: 800px) {
+			header {
+				flex-direction: row;
+				justify-content: space-between;
+			}
+
+			#menuButton {
+				margin-right: 0;
+			}
+			.content{
+		      flex: 1;
+	          color: black;
+	          padding: 20px;
+	        }	
+	        .table-container{
+  		text-align: center;
+		padding: 5%;
+		/*margin: 2%;*/
+		/*opacity: 0.9;*/
+		border-radius: 5px;
+	}
+	.table-row
+	 {
+	 	display: block;
+	 	align-items: center;	
+	 	padding: 10px 0;
+	 }
+	 .table-cell {
+	 	flex: 1;
+	 	padding: 0 10px;
+	 	display: block;
+	}
+	.product-container {
+	    display: block;
+	    flex-direction: column;
+	    align-items: center;
+	    text-align: center;
+	    width: 95%;
+	    margin: 2%;
+	}
+}
+
+  

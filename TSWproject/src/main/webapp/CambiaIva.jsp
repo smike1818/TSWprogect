@@ -12,7 +12,6 @@ if(session.getAttribute("admin")==null){
 <head>
 <meta charset="UTF-8">
 <title>Cambia IVA</title>
-<link href="css/adminstyle.css" rel="stylesheet" type="text/css">
 </head>
 <body>
  <jsp:include page="headerAdmin.jsp"></jsp:include>

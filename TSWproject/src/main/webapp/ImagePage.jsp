@@ -71,14 +71,12 @@ if(request.getParameter("id")!=null){
       </tr>
     </table>
     
-     <!-- quetso bottone deve essere nascosto una volta cliccato il bottone -->
-	 <br><button id="show-image-form">clicca per inserire le immagini</button>
 	 <div class="image-form">
 	    <br><h3> inserimento delle immagini </h3><br>
         <form action="imagespage" method="post" enctype="multipart/form-data" id="image-form">
            <input type="hidden" name="action" value="addImage">
            <input type="hidden" name="code" value="<%=art %>">
-           <input name="images" type="file" multiple required accept="image/*"><br>
+           <input name="images" type="file" multiple required accept="image/*"><br><br>
            <input type="submit" value="Add">
            </form>
      </div>

@@ -36,7 +36,7 @@
 			<th>Code</th>
 			<th>Name</th>
 			<th>Description</th>
-			<th>Delete</th>
+			<!-- <th>Delete</th> -->
 		</tr>
 		
 		<%
@@ -50,7 +50,8 @@
 		    <td><%=bean.getID() %></td>
 		    <td><%=bean.getNome() %></td>
 		    <td><%=bean.getDescrizione() %></td>
-		    <td><a href="catalogo?action=deletefromcategorie&id=<%=bean.getID()%>">Delete</a></td>
+		    
+		   <!-- <td><a href="catalogo?action=deletefromcategorie&id=<%=bean.getID()%>">Delete</a></td>  --> 
 		    
 		<%}}else{ %>
 		

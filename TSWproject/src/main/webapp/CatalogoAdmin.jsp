@@ -81,8 +81,9 @@
 			<td><%=bean.getIva().getPercentuale() %>%</td>
 			<td class="type-col"><%=bean.getTipo() %></td>
 			<!-- pagina che mostra tutte le immagini di un determinato prodotto -->
-			<td><a href="ImagePage.jsp?id=<%=bean.getID()%>">visualizza immagini</a></td>
-			<!-- eliminazione dell'articolo dal database  -->
+			<td><a href="ImagePage.jsp?id=<%=bean.getID()%>"> immagini</a></td>
+			<!-- modifica dell'articolo dal database  -->
+			<td><a href="ChangeProduct.jsp?id=<%=bean.getID()%>">Modifica</a></td>
 			
 		</tr>
 		<%
