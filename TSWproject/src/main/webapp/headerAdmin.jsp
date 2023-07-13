@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="it">
     <head>
+    <title></title>
         <meta charset="UTF-8">
     </head>
     <body>
