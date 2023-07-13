@@ -67,16 +67,18 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 						throw new SQLException();
 				}finally {
 					try {
-						if (preparedStatement != null) 
-							preparedStatement.close();
-						if(ps!=null)    ps.close();
-						
-					} finally {
-						if (connection != null)
-							connection.close();
+						if (preparedStatement != null)
+							preparedStatement.close();				 
+					}finally {
+						 try{
+							 if(ps!=null)    
+								ps.close();
+						 }finally {
+						   if (connection != null)
+							  connection.close();
+						 }
 					}
-				 }
-		
+				}
 	}
 
 	@Override
@@ -296,14 +298,18 @@ public class ModelIndirizzoDAO implements IndirizzoDAO{
 			  result = preparedStatement.executeUpdate();
 			}
 			
-		} finally {
+		}finally {
 			try {
 				if (preparedStatement != null)
-					preparedStatement.close();
-				if(ps!=null)    ps.close();
-			} finally {
-				if (connection != null)
-					connection.close();
+					preparedStatement.close();				 
+			}finally {
+				 try{
+					 if(ps!=null)    
+						ps.close();
+				 }finally {
+				   if (connection != null)
+					  connection.close();
+				 }
 			}
 		}
 		return (result != 0);
