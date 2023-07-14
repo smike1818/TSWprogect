@@ -356,12 +356,14 @@ a.text-white{
 	padding-bottom: 1%;
 	display: flex;
 	border-radius: 25px;
+	justify-content: center;
 }
 
 .images-block {
 	width: 60%;
 	height: 100%;
 	padding: 2%;
+	display: inline-block;
 }
 
 .cycle-slideshow {
