@@ -31,13 +31,13 @@
 <body>
 
    <br><h2>categorie inserite</h2><br>
-   <table border="1">
-		<tr>
-			<th>Code</th>
-			<th>Name</th>
-			<th>Description</th>
+   <div class="table-container">
+		<div class="table-row">
+			<span class="table-cell">Code</span>
+			<span class="table-cell">Name</span>
+			<span class="table-cell">Description</span>
 			<!-- <th>Delete</th> -->
-		</tr>
+		</div>
 		
 		<%
 		  CategoriaBean bean = null;
@@ -46,20 +46,19 @@
 			while (it.hasNext()) {
 			    bean = (CategoriaBean) it.next();
 		%>
-		<tr>
-		    <td><%=bean.getID() %></td>
-		    <td><%=bean.getNome() %></td>
-		    <td><%=bean.getDescrizione() %></td>
-		    
+		<div class="table-row">
+		    <span class="table-cell"><%=bean.getID() %></span>
+		    <span class="table-cell"><%=bean.getNome() %></span>
+		    <span class="table-cell"><%=bean.getDescrizione() %></span>
+		 </div>
 		   <!-- <td><a href="catalogo?action=deletefromcategorie&id=<%=bean.getID()%>">Delete</a></td>  --> 
 		    
 		<%}}else{ %>
-		
-		    <td colspan=4>No categories available</td> 
-		    
+		<div class="table-row">
+		    <span class="table-cell">No categories available</span> 
+		 </div>
 		<%} %>
 		
-		</tr>
-	</table>
+		</div>
 </body>
 </html>

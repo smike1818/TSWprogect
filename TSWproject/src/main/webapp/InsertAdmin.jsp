@@ -44,12 +44,21 @@
 <link href="css/adminstyle.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div class="wrapper">
+<header>
 	 <jsp:include page="headerAdmin.jsp"></jsp:include>
+</header>
+<div class="content">
+	<div class="main">
+	<div class="table-container" id="inserimento">
+		<div class="table-row">
+	<div class="table-cell">
 	 <jsp:include page="ChoiseAdmin.jsp"></jsp:include>
+	</div>
 	
 	    <!-- in questa sezione verranno mostrati tutti gli errori 400 in poi -->
 	    <p class="error-statement"><%=error %></p>
-        
+       <div class="table-cell">
 		<br><form id="insert-product-form" action="insertadmin" method="post">
 		<input type="hidden" name="action" value="Add">
 		   <label for="name">Name:</label><br> 
@@ -109,21 +118,32 @@
 	    
 		<input id="insert-product-submit" type="submit" value="Add">
 	 </form>
+       </div> 
 	 
-	 
-	 <br><br><div class="categories-form">
-	    <h3> inserimento della categoria </h3><br>
-        <form id="categories-form" action="insertadmin" method="post">
-        <input type="hidden" name="action" value="cat">
-        <input type="hidden" name="tipo" value="">
-        <input name="name" type="text" maxlength="50" required placeholder="Enter name"><br>
-        <textarea name="descrizione" maxlength="1000" rows="5" required placeholder="Enter description"></textarea><br>
-        <input type="submit" value="Add">
-        </form>
+	 <div class="table-cell">
+		 <br><br>
+		 <div class="categories-form">
+		    <h3> inserimento della categoria </h3><br>
+	        <form id="categories-form" action="insertadmin" method="post">
+	        <input type="hidden" name="action" value="cat">
+	        <input type="hidden" name="tipo" value="">
+	        <input name="name" type="text" maxlength="50" required placeholder="Enter name"><br>
+	        <textarea name="descrizione" maxlength="1000" rows="5" required placeholder="Enter description"></textarea><br>
+	        <input type="submit" value="Add">
+	        </form>
+		 </div>
 	 </div>
-	 
+	 </div>	
+	</div>
 	 <br><a href="CatalogoAdmin.jsp">Torna al Catalogo</a>
 	 
+	</div>
+	
+</div>
+<footer>
+				<jsp:include page="footerAdmin.jsp"></jsp:include>	
+			</footer>
+</div>
 	 <script src="js/JQuery.js"></script>
 	 <script src="js/admin.js"></script>
 	 <script src="js/validation.js" type="text/javascript"></script>

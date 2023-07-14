@@ -10,24 +10,25 @@
 	</head>
 	<link rel="stylesheet" href="css/adminstyle.css">
 	<body>
-		<div class="container">
-			<div class="main-admin">
-				<form action="loginadmin">
-					<label for="un">Please enter your username</label>
-					<input type="text" id="un" name="un" required>
-					<label for="pw">Please enter your password</label>
-					<input type="password" id="pw" name="pw" required>
-					<input type="submit" value="Accedi">
-				</form>
+		<div class="wrapper">
+			<header>
+			</header>
+			<div class="content">
+				<div class="main">
+					<div class="login-form">
+						<form action="loginadmin" id="login-form">
+							<label for="un">Please enter your username</label><br>
+							<input type="text" id="un" name="un" required class="add-Phone-number"><br>
+							<label for="pw">Please enter your password</label><br>
+							<input type="password" id="pw" name="pw" required class="add-Phone-number"><br>
+							<input type="submit" value="Accedi"> 
+						</form>
+					</div>
+				</div>
 			</div>
+			<footer>
+				<jsp:include page="footerAdmin.jsp"></jsp:include>	
+			</footer>
 		</div>
-		<footer>
-			<nav>
-				<span><a href="UserList.jsp">elenco utenti</a></span>
-				<span><a href="orderList.jsp">elenco ordini</a></span>
-				<span><a href="CatalogoAdmin.jsp">HOME</a></span>
-				<span><a href="CambiaIva.jsp">Cambia iva</a></span>
-			</nav>
-		</footer>
 	</body>
 </html>

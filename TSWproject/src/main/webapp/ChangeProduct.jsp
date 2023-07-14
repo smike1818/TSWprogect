@@ -63,7 +63,7 @@ if(rend!=null){
 			<jsp:include page="headerAdmin.jsp"></jsp:include>
 		</header>
 	<div class="content">
-     <div class="main-admin">
+     <div class="main">
 				<div class="table-container" id="user-table">
 					<div class="table-row">
 						<h2 class="table-cell">Dettagli Prodotto</h2>
@@ -129,6 +129,9 @@ if(rend!=null){
 					</div>
 				</div>
 			  </div>
+			  <footer>
+				<jsp:include page="footerAdmin.jsp"></jsp:include>	
+			</footer>
 			</div>
 			
 			<script src="js/JQuery.js" type="text/javascript"></script>
