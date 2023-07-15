@@ -7,6 +7,7 @@ html, body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
 }
 .content{
 	flex: 1;
@@ -133,7 +134,7 @@ header {
 }
 
 .addtocart-submit{
-	background-color: white;
+	background-color: rgb(199, 193, 193);
 }
 #details-addtocart{
 	background-color: lightgray;
@@ -285,7 +286,7 @@ a.text-white{
 }
 
 .image-block img {
-   width: 50%;
+   width: 20%;
 }
 
 .name-item-block, 
@@ -303,7 +304,7 @@ a.text-white{
 }
 
 .add-quantity {
-  display: inline-block;
+  display: -webkit-flex;
 }
 
 .bottom-cart{
@@ -545,18 +546,18 @@ a.text-white{
 .table-container{
   text-align: center;
   padding: 5%;
-  /*margin: 2%;*/
-  /*opacity: 0.9;*/
   border-radius: 10px;
 }
 
-.table-row,
-.table-header {
+.table-row {
     display: flex;
     align-items: center;
     border-bottom: 1px solid #ccc;
     padding: 10px 0;
   }
+.change-view{
+	display: block;
+}
 .table-cell {
     flex: 1;
     padding: 0 10px;
@@ -706,7 +707,9 @@ select option:hover {
   background-color: #ccc;
   color: #fff;
 }*/
-
+.music-display{
+	display: -webkit-flex;
+}
 
 
 .login-form,
@@ -758,12 +761,13 @@ select option:hover {
 	font-size: 14px;
 	margin-bottom: 5px;
 }
-
 /*
 	responsive layout
 */
 @media only screen and (max-width: 800px) {
-	
+	.music-display{
+	display: inline-block;
+}
 	.acquisti-details {
         display: flex;
         justify-content: center;
@@ -806,6 +810,14 @@ select option:hover {
 		/*opacity: 0.9;*/
 		border-radius: 5px;
 	}
+	#categorie-table .table-row,
+	#categorie-table .table-cell
+	 {
+	 	display: inline-block;
+	 }
+	 #change-view{
+	 	display: none;
+	 }
 	#cart .table-row,
 	#cart .table-cell{
 		display: inline-block;

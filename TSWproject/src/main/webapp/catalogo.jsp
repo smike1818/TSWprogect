@@ -62,8 +62,11 @@
 					        	<jsp:include page="ListProducts.jsp"></jsp:include>
 					    	</div>
 		        		</div>
-		    	<h1 style="color: white">La redazione consiglia</h1>
-		        	<iframe title="" allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/it/playlist/gaylist/pl.u-pMylDZmHW2zYYLa"></iframe>
+		    	<h1>La redazione consiglia</h1>
+		    	<div class="music-display">
+		        	<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/it/album/experience-hendrix-the-best-of-jimi-hendrix/344799413"></iframe>
+					<iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/it/album/continuum/184335550"></iframe>
+		    	</div>
 		    	</div>
 		    </div>
 		    <jsp:include page="footer.jsp"></jsp:include>

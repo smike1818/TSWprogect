@@ -99,6 +99,11 @@ application.removeAttribute("can-show");
 			       		<jsp:include page="filter.jsp"></jsp:include>
 			       	</div>
 					<div class="table-container" id="catalogoFiltrato">
+						<div class="table-row">
+							<div class="table-cell">
+								<button class="modern-button" id="change-view">Vista</button>
+							</div>
+						</div>
 						<%
 				        ArticoloBean bean = null;
 				        int counter = 1; // Counter variable
@@ -108,7 +113,7 @@ application.removeAttribute("can-show");
 				                bean = (ArticoloBean) it.next();
 				                int divId = counter; // Unique ID for each product div
 						%>
-				        <div class="table-row">
+				        <div class="table-row" id="items-in-catalogue">
 				        	<div class="table-cell" id="<%=divId%>">
 				        	<!-- IMMAGINE  -->
 								<div class="image-block">
@@ -181,6 +186,6 @@ application.removeAttribute("can-show");
 		<script src="js/userFunctions.js" type="text/javascript"></script>
 		<script src="js/filters.js" type="text/javascript"></script>
 		<script src="js/animations.js" type="text/javascript"></script>
-		<script src="js/filtersToggle.js" type="text/javascript"></script>
+		<script src="js/buttons.js" type="text/javascript"></script>
 	</body>
 </html>

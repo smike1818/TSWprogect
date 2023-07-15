@@ -12,7 +12,7 @@
  <!-- Footer -->
 <footer class="footer">
 	<div class="footer-content">
-		<h1>Footer</h1>
+		<h1>Creatori</h1>
 		<div class="table-container">
      		<div class="table-row">
      			<span class="table-cell">Gatto Francesco</span>

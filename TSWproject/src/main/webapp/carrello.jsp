@@ -69,12 +69,6 @@
 									<h4><%=bean.getNome() %></h4>
 								</div>
 							</div>
-							<!-- MARCA -->
-							<div class="table-cell">
-				 				<div class="marca-item-block">
-									<p class="marca-item"><%=bean.getMarca() %></p>
-								</div>
-							</div>
 							<!-- PREZZO -->
 							<div class="table-cell">
 								<div class="prezzo-item-block">
@@ -96,7 +90,7 @@
 							<!-- DELETE BY CART --> 
 							<div class="table-cell">
 								<div class="delete-item-block">
-									<p class="delete-section"><a href="cart?action=deleteByCart&id=<%=bean.getID()%>" class="redbutton-a">Delete By Cart</a></p>
+									<p class="delete-section"><a href="cart?action=deleteByCart&id=<%=bean.getID()%>" class="redbutton-a">Delete</a></p>
 								</div>
 							</div>
 							</div>
