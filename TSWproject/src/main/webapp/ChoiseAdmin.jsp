@@ -15,17 +15,22 @@ if(session.getAttribute("admin")==null){
 <meta charset="ISO-8859-1">
 </head>
 <body>
-		
-   <h2> Che strumento vuoi inserire? </h2>                  
-		
-    <label for="select">Scegli che articolo vuoi inserire</label><br>
-    <select name="type" id="choise-type">
-	   <option value="strumento" selected>Strumento</option>
-	   <option value="pezzidiricambio">Altro</option>
-    </select>
+  
+  <div class="table-container">
+     <div class="table-row no-border" id="choise-table">
+      <div class="table-cell">
+       <h2> Che strumento vuoi inserire? </h2>                  
+	  
+      <label for="select">Scegli che articolo vuoi inserire</label><br><br>
+      <select name="type" id="choise-type">
+	     <option value="strumento" selected>Strumento</option>
+	     <option value="pezzidiricambio">Altro</option>
+      </select>
+      </div>
+     </div>
+   </div>	
 	
    	 <script src="js/JQuery.js"></script>
 	 <script src="js/admin.js"></script>
-	 <script src="js/not_autorized.js" type="text/javascript"></script>
 </body>
 </html>

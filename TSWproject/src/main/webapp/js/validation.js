@@ -304,7 +304,7 @@ function allLetter(uname){
 
 //VALIDAZIONE NOMI PRODOTTO E CATEGORIA
 function allLetterWithSpace(uname){     
-	var letters = /^([A-Z][a-z]*)(\s[A-Z][a-z]*)*$/;
+	var letters = /^([A-Z][a-z]*)(\s[a-z]*)*$/;
     if(uname.val().match(letters)){
            return true;
     }else{

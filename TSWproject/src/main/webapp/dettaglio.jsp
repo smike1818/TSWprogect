@@ -68,10 +68,16 @@
 							<%}else if(images.size() == 1){ %>
 							<div class="table-cell">
 						    	<div class="images-block">
-						       		<img src="img/<%=images.get(0)%>" alt="no available" width="70%"/>
+						       		<img src="img/<%=images.get(0)%>" alt="no available"/>
 						    	</div>
 					    	</div>
-							<% } %>
+							<% }else if(images.size() == 0){ %>
+							
+							   <div class="table-cell images-block">
+                               <img src="img/default.png" alt="no available"/>
+                               </div>				
+                               			
+							<%} %>
 							<div class="table-cell" id="product-details">
 							    
 							    

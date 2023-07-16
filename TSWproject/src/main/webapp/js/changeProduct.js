@@ -26,7 +26,7 @@ $(document).ready(function() {
     // Step 1: Get the initial text from the campText element
     var originalText = $('#' + campTextId).text();
     var editButton = $('#' + buttonId);
-    var resetButton = $('<input type="reset" value="ripristina" class="redbutton-a">');
+    var resetButton = $('<input type="reset" value="ripristina" class="redbutton-a reset">');
     var id = editButton.closest(".table-container").find("#id-product").val();
     console.log(id);
 

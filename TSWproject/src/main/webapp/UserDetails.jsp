@@ -44,15 +44,14 @@
 	    	<div class="content">
 	    		<div class="main">
 					<h3>Ordini di <span class="userdetails-span"><%=username %></span></h3>
-					<table border="1" class="table-acquisti">
+					 <div class="table-container table-acquisti">
 					
-							<tr>
-								<th>Conto</th>
-								<th>Data</th>
-								<th>Totale</th>
-								<th colspan=3>Indirizzo</th>
-								
-							</tr>
+							<div class="table-row th">
+								<div class="table-cell">Conto</div>
+								<div class="table-cell">Data</div>
+								<div class="table-cell">Totale</div>
+								<div class="table-cell">Indirizzo</div>
+							</div>
 							
 							<%
 							    AcquistoBean bean = null;
@@ -62,28 +61,29 @@
 									    bean = (AcquistoBean) it.next();
 									  
 							%>
-							<tr class="acquisto-<%=bean.getID()%>">
-								<td><%=bean.getConto().getIBAN()%></td>
-								<td class="date-td"><%=bean.getDate()%></td>
-								<td><%=bean.getImporto()%></td>
-								<td>via <%=bean.getIndirizzo().getVia() %></td>
-								<td>(<%=bean.getIndirizzo().getCivico() %>) </td>
-								<td><%=bean.getIndirizzo().getCitta() %></td>
-							</tr>
+							<div class="table-row acquisto-<%=bean.getID()%>">
+								<div class="table-cell"><label class="label-responsive">IBAN: </label><%=bean.getConto().getIBAN()%></div>
+								<div class="table-cell"><label class="label-responsive">Data: </label><%=bean.getDate()%></div>
+								<div class="table-cell"><label class="label-responsive">Importo: </label><%=bean.getImporto()%></div>
+								<div class="table-cell"><label class="label-responsive">Indirizzo: </label>
+								                        via <%=bean.getIndirizzo().getVia() %>
+								                       <%=bean.getIndirizzo().getCivico() %>
+								                       (<%=bean.getIndirizzo().getCitta() %>)</div>
+							</div>
 							<%
 								}} else {                   //quando non si sono prodotti nel database stampo a video il mess sotto
 							%>
-							<tr>
-								<td class="no-acquisti" colspan=6><%=username %> non ha ancora effettuato acquisti</td>        
-							</tr>
+							<div class="table-row">
+								<div class="table-cell no-acquisti"><%=username %> non ha ancora effettuato acquisti</div>        
+							<div>
 							
 							<%}%>
 							
-							</table><br>
+					</div>
 	    		</div>
 	    	</div>
-
-
+	    	</div>
+	    	</div>
 </body>
 </html>
 

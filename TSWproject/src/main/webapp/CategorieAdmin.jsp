@@ -32,7 +32,7 @@
 
    <br><h2>categorie inserite</h2><br>
    <div class="table-container">
-		<div class="table-row">
+		<div class="table-row th">
 			<span class="table-cell">Code</span>
 			<span class="table-cell">Name</span>
 			<span class="table-cell">Description</span>
@@ -47,14 +47,14 @@
 			    bean = (CategoriaBean) it.next();
 		%>
 		<div class="table-row">
-		    <span class="table-cell"><%=bean.getID() %></span>
-		    <span class="table-cell"><%=bean.getNome() %></span>
-		    <span class="table-cell"><%=bean.getDescrizione() %></span>
+		    <div class="table-cell"><label class="label-responsive">Code: </label><span><%=bean.getID()%></span><br></div>
+		    <div class="table-cell"><label class="label-responsive">Nome: </label><span><%=bean.getNome()%></span><br></div>
+		    <div class="table-cell"><label class="label-responsive">Descrizione: </label><span><%=bean.getDescrizione()%></span><br></div>
 		 </div>
 		   <!-- <td><a href="catalogo?action=deletefromcategorie&id=<%=bean.getID()%>">Delete</a></td>  --> 
 		    
 		<%}}else{ %>
-		<div class="table-row">
+		<div class="table-row th">
 		    <span class="table-cell">No categories available</span> 
 		 </div>
 		<%} %>

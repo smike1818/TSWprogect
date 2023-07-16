@@ -2,12 +2,12 @@ html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box; 
+  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
 }
 .wrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+    min-height: 100vh;  
 }
 .content{
 	flex: 1;
@@ -385,13 +385,6 @@ a.text-white{
   width: 400px;
 }
 
-.slice {
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 150; /* Imposta un valore di z-index superiore rispetto alle immagini */
-}
-
 .cycle-slideshow .prev,
 .cycle-slideshow .next {
   position: absolute;
@@ -412,12 +405,12 @@ a.text-white{
   align-items: center;
 }
 
-.cycle-slideshow .prev {
-  right: 100px;
+.prev {
+  left: 0;
 }
 
-.cycle-slideshow .next {
-  left: 100px;
+.next {
+  right: 0
 }
 
 .acquisti-details, 
@@ -761,6 +754,42 @@ select option:hover {
 	font-size: 14px;
 	margin-bottom: 5px;
 }
+
+/* Personalizza la barra di scorrimento verticale */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/* Personalizza la barra di scorrimento orizzontale */
+::-webkit-scrollbar-horizontal {
+  height: 10px;
+}
+
+::-webkit-scrollbar-track-horizontal {
+  background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb-horizontal {
+  background-color: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb-horizontal:hover {
+  background-color: #555;
+}	
 /*
 	responsive layout
 */
@@ -853,13 +882,6 @@ select option:hover {
 
 @media only screen and (max-width: 494px) {
  
- 	.cycle-slideshow .prev {
-	      right: 15px;
-	}
-	
-	.cycle-slideshow .next {
-	  left: 15px;
-	}
 	 header{
 	     display: block;
 	 }
@@ -885,14 +907,6 @@ select option:hover {
 	#filter-toggle{
 		display: block;
 		margin:5px 40%
-	}
-	
-	 .cycle-slideshow .prev {
-	      right: 5px;
-	}
-	
-	.cycle-slideshow .next {
-	  left: 5px;
 	}
 	
 	.search-product-input,

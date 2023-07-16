@@ -31,13 +31,11 @@ $(document).ready(function() {
 		
 		$(".error-statement").html("");
 		
-		//seleziono ogni tr della tabella, tranne i th
-		//il tutto lo faccio non selezionando i tr primi figli (ovvero
-		//quelli che contengono i th)
 		
-		$(".table-acquisti tr:not(:first-child)").each(function() {
-            var td = $(this).find(".date-td");
+		$(".purchase-item").each(function() {
+            var td = $(this).find(".date");
             var tdContent = td.html();
+            console.log(tdContent);
             fine += " 23:59:59";
 
             if (tdContent >= inizio && tdContent <= fine) {
@@ -48,6 +46,15 @@ $(document).ready(function() {
          });
 
 
-	}
-  }); 
+	} 
+	
+  });
+  
+  $("#reset-date").click(function(){
+	  $(".purchase-item").each(function() {
+		     $(this).show();
+     });
+  });
+  
+  
 });

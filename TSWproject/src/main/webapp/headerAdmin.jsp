@@ -14,10 +14,10 @@
 		<div class="menu">
             <div class="closeButton"><a class="icon-close"><b>X</b></a></div>
                 <ul>     
-                  <li><a href="UserList.jsp">elenco utenti</a></li>
-				  <li><a href="orderList.jsp">elenco ordini</a></li>
+                  <li><a href="UserList.jsp">Utenti</a></li>
+				  <li><a href="orderList.jsp">Ordini</a></li>
 				  <li><a href="CatalogoAdmin.jsp">HOME</a></li>
-				  <li><a href="CambiaIva.jsp">Cambia iva</a></li>
+				  <li><a href="CambiaIva.jsp">Iva</a></li>
                 </ul>
         </div>
         <div id="menuButton">

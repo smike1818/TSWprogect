@@ -31,16 +31,16 @@ public class ModelImageDAO implements ImageDAO{
 			System.out.println("Error:" + e.getMessage());
 		}
 	}
-	
+
 	private static final String TABLE_NAME = "image";
-	
+
 	@Override
 	public void doSave(ImageBean image) throws SQLException {
 		// TODO Auto-generated method stub
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		PreparedStatement ps = null;
-        
+
 		String ifExists = "SELECT * FROM " + TABLE_NAME +" WHERE nome = ? ";
 		String insertSQL = "INSERT INTO " + TABLE_NAME +"(pathImage,articolo,nome) VALUES (?,?,?)";
 
@@ -66,7 +66,7 @@ public class ModelImageDAO implements ImageDAO{
 					connection.close();
 			}
 		 }
-		
+
 	}
 
 	@Override
@@ -106,7 +106,7 @@ public class ModelImageDAO implements ImageDAO{
 
 		ImageBean img = null;
 		ArticoloBean art = null;
-		
+
 		String selectSQL = "SELECT * FROM " + TABLE_NAME + "join articolo where nome = ? AND articolo = ?";
 
 		try {
@@ -114,17 +114,17 @@ public class ModelImageDAO implements ImageDAO{
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, code);
 			preparedStatement.setInt(2, id);
-			
+
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
 				img = new ImageBean();
-		    	
+
 				img.setNome(rs.getString("nome"));
 		    	img.setPath(rs.getString("pathImage"));
-		    	
+
 		    	art = model.doRetrieveByKey(rs.getInt("articolo"));
-		    	img.setArticolo(art);		    			    		    			    	    	
+		    	img.setArticolo(art);
 			}
 
 		} finally {
@@ -148,26 +148,26 @@ public class ModelImageDAO implements ImageDAO{
 		ImageBean img = null;
 		ArticoloBean art = null;
 		List<ImageBean> images = new LinkedList<ImageBean>();
-		
+
 		String selectSQL = "SELECT * FROM " + TABLE_NAME + "join articolo";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
-			
+
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
 				img = new ImageBean();
-		    	
+
 				img.setNome(rs.getString("nome"));
 		    	img.setPath(rs.getString("pathImage"));
-		    	
+
 		    	art = model.doRetrieveByKey(rs.getInt("articolo"));
-		    	img.setArticolo(art);	
-		    	
+		    	img.setArticolo(art);
+
 		    	images.add(img);
-		    	
+
 			}
 
 		} finally {
@@ -191,27 +191,27 @@ public class ModelImageDAO implements ImageDAO{
 		ImageBean img = null;
 		ArticoloBean art = null;
 		List<ImageBean> images = new LinkedList<ImageBean>();
-		
+
 		String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE articolo = ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, code);
-			
+
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
 				img = new ImageBean();
-		    	
+
 				img.setNome(rs.getString("nome"));
 		    	img.setPath(rs.getString("pathImage"));
-		    	
+
 		    	art = model.doRetrieveByKey(rs.getInt("articolo"));
-		    	img.setArticolo(art);	
-		    	
+		    	img.setArticolo(art);
+
 		    	images.add(img);
-		    	
+
 			}
 
 		} finally {
@@ -263,6 +263,5 @@ public class ModelImageDAO implements ImageDAO{
 			}
 		}
 		return (result != 0);
+	 }
 	}
-
-}

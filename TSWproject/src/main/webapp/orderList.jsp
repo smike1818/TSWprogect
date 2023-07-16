@@ -31,32 +31,34 @@ if(rend!=null){
 	<body>
 	<div class="wrapper">
 		<header>
-		<jsp:include page="headerAdmin.jsp"></jsp:include>
+		   <jsp:include page="headerAdmin.jsp"></jsp:include>
+		   <span class="error-statement"></span><br>
 		</header>
-		<br><span class="error-statement"></span><br>
 		<!-- FORM INSERIMENTO DATE -->
 		<div class="content">
 			<div class="main">
 				<div class="table-container">
-					<div class="table-cell">
+					<div class="table-row no-border everycenter" id="data-insert">
 						<h5>inserisci le date</h5>
-						<label for="inizio">Da:</label><br>
+						<label for="label-date">Da: </label>
 						<input type="date" id="inizio"><br>
-						<label for="inizio">A:</label><br>
+						<label for="label-date">A: </label>
 						<input type="date" id="fine"><br>
 						<button class="modern-button" id="form-data-button">Click!</button>
+						<button class="redbutton-a" id="reset-date">Reset</button>
 					</div>
 					<div class="table-container">
-						<div class="table-row">
+					   <h2 class="table-row no-border">LISTA ORDINI:</h2><br><br><br><br>
+						<div class="table-row th">
+						    <span class="table-cell"></span>
 							<span class="table-cell">Conto</span>
 							<span class="table-cell">Data</span>
 							<span class="table-cell">Totale</span>
 							<span class="table-cell">Consumer</span>
-							<div class="table-cell">
-								<span class="address">Indirizzo</span>
-							</div>
-							<span class="table-cell">scarica la fattura</span>
+							<span class="table-cell address">Indirizzo</span>
+							<span class="table-cell"></span>
 						</div>   
+						
 						<% 
 							AcquistoBean bean = null;
 							if (acquisti != null && acquisti.size() != 0) {
@@ -64,17 +66,16 @@ if(rend!=null){
 								while (it.hasNext()) {
 									bean = (AcquistoBean) it.next();
 						%>
-						<div class="table-row">
-							<span class="table-cell"><%=bean.getConto().getIBAN()%></span>
-							<div class="table-cell">
-								<span class="date-td"><%=bean.getDate()%></span>
-							</div>
-							<span class="table-cell"><%=bean.getImporto()%></span>
-							<span class="table-cell"><%=bean.getConsumer().getCF() %></span>
-							<span class="table-cell">via <%=bean.getIndirizzo().getVia() %></span>
-							<span class="table-cell">(<%=bean.getIndirizzo().getCivico() %>)</span>
-							<span class="table-cell"><%=bean.getIndirizzo().getCitta() %></span>
-							<span class="table-cell"><a href="" class="modern-a">scarica la fattura</a></span>
+						
+						<div class="table-row purchase-item">
+							<span class="table-cell"><label class="label-responsive">IBAN:</label> <%=bean.getConto().getIBAN()%></span>
+							<span class="table-cell date"><label class="label-responsive">Data:</label> <%=bean.getDate()%></span>
+							<span class="table-cell"><label class="label-responsive">Totale: </label><%=bean.getImporto()%></label></span>
+							<span class="table-cell"><label class="label-responsive">Codice Fiscale: </label><%=bean.getConsumer().getCF() %></label></span>
+							<span class="table-cell"><label class="label-responsive">Indirizzo:</label> via <%=bean.getIndirizzo().getVia() %>
+							                         <%=bean.getIndirizzo().getCivico() %>
+							                         (<%=bean.getIndirizzo().getCitta() %>)</label></span>
+							<span class="table-cell"><button class="fattura modern-button" id="<%=bean.getID()%>">Fattura</button></span>
 						</div>
 						<% } } else { %>
 						<div class="table-row">
@@ -93,6 +94,7 @@ if(rend!=null){
 	</div>
 		<script src="js/JQuery.js" type="text/javascript"></script>
 		<script src="js/orderList.js" type="text/javascript"></script>
+		<script src="js/fattura.js" type="text/javascript"></script>
 	</body>
 </html>
 <%}%>

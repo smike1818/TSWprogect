@@ -39,9 +39,8 @@ $(document).ready(function(){
 		 if(choise !== "strumento"){
 			 $("#categoria .false").hide();
 		     $("#categoria .true").show();
-		     $(".product .type-col:contains('1')").closest("tr").show();
-		     $(".product .type-col:contains('0')").closest("tr").hide();
-		     $(".no-products").attr('colspan', '10');
+		     $(".type-col:contains('0')").closest(".table-row").show();
+		     $(".type-col:contains('1')").closest(".table-row").hide();
 		     
 		     // Imposta l'elemento selezionato sul primo option non nascosto
              var primoOptionVisibile = $("#categoria .true").first();
@@ -61,9 +60,8 @@ $(document).ready(function(){
 		 }else{
 			 $("#categoria .true").hide();
 		     $("#categoria .false").show();
-		     $(".product .type-col:contains('1')").closest("tr").hide();
-		     $(".product .type-col:contains('0')").closest("tr").show();
-		     $(".no-products").attr('colspan', '11');
+		     $(".type-col:contains('1')").closest(".table-row").hide();
+		     $(".type-col:contains('0')").closest(".table-row").show();
 		     
 		      // Imposta l'elemento selezionato sul primo option non nascosto
              var primoOptionVisibile = $("#categoria .false").first();
@@ -115,8 +113,8 @@ $("#choise-type").change(function() {
       
       if(json.value==1){
 		  $(".tag-choise").css('display','none');
-		  $(".product .type-col:contains('0')").closest("tr").hide();
-		  $(".product .type-col:contains('1')").closest("tr").show();
+		  $(".type-col:contains('0')").closest(".table-row").hide();
+		  $(".type-col:contains('1')").closest(".table-row").show();
 		  $(".no-products").attr('colspan', '10');
 		  $(".insert-corde").hide();
 		  
@@ -140,8 +138,8 @@ $("#choise-type").change(function() {
 		           
 	  }else{
 		  $(".tag-choise").css('display','block');
-		  $(".product .type-col:contains('1')").closest("tr").hide();
-		  $(".product .type-col:contains('0')").closest("tr").show();
+		  $(".type-col:contains('1')").closest(".table-row").hide();
+		  $(".type-col:contains('0')").closest(".table-row").show();
 		  $(".no-products").attr('colspan', '11');
 		  $(".insert-corde").show()
 		  

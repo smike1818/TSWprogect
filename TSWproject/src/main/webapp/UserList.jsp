@@ -36,10 +36,10 @@
 			<div class="content">
 				<div class="main">
 					<div class="table-container">
-						<div class="table-row">
+						<div class="table-row no-border everycenter">
 							<div class="table-cell">
 								<div class="search-user">
-									<label for="username">Scrivi Username: </label><br>
+									<label for="username">Scrivi Username: </label><br><br>
 									<div class="dropdown">
 										<input type="text" id="search-user-input" ><br>
 										<ul id="search-user-suggestions"></ul>
@@ -49,11 +49,10 @@
 							</div>
 						</div>
 						<!-- LISTA DEGLI UTENTI REGISTRATI -->  
-						<div class="table-row">
+						<div class="table-row no-border">
 							<div class="table-cell">
 								<div class="user-list-block">
-									<fieldset class="box-list">
-										<legend>Lista Utenti</legend>
+									 <br><br><label class="table-cell everycenter">Lista utenti</label><br><br><br>
 										<ul class="user-list">
 											<%
 												UserBean bean = null;

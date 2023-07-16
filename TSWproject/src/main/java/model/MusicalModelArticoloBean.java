@@ -44,19 +44,19 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 
 	private static final String TABLE_NAME = "articolo";
 	CategoriaDAO modelcat = new ModelCategoriaDAO();
-	
+
 	@Override
 	public void doSave(ArticoloBean product) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-        
+
 		String insertSQL = "INSERT INTO " + MusicalModelArticoloBean.TABLE_NAME +" VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setInt(1, product.getID());
-			preparedStatement.setString(2, product.getNome());			
+			preparedStatement.setString(2, product.getNome());
 			preparedStatement.setInt(4, product.getQuantita());
 			preparedStatement.setString(5, product.getColore());
 			preparedStatement.setString(6, product.getDescrizione());
@@ -79,7 +79,7 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 					connection.close();
 			}
 		}
-		
+
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		CategoriaDAO model = new ModelCategoriaDAO();
 
 		List<ArticoloBean> products = new LinkedList<ArticoloBean>();
-		
+
 		String selectSQL = "SELECT * FROM " + MusicalModelArticoloBean.TABLE_NAME ;
 
 		if (order != null && !order.equals("")) {
@@ -135,7 +135,7 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 
 			while (rs.next()) {
 				ArticoloBean ab = new ArticoloBean();
-								
+
 				ab.setID(rs.getInt("codice"));
 		    	ab.setColore(rs.getString("colore"));
 		    	ab.setNome(rs.getString("nome"));
@@ -146,12 +146,12 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		    	ab.setPrezzo(rs.getDouble("prezzoBase"));
 		    	ab.setTipo(rs.getInt("tipo"));
 		    	ab.setCorde(rs.getInt("corde"));
-		    
+
 		    	iva = modeliva.getIvaByModel();
 		    	cat = model.doRetrieveByKey(rs.getInt("categoria"));
-		    	
+
 		    	ab.setIva(iva);
-		    	ab.setCategoria(cat);	
+		    	ab.setCategoria(cat);
 		    	products.add(ab);
 			}
 
@@ -173,21 +173,21 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		PreparedStatement preparedStatement = null;
 		IvaBean iva = null;
 		IvaDAO modeliva = new ModelIvaDAO();
-		
+
 		String selectSQL = "SELECT * FROM " + MusicalModelArticoloBean.TABLE_NAME + " WHERE codice = ?";
 		ArticoloBean ab = null;
 		CategoriaBean cat = null;
-		
+
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, code);
-			
+
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
 				ab = new ArticoloBean();
-				
+
 				ab.setID(rs.getInt("codice"));
 		    	ab.setColore(rs.getString("colore"));
 		    	ab.setNome(rs.getString("nome"));
@@ -198,13 +198,13 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		    	ab.setPrezzo(rs.getDouble("prezzoBase"));
 		    	ab.setTipo(rs.getInt("tipo"));
 		    	ab.setCorde(rs.getInt("corde"));
-		    	
+
 		    	iva = modeliva.getIvaByModel();
 		    	ab.setIva(iva);
-		    	
+
 		    	cat = modelcat.doRetrieveByKey(rs.getInt("categoria"));
-		    	
-		    	ab.setCategoria(cat);	
+
+		    	ab.setCategoria(cat);
 
 			}
 
@@ -219,12 +219,12 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		}
 		return ab;
 	}
-	
+
 	@Override
 	public void doChangeQuantity(int id, float q) throws SQLException{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
+
 		String selectSQL = "UPDATE "+ MusicalModelArticoloBean.TABLE_NAME + " SET quantita = ? WHERE codice = ?";
 
 		try {
@@ -249,20 +249,20 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String ImageName = null;
-		
+
 		String selectSQL = "SELECT * FROM " + MusicalModelArticoloBean.TABLE_NAME + " a join image i "
 				+ "WHERE a.codice = ? AND a.codice = i.articolo";
-		
+
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, code);
-			
+
 			ResultSet rs = preparedStatement.executeQuery();
 			if(rs.next()) {
 				ImageName = rs.getString("i.nome");
 			}else
-				ImageName = "default.jpg";
+				ImageName = "default.png";
 
 		}finally {
 			try {
@@ -273,7 +273,7 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 					connection.close();
 			}
 		}
-		
+
 		return ImageName;
 	}
 
@@ -282,25 +282,25 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		Connection connection = null;
 		Collection<String>sugg = new ArrayList<String>();    //collezione di username suggeriti
 		PreparedStatement preparedStatement = null;
-        
+
 	  try {
 		//query per prelevare l'utente
 		String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE nome LIKE ?";
-		
+
 		connection = ds.getConnection();
 		preparedStatement = connection.prepareStatement(selectSQL);
 		if(value.equalsIgnoreCase(""))
 			preparedStatement.setString(1, "null");
 		else
 		    preparedStatement.setString(1, value+"%");
-		
+
 		ResultSet rs = preparedStatement.executeQuery();
-		while(rs.next()) { 
-            
+		while(rs.next()) {
+
 		    sugg.add(rs.getString("nome")+"("+rs.getString("codice")+")");
-		    
+
 		}
-		
+
 	  }finally {
 			try {
 				if (preparedStatement != null)
@@ -319,23 +319,19 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		PreparedStatement preparedStatement = null;
 		List<String> ImagesName = new ArrayList<String>();
 		String ImageName = null;
-		
+
 		String selectSQL = "SELECT * FROM " + MusicalModelArticoloBean.TABLE_NAME + " a join image i "
 				+ "WHERE a.codice = ? AND a.codice = i.articolo";
-		
+
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, code);
-			
+
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
 				ImageName = rs.getString("i.nome");
 			    ImagesName.add(ImageName);
-			}
-			
-			if(ImagesName.size()==0) {
-				ImagesName.add("default.jpg");
 			}
 
 		}finally {
@@ -347,21 +343,21 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 					connection.close();
 			}
 		}
-		
+
 		return ImagesName;
 	}
-	
+
 	public boolean modifyProduct(String newText, String field, int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		System.out.print(id);
-       try {
+	   try {
 		String insertSQL = "UPDATE "+TABLE_NAME+" SET "+field+" = ? WHERE codice = ?";
 		connection = ds.getConnection();
 		preparedStatement = connection.prepareStatement(insertSQL);
 		preparedStatement.setString(1, newText);
 		preparedStatement.setInt(2, id);
-		
+
 		return preparedStatement.executeUpdate()>0 ;
 
 	  }finally {
@@ -374,5 +370,4 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 			}
 		 }
 	}
-
 }
