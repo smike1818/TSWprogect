@@ -593,7 +593,7 @@ label[for="label-date"] {
 	margin-top: 50px;
 }
 		
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1100px) {
 	header {
 		flex-direction: row;
 		justify-content: space-between;
