@@ -6,7 +6,7 @@ $(document).ready(function() {
   $(".delete-button").click(function(){
 	  var currentImage = $(".cycle-slide-active");
 	  
-	  if (typeof currentImage.val() === "undefined")   currentImage = $(".only-image");
+	  if (typeof currentImage.val() === "undefined")   currentImage = $("#unique-img");
 	  
       var imagePath = currentImage.attr("src");
       var fileName = imagePath.split("/").pop();

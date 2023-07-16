@@ -97,14 +97,13 @@ while(it.hasNext()) {
        FImage = (ImageBean) it.next();
 %>
 
-  <div class="table-cell">
-    <img class="only-image" src="img/<%=FImage.getNome()%>" alt="no available"/>
-  </div>
-  
-  <div class="delete-block">
-    <input type="submit" class="delete-button" value="delete">
-    <input type="hidden" class="delete-input" value="<%=art %>">
-  </div>
+  <div class="table-cell images-block only-image">
+    <img id="unique-img" src="img/<%=FImage.getNome()%>" alt="no available"/>
+    <div class="delete-block">
+      <input type="submit" class="delete-button" value="delete">
+      <input type="hidden" class="delete-input" value="<%=art %>">
+    </div>
+</div>
 
 <% }}else if(images.size() == 0){%>
 

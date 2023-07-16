@@ -45,13 +45,23 @@ $(document).ready(function() {
 							  var cycle = $('<div class="cycle-slideshow2" data-cycle-fx="scrollHorz" data-cycle-prev=".prev" data-cycle-next=".next" data-cycle-timeout = 2000 >');
 							  cell.append(cycle);
 							  secondiv.append(cell);	
-							  div.append(secondiv);			  
+							  div.append(secondiv);		
+							  
+							  var exist = false;   //verifico se c'è almeno un immagine
+							  	  
                               response.forEach(function(element) {
                                       // Creazione degli elementi immagine e aggiunta al DOM
                                       var image = $('<img>').attr('src', 'img/'+element);
                                      cycle.append(image);
+                                     exist = true;
                               });
-                            								 
+                            	
+                              //se non esiste nessuna immagine allora metto quella di defalt	
+                              if(!exist){
+								    var image = $('<img>').attr('src', 'img/default.png');
+                                    cycle.append(image);
+							  }   
+							  						 
                               // Inizializzazione del plugin Cycle dopo aver aggiunto le immagini
                                   cycle.cycle({
                                     fx: 'scrollHorz',
