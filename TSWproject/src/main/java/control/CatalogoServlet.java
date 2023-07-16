@@ -3,7 +3,6 @@ package control;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,7 +23,6 @@ import model.MusicalModelArticoloBean;
 public class CatalogoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 123131L;
-	private static final Logger LOGGER = Logger.getLogger(CatalogoServlet.class.getName());
 	
 	ArticoloDAO model = new MusicalModelArticoloBean();
 	CategoriaDAO categ = new ModelCategoriaDAO();
@@ -84,8 +82,7 @@ public class CatalogoServlet extends HttpServlet {
 				int code = Integer.parseInt(request.getParameter("id"));
 				try {
 					categ.doDelete(code);
-				} catch (SQLException e) {
-					     LOGGER.log(null,"context", e);	
+				} catch (SQLException e) {	
 					     RequestDispatcher error = null;
 		    			 String header = "Server Error";
 		    			 String details = "c'e' stato un errore nella cancellazione delle categorie...";
@@ -103,7 +100,6 @@ public class CatalogoServlet extends HttpServlet {
 	    try {
 		    request.setAttribute("products",  model.doRetrieveAll(sort));
 	    } catch (SQLException e) {
-	    	LOGGER.log(null,"context", e);	
 	    	 RequestDispatcher error = null;
  			 String header = "Server Error";
  			 String details = "c'e' stato un errore nella mostra del catalogo...";
@@ -116,8 +112,7 @@ public class CatalogoServlet extends HttpServlet {
 	    
 	    try {
 		    request.setAttribute("categories",  categ.doRetrieveAll(sort));
-	    } catch (SQLException e) {
-	    	LOGGER.log(null,"context", e);	
+	    } catch (SQLException e) {	
 	    	 RequestDispatcher error = null;
  			 String header = "Server Error";
  			 String details = "c'è stato un errore, nella mostra delle categorie...";

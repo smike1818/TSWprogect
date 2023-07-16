@@ -5,7 +5,6 @@
         auth="Container"
         driverClassName="com.mysql.cj.jdbc.Driver"
         type="javax.sql.DataSource"
-        username="root"
-        password="{SHA-256}7a43c46456b2e8010cec654951275e3b0615dbb1d4368341da6af06bf447b561"
+        username="root" password="Satellte18."
         url="jdbc:mysql://localhost:3306/musicalstore?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
 </Context>

@@ -36,7 +36,7 @@
           		while (it.hasNext()) {
             		bean = (ArticoloBean) it.next();
             		int divId = counter; // Unique ID for each product div
-            		if(bean.getQuantita()==0){
+            		if(bean.getQuantita()!=0){
       	%> 
         <div class="product-container" id="<%=divId%>">          
         	<!-- IMMAGINE  -->
