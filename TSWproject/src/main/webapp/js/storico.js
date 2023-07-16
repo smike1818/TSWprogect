@@ -89,10 +89,6 @@ $(document).ready(function() {
         }
     });
     
-   $(".artDetailsContainer").click(function(){
-	   var childID = $(this).children().attr('id');
-       window.location.href = "dettaglio.jsp?id=" + childID;
-   })
 });
 
 

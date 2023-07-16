@@ -36,6 +36,7 @@
           		while (it.hasNext()) {
             		bean = (ArticoloBean) it.next();
             		int divId = counter; // Unique ID for each product div
+            		if(bean.getQuantita()==0){
       	%> 
         <div class="product-container" id="<%=divId%>">          
         	<!-- IMMAGINE  -->
@@ -46,12 +47,7 @@
           	<h4 class="product-name">
           		<a href="dettaglio.jsp?id=<%=bean.getID()%>"><%= bean.getName() %></a>
           	</h4>        
-          	<!-- se la quantità è 0 lo rendo non accessibile -->
-          	<% if(bean.getQuantita()==0){ %>
-            <span class="product-no-available">non disponibile</span>
-          	<%}else{ %>
-            <span class="product-available"> disponibile</span>
-          	<%} %>      
+          	      
           	<!-- MARCA -->
           	<br><span class="item-marca"><%=bean.getMarca() %></span>           
           	<!-- PREZZO, in formato 0,00 -->
@@ -66,10 +62,11 @@
           	</div>                                                   
         </div>
         <%
-              counter++; // Increment the counter
-              //esco dal while se supero il limite 
-              if(limit==1)  break;
-              else limit--; 
+             }
+               counter++; // Increment the counter
+               //esco dal while se supero il limite 
+               if(limit==1)  break;
+               else limit--; 
             }
           }
         %>

@@ -6,11 +6,21 @@
    categorie = (List<CategoriaBean>) request.getAttribute("categorieFiltrate");
    String cat = null;
    
-   //prelevo il tipo 
-   if(categorie.get(0).getTipo())
+   //prelevo il tipo
+   if(categorie!=null && categorie.size()>0){
+    if(categorie.get(0).getTipo())
 	   cat = "Pezzi di Ricambio";
    else
 	   cat = "Strumenti";
+   }else{
+	   String type = request.getParameter("tipo");
+	   if(type.equalsIgnoreCase("true")){
+		   cat = "Pezzi di Ricambio";
+	   }else{
+		   cat = "Strumenti";
+	   }
+   }
+	   
    
    application.setAttribute("page", "categorie.jsp");
    if(categorie==null){

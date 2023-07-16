@@ -34,7 +34,7 @@ $(document).ready(function() {
 		
 		$(".purchase-item").each(function() {
             var td = $(this).find(".date");
-            var tdContent = td.html();
+            var tdContent = td.text().substring(6);
             console.log(tdContent);
             fine += " 23:59:59";
 

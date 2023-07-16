@@ -122,8 +122,7 @@ public class IndirizzoServlet extends HttpServlet{
    	    }
 		   	  
    	    try {
-			request.setAttribute("indirizzo", model.doRetrieveAll("via",user.getCF()));
-			
+			request.setAttribute("indirizzo", model.doRetrieveAll("via",user.getCF()));			
 		} catch (SQLException e) {
 			 e.printStackTrace();
 		     RequestDispatcher dispatcher = null;   
