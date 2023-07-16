@@ -132,7 +132,7 @@ public class ModelUserDAO implements UserDAO{
 		
 		connection = ds.getConnection();
 		preparedStatement = connection.prepareStatement(selectSQL);
-		preparedStatement.setString(0, order);
+		preparedStatement.setString(1, order);
 		
 		ResultSet rs = preparedStatement.executeQuery();
 		while(rs.next()) { 
@@ -311,7 +311,7 @@ public class ModelUserDAO implements UserDAO{
 		
 		connection = ds.getConnection();
 		preparedStatement = connection.prepareStatement(selectSQL);
-		preparedStatement.setString(0, order);
+		preparedStatement.setString(1, order);
 		
 		if(value.equalsIgnoreCase(""))
 			preparedStatement.setString(1, "null");

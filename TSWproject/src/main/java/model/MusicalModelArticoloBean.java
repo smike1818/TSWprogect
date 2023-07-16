@@ -130,7 +130,7 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
-			preparedStatement.setString(0, order);
+			preparedStatement.setString(1, order);
 
 			ResultSet rs = preparedStatement.executeQuery();
 
