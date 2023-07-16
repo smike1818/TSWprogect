@@ -47,8 +47,8 @@
 					       	<%
 					    	if (images != null && images.size() >1) {
 					  		%>
-						 	  <div class="images-block">
-						 		 <div class="table-cell" id="product-img">
+						 	<div class="table-cell" id="product-img">
+						 		<div class="images-block">
 						  			<div class="cycle-slideshow" 
 										data-cycle-fx="scrollHorz"
 						       			data-cycle-prev=".prev"
