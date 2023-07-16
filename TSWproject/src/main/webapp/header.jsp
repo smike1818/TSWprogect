@@ -36,7 +36,27 @@
 		            		<i style="font-size:40px" class="fa fa-home" aria-hidden="true" ></i>
 		            	</a>
 		            </div>
-        	</div>
+		            
+		<div class="menu">
+            <div class="closeButton"><a class="icon-close"><b>X</b></a></div>
+                <ul>   
+                <% if(session==null || session.getAttribute("un")==null){ %>  
+                  <li><a href="LoginPageUtente.jsp">LOGIN</a></li>
+                <%}else{ %>
+                  <li><a href="UserMods.jsp">USER</a></li>
+                <%} %>
+				  <li><a href="carrello.jsp">Carrello</a></li>
+				  <li><a href="catalogo.jsp">HOME</a></li>
+                </ul>
+        </div>
+        <div id="menuButton">
+            <svg class="icon-menu" viewBox="0 0 20 20">
+				<path d="M2 4h16M2 10h16M2 16h16"></path>
+			</svg>
+	   </div>
+     </div>
+     
+     
         	<div class="header-center">
             	<img src="MusicalStore.png" alt="Logo">
         	</div>
@@ -47,5 +67,8 @@
 		        	</div>
 		         	<button class="search-product-submit">Search</button>
         	</div>
+        	
+        <script src="js/JQuery.js" type="text/javascript"></script>
+        <script src="js/nav.js" type="text/javascript"></script>
 	</body>
 </html>
