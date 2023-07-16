@@ -370,7 +370,6 @@ a.text-white{
 .cycle-slideshow {
   position: relative;
   border-radius: 10px;
-  width: 100%;
   height: 100%;
   overflow: hidden; /* Impedisce alle immagini di uscire dal div */
   display: flex; 
