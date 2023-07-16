@@ -317,7 +317,7 @@ function allLetterWithSpace(uname){
 //VAIDAZIONE EMAIL
 function ValidateEmail(uemail) {
     var esito = false;
-    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var mailformat = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     
     if (!uemail.val().match(mailformat)) {
         $(".error-statement").html("email non valida");

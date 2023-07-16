@@ -2,6 +2,7 @@ package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,6 +21,8 @@ import model.ModelUserDAO;
 public class CardsServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 7840574076685133744L;
+	private static final Logger LOGGER = Logger.getLogger(AcquistoServlet.class.getName());
+	
 	ContoDAO model = new ModelContoDAO();
 	UserDAO us = new ModelUserDAO();
 	UserBean user = null;
@@ -33,7 +36,7 @@ public class CardsServlet extends HttpServlet{
 		try {
 		    user = us.doRetrieveByUsr((String) session.getAttribute("un"));
 		} catch (SQLException e) {
-			 e.printStackTrace();
+			 LOGGER.log(null, "context", e);
 			 RequestDispatcher error = null;
 			 String header = "Server Error";
 			 String details = "errore nel salvataggio della carta...";
@@ -60,7 +63,7 @@ public class CardsServlet extends HttpServlet{
 					try {
 						model.doSave(bean);
 					} catch (SQLException e) {
-						 e.printStackTrace();
+						 LOGGER.log(null, "context", e);
 						 RequestDispatcher error = null;
 		    			 String header = "Server Error";
 		    			 String details = "errore nel salvataggio della carta, controlla se gia' hai salvato la carta...";
@@ -80,8 +83,7 @@ public class CardsServlet extends HttpServlet{
 					model.doDelete(iban);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
-					e.printStackTrace();
+					 LOGGER.log(null, "context", e);
 					 RequestDispatcher error = null;
 	    			 String header = "Server Error";
 	    			 String details = "errore nella cancellazione della carta...";
@@ -98,7 +100,7 @@ public class CardsServlet extends HttpServlet{
 					model.doPrefer(iban,user);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
-					 e.printStackTrace();
+					 LOGGER.log(null, "context", e);
 					 RequestDispatcher error = null;
 	    			 String header = "Server Error";
 	    			 String details = "errore nella scelta della carta...";
@@ -116,7 +118,7 @@ public class CardsServlet extends HttpServlet{
    	    try {
 			request.setAttribute("cards", model.doRetrieveAll(order,user.getCF()));
 		} catch (SQLException e) {
-			 e.printStackTrace();
+			 LOGGER.log(null, "context", e);
 			 RequestDispatcher error = null;
 			 String header = "Server Error";
 			 String details = "c'e' stato un errore nella stampa dei conti...";

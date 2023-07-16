@@ -51,7 +51,7 @@ if(rend!=null){
 %>
 
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
 <meta charset="UTF-8">
 <title>Change Product</title>

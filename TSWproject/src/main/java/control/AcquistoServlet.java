@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,6 +36,8 @@ import model.MusicalModelArticoloBean;
 public class AcquistoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 5990937487736664990L;
+	private static final Logger LOGGER = Logger.getLogger(AcquistoServlet.class.getName());
+	
 	AcquistoDAO model = new ModelAcquistoDAO();
 	ComposizioneDAO comp = new ModelComposizioneDAO();
 	ComposizioneBean compbean = null;
@@ -111,7 +114,7 @@ public class AcquistoServlet extends HttpServlet {
    	      try {
 			user = usermodel.doRetrieveByUsr(username);
 		} catch (SQLException e) {
-			 e.printStackTrace();
+			 LOGGER.log(null, "context", e);
 			 RequestDispatcher error = null;
 		     String header = "Client Error";
 		     String details = "errore nell'acquisto, salvataggio utente non effettuato...";
@@ -127,7 +130,7 @@ public class AcquistoServlet extends HttpServlet {
    	      try {
 			conto = modelconto.doRetrieveByKey(IBAN);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.log(null, "context", e);
 			 RequestDispatcher error = null;
 		     String header = "Client Error";
 		     String details = "errore nell'acquisto, salvataggio conto non effettuato...";
@@ -186,7 +189,7 @@ public class AcquistoServlet extends HttpServlet {
    	      try {
 			model.doSave(acq);
 		} catch (SQLException e) {
-			 e.printStackTrace();
+			LOGGER.log(null, "context", e);
 			 RequestDispatcher error = null;
 		     String header = "Client Error";
 		     String details = "errore nell'acquisto, salvataggio acquisto non effettuato...";
@@ -201,7 +204,7 @@ public class AcquistoServlet extends HttpServlet {
    	      try {
 			   ab = model.doRetrieveBeanDesc();
 		  } catch (SQLException e1) {
-			    e1.printStackTrace();
+			  LOGGER.log(null, "context", e1);
 		  }
    	      
    	      if(ab!=null) {
@@ -210,7 +213,7 @@ public class AcquistoServlet extends HttpServlet {
    	    	  try {
 				comp.doSave(c);
 			  }catch (SQLException e) {
-				 e.printStackTrace();
+				  LOGGER.log(null, "context", e);
 				 RequestDispatcher error = null;
 			     String header = "Client Error";
 			     String details = "errore nell'acquisto, salvataggio composizione non effettuato...";
@@ -228,7 +231,7 @@ public class AcquistoServlet extends HttpServlet {
    		   try {
 			modelarticolo.doChangeQuantity(art.getID(), art.getQuantita() - c.getQCorrente());
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.log(null, "context", e);
 			RequestDispatcher error = null;
 		    String header = "Client Error";
 		    String details = "errore nell'acquisto, e' possibile che le quantita' inserite nel carrello "

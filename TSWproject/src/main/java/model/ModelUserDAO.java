@@ -127,11 +127,12 @@ public class ModelUserDAO implements UserDAO{
 		String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE ruolo = 0";
 		
 		if (order != null && !order.equals("")) {
-			selectSQL += " ORDER BY " + order;
+			selectSQL += " ORDER BY ?";
 		}
 		
 		connection = ds.getConnection();
 		preparedStatement = connection.prepareStatement(selectSQL);
+		preparedStatement.setString(0, order);
 		
 		ResultSet rs = preparedStatement.executeQuery();
 		while(rs.next()) { 
@@ -305,11 +306,13 @@ public class ModelUserDAO implements UserDAO{
 		String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE ruolo = 0 AND username LIKE ?";
 		
 		if (order != null && !order.equals("")) {
-			selectSQL += " ORDER BY " + order;
+			selectSQL += " ORDER BY ?";
 		}
 		
 		connection = ds.getConnection();
 		preparedStatement = connection.prepareStatement(selectSQL);
+		preparedStatement.setString(0, order);
+		
 		if(value.equalsIgnoreCase(""))
 			preparedStatement.setString(1, "null");
 		else
@@ -338,18 +341,35 @@ public class ModelUserDAO implements UserDAO{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
        try {
-		String insertSQL = "UPDATE "+TABLE_NAME+" SET "+field+" = ? WHERE username = ?";
-		connection = ds.getConnection();
-		preparedStatement = connection.prepareStatement(insertSQL);
-		preparedStatement.setString(1, newText);
-		preparedStatement.setString(2, user);
-		preparedStatement.executeUpdate();
-		if(field.equals("username")) {
-			return doRetrieveByUsr(newText);
-		}
-		else
-			return doRetrieveByUsr(user);
-	  }finally {
+    	
+    	String insertSQL = null;  
+    	if(field.equalsIgnoreCase("CF"))
+    		insertSQL = "UPDATE "+TABLE_NAME+" SET CF = ? WHERE username = ?";
+    	if(field.equalsIgnoreCase("nome"))
+    		insertSQL = "UPDATE "+TABLE_NAME+" SET nome = ? WHERE username = ?";
+    	if(field.equalsIgnoreCase("cognome"))
+    		insertSQL = "UPDATE "+TABLE_NAME+" SET cognome = ? WHERE username = ?";
+    	if(field.equalsIgnoreCase("email"))
+    		insertSQL = "UPDATE "+TABLE_NAME+" SET email = ? WHERE username = ?";
+    	if(field.equalsIgnoreCase("pwd"))
+    		insertSQL = "UPDATE "+TABLE_NAME+" SET pwd = ? WHERE username = ?";
+    	if(field.equalsIgnoreCase("username"))
+    		insertSQL = "UPDATE "+TABLE_NAME+" SET username = ? WHERE username = ?";
+    	
+    	if(insertSQL!=null) {
+		  connection = ds.getConnection();
+		  preparedStatement = connection.prepareStatement(insertSQL);
+		  preparedStatement.setString(1, newText);
+		  preparedStatement.setString(2, user);
+		  preparedStatement.executeUpdate();
+		  if(field.equals("username")) {
+			  return doRetrieveByUsr(newText);
+		  }
+		  else
+			  return doRetrieveByUsr(user);
+    	 }else 
+    		  return null;
+	    }finally {
 			try {
 				if (preparedStatement != null)
 					preparedStatement.close();

@@ -18,9 +18,13 @@ import model.ModelAcquistoDAO;
 import model.ModelContoDAO;
 import model.ModelUserDAO;
 
+import java.util.logging.Logger;
+
 public class AcquistoListServlet extends HttpServlet{
 	
 	private static final long serialVersionUID = 5990937487736664991L;
+	private static final Logger LOGGER = Logger.getLogger(AcquistoListServlet.class.getName());
+	
 	AcquistoDAO model = new ModelAcquistoDAO();
 	UserBean user = null;
 	UserDAO usermodel = new ModelUserDAO();
@@ -35,7 +39,7 @@ public class AcquistoListServlet extends HttpServlet{
 	   try {
 		request.setAttribute("acquisti", model.doRetrieveAll("idAcquisto"));
 	} catch (SQLException e) {
-		    e.printStackTrace();
+		    LOGGER.log(null, "context", e);
 		    RequestDispatcher error = null;
 	        String header = "Server Error";
 	        String details = "errore nella mostra degli acquisti...";

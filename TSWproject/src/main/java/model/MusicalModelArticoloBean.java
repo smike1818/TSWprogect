@@ -124,12 +124,13 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		String selectSQL = "SELECT * FROM " + MusicalModelArticoloBean.TABLE_NAME ;
 
 		if (order != null && !order.equals("")) {
-			selectSQL += " ORDER BY " + order;
+			selectSQL += " ORDER BY ?";
 		}
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setString(0, order);
 
 			ResultSet rs = preparedStatement.executeQuery();
 
@@ -352,14 +353,32 @@ public class MusicalModelArticoloBean implements ArticoloDAO{
 		PreparedStatement preparedStatement = null;
 		System.out.print(id);
 	   try {
-		String insertSQL = "UPDATE "+TABLE_NAME+" SET "+field+" = ? WHERE codice = ?";
+		
+		   String insertSQL = null;  
+	    	if(field.equalsIgnoreCase("prezzoBase"))
+	    		insertSQL = "UPDATE "+TABLE_NAME+" SET prezzoBase = ? WHERE codice = ?";
+	    	if(field.equalsIgnoreCase("nome"))
+	    		insertSQL = "UPDATE "+TABLE_NAME+" SET nome = ? WHERE codice = ?";
+	    	if(field.equalsIgnoreCase("quantita"))
+	    		insertSQL = "UPDATE "+TABLE_NAME+" SET quantita = ? WHERE codice = ?";
+	    	if(field.equalsIgnoreCase("descrizione"))
+	    		insertSQL = "UPDATE "+TABLE_NAME+" SET descrizione = ? WHERE codice = ?";
+	    	if(field.equalsIgnoreCase("marca"))
+	    		insertSQL = "UPDATE "+TABLE_NAME+" SET marca = ? WHERE codice = ?";
+	    	if(field.equalsIgnoreCase("tipologia"))
+	    		insertSQL = "UPDATE "+TABLE_NAME+" SET tipologia = ? WHERE codice = ?";
+	    	if(field.equalsIgnoreCase("corde"))
+	    		insertSQL = "UPDATE "+TABLE_NAME+" SET corde = ? WHERE codice = ?";
+	    	
+	   if(insertSQL!=null) {
 		connection = ds.getConnection();
 		preparedStatement = connection.prepareStatement(insertSQL);
 		preparedStatement.setString(1, newText);
 		preparedStatement.setInt(2, id);
 
 		return preparedStatement.executeUpdate()>0 ;
-
+		
+	   }else return false;
 	  }finally {
 			try {
 				if (preparedStatement != null)
