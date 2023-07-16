@@ -49,7 +49,6 @@ public class StoricoUserServlet extends HttpServlet {
 					try {
 						IDAcquisto = Integer.parseInt(temp);
 					}catch(NumberFormatException e) {
-						 e.printStackTrace();	
 						 RequestDispatcher error = null;
 			 		     String header = "Server Error";
 			 		     String details = "impossibile convertire da string a int...";
@@ -70,7 +69,6 @@ public class StoricoUserServlet extends HttpServlet {
 				    response.getWriter().write(json);
 				    
 				} catch (SQLException e) {
-					e.printStackTrace();
 					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 					response.getWriter().write("Errore durante l'accesso al database");
 				}
@@ -79,8 +77,7 @@ public class StoricoUserServlet extends HttpServlet {
 				if(temp!=null) {
 					try {
 						IDArticolo = Integer.parseInt(temp);
-					}catch(NumberFormatException e) {
-						 e.printStackTrace();	
+					}catch(NumberFormatException e) {	
 						 RequestDispatcher error = null;
 			 		     String header = "Server Error";
 			 		     String details = "impossibile convertire da string a int...";
@@ -102,7 +99,6 @@ public class StoricoUserServlet extends HttpServlet {
 				    response.getWriter().write(json);
 				    
 				} catch (SQLException e) {
-					e.printStackTrace();
 					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 					response.getWriter().write("Errore durante l'accesso al database");
 				}
@@ -114,7 +110,6 @@ public class StoricoUserServlet extends HttpServlet {
 		  try {
 			  user = model.doRetrieveByUsr(username);
 		  } catch (SQLException e) {
-			  e.printStackTrace();	
 			  RequestDispatcher error = null;
  		       String header = "Server Error";
  		       String details = "errore nel reperire l'utente dal database...";
@@ -136,7 +131,6 @@ public class StoricoUserServlet extends HttpServlet {
 			try {
 				request.setAttribute("storico", modelacquisto.doRetrieveByUser(user.getCF()));
 			} catch (SQLException e) {				
-				e.printStackTrace();
 				 RequestDispatcher error = null;
 	 		       String header = "Server Error";
 	 		       String details = "errore nel reperire gli ordini dal database...";

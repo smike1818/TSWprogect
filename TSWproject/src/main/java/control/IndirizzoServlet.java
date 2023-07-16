@@ -36,7 +36,6 @@ public class IndirizzoServlet extends HttpServlet{
    	 try {
 			user = usermodel.doRetrieveByUsr(username);
 		} catch (SQLException e) {
-			e.printStackTrace();
 			 RequestDispatcher error = null;
 		     String header = "Client Error";
 		     String details = "utente non trovato, impossibile continuare il salvataggio dlel'indirizzo...";
@@ -66,7 +65,6 @@ public class IndirizzoServlet extends HttpServlet{
    	    		try {
 					model.doSave(ind);
 				} catch (SQLException e) {
-					e.printStackTrace();
 					 RequestDispatcher error = null;
 				     String header = "Client Error";
 				     String details = "errori nel salvataggio dell'indirizzo...";
@@ -87,8 +85,6 @@ public class IndirizzoServlet extends HttpServlet{
    	    		try {
 					model.doDelete(via,civico,citta);
 				} catch (SQLException e) {
-					e.printStackTrace();
-					e.printStackTrace();
 					 RequestDispatcher error = null;
 				     String header = "Client Error";
 				     String details = "errore nella cancellazione dell'indirizzo...";
@@ -107,8 +103,6 @@ public class IndirizzoServlet extends HttpServlet{
 	    	try {
 				model.doPrefer(via,civico,citta,user);
 			} catch (SQLException e) {
-				e.printStackTrace();
-				e.printStackTrace();
 				 RequestDispatcher error = null;
 			     String header = "Client Error";
 			     String details = "errore nella scelta dell'indirizzo...";
@@ -124,7 +118,6 @@ public class IndirizzoServlet extends HttpServlet{
    	    try {
 			request.setAttribute("indirizzo", model.doRetrieveAll("via",user.getCF()));			
 		} catch (SQLException e) {
-			 e.printStackTrace();
 		     RequestDispatcher dispatcher = null;   
 			 dispatcher = getServletContext().getRequestDispatcher("/500.jsp");
 			 dispatcher.forward(request, response);

@@ -95,7 +95,6 @@ public class RegisterServlet extends HttpServlet {
 		        session.setAttribute("pw",password);
 				response.sendRedirect("catalogo.jsp");				
 			} catch (SQLException e) {
-				     e.printStackTrace();
 				     RequestDispatcher error = null;
 	    			 String header = "Client Error";
 	    			 String details = "sei gia' registrato ...";

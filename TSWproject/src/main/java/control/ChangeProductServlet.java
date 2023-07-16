@@ -76,8 +76,6 @@ public class ChangeProductServlet extends HttpServlet{
    	    try {
 			request.setAttribute("bean", model.doRetrieveByKey(id));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			RequestDispatcher error = null;
 		      String header = "Client Error";
 		      String details = "errore nel mostrare il prodotto...";

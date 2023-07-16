@@ -40,7 +40,6 @@ public class ConfirmPaymentServlet extends HttpServlet {
 			 user = modeluser.doRetrieveByUsr(username);
 			 System.out.print(user.getCF());
 		}catch(SQLException e) {
-			 e.printStackTrace();
 			 RequestDispatcher error = null;
 			 String header = "Server Error";
 			 String details = "c'e' stato un errore nella corrispondenza con l'utente in sessione...";
@@ -56,7 +55,6 @@ public class ConfirmPaymentServlet extends HttpServlet {
 			request.setAttribute("cards", modelconto.doRetrieveByUsr(user));
 			request.setAttribute("list-address", modelind.doRetrieveByUsr(user));
 		} catch (SQLException e) {
-			 e.printStackTrace();
 			 RequestDispatcher error = null;
 			 String header = "Server Error";
 			 String details = "c'e' stato un errore nel mostrare la pagina...";

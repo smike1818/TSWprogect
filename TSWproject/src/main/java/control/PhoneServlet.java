@@ -60,7 +60,6 @@ public class PhoneServlet extends HttpServlet {
    	    		try {
 					model.doSave(phone);
 				} catch (SQLException e) {
-					e.printStackTrace();
 					 RequestDispatcher error = null;
 				     String header = "Client Error";
 				     String details = "errori nel salvataggio del numero...";
@@ -78,8 +77,6 @@ public class PhoneServlet extends HttpServlet {
         		try {
 					model.doDelete(numero);
 				} catch (SQLException e) {
-					e.printStackTrace();
-					e.printStackTrace();
 					 RequestDispatcher error = null;
 				     String header = "Client Error";
 				     String details = "errore nella cancellazione del telefono...";
@@ -96,8 +93,6 @@ public class PhoneServlet extends HttpServlet {
 				try {
 					model.doPrefer(numero,user);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					 e.printStackTrace();
 					 RequestDispatcher error = null;
 	    			 String header = "Server Error";
 	    			 String details = "errore nella scelta del numero predefinito...";
@@ -113,8 +108,6 @@ public class PhoneServlet extends HttpServlet {
         try {
         	request.setAttribute("user-phones", model.doRetrieveAllPhones(user));
         }catch(SQLException e) {
-        	// TODO Auto-generated catch block
-			 e.printStackTrace();
 			 RequestDispatcher error = null;
 			 String header = "Server Error";
 			 String details = "errore nella stampa dei numeri...";

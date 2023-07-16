@@ -13,6 +13,7 @@ import bean.*;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.Date;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -22,6 +23,8 @@ import model.*;
 
 public class FatturaServlet extends HttpServlet {
     private static final long serialVersionUID = -725712349886211710L;
+    private static final Logger LOGGER = Logger.getLogger(FatturaServlet.class.getName());
+    
     private AcquistoDAO modelacquisto = new ModelAcquistoDAO();
     private AcquistoBean acquisto = null;
     private UserBean consumer = null;
@@ -315,13 +318,13 @@ public class FatturaServlet extends HttpServlet {
                     documento.left(), documento.bottom(), 0);
             
         } catch (DocumentException e) {
-            e.printStackTrace();
+        	LOGGER.log(null, "context", e);
             response.sendError(500,"Errore nella scrittura del documento");
         } catch (NumberFormatException ne) {
-            ne.printStackTrace();
+        	LOGGER.log(null, "context", ne);
             response.sendError(500,"Errore nella conversione dell'id");
         } catch (SQLException e) {
-            e.printStackTrace();
+        	LOGGER.log(null, "context", e);
             response.sendError(500,"Errore nell'esecuzione della query");
         } finally {
             // Chiudi il documento

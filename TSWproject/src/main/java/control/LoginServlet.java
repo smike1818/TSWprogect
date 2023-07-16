@@ -67,7 +67,6 @@ public class LoginServlet extends HttpServlet {
 	        	dispatcher.forward(request, response);
 				
 			} catch (SQLException e) {
-				e.printStackTrace();
 				RequestDispatcher error = null;
 				String header = "Client Error";
 				String details = "client not registered ...";

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,6 +30,8 @@ import model.MusicalModelArticoloBean;
 public class CartServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 102831973239L;
+	private static final Logger LOGGER = Logger.getLogger(CartServlet.class.getName());
+	
 	ArticoloDAO model = new MusicalModelArticoloBean();
 	List<ComposizioneBean>listCart = new ArrayList<ComposizioneBean>();
 	UserDAO user = new ModelUserDAO();
@@ -161,8 +164,7 @@ public class CartServlet extends HttpServlet{
 		try {
 			request.setAttribute("products",  model.doRetrieveAll(sort));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(null,"context", e);			
 		}
 		
 		RequestDispatcher dispatcher = null;
