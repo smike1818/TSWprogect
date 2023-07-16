@@ -2,6 +2,7 @@ package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,6 +20,8 @@ public class ChangeProductServlet extends HttpServlet{
 	 */
 	
 	private static final long serialVersionUID = 7840574685133744L;
+	private static final Logger LOGGER = Logger.getLogger(ChangeProductServlet.class.getName());
+	
 	ArticoloDAO model = new MusicalModelArticoloBean();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,7 +44,7 @@ public class ChangeProductServlet extends HttpServlet{
                 try {
         			 mdu.modifyProduct(newText, field, id);    
         		} catch (SQLException e) {
-        			e.printStackTrace();
+        			LOGGER.log(null, "context", e);
         		}
             }
         }

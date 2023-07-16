@@ -2,6 +2,7 @@ package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,6 +25,8 @@ import model.ModelIvaDAO;
 public class InsertAdminServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 123131L;
+	private static final Logger LOGGER = Logger.getLogger(InsertAdminServlet.class.getName());
+	
 	ArticoloDAO articoli = new MusicalModelArticoloBean();
 	CategoriaDAO categorie = new ModelCategoriaDAO();
 	ImageDAO images = new ModelImageDAO();
@@ -62,8 +65,7 @@ public class InsertAdminServlet extends HttpServlet {
 	    	        request.setAttribute("errorMessageDetails", details);
 	    	        response.setStatus(500);
 	    	        error = getServletContext().getRequestDispatcher("/errorAdmin.jsp");
-	    	        error.forward(request, response);
-					e.printStackTrace();
+	    	        error.forward(request, response);					
 				}
 		    	  if(iva!=null) {
 		    		  ab.setIva(iva);
@@ -105,7 +107,7 @@ public class InsertAdminServlet extends HttpServlet {
 				 try {
 					categorie.doSave(cat);
 				 } catch (SQLException e) {
-					  e.printStackTrace();
+					  LOGGER.log(null, "context", e);
 					  request.setAttribute("error-statement", "nome categoria già inserito, riprova");
 				 }
 				 

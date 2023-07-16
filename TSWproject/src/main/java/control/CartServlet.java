@@ -156,7 +156,7 @@ public class CartServlet extends HttpServlet{
 		      
 			}
 		   }catch(Exception e) {
-			e.printStackTrace();
+			   LOGGER.log(null, "context", e);
 		}
 		
 		String sort="codice";
