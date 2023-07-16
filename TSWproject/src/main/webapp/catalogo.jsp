@@ -45,7 +45,7 @@
 			         			</p>
 		         			</div>
 		         		<div class="table-cell" id="cat2">
-		         			<a href="categories?tipo=false"><img src="img/strato.png" alt="no-available" width="15%"></a>
+		         			<a href="categories?tipo=false"><img src="img/blackstrat.jpeg" alt="no-available" width="15%"></a>
 		         			<p>	
 		         				strumenti
 		         			</p>
@@ -56,8 +56,8 @@
 			        	<h1>I nostri articoli in evidenza</h1>
 						    <div class="products-list">
 						        <%
-						           //setto un limite di 5 elementi da mostrare nella pagina principale
-						           request.setAttribute("limit",5);
+						           //setto un limite di 4 elementi da mostrare nella pagina principale
+						           request.setAttribute("limit",4);
 						        %>
 					        	<jsp:include page="ListProducts.jsp"></jsp:include>
 					    	</div>

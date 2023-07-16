@@ -129,14 +129,6 @@ application.removeAttribute("can-show");
 								</h5>
 							</div>
 							<div class="table-cell" id="<%=divId%>">
-							<!-- TIPO -->
-								<% if(bean.getTipo()==0){ %>
-								<input type="hidden" value="Strumenti" class="type-item">
-								<%}else{ %>
-								<input type="hidden" value="Pezzi di Ricambio" class="type-item">
-								<%} %>
-							</div>
-							<div class="table-cell" id="<%=divId%>">
 							<!-- se la quantità è 0 lo rendo non accessibile -->
 								<% if(bean.getQuantita()==0){ %>
 								<span class="product-no-available">Non disponibile</span>

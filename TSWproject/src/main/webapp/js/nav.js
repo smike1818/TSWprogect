@@ -1,7 +1,7 @@
 /**
  * 
  */
-$('#menuButton').click(function()
+$('.menuButton').click(function()
 {
         $('.menu').animate({"left":"0px"}, 100); 
 });

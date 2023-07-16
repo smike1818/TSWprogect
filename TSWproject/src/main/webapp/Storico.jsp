@@ -64,7 +64,7 @@ if(rend!=null){
 			<span>(<%=bean.getIndirizzo().getCitta() %>)</span><br><br><br>
 		  </div>		  
 		  <div class="terzo-block table-cell">
-			<button class="dettagli modern-button">Dettagli</button> <br> 
+			<button class="dettagli modern-button">Dettagli</button> 
 			<button class="fattura modern-button" id="<%=bean.getID()%>">Fattura</button><br> 
 		  </div>
 		  <div class="total-storico">

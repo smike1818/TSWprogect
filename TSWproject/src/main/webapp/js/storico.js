@@ -24,20 +24,14 @@ $(document).ready(function() {
                     response.forEach(function(element) {
                         var div = $('<div class="artDetails">');
                         div.attr('id',element.id);
-                        var secondiv = $('<div class="text">');
-                        secondiv.append($('<h3>').text("id articolo: " + element.id));
-secondiv.append($('<br>'));
-secondiv.append($('<span>').text("Nome: ").css({'font-weight': 'bold', 'font-style': 'italic'}));
-secondiv.append($('<span>').text(element.nome));
-secondiv.append($('<br>'));
-secondiv.append($('<span>').text("Prezzo: ").css({'font-weight': 'bold', 'font-style': 'italic'}));
-secondiv.append($('<span>').text(element.prezzo));
-secondiv.append($('<br>'));
-secondiv.append($('<span>').text("Categoria: ").css({'font-weight': 'bold', 'font-style': 'italic'}));
-secondiv.append($('<span>').text(element.cat.nome));
-secondiv.append($('<br>'));
-secondiv.append($('<br>'));
-secondiv.append($('<br>'));
+                        var secondiv = $('<div class="table-row">');
+                        secondiv.append($('<h3 class="table-cell>').text("id articolo: " + element.id));
+						secondiv.append($('<span class="table-cell">').text("Nome: ").css({'font-weight': 'bold', 'font-style': 'italic'}));
+						secondiv.append($('<span class="table-cell">').text(element.nome));
+						secondiv.append($('<span class="table-cell">').text("Prezzo: ").css({'font-weight': 'bold', 'font-style': 'italic'}));
+						secondiv.append($('<span class="table-cell">').text(element.prezzo));
+						secondiv.append($('<span class="table-cell">').text("Categoria: ").css({'font-weight': 'bold', 'font-style': 'italic'}));
+						secondiv.append($('<span class="table-cell">').text(element.cat.nome));
                         div.append(secondiv);
                         
                         //in quest'altra chiamata ajax andrò a prendere tutte le immagini dei vari articoli
@@ -47,9 +41,11 @@ secondiv.append($('<br>'));
                               dataType: "json",
                               data: { data: element.id, action: "mostra-immagini"},
                               success: function(response) {	
-							  
+							  var cell = $('<div class="table-cell">');
 							  var cycle = $('<div class="cycle-slideshow2" data-cycle-fx="scrollHorz" data-cycle-prev=".prev" data-cycle-next=".next" data-cycle-timeout = 2000 >');
-							  div.append(cycle);				  
+							  cell.append(cycle);
+							  secondiv.append(cell);	
+							  div.append(secondiv);			  
                               response.forEach(function(element) {
                                       // Creazione degli elementi immagine e aggiunta al DOM
                                       var image = $('<img>').attr('src', 'img/'+element);
@@ -64,7 +60,6 @@ secondiv.append($('<br>'));
                                     next: '.next',
                                     timeout: 2000, 
                                   });
-    
                             },
                             error: function() {	
                                 console.log("errore");

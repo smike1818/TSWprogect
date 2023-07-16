@@ -9,8 +9,6 @@
     </head>
     <body>
     <header>
- 
-
 		<div class="menu">
             <div class="closeButton"><a class="icon-close"><b>X</b></a></div>
                 <ul>     
@@ -20,15 +18,13 @@
 				  <li><a href="CambiaIva.jsp">Iva</a></li>
                 </ul>
         </div>
-        <div id="menuButton">
+        <div class="menuButton">
             <svg class="icon-menu" viewBox="0 0 20 20">
 				<path d="M2 4h16M2 10h16M2 16h16"></path>
 			</svg>
 	   </div>
-			
-			
-        </header>
-        <script src="js/JQuery.js" type="text/javascript"></script>
-        <script src="js/nav.js" type="text/javascript"></script>
+	</header>
+	<script src="js/JQuery.js" type="text/javascript"></script>
+	<script src="js/nav.js" type="text/javascript"></script>
     </body>
 </html>

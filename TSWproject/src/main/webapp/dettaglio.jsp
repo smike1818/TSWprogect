@@ -68,7 +68,9 @@
 							<%}else if(images.size() == 1){ %>
 							<div class="table-cell">
 						    	<div class="images-block">
-						       		<img src="img/<%=images.get(0)%>" alt="no available"/>
+						    		<div class="cycle-slideshow">
+						       			<img src="img/<%=images.get(0)%>" alt="no available"/>
+						    		</div>
 						    	</div>
 					    	</div>
 							<% }else if(images.size() == 0){ %>
